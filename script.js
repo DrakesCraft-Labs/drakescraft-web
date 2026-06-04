@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     setupVisitorStats();
     setupDiscordLivePanel();
+    setupPortalEffects();
+    setupAmbientSound();
 
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -220,60 +222,18 @@ function setupVisitorStats() {
         viewerDateTimeEl.textContent = formatter.format(now);
     };
 
-    const renderBadgeFallback = () => {
-        const badgeUrl = 'https://visitor-badge.laobi.icu/badge?page_id=drakescraft.cl';
-        fetch(badgeUrl)
-            .then((res) => {
-                if (!res.ok) throw new Error('badge endpoint error');
-                return res.text();
-            })
-            .then((svgText) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(svgText, 'image/svg+xml');
-                const textNodes = Array.from(doc.querySelectorAll('text'))
-                    .map((node) => (node.textContent || '').trim())
-                    .filter(Boolean);
-                const rawCounter = textNodes.reverse().find((value) => /^\d[\d.,]*$/.test(value));
-                if (!rawCounter) throw new Error('badge counter not found');
-                const normalizedNumber = Number(rawCounter.replace(/[^\d]/g, ''));
-                if (!Number.isFinite(normalizedNumber)) throw new Error('badge counter parse error');
-                visitCountEl.textContent = normalizedNumber.toLocaleString('es-CL');
-            })
-            .catch(() => {
-                visitCountEl.textContent = 'No disponible';
-            });
-    };
-
-    fetch('https://api.countapi.xyz/hit/drakescraft.cl/site-views')
+    fetch('/api/overview')
         .then((res) => {
-            if (!res.ok) throw new Error('countapi error');
+            if (!res.ok) throw new Error('overview error');
             return res.json();
         })
         .then((data) => {
-            const visits = typeof data.value === 'number' ? data.value.toLocaleString('es-CL') : null;
-            if (!visits) throw new Error('countapi without value');
-            visitCountEl.textContent = visits;
+            visitCountEl.textContent = Number(data.visits || 0).toLocaleString('es-CL');
+            viewerLocationEl.textContent = data.city || data.region || 'La Odisea';
         })
         .catch(() => {
-            renderBadgeFallback();
-        });
-
-    fetch('https://ipapi.co/json/')
-        .then((res) => {
-            if (!res.ok) throw new Error('ipapi error');
-            return res.json();
-        })
-        .then((data) => {
-            const city = data.city || 'Ciudad no detectada';
-            const region = data.region || '';
-            const country = data.country_name || 'Pais no detectado';
-            const zoneText = [city, region, country].filter(Boolean).join(', ');
-            viewerLocationEl.textContent = zoneText;
-            updateDateTime(data.timezone);
-        })
-        .catch(() => {
-            viewerLocationEl.textContent = 'No disponible';
-            updateDateTime();
+            visitCountEl.textContent = 'N/D';
+            viewerLocationEl.textContent = 'La Odisea';
         });
 
     updateDateTime();
@@ -286,13 +246,15 @@ function setupDiscordLivePanel() {
     const presenceCount = document.getElementById('discord-presence-count');
     const totalCount = document.getElementById('discord-total-count');
     const channelsList = document.getElementById('discord-channels-list');
+    const membersGrid = document.getElementById('discord-members');
+    const heroDiscordCount = document.getElementById('hero-discord-count');
     if (!statusDot || !statusText || !presenceCount || !totalCount || !channelsList) return;
 
     const setOffline = () => {
         statusDot.classList.remove('online');
         statusDot.classList.add('offline');
         statusText.textContent = 'Sin conexion';
-        channelsList.innerHTML = '<li>No se pudo cargar el widget.json</li>';
+        channelsList.innerHTML = '<li>Discord no disponible temporalmente</li>';
     };
 
     const renderChannels = (channels) => {
@@ -310,7 +272,7 @@ function setupDiscordLivePanel() {
     };
 
     const fetchDiscordData = () => {
-        fetch('https://discord.com/api/guilds/699391897369575476/widget.json')
+        fetch('/api/discord')
             .then((res) => {
                 if (!res.ok) throw new Error('discord widget json error');
                 return res.json();
@@ -323,8 +285,17 @@ function setupDiscordLivePanel() {
                 statusDot.classList.add('online');
                 statusText.textContent = 'En linea';
                 presenceCount.textContent = online.toLocaleString('es-CL');
-                totalCount.textContent = estimatedTotal !== null ? estimatedTotal.toLocaleString('es-CL') : 'N/D';
+                totalCount.textContent = Number(data.listed || estimatedTotal || 0).toLocaleString('es-CL');
+                if (heroDiscordCount) heroDiscordCount.textContent = online.toLocaleString('es-CL');
                 renderChannels(data.channels);
+                if (membersGrid) {
+                    membersGrid.innerHTML = (data.members || []).map((member) => `
+                        <article class="member-chip" title="${escapeHtml(member.activity || member.status)}">
+                            <span class="member-avatar-wrap"><img src="${member.avatarUrl}" alt="" loading="lazy"><i class="${member.status}"></i></span>
+                            <span><strong>${escapeHtml(member.username)}</strong><small>${escapeHtml(member.activity || member.status)}</small></span>
+                        </article>
+                    `).join('');
+                }
             })
             .catch(() => {
                 setOffline();
@@ -333,4 +304,80 @@ function setupDiscordLivePanel() {
 
     fetchDiscordData();
     setInterval(fetchDiscordData, 60000);
+}
+
+function escapeHtml(value) {
+    const element = document.createElement('span');
+    element.textContent = String(value || '');
+    return element.innerHTML;
+}
+
+function setupPortalEffects() {
+    const progress = document.getElementById('scroll-progress');
+    const dragon = document.querySelector('.hero-dragon');
+    const deck = document.querySelector('.command-deck');
+    let ticking = false;
+
+    const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (progress) progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+        if (dragon) dragon.style.transform = `translate3d(${window.scrollY * -0.035}px, ${window.scrollY * 0.08}px, 0) rotate(${window.scrollY * 0.006}deg)`;
+        ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+        if (!ticking) requestAnimationFrame(update);
+        ticking = true;
+    }, { passive: true });
+
+    if (deck && matchMedia('(pointer:fine)').matches) {
+        deck.addEventListener('pointermove', (event) => {
+            const box = deck.getBoundingClientRect();
+            const x = (event.clientX - box.left) / box.width - 0.5;
+            const y = (event.clientY - box.top) / box.height - 0.5;
+            deck.style.transform = `perspective(900px) rotateY(${x * 5}deg) rotateX(${y * -5}deg)`;
+        });
+        deck.addEventListener('pointerleave', () => { deck.style.transform = ''; });
+    }
+    update();
+}
+
+function setupAmbientSound() {
+    const button = document.getElementById('sound-toggle');
+    if (!button) return;
+    let context;
+    let gain;
+    let oscillators = [];
+
+    const stop = () => {
+        oscillators.forEach((oscillator) => oscillator.stop());
+        oscillators = [];
+        context?.close();
+        context = null;
+        button.classList.add('muted');
+        button.setAttribute('aria-label', 'Activar ambientación sonora');
+    };
+
+    button.addEventListener('click', () => {
+        try {
+            if (context) return stop();
+            context = new AudioContext();
+            gain = context.createGain();
+            gain.gain.value = 0.025;
+            gain.connect(context.destination);
+            [55, 82.41, 110].forEach((frequency, index) => {
+                const oscillator = context.createOscillator();
+                const localGain = context.createGain();
+                oscillator.type = index === 1 ? 'triangle' : 'sine';
+                oscillator.frequency.value = frequency;
+                localGain.gain.value = 0.5 / (index + 1);
+                oscillator.connect(localGain).connect(gain);
+                oscillator.start();
+                oscillators.push(oscillator);
+            });
+            button.classList.remove('muted');
+            button.setAttribute('aria-label', 'Desactivar ambientación sonora');
+        } catch (_error) {
+            stop();
+        }
+    });
 }

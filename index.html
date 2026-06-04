@@ -19,6 +19,13 @@
 </head>
 
 <body>
+    <div id="background-layers" aria-hidden="true">
+        <div class="gradient-layer"></div>
+        <div class="nebula nebula-a"></div>
+        <div class="nebula nebula-b"></div>
+        <canvas id="particles-canvas"></canvas>
+    </div>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
     <nav class="navbar" aria-label="Principal">
         <div class="container nav-container">
@@ -47,25 +54,31 @@
 
     <header id="home" class="site-hero">
         <div class="site-hero__glow" aria-hidden="true"></div>
-        <div class="container site-hero__inner">
-            <p class="badge-status">MOTD en juego: DrakesCraft — Odisea · Paper 1.21</p>
-            <img src="assets/logo-drakescraft.png" alt="DrakesCraft" class="site-hero__logo" width="220" height="220">
-            <h1 class="site-hero__title">DrakesCraft</h1>
-            <p class="site-hero__tagline">Una odisea en bloques: mitología griega, progresión técnica con Slimefun y una
-                comunidad que habla tu idioma.</p>
-            <p class="site-hero__note">El servidor y los rangos siguen en evolución; la fuente de verdad para novedades
-                y aperturas es <strong>Discord</strong>.</p>
-            <div class="visitor-stats" aria-live="polite">
-                <p class="visitor-stats__title">Estadisticas en vivo</p>
-                <p class="visitor-stats__line"><strong>Visitas del sitio:</strong> <span id="visit-count">Cargando...</span></p>
-                <p class="visitor-stats__line"><strong>Tu zona:</strong> <span id="viewer-location">Detectando...</span></p>
-                <p class="visitor-stats__line"><strong>Fecha y hora local:</strong> <span id="viewer-datetime">Cargando...</span></p>
+        <img src="dragon_fly.png" alt="" class="hero-dragon" aria-hidden="true">
+        <div class="container site-hero__inner portal-hero">
+            <div class="hero-copy">
+                <p class="badge-status"><span class="live-pulse"></span> Portal oficial conectado a star</p>
+                <p class="hero-kicker">Minecraft Survival · Slimefun · Crossplay</p>
+                <h1 class="site-hero__title">DrakesCraft</h1>
+                <p class="site-hero__tagline">Tu próxima odisea no se mira desde lejos. Se construye bloque a bloque.</p>
+                <p class="site-hero__note">Mitología, tecnología y una comunidad latina viva detrás de cada expedición.</p>
+                <div class="site-hero__actions">
+                    <button type="button" class="btn-primary portal-enter" onclick="copyIp('mc.drakescraft.cl')">Copiar IP Java</button>
+                    <a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord" target="_blank" rel="noopener">Entrar al Discord</a>
+                    <a href="#conectar" class="btn-secondary">Explorar</a>
+                </div>
             </div>
-            <div class="site-hero__actions">
-                <a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord" target="_blank" rel="noopener">Entrar al
-                    Discord</a>
-                <a href="#conectar" class="btn-secondary">Cómo conectar</a>
-            </div>
+            <aside class="command-deck" aria-label="Telemetría del portal">
+                <div class="command-deck__head"><span>TELEMETRÍA DE LA ODISEA</span><span class="deck-signal">EN VIVO</span></div>
+                <div class="command-deck__logo"><div class="portal-ring"></div><img src="assets/logo-drakescraft.png" alt="DrakesCraft" width="180" height="180"></div>
+                <div class="deck-grid" aria-live="polite">
+                    <div><span>Viajeros</span><strong id="visit-count">...</strong></div>
+                    <div><span>Discord</span><strong id="hero-discord-count">...</strong></div>
+                    <div><span>Origen</span><strong id="viewer-location">...</strong></div>
+                    <div><span>Hora local</span><strong id="viewer-datetime">...</strong></div>
+                </div>
+                <div class="deck-bar"><span></span></div>
+            </aside>
         </div>
     </header>
 
@@ -102,7 +115,7 @@
     <section id="comunidad" class="section section-dark">
         <div class="container community-widget-block">
             <h2 class="section-title">Comunidad en Discord</h2>
-            <p class="section-desc">Este bloque muestra el servidor en vivo para que veas canales y actividad antes de entrar.</p>
+            <p class="section-desc">Datos servidos por nuestro backend en star, con caché para mantener el portal rápido y estable.</p>
             <div class="community-layout">
                 <div class="discord-live-panel">
                     <div class="discord-live-panel__metrics">
@@ -127,16 +140,9 @@
                     </div>
                     <a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord" target="_blank" rel="noopener">Unirme al Discord</a>
                 </div>
-                <div class="discord-widget-wrap">
-                    <iframe
-                        src="https://discord.com/widget?id=699391897369575476&theme=dark"
-                        width="420"
-                        height="620"
-                        allowtransparency="true"
-                        frameborder="0"
-                        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                        title="Widget de Discord DrakesCraft"
-                        class="discord-widget"></iframe>
+                <div class="discord-widget-wrap member-radar">
+                    <div class="member-radar__head"><span>Tripulación conectada</span><span class="radar-sweep"></span></div>
+                    <div id="discord-members" class="discord-members"><p class="member-loading">Sincronizando presencias...</p></div>
                 </div>
             </div>
         </div>
@@ -233,11 +239,12 @@
                 <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
                 <a href="mailto:contacto@drakescraft.cl">Contacto</a>
             </div>
-            <p class="copyright">© 2026 DrakesCraft · drakescraft.cl</p>
+            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl · impulsado por star</p>
             <p class="disclaimer">Minecraft es una marca de Mojang AB. No afiliado.</p>
         </div>
     </footer>
 
+    <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
     <script src="script.js"></script>
 </body>
 
