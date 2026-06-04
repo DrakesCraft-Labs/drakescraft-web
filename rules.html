@@ -14,12 +14,15 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=store-3-0">
     <style>
         .rules-hero {
-            padding: 150px 0 80px;
+            padding: 125px 0 58px;
             text-align: center;
-            background: radial-gradient(circle at center, #2e1065 0%, #050816 80%);
+            background:
+                linear-gradient(90deg, rgba(5, 3, 14, 0.96), rgba(5, 3, 14, 0.8) 48%, rgba(5, 3, 14, 0.96)),
+                linear-gradient(180deg, rgba(5, 3, 14, 0.35), rgba(5, 3, 14, 0.95)),
+                url('assets/portal-background-v1.png') center / cover no-repeat;
         }
 
         .rules-container {
@@ -102,6 +105,13 @@
 </head>
 
 <body>
+    <div id="background-layers" aria-hidden="true">
+        <div class="gradient-layer"></div>
+        <div class="nebula nebula-a"></div>
+        <div class="nebula nebula-b"></div>
+        <canvas id="particles-canvas"></canvas>
+    </div>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
     <!-- Navbar -->
     <nav class="navbar" aria-label="Principal">
@@ -291,12 +301,13 @@
                 <a href="mailto:contacto@drakescraft.cl"
                     style="color: var(--text-muted); text-decoration: none;">Contacto</a>
             </div>
-            <p class="copyright">© 2026 DrakesCraft · drakescraft.cl</p>
+            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl</p>
             <p class="disclaimer">Minecraft es una marca registrada de Mojang AB.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
+    <script src="script.js?v=store-3-0"></script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda - DrakesCraft</title>
     <meta name="description"
-        content="Tienda oficial de DrakesCraft. Rangos VIP mensuales, kits competitivos, protecciones exclusivas y compras especiales coordinadas por Discord.">
+        content="Tienda oficial de DrakesCraft: rangos VIP, protecciones, kits y cotizaciones manuales desde star.">
     <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,15 +15,22 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=store-3-0">
 </head>
 
 <body>
+    <div id="background-layers" aria-hidden="true">
+        <div class="gradient-layer"></div>
+        <div class="nebula nebula-a"></div>
+        <div class="nebula nebula-b"></div>
+        <canvas id="particles-canvas"></canvas>
+    </div>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
     <nav class="navbar" aria-label="Principal">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <img src="assets/logo-drakescraft.png" alt="" class="logo-img" width="40" height="40">
+                <img src="assets/logo-drakescraft.png" alt="" class="logo-img" width="44" height="44">
                 <span class="logo-text">DrakesCraft</span>
             </a>
             <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu"
@@ -33,6 +40,7 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html#home" class="nav-link">Inicio</a></li>
                 <li><a href="index.html#conectar" class="nav-link">Conectar</a></li>
+                <li><a href="index.html#comunidad" class="nav-link">Comunidad</a></li>
                 <li><a href="index.html#odisea" class="nav-link">Odisea</a></li>
                 <li><a href="index.html#slimefun" class="nav-link">Slimefun</a></li>
                 <li><a href="store.html" class="nav-link active">Tienda</a></li>
@@ -44,499 +52,129 @@
         </div>
     </nav>
 
-    <header class="hero" style="min-height: 40vh; padding-top: 120px; align-items: flex-start;">
-        <div class="container hero-content">
-            <h1 class="hero-title" style="font-size: 3rem;">Tienda de DrakesCraft</h1>
-            <p class="hero-subtitle">Rangos mensuales con identidad griega, kits fuertes, protecciones VIP y compras especiales bajo revisión manual.</p>
+    <header class="store-hero page-hero">
+        <div class="container store-hero__grid">
+            <div>
+                <p class="badge-status"><span class="live-pulse"></span> Tienda conectada al backend de star</p>
+                <h1 class="site-hero__title">Tienda de la Odisea</h1>
+                <p class="site-hero__tagline">Rangos, protecciones y encargos premium sin romper la economía del servidor.</p>
+                <div class="store-hero__actions">
+                    <a href="#store" class="btn-primary">Ver catálogo</a>
+                    <a href="#quote" class="btn-secondary">Preparar solicitud</a>
+                </div>
+            </div>
+            <aside class="store-console">
+                <span class="store-console__label">Estado de tienda</span>
+                <strong id="store-health">Sincronizando...</strong>
+                <p>Las compras se confirman por ticket. El backend prepara tu resumen y deja registro local.</p>
+                <div class="store-console__stats">
+                    <div><span>Productos</span><strong id="store-product-count">--</strong></div>
+                    <div><span>Desde</span><strong id="store-min-price">--</strong></div>
+                    <div><span>Hasta</span><strong id="store-max-price">--</strong></div>
+                </div>
+            </aside>
         </div>
     </header>
 
-    <section id="store" class="section">
+    <main id="store" class="section store-page">
+        <div class="container store-shell">
+            <section class="store-board">
+                <div class="store-board__head">
+                    <div>
+                        <h2>Catálogo vivo</h2>
+                        <p>Filtra, compara y arma una solicitud limpia antes de abrir ticket.</p>
+                    </div>
+                    <div class="store-sync">
+                        <span id="store-updated">Backend</span>
+                    </div>
+                </div>
+
+                <div id="store-tabs" class="store-tabs store-tabs--dynamic" aria-label="Categorías de tienda"></div>
+                <div id="store-grid" class="store-grid store-grid--dynamic" aria-live="polite">
+                    <article class="store-loading-card">Cargando catálogo desde star...</article>
+                </div>
+            </section>
+
+            <aside id="quote" class="quote-panel">
+                <div class="quote-panel__sticky">
+                    <p class="quote-panel__eyebrow">Solicitud</p>
+                    <h2>Arma tu ticket</h2>
+                    <p class="quote-panel__desc">Selecciona productos y genera un resumen para pegar en Discord.</p>
+
+                    <div id="quote-items" class="quote-items">
+                        <p>No hay productos seleccionados todavía.</p>
+                    </div>
+
+                    <div class="quote-total">
+                        <span>Total mensual estimado</span>
+                        <strong id="quote-total">$0 CLP</strong>
+                    </div>
+
+                    <form id="quote-form" class="quote-form">
+                        <label>
+                            Nick de Minecraft
+                            <input name="nick" maxlength="40" placeholder="Tu nick">
+                        </label>
+                        <label>
+                            Discord o contacto
+                            <input name="contact" maxlength="80" placeholder="@usuario">
+                        </label>
+                        <label class="quote-honeypot">
+                            Website
+                            <input name="website" tabindex="-1" autocomplete="off">
+                        </label>
+                        <label>
+                            Notas
+                            <textarea name="notes" maxlength="500" rows="4"
+                                placeholder="Qué quieres, horario, dudas, pack especial..."></textarea>
+                        </label>
+                        <button type="submit" class="btn-discord">Generar solicitud</button>
+                    </form>
+
+                    <div id="quote-result" class="quote-result" hidden></div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <section class="section section-dark store-policy">
         <div class="container">
-
-            <div class="warning-box"
-                style="background: rgba(88, 101, 242, 0.1); border: 1px solid var(--discord); padding: 20px; border-radius: 12px; margin-bottom: 40px; text-align: center;">
-                <h3
-                    style="color: var(--discord); margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span style="font-size: 1.5em;">📢</span> COMPRA POR TICKET
-                </h3>
-                <p style="color: #e5e7eb; margin-bottom: 15px;">
-                    Las compras todavía se gestionan manualmente. Si quieres un rango, protección o encargo especial,
-                    abre ticket en Discord y te ayudamos directo.
-                </p>
-                <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" class="btn-discord small"
-                    rel="noopener">Abrir ticket</a>
+            <h2 class="section-title">Política de balance</h2>
+            <div class="two-col">
+                <article class="prose-card">
+                    <h3>No es pay-to-break</h3>
+                    <p>Los rangos deben sentirse premium, pero no pueden destruir el progreso de jugadores nuevos ni
+                        convertir la economía en decoración.</p>
+                </article>
+                <article class="prose-card">
+                    <h3>Entrega manual</h3>
+                    <p>Todo se confirma por ticket. Si el servidor está en una etapa temprana, algunos encargos se
+                        retrasan o se ajustan para proteger el gameplay.</p>
+                </article>
             </div>
-
-            <div class="store-intro">
-                <p style="font-size: 1.05em; margin-bottom: 1rem;">
-                    Los <strong>rangos VIP son mensuales</strong>, no permanentes. Están diseñados para sentirse
-                    premium incluso en un servidor con Slimefun, pero sin regalar creativo ni romper la economía del día uno.
-                </p>
-                <p style="margin-bottom: 1.25rem;">
-                    Los pagos no son automáticos todavía. Se coordinan por <strong>Discord</strong> y puedes pagar con
-                    <strong>PayPal</strong> o <strong>MercadoPago</strong>.
-                </p>
-
-                <div class="direct-payment-links"
-                    style="margin: 0 auto 1.5rem; padding: 20px; background: rgba(5, 8, 22, 0.6); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3); max-width: 640px;">
-                    <p style="margin-bottom: 15px; color: var(--secondary); font-weight: 600;">Pago directo / donación</p>
-                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                        <a href="https://paypal.me/jackstar6677" target="_blank" rel="noopener noreferrer"
-                            class="btn-store"
-                            style="width: auto; background: #0070BA; color: white; border: none; min-width: 150px;">PayPal</a>
-                        <a href="https://link.mercadopago.cl/drakescraft" target="_blank" rel="noopener noreferrer"
-                            class="btn-store"
-                            style="width: auto; background: #009EE3; color: white; border: none; min-width: 150px;">MercadoPago</a>
-                    </div>
-                </div>
-
-                <p class="store-lead">
-                    Los precios se muestran en <strong>CLP</strong> y <strong>USD</strong>. Si necesitas una compra no estándar,
-                    como un pack especial, una cotización Slimefun o un encargo endgame, se revisa caso a caso.
-                </p>
-            </div>
-
-            <div class="store-tabs">
-                <button class="tab-btn active" data-category="monthly">Rangos Mensuales</button>
-                <button class="tab-btn" data-category="kits">Kits de Rango</button>
-                <button class="tab-btn" data-category="protection">Protecciones VIP</button>
-                <button class="tab-btn" data-category="commands">Utilidad y Comandos</button>
-                <button class="tab-btn" data-category="money">Compras Especiales</button>
-            </div>
-
-            <div class="store-grid">
-
-                <div class="store-card category-monthly">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL</div>
-                        <h3>HÉRCULES</h3>
-                        <p class="store-card-subtitle">Entrada premium para empezar con ventaja real.</p>
-                        <div class="price">CLP 4.990 <span>/ USD 4.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><strong>3 homes</strong> y <strong>5 playerwarps</strong></li>
-                        <li><code>/hat</code>, <code>/recipe</code> y chat con color</li>
-                        <li>Kit diamante con <strong>Protección VIII</strong> y espada <strong>Sharpness X</strong> + <strong>$25.000</strong></li>
-                        <li>Protección VIP exclusiva <strong>49x49</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-monthly">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL</div>
-                        <h3>HESTIA</h3>
-                        <p class="store-card-subtitle">Más comodidad social y mejor kit de diamante.</p>
-                        <div class="price">CLP 7.990 <span>/ USD 7.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><strong>5 homes</strong>, <code>/nick</code>, hora y clima personal</li>
-                        <li>Todo lo de Hércules, mejorado</li>
-                        <li>Kit diamante con <strong>Protección X</strong>, <strong>Sharpness XII</strong> y arco <strong>Power X</strong> + <strong>$50.000</strong></li>
-                        <li>Protección VIP <strong>81x81</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-monthly featured">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL</div>
-                        <h3>HERMES</h3>
-                        <p class="store-card-subtitle">Movilidad total: volar, volver y moverte mejor que nadie.</p>
-                        <div class="price">CLP 10.990 <span>/ USD 10.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><code>/fly</code>, <code>/speed</code>, <code>/workbench</code>, <code>/enderchest</code></li>
-                        <li><code>/back</code>, <code>/back</code> al morir y mejor experiencia en <code>/wild</code></li>
-                        <li>Kit diamante con <strong>Protección XII</strong>, <strong>Sharpness XIV</strong> y arco <strong>Power XII</strong> + <strong>$100.000</strong></li>
-                        <li>Protección VIP <strong>113x113</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-monthly">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL</div>
-                        <h3>HEFESTO</h3>
-                        <p class="store-card-subtitle">El salto a netherita y a la utilidad técnica pesada.</p>
-                        <div class="price">CLP 15.990 <span>/ USD 15.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><code>/feed</code>, <code>/top</code>, <code>/depth</code>, <code>/dispose</code></li>
-                        <li><code>/anvil</code>, <code>/grindstone</code>, <code>/smithingtable</code> y más</li>
-                        <li>Kit netherita con <strong>Protección XVI</strong>, <strong>Sharpness XVIII</strong> y pico <strong>Eficiencia XIV</strong> + <strong>$175.000</strong></li>
-                        <li>Protección VIP <strong>177x177</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-monthly">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL</div>
-                        <h3>ARTEMISA</h3>
-                        <p class="store-card-subtitle">Exploración, verticalidad y equipo endgame de alto nivel.</p>
-                        <div class="price">CLP 22.990 <span>/ USD 22.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><code>/fly</code>, <code>/speed</code>, <code>/jump</code>, <code>/compass</code></li>
-                        <li><strong>12 playerwarps</strong> y gran movilidad</li>
-                        <li>Kit netherita con <strong>Protección XVIII</strong>, <strong>Sharpness XX</strong> y tridente <strong>Impaling XII</strong> + <strong>$300.000</strong></li>
-                        <li>Protección VIP <strong>241x241</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-monthly">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL</div>
-                        <h3>AFRODITA</h3>
-                        <p class="store-card-subtitle">Economía premium, reparaciones y presencia de élite.</p>
-                        <div class="price">CLP 31.990 <span>/ USD 31.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><code>/repair</code>, más homes y más playerwarps</li>
-                        <li>Crear ChestShop sin pagar tasa de apertura</li>
-                        <li>Kit elite con <strong>Protección XXII</strong>, <strong>Sharpness XXIV</strong> y arco <strong>Power XVIII</strong> + <strong>$500.000</strong></li>
-                        <li>Protección VIP <strong>353x353</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-monthly featured">
-                    <div class="card-header">
-                        <div class="rank-badge monthly">MENSUAL TOP</div>
-                        <h3>ZEUS</h3>
-                        <p class="store-card-subtitle">El rango insignia: kit mítico, protección colosal y utilidad máxima.</p>
-                        <div class="price">CLP 44.990 <span>/ USD 44.99</span></div>
-                    </div>
-                    <ul class="benefits-list">
-                        <li><code>/repair all</code>, <code>/heal</code>, <code>/ext</code>, <code>/near</code></li>
-                        <li>ChestShop sin tasa y sin tax al comprar</li>
-                        <li>Kit mítico con <strong>Protección XXX</strong>, <strong>Sharpness XXX</strong> y doble pico <strong>Eficiencia XX</strong> + <strong>$1.000.000</strong></li>
-                        <li>Protección VIP <strong>481x481</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Comprar por Discord</a>
-                </div>
-
-                <div class="store-card category-kits">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">KIT DE RANGO</div>
-                        <h3>HÉRCULES / HESTIA</h3>
-                        <p class="store-card-subtitle">Diamante encantado, dinero y protección propia.</p>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Hércules: armadura diamante <strong>Protección VIII / Irrompibilidad V / Mending</strong></li>
-                        <li>Hestia: armadura diamante <strong>Protección X</strong>, casco con <strong>Respiración IV</strong> y peto con <strong>Espinas III</strong></li>
-                        <li>Espadas con <strong>Sharpness X-XII</strong>, <strong>Looting V-VI</strong> y <strong>Fire Aspect II</strong></li>
-                        <li>Picos y herramientas con <strong>Eficiencia VIII-X</strong>, Fortune o Silk Touch según el rango</li>
-                        <li>Hestia además suma <strong>arco Power X + Infinity + Flame + Punch II</strong></li>
-                        <li>Comida premium, manzanas doradas, perlas y totems</li>
-                        <li>Incluye piedra VIP del rango</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Ver compra por ticket</a>
-                </div>
-
-                <div class="store-card category-kits featured">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">KIT DE RANGO</div>
-                        <h3>HERMES</h3>
-                        <p class="store-card-subtitle">Diamante premium con enfoque total en movilidad.</p>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Armadura diamante <strong>Protección XII / Irrompibilidad VII / Mending</strong></li>
-                        <li>Botas con <strong>Feather Falling X</strong>, <strong>Depth Strider IV</strong> y <strong>Soul Speed IV</strong></li>
-                        <li>Espada <strong>Sharpness XIV</strong>, pico <strong>Eficiencia XII + Fortune VIII</strong></li>
-                        <li>Arco con <strong>Power XII + Infinity + Flame + Punch III</strong></li>
-                        <li>Escudo, shulker, cohetes, golden carrots, golden apples y totems</li>
-                        <li>Mucho alimento premium y utilidades de viaje</li>
-                        <li>Piedra VIP <strong>113x113</strong></li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Ver compra por ticket</a>
-                </div>
-
-                <div class="store-card category-kits">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">KIT DE RANGO</div>
-                        <h3>HEFESTO / ARTEMISA</h3>
-                        <p class="store-card-subtitle">Netherita competitiva con enfoque utility y endgame.</p>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Hefesto: netherita con <strong>Protección XVI</strong> y espada <strong>Sharpness XVIII</strong></li>
-                        <li>Artemisa: netherita con <strong>Protección XVIII</strong> y peto con <strong>Espinas VI</strong></li>
-                        <li>Botas entre <strong>Feather Falling XII-XIV</strong> y <strong>Soul Speed V</strong></li>
-                        <li>Picos con <strong>Eficiencia XIV-XVI</strong>; Hefesto lleva <strong>Fortune X</strong> y Artemisa <strong>Fortune XII</strong></li>
-                        <li>Artemisa suma <strong>tridente Impaling XII + Loyalty VIII + Channeling</strong></li>
-                        <li>Beacons, shulkers, totems y comida premium</li>
-                        <li>Encantamientos más altos que un kit casual</li>
-                        <li>Protecciones VIP 177x177 y 241x241</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Ver compra por ticket</a>
-                </div>
-
-                <div class="store-card category-kits">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">KIT DE RANGO</div>
-                        <h3>AFRODITA / ZEUS</h3>
-                        <p class="store-card-subtitle">La línea alta: netherita élite, economía y presencia endgame.</p>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Afrodita: netherita <strong>Protección XXII</strong>, espada <strong>Sharpness XXIV</strong> y arco <strong>Power XVIII + Punch V</strong></li>
-                        <li>Zeus: netherita <strong>Protección XXX</strong>, peto con <strong>Espinas X</strong> y botas <strong>Feather Falling XX</strong></li>
-                        <li>Zeus trae espada <strong>Sharpness XXX + Looting XII + Fire Aspect V + Knockback III</strong></li>
-                        <li>Dos picos Zeus: <strong>Eficiencia XX + Fortune XVI</strong> y <strong>Eficiencia XX + Silk Touch</strong></li>
-                        <li>Varias shulkers, beacons, totems, cohetes, golden carrots y enchanted golden apples</li>
-                        <li>Protecciones VIP 353x353 y 481x481</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Ver compra por ticket</a>
-                </div>
-
-                <div class="store-card category-protection">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE</div>
-                        <h3>VIPHÉRCULES</h3>
-                        <div class="price">49x49</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Piedra exclusiva del rango Hércules</li>
-                        <li>Más grande que una protección básica inicial</li>
-                        <li>Ideal para una base de arranque seria</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-protection">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE</div>
-                        <h3>VIPHESTIA</h3>
-                        <div class="price">81x81</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Protección mediana y cómoda para progreso temprano</li>
-                        <li>Exclusiva del rango Hestia</li>
-                        <li>Perfecta para una base con granja inicial</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-protection featured">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE</div>
-                        <h3>VIPHERMES</h3>
-                        <div class="price">113x113</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Terreno cómodo para movilidad, pwarp y centro operativo</li>
-                        <li>Escala claramente sobre protecciones tempranas</li>
-                        <li>Exclusiva del rango Hermes</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-protection">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE</div>
-                        <h3>VIPHEFESTO</h3>
-                        <div class="price">177x177</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Ya entra en territorio de megabase funcional</li>
-                        <li>Buena para máquinas, almacenamiento y zonas técnicas</li>
-                        <li>Exclusiva del rango Hefesto</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-protection">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE</div>
-                        <h3>VIPARTEMISA</h3>
-                        <div class="price">241x241</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Para bases grandes con exploración avanzada</li>
-                        <li>Ideal si quieres construir con amplitud real</li>
-                        <li>Exclusiva del rango Artemisa</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-protection">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE</div>
-                        <h3>VIPAFRODITA</h3>
-                        <div class="price">353x353</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Protección gigantesca para proyectos serios o grupos</li>
-                        <li>Escala de forma premium sobre la línea gratuita</li>
-                        <li>Exclusiva del rango Afrodita</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-protection featured">
-                    <div class="card-header">
-                        <div class="rank-badge money">VIP STONE FINAL</div>
-                        <h3>VIPZEUS</h3>
-                        <div class="price">481x481</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Más grande que la mejor protección gratuita del servidor</li>
-                        <li>Hecha para imperios, hubs privados y megabases</li>
-                        <li>Exclusiva del rango Zeus</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Pedir por Discord</a>
-                </div>
-
-                <div class="store-card category-commands">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">UTILIDAD</div>
-                        <h3>MOVILIDAD HERMES</h3>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li><code>/fly</code> y <code>/speed</code></li>
-                        <li><code>/back</code> y <code>/back</code> al morir</li>
-                        <li><code>/workbench</code> y <code>/enderchest</code></li>
-                        <li>Hecho para jugadores activos y constructores veloces</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Solicitar rango</a>
-                </div>
-
-                <div class="store-card category-commands">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">UTILIDAD</div>
-                        <h3>WORKFLOW HEFESTO</h3>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li><code>/top</code>, <code>/depth</code>, <code>/dispose</code></li>
-                        <li><code>/anvil</code>, <code>/grindstone</code>, <code>/stonecutter</code></li>
-                        <li><code>/smithingtable</code> y utilidades premium de trabajo</li>
-                        <li>Perfecto para gente técnica y builders serios</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Solicitar rango</a>
-                </div>
-
-                <div class="store-card category-commands featured">
-                    <div class="card-header">
-                        <div class="rank-badge permanent">UTILIDAD</div>
-                        <h3>ECONOMÍA AFRODITA / ZEUS</h3>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li><code>/repair</code> o <code>/repair all</code></li>
-                        <li>Mejores límites de homes, pwarps y ProtectionStones</li>
-                        <li>ChestShop sin fee y, en Zeus, sin tax al comprar</li>
-                        <li>La línea premium para largo plazo</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Solicitar rango</a>
-                </div>
-
-                <div class="store-card category-money">
-                    <div class="card-header">
-                        <div class="rank-badge money">MANUAL</div>
-                        <h3>ENCARGO SLIMEFUN</h3>
-                        <div class="price">Cotización por ticket</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Items concretos, máquinas o componentes avanzados</li>
-                        <li>Precio según dificultad real y etapa del servidor</li>
-                        <li>No todo está disponible en todo momento</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Cotizar en Discord</a>
-                </div>
-
-                <div class="store-card category-money">
-                    <div class="card-header">
-                        <div class="rank-badge money">MANUAL</div>
-                        <h3>PACKS ESPECIALES</h3>
-                        <div class="price">Cotización por ticket</div>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>Packs personalizados para builders, exploradores o gremios</li>
-                        <li>Opciones alineadas al estado actual de la economía</li>
-                        <li>Siempre revisado caso a caso</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Cotizar en Discord</a>
-                </div>
-
-                <div class="store-card category-money featured">
-                    <div class="card-header">
-                        <div class="rank-badge money">ECONOMÍA</div>
-                        <h3>POLÍTICA DE BALANCE</h3>
-                    </div>
-                    <ul class="benefits-list small">
-                        <li>No vendemos recursos que rompan el día 1 sin control</li>
-                        <li>Items como netherite, wither skulls o dragon breath se revisan con cuidado</li>
-                        <li>La tienda está pensada para sumar, no para destruir el progreso</li>
-                    </ul>
-                    <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener" class="btn-store">Consultar disponibilidad</a>
-                </div>
-
-            </div>
-
-            <div class="custom-orders-section"
-                style="margin-top: 50px; background: rgba(5, 8, 22, 0.8); border: 1px solid var(--secondary); border-radius: 15px; padding: 30px; text-align: left;">
-                <h3
-                    style="color: #a855f7; font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                    <span>🟣</span> COMPRAS PERSONALIZADAS Y ENDGAME
-                </h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 1.05rem;">
-                    Si quieres algo fuera de los rangos estándar, como un pack para tu clan, una compra de utilidad
-                    concreta o una cotización de progreso, lo vemos manualmente. No se aprueba todo: revisamos impacto
-                    económico, etapa del servidor y salud del gameplay antes de aceptar.
-                </p>
-
-                <div
-                    style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-bottom: 25px;">
-                    <h4 style="color: white; margin-bottom: 15px;">Cómo comprar bien</h4>
-                    <ol style="color: var(--text-muted); margin-left: 20px; line-height: 1.8;">
-                        <li>Abre ticket en Discord y explica exactamente lo que quieres.</li>
-                        <li>Indica tu nick, modalidad y rango actual si ya tienes uno.</li>
-                        <li>Te daremos disponibilidad, precio y forma de entrega.</li>
-                    </ol>
-                </div>
-
-                <div class="note-box"
-                    style="border-left: 4px solid var(--secondary); background: rgba(139, 92, 246, 0.1); padding: 15px;">
-                    <p style="color: #e9d5ff; font-style: italic;">
-                        DrakesCraft prioriza una economía robusta desde el día uno. Por eso las compras premium están
-                        diseñadas para sentirse útiles, pero no para volver irrelevante el progreso del servidor.
-                    </p>
-                </div>
-            </div>
-
-            <p class="store-note" style="margin-top: 30px;">
-                * Los rangos VIP son mensuales. Los kits y protecciones mostrados se entregan según el rango comprado y
-                la configuración vigente del servidor.
-            </p>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-logo">
-                <img src="assets/logo-drakescraft.png" alt="" height="40" width="40">
+                <img src="assets/logo-drakescraft.png" alt="" width="36" height="36">
                 <span>DrakesCraft</span>
             </div>
             <div class="footer-links">
-                <a href="rules.html">Reglamento</a>
-                <a href="https://discord.gg/rR7FbfCt9Y">Discord</a>
+                <a href="index.html">Inicio</a>
+                <a href="rules.html">Reglas</a>
                 <a href="store.html">Tienda</a>
+                <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
                 <a href="mailto:contacto@drakescraft.cl">Contacto</a>
-                <div class="footer-votes">
-                    <span>Votar:</span>
-                    <a href="https://minecraft-mp.com/server-s351633" target="_blank">Minecraft-MP</a>
-                    <a href="https://minecraft-server-list.com/server/516486/" target="_blank">MC Server List</a>
-                    <a href="https://topg.org/minecraft-servers/server-677700" target="_blank">TopG</a>
-                </div>
             </div>
-            <p class="copyright">© 2026 DrakesCraft · drakescraft.cl</p>
-            <p class="disclaimer">Minecraft es una marca registrada de Mojang AB. No estamos afiliados con Mojang AB.
-            </p>
+            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl · tienda manual</p>
+            <p class="disclaimer">Minecraft es una marca de Mojang AB. No afiliado.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
+    <script src="script.js?v=store-3-0"></script>
 </body>
 
 </html>

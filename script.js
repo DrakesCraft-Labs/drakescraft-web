@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     setupVisitorStats();
     setupDiscordLivePanel();
+    setupStoreExperience();
     setupPortalEffects();
     setupAmbientSound();
 
@@ -380,4 +381,159 @@ function setupAmbientSound() {
             stop();
         }
     });
+}
+
+function setupStoreExperience() {
+    const grid = document.getElementById('store-grid');
+    const tabs = document.getElementById('store-tabs');
+    const quoteItems = document.getElementById('quote-items');
+    const quoteTotal = document.getElementById('quote-total');
+    const quoteForm = document.getElementById('quote-form');
+    if (!grid || !tabs || !quoteItems || !quoteTotal || !quoteForm) return;
+
+    const state = {
+        catalog: null,
+        category: 'monthly',
+        selected: new Set()
+    };
+
+    const money = (value) => Number.isFinite(value)
+        ? '$' + value.toLocaleString('es-CL') + ' CLP'
+        : 'Cotización';
+
+    const productById = (id) => state.catalog.products.find((product) => product.id === id);
+
+    const renderTabs = () => {
+        tabs.innerHTML = state.catalog.categories.map((category) => `
+            <button type="button" class="tab-btn ${category.id === state.category ? 'active' : ''}" data-store-category="${category.id}">
+                <span>${escapeHtml(category.label)}</span>
+                <small>${escapeHtml(category.tagline)}</small>
+            </button>
+        `).join('');
+    };
+
+    const renderProducts = () => {
+        const products = state.catalog.products.filter((product) => product.category === state.category);
+        grid.innerHTML = products.map((product) => `
+            <article class="store-card store-card--modern ${product.featured ? 'featured' : ''} accent-${product.accent}">
+                <div class="card-header">
+                    <div class="rank-badge ${product.featured ? 'monthly' : 'permanent'}">${escapeHtml(product.badge)}</div>
+                    <h3>${escapeHtml(product.name)}</h3>
+                    <p class="store-card-subtitle">${escapeHtml(product.summary)}</p>
+                    <div class="price">${money(product.clp)}${Number.isFinite(product.usd) ? `<span>/ USD ${product.usd}</span>` : ''}</div>
+                </div>
+                <ul class="benefits-list">
+                    ${product.includes.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+                </ul>
+                <button type="button" class="btn-store ${state.selected.has(product.id) ? 'selected' : ''}" data-product-id="${product.id}">
+                    ${state.selected.has(product.id) ? 'Seleccionado' : 'Agregar a solicitud'}
+                </button>
+            </article>
+        `).join('');
+    };
+
+    const renderQuote = () => {
+        const selected = Array.from(state.selected).map(productById).filter(Boolean);
+        if (!selected.length) {
+            quoteItems.innerHTML = '<p>No hay productos seleccionados todavía.</p>';
+            quoteTotal.textContent = '$0 CLP';
+            return;
+        }
+
+        const total = selected.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0);
+        quoteTotal.textContent = money(total);
+        quoteItems.innerHTML = selected.map((product) => `
+            <div class="quote-item">
+                <span>${escapeHtml(product.name)}</span>
+                <strong>${money(product.clp)}</strong>
+                <button type="button" data-remove-product="${product.id}" aria-label="Quitar ${escapeHtml(product.name)}">×</button>
+            </div>
+        `).join('');
+    };
+
+    const renderAll = () => {
+        renderTabs();
+        renderProducts();
+        renderQuote();
+    };
+
+    tabs.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-store-category]');
+        if (!button) return;
+        state.category = button.dataset.storeCategory;
+        renderAll();
+    });
+
+    grid.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-product-id]');
+        if (!button) return;
+        const id = button.dataset.productId;
+        if (state.selected.has(id)) state.selected.delete(id);
+        else state.selected.add(id);
+        renderAll();
+    });
+
+    quoteItems.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-remove-product]');
+        if (!button) return;
+        state.selected.delete(button.dataset.removeProduct);
+        renderAll();
+    });
+
+    quoteForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const result = document.getElementById('quote-result');
+        if (!state.selected.size) {
+            showToast('Selecciona algo de la tienda primero.');
+            return;
+        }
+        const formData = new FormData(quoteForm);
+        const payload = {
+            nick: formData.get('nick'),
+            contact: formData.get('contact'),
+            notes: formData.get('notes'),
+            website: formData.get('website'),
+            items: Array.from(state.selected)
+        };
+
+        try {
+            const response = await fetch('/api/store/quote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('quote failed');
+            const data = await response.json();
+            if (result) {
+                result.hidden = false;
+                result.innerHTML = `
+                    <strong>Solicitud ${escapeHtml(data.quoteId)} lista.</strong>
+                    <textarea readonly rows="7">${escapeHtml(data.ticketMessage)}</textarea>
+                    <a class="btn-discord" href="${escapeHtml(data.discordUrl)}" target="_blank" rel="noopener">Abrir Discord</a>
+                `;
+            }
+            showToast('Solicitud generada.');
+        } catch (_error) {
+            showToast('No se pudo generar la solicitud.');
+        }
+    });
+
+    fetch('/api/store')
+        .then((response) => {
+            if (!response.ok) throw new Error('store unavailable');
+            return response.json();
+        })
+        .then((catalog) => {
+            state.catalog = catalog;
+            document.getElementById('store-health').textContent = 'Catálogo online';
+            document.getElementById('store-product-count').textContent = catalog.summary.products.toLocaleString('es-CL');
+            document.getElementById('store-min-price').textContent = money(catalog.summary.minPrice);
+            document.getElementById('store-max-price').textContent = money(catalog.summary.maxPrice);
+            document.getElementById('store-updated').textContent = 'Actualizado ' + catalog.updatedAt;
+            renderAll();
+        })
+        .catch(() => {
+            grid.innerHTML = '<article class="store-loading-card">La tienda no está disponible temporalmente.</article>';
+            document.getElementById('store-health').textContent = 'Sin conexión';
+        });
 }

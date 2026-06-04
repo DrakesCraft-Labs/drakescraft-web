@@ -8,9 +8,44 @@ const app = Fastify({ logger: true, trustProxy: true });
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = process.env.DATA_DIR || path.join(root, 'data');
 const counterFile = path.join(dataDir, 'visits.json');
+const quoteFile = path.join(dataDir, 'store-quotes.jsonl');
 const discordUrl = 'https://discord.com/api/guilds/699391897369575476/widget.json';
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
+
+const storeCatalog = {
+  updatedAt: '2026-06-04',
+  currency: 'CLP',
+  payment: {
+    mode: 'ticket',
+    discord: 'https://discord.gg/rR7FbfCt9Y',
+    paypal: 'https://paypal.me/jackstar6677',
+    mercadoPago: 'https://link.mercadopago.cl/drakescraft'
+  },
+  categories: [
+    { id: 'monthly', label: 'Rangos mensuales', tagline: 'Identidad griega, utilidad progresiva y kits fuertes.' },
+    { id: 'kits', label: 'Kits y equipo', tagline: 'Resumen de lo que trae cada línea de rango.' },
+    { id: 'protection', label: 'Protecciones', tagline: 'Territorio VIP para bases, gremios y proyectos.' },
+    { id: 'utility', label: 'Utilidad', tagline: 'Comandos, economía y comodidad diaria.' },
+    { id: 'custom', label: 'Especiales', tagline: 'Cotizaciones manuales sin romper el balance.' }
+  ],
+  products: [
+    { id: 'hercules', category: 'monthly', tier: 1, name: 'Hércules', badge: 'Entrada', clp: 4990, usd: 4.99, featured: false, accent: 'bronze', summary: 'Primer salto premium para empezar cómodo.', includes: ['3 homes y 5 playerwarps', 'Chat con color, /hat y /recipe', 'Kit diamante Protección VIII + Sharpness X', 'Protección VIP 49x49'] },
+    { id: 'hestia', category: 'monthly', tier: 2, name: 'Hestia', badge: 'Social', clp: 7990, usd: 7.99, featured: false, accent: 'rose', summary: 'Más presencia social y mejor kit diamante.', includes: ['5 homes y /nick', 'Hora y clima personal', 'Kit diamante Protección X + Power X', 'Protección VIP 81x81'] },
+    { id: 'hermes', category: 'monthly', tier: 3, name: 'Hermes', badge: 'Recomendado', clp: 10990, usd: 10.99, featured: true, accent: 'violet', summary: 'Movilidad total para explorar y construir rápido.', includes: ['/fly, /speed, /back y /enderchest', '/workbench y mejoras de viaje', 'Kit diamante Protección XII + Sharpness XIV', 'Protección VIP 113x113'] },
+    { id: 'hefesto', category: 'monthly', tier: 4, name: 'Hefesto', badge: 'Técnico', clp: 15990, usd: 15.99, featured: false, accent: 'ember', summary: 'Utilidad pesada y entrada a netherita.', includes: ['/feed, /top, /anvil y mesas premium', 'Herramientas de trabajo avanzadas', 'Kit netherita Protección XVI + Sharpness XVIII', 'Protección VIP 177x177'] },
+    { id: 'artemisa', category: 'monthly', tier: 5, name: 'Artemisa', badge: 'Exploración', clp: 22990, usd: 22.99, featured: false, accent: 'cyan', summary: 'Verticalidad, movilidad y equipo endgame.', includes: ['/fly, /speed, /jump y /compass', '12 playerwarps', 'Netherita Protección XVIII + tridente Impaling XII', 'Protección VIP 241x241'] },
+    { id: 'afrodita', category: 'monthly', tier: 6, name: 'Afrodita', badge: 'Economía', clp: 31990, usd: 31.99, featured: false, accent: 'pink', summary: 'Presencia premium, reparación y comercio.', includes: ['/repair y límites superiores', 'ChestShop sin tasa de apertura', 'Kit élite Protección XXII + Sharpness XXIV', 'Protección VIP 353x353'] },
+    { id: 'zeus', category: 'monthly', tier: 7, name: 'Zeus', badge: 'Rango top', clp: 44990, usd: 44.99, featured: true, accent: 'gold', summary: 'El rango insignia para una odisea completa.', includes: ['/repair all, /heal, /ext y /near', 'ChestShop sin fee y sin tax al comprar', 'Kit mítico Protección XXX + Sharpness XXX', 'Protección VIP 481x481'] },
+    { id: 'kit-hermes', category: 'kits', tier: 3, name: 'Kit Hermes', badge: 'Movilidad', clp: null, usd: null, featured: true, accent: 'violet', summary: 'Equipo diamante premium enfocado en viajar.', includes: ['Botas con Feather Falling X y Soul Speed IV', 'Pico Eficiencia XII + Fortune VIII', 'Arco Power XII + Infinity', 'Shulker, cohetes, totems y comida premium'] },
+    { id: 'kit-zeus', category: 'kits', tier: 7, name: 'Kit Zeus', badge: 'Mítico', clp: null, usd: null, featured: true, accent: 'gold', summary: 'Netherita extrema y herramientas de línea alta.', includes: ['Protección XXX y Espinas X', 'Sharpness XXX + Looting XII', 'Doble pico Eficiencia XX', 'Beacons, shulkers, totems y recursos premium'] },
+    { id: 'protection-177', category: 'protection', tier: 4, name: 'Protección 177x177', badge: 'Base seria', clp: null, usd: null, featured: false, accent: 'ember', summary: 'Terreno amplio para una base técnica.', includes: ['Área cuadrada de 177x177', 'Pensada para farms y almacenes', 'Entrega por staff', 'Revisión de ubicación incluida'] },
+    { id: 'protection-481', category: 'protection', tier: 7, name: 'Protección 481x481', badge: 'Colosal', clp: null, usd: null, featured: true, accent: 'gold', summary: 'Protección gigante para proyectos grandes.', includes: ['Área cuadrada de 481x481', 'Ideal para clanes o ciudades', 'Entrega manual supervisada', 'No invade claims existentes'] },
+    { id: 'utility-economy', category: 'utility', tier: 6, name: 'Economía premium', badge: 'Comercio', clp: null, usd: null, featured: true, accent: 'pink', summary: 'Ventajas comerciales sin romper el mercado.', includes: ['ChestShop sin fee', 'Menor fricción para vender', 'Revisión de abuso económico', 'Ideal para tiendas comunitarias'] },
+    { id: 'custom-slimefun', category: 'custom', tier: 5, name: 'Encargo Slimefun', badge: 'Cotización', clp: null, usd: null, featured: false, accent: 'cyan', summary: 'Máquinas, componentes o ayuda técnica puntual.', includes: ['Precio según dificultad', 'Disponibilidad según etapa del servidor', 'Entrega por ticket', 'Balance revisado caso a caso'] },
+    { id: 'custom-guild', category: 'custom', tier: 5, name: 'Pack de gremio', badge: 'Manual', clp: null, usd: null, featured: false, accent: 'violet', summary: 'Pack para equipos, builders o comunidades.', includes: ['Cotización personalizada', 'Enfoque builder, explorador o técnico', 'No todo se aprueba', 'Entrega coordinada por staff'] }
+  ]
+};
 
 async function loadVisits() {
   try {
@@ -93,6 +128,63 @@ app.get('/api/discord', async (_request, reply) => {
     reply.code(503);
     return { error: 'Discord no disponible temporalmente' };
   }
+});
+
+app.get('/api/store', async () => {
+  const monthly = storeCatalog.products.filter((product) => product.category === 'monthly');
+  const minPrice = Math.min(...monthly.map((product) => product.clp).filter(Number.isFinite));
+  const maxPrice = Math.max(...monthly.map((product) => product.clp).filter(Number.isFinite));
+  return {
+    ...storeCatalog,
+    summary: {
+      products: storeCatalog.products.length,
+      monthlyRanks: monthly.length,
+      minPrice,
+      maxPrice
+    }
+  };
+});
+
+app.post('/api/store/quote', async (request, reply) => {
+  const body = request.body || {};
+  const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
+  const validIds = new Set(storeCatalog.products.map((product) => product.id));
+  const items = selectedIds.filter((id) => validIds.has(id));
+  const nick = String(body.nick || '').trim().slice(0, 40);
+  const contact = String(body.contact || '').trim().slice(0, 80);
+  const notes = String(body.notes || '').trim().slice(0, 500);
+
+  if (!items.length) return reply.code(400).send({ error: 'Selecciona al menos un producto.' });
+  if (body.website) return reply.code(204).send();
+
+  const quote = {
+    id: `dq-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`,
+    createdAt: new Date().toISOString(),
+    ipCountry: request.headers['cf-ipcountry'] || null,
+    nick,
+    contact,
+    items,
+    notes
+  };
+
+  await fs.mkdir(dataDir, { recursive: true });
+  await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
+
+  const selected = storeCatalog.products.filter((product) => items.includes(product.id));
+  const total = selected.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0);
+  return {
+    ok: true,
+    quoteId: quote.id,
+    discordUrl: storeCatalog.payment.discord,
+    total,
+    ticketMessage: [
+      `Solicitud tienda DrakesCraft ${quote.id}`,
+      nick ? `Nick: ${nick}` : null,
+      contact ? `Contacto: ${contact}` : null,
+      `Items: ${selected.map((product) => product.name).join(', ')}`,
+      notes ? `Notas: ${notes}` : null
+    ].filter(Boolean).join('\n')
+  };
 });
 
 await app.register(fastifyStatic, {
