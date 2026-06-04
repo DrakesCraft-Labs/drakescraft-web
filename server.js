@@ -100,11 +100,29 @@ await app.register(fastifyStatic, {
   wildcard: false,
   index: ['index.html'],
   maxAge: '1h',
-  immutable: false
+  immutable: false,
+  allowedPath: (pathname) => {
+    const publicFiles = new Set([
+      'index.html',
+      'rules.html',
+      'store.html',
+      'styles.css',
+      'script.js',
+      'bannerdrakes.jpg',
+      'dragon_fly.png',
+      'logodrakescraft.png',
+      'previewdiscord1.png',
+      'previewdiscord2.png'
+    ]);
+    const normalized = pathname.replace(/^[/\\]+/, '').replaceAll('\\', '/');
+    return publicFiles.has(normalized) || normalized.startsWith('assets/');
+  }
 });
 
 app.setNotFoundHandler((request, reply) => {
   if (request.raw.url?.startsWith('/api/')) return reply.code(404).send({ error: 'Ruta no encontrada' });
+  const requestedPath = request.raw.url?.split('?')[0] || '';
+  if (path.extname(requestedPath)) return reply.code(404).send('Not found');
   return reply.sendFile('index.html');
 });
 
