@@ -1594,8 +1594,10 @@ img {
     min-height: 100vh;
     isolation: isolate;
     background:
-        linear-gradient(90deg, rgba(5, 3, 14, 0.96), rgba(5, 3, 14, 0.56) 52%, rgba(5, 3, 14, 0.9)),
-        url('bannerdrakes.jpg') center / cover;
+        radial-gradient(circle at 22% 34%, rgba(124, 58, 237, 0.35), transparent 34%),
+        radial-gradient(circle at 72% 26%, rgba(250, 204, 21, 0.14), transparent 26%),
+        linear-gradient(135deg, rgba(5, 3, 14, 0.98), rgba(18, 10, 42, 0.94) 46%, rgba(5, 3, 14, 0.98));
+    padding-top: 9rem;
 }
 
 .site-hero::after {
@@ -1607,12 +1609,14 @@ img {
 }
 
 .portal-hero {
-    max-width: 1260px;
+    width: min(1120px, calc(100% - 40px));
+    max-width: none;
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
-    gap: clamp(2rem, 6vw, 6rem);
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: center;
     text-align: left;
+    padding: 0;
 }
 
 .hero-copy {
@@ -1629,9 +1633,9 @@ img {
 }
 
 .portal-hero .site-hero__title {
-    font-size: clamp(4rem, 9vw, 7.5rem);
-    letter-spacing: -0.03em;
-    line-height: 0.98;
+    font-size: clamp(3.4rem, 7vw, 5.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
     margin: 0.25rem 0 1.2rem;
     filter: drop-shadow(0 0 28px rgba(250, 204, 21, 0.22));
 }
@@ -1664,10 +1668,10 @@ img {
 .hero-dragon {
     position: absolute;
     z-index: 0;
-    right: -8vw;
-    top: 7vh;
-    width: min(54vw, 760px);
-    opacity: 0.22;
+    left: max(-120px, -8vw);
+    bottom: -10vh;
+    width: min(38vw, 520px);
+    opacity: 0.18;
     filter: drop-shadow(0 0 35px rgba(124, 58, 237, 0.5));
     pointer-events: none;
     transition: transform 0.1s linear;
@@ -1759,7 +1763,12 @@ img {
 
 .deck-grid span, .deck-grid strong { display: block; }
 .deck-grid span { color: var(--text-muted); font-size: 0.65rem; text-transform: uppercase; }
-.deck-grid strong { color: #fff; margin-top: 0.25rem; font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.deck-grid strong {
+    color: #fff;
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+    overflow-wrap: anywhere;
+}
 
 .deck-bar { height: 3px; margin-top: 1rem; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
 .deck-bar span { display: block; width: 38%; height: 100%; background: linear-gradient(90deg, transparent, #22d3ee, #facc15, transparent); animation: deckScan 2.4s linear infinite; }
@@ -1815,7 +1824,7 @@ img {
 @media (max-width: 900px) {
     .portal-hero { grid-template-columns: 1fr; text-align: center; }
     .portal-hero .site-hero__actions { justify-content: center; }
-    .hero-dragon { width: 100vw; opacity: 0.12; }
+    .hero-dragon { width: 85vw; opacity: 0.1; left: 50%; transform: translateX(-50%); }
     .command-deck { max-width: 540px; margin: 0 auto; }
 }
 

@@ -278,7 +278,7 @@ function setupDiscordLivePanel() {
                 return res.json();
             })
             .then((data) => {
-                const online = Number.isFinite(data.presence_count) ? data.presence_count : 0;
+                const online = Number.isFinite(data.online) ? data.online : 0;
                 const estimatedTotal = Array.isArray(data.members) ? data.members.length : null;
 
                 statusDot.classList.remove('offline');
