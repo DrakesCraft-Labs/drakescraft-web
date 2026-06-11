@@ -157,9 +157,11 @@ app.get('/api/discord', async (_request, reply) => {
 });
 
 app.get('/api/store', async () => {
-  const monthly = storeCatalog.products.filter((product) => product.category === 'monthly');
-  const minPrice = Math.min(...monthly.map((product) => product.clp).filter(Number.isFinite));
-  const maxPrice = Math.max(...monthly.map((product) => product.clp).filter(Number.isFinite));
+  
+  const allPriced = storeCatalog.products.map(p => p.clp).filter(Number.isFinite);
+  const monthly = storeCatalog.products.filter(p => p.category === 'monthly');
+  const minPrice = Math.min(...allPriced);
+  const maxPrice = Math.max(...allPriced);
   return {
     ...storeCatalog,
     summary: {
