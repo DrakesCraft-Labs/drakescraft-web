@@ -214,26 +214,37 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
     ? `$${total.toLocaleString('es-CL')} CLP` 
     : `$${total.toFixed(2)} USD`;
   
-  const emoji = type.includes('Pago') ? '🛒' : '📝';
-  const color = type.includes('Pago') ? 16750848 : 3447003; // Naranja para pago, Azul para manual
+  let emoji = '📝';
+  let color = 10181046; // Violeta para cotización manual
+  
+  if (type.includes('Mercado Pago')) {
+    color = 40675; // Celeste Mercado Pago
+    emoji = '🔵';
+  } else if (type.includes('PayPal')) {
+    color = 12423; // Azul PayPal
+    emoji = '🟡';
+  }
 
   try {
     const res = await fetch(webhook, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: 'DrakesCraft · Solicitudes',
+        username: 'DrakesCraft · Portal',
+        avatar_url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png',
         embeds: [{
-          title: `${emoji} ${type} — ${names}`,
+          title: `${emoji} ${type}`,
+          description: `Se ha generado una solicitud para adquirir: **${names}**`,
           color,
+          thumbnail: { url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png' },
           fields: [
-            { name: '🎮 Nick', value: nick || '—', inline: true },
-            { name: '💬 Contacto', value: contact || '—', inline: true },
-            { name: '💰 Total', value: formattedAmount, inline: true },
-            { name: '🔑 ID Solicitud', value: `\`${quoteId}\``, inline: false },
-            { name: '📝 Notas', value: notes || 'Sin notas.', inline: false },
+            { name: '🎮 Nick de Minecraft', value: `\`${nick || 'No especificado'}\``, inline: true },
+            { name: '💬 Medio de Contacto', value: `\`${contact || 'No especificado'}\``, inline: true },
+            { name: '💰 Valor Estimado', value: `**${formattedAmount}**`, inline: true },
+            { name: '🔑 ID de Solicitud', value: `\`${quoteId}\``, inline: false },
+            { name: '📝 Notas Adicionales', value: notes ? `>>> ${notes}` : '*Sin comentarios.*', inline: false },
           ],
-          footer: { text: `DrakesCraft · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
+          footer: { text: `DrakesCraft · Portal de Pagos · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
         }]
       })
     });
@@ -288,8 +299,10 @@ async function notifyPaymentDiscord({ platform, paymentId, status, items, nick, 
   if (!webhook) return;
 
   const names = items.map(p => p.name).join(', ');
-  const emoji = status === 'approved' || status === 'COMPLETED' ? '✅' : '⚠️';
-  const color = status === 'approved' || status === 'COMPLETED' ? 3066993 : 15158332;
+  const isApproved = status === 'approved' || status === 'COMPLETED';
+  const emoji = isApproved ? '🟢' : '🔴';
+  const statusLabel = isApproved ? 'Aprobado / Completado' : `Pendiente/Rechazado (${status})`;
+  const color = isApproved ? 3066993 : 15158332; // Verde esmeralda (#2ecc71) o Rojo/naranja (#e74c3c)
   const formattedAmount = currency === 'CLP' 
     ? `$${amount.toLocaleString('es-CL')} CLP` 
     : `$${amount.toFixed(2)} USD`;
@@ -300,17 +313,21 @@ async function notifyPaymentDiscord({ platform, paymentId, status, items, nick, 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         username: 'DrakesCraft · Pagos',
+        avatar_url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png',
         embeds: [{
-          title: `${emoji} Pago ${status} via ${platform} — ${names}`,
+          title: `${emoji} Pago Recibido — ${platform}`,
+          description: `¡Se ha completado una transacción con éxito para: **${names}**!`,
           color,
+          thumbnail: { url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png' },
           fields: [
-            { name: '🎮 Nick', value: nick || '—', inline: true },
-            { name: '💬 Contacto', value: contact || '—', inline: true },
-            { name: '💰 Monto', value: formattedAmount, inline: true },
-            { name: '🏦 Plataforma', value: platform, inline: true },
-            { name: '🔑 ID Transacción', value: `\`${paymentId}\``, inline: false },
+            { name: '🎮 Nick del Jugador', value: `\`${nick || '—'}\``, inline: true },
+            { name: '💬 Contacto', value: `\`${contact || '—'}\``, inline: true },
+            { name: '💰 Monto Pagado', value: `**${formattedAmount}**`, inline: true },
+            { name: '🏦 Pasarela', value: `\`${platform}\``, inline: true },
+            { name: '📊 Estado del Pago', value: `\`${statusLabel}\``, inline: true },
+            { name: '🔑 ID de Transacción', value: `\`${paymentId}\``, inline: false },
           ],
-          footer: { text: `DrakesCraft · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
+          footer: { text: `DrakesCraft · Portal de Pagos · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
         }]
       })
     });

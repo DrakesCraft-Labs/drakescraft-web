@@ -15,7 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=store-3-1">
+    <link rel="stylesheet" href="styles.css?v=store-3-2">
 </head>
 
 <body>
@@ -110,25 +110,34 @@
                         <strong id="quote-total">$0 CLP</strong>
                     </div>
 
+                    <div class="quote-instructions" style="font-size:0.85rem;line-height:1.4;opacity:0.85;margin-bottom:1rem;padding:0.75rem;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
+                        <p style="margin:0 0 0.5rem 0;font-weight:600;color:var(--color-accent, #9b59b6);">📋 Instrucciones de Compra:</p>
+                        <ul style="margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:4px;">
+                            <li>Ingresa tu <strong>Nick de Minecraft exacto</strong> (sensible a mayúsculas/minúsculas).</li>
+                            <li>Ingresa tu contacto para coordinar la entrega si es manual.</li>
+                            <li>Al hacer clic en <strong>Generar solicitud</strong>, se habilitarán los botones de pago online inmediato (Mercado Pago / PayPal) y la opción de ticket manual.</li>
+                        </ul>
+                    </div>
+
                     <form id="quote-form" class="quote-form">
                         <label>
-                            Nick de Minecraft
-                            <input name="nick" maxlength="40" placeholder="Tu nick">
+                            Nick de Minecraft (Exacto) <span style="color:var(--color-accent, #9b59b6)">*</span>
+                            <input name="nick" maxlength="40" placeholder="Ej: JackStar6677" required>
                         </label>
                         <label>
-                            Discord o contacto
-                            <input name="contact" maxlength="80" placeholder="@usuario">
+                            Discord o Contacto (Usuario o Email) <span style="color:var(--color-accent, #9b59b6)">*</span>
+                            <input name="contact" maxlength="80" placeholder="Ej: @jack o tu_correo@mail.com" required>
                         </label>
                         <label class="quote-honeypot">
                             Website
                             <input name="website" tabindex="-1" autocomplete="off">
                         </label>
                         <label>
-                            Notas
-                            <textarea name="notes" maxlength="500" rows="4"
-                                placeholder="Qué quieres, horario, dudas, pack especial..."></textarea>
+                            Notas / Peticiones especiales (Opcional)
+                            <textarea name="notes" maxlength="500" rows="3"
+                                placeholder="Indica detalles adicionales del pedido o dudas..."></textarea>
                         </label>
-                        <button type="submit" class="btn-discord">Generar solicitud</button>
+                        <button type="submit" class="btn-discord" style="width:100%;font-weight:600;">Generar solicitud de pago</button>
                     </form>
 
                     <div id="quote-result" class="quote-result" hidden></div>
@@ -174,7 +183,7 @@
     </footer>
 
     <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
-    <script src="script.js?v=store-3-1"></script>
+    <script src="script.js?v=store-3-2"></script>
 </body>
 
 </html>
