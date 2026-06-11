@@ -217,25 +217,33 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
   const emoji = type.includes('Pago') ? '🛒' : '📝';
   const color = type.includes('Pago') ? 16750848 : 3447003; // Naranja para pago, Azul para manual
 
-  await fetch(webhook, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      username: 'DrakesCraft · Solicitudes',
-      embeds: [{
-        title: `${emoji} ${type} — ${names}`,
-        color,
-        fields: [
-          { name: '🎮 Nick', value: nick || '—', inline: true },
-          { name: '💬 Contacto', value: contact || '—', inline: true },
-          { name: '💰 Total', value: formattedAmount, inline: true },
-          { name: '🔑 ID Solicitud', value: `\`${quoteId}\``, inline: false },
-          { name: '📝 Notas', value: notes || 'Sin notas.', inline: false },
-        ],
-        footer: { text: `DrakesCraft · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
-      }]
-    })
-  }).catch(() => {});
+  try {
+    const res = await fetch(webhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'DrakesCraft · Solicitudes',
+        embeds: [{
+          title: `${emoji} ${type} — ${names}`,
+          color,
+          fields: [
+            { name: '🎮 Nick', value: nick || '—', inline: true },
+            { name: '💬 Contacto', value: contact || '—', inline: true },
+            { name: '💰 Total', value: formattedAmount, inline: true },
+            { name: '🔑 ID Solicitud', value: `\`${quoteId}\``, inline: false },
+            { name: '📝 Notas', value: notes || 'Sin notas.', inline: false },
+          ],
+          footer: { text: `DrakesCraft · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
+        }]
+      })
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      app.log.warn({ status: res.status, text }, 'Discord webhook returned non-2xx response');
+    }
+  } catch (err) {
+    app.log.error(err, 'Error sending to Discord webhook');
+  }
 }
 
 
@@ -286,25 +294,33 @@ async function notifyPaymentDiscord({ platform, paymentId, status, items, nick, 
     ? `$${amount.toLocaleString('es-CL')} CLP` 
     : `$${amount.toFixed(2)} USD`;
 
-  await fetch(webhook, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      username: 'DrakesCraft · Pagos',
-      embeds: [{
-        title: `${emoji} Pago ${status} via ${platform} — ${names}`,
-        color,
-        fields: [
-          { name: '🎮 Nick', value: nick || '—', inline: true },
-          { name: '💬 Contacto', value: contact || '—', inline: true },
-          { name: '💰 Monto', value: formattedAmount, inline: true },
-          { name: '🏦 Plataforma', value: platform, inline: true },
-          { name: '🔑 ID Transacción', value: `\`${paymentId}\``, inline: false },
-        ],
-        footer: { text: `DrakesCraft · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
-      }]
-    })
-  }).catch(() => {});
+  try {
+    const res = await fetch(webhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'DrakesCraft · Pagos',
+        embeds: [{
+          title: `${emoji} Pago ${status} via ${platform} — ${names}`,
+          color,
+          fields: [
+            { name: '🎮 Nick', value: nick || '—', inline: true },
+            { name: '💬 Contacto', value: contact || '—', inline: true },
+            { name: '💰 Monto', value: formattedAmount, inline: true },
+            { name: '🏦 Plataforma', value: platform, inline: true },
+            { name: '🔑 ID Transacción', value: `\`${paymentId}\``, inline: false },
+          ],
+          footer: { text: `DrakesCraft · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
+        }]
+      })
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      app.log.warn({ status: res.status, text }, 'Discord payments webhook returned non-2xx response');
+    }
+  } catch (err) {
+    app.log.error(err, 'Error sending payment to Discord webhook');
+  }
 }
 
 // POST /api/store/checkout — crea preferencia de pago en MP y devuelve init_point
