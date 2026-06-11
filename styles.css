@@ -557,6 +557,8 @@ img {
 
 /* Buttons */
 .btn-primary,
+.btn-mp,
+.btn-paypal,
 .btn-secondary,
 .btn-discord,
 .btn-store,
@@ -614,6 +616,28 @@ img {
 .btn-discord-large:hover {
     background: #404EED;
     box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-mp {
+    background: #009EE3;
+    color: white;
+}
+
+.btn-mp:hover {
+    background: #0087c2;
+    box-shadow: 0 0 15px rgba(0, 158, 227, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-paypal {
+    background: #003087;
+    color: white;
+}
+
+.btn-paypal:hover {
+    background: #002466;
+    box-shadow: 0 0 15px rgba(0, 48, 135, 0.5);
     transform: translateY(-2px);
 }
 

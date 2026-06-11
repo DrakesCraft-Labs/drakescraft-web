@@ -496,6 +496,10 @@ function setupStoreExperience() {
             items: Array.from(state.selected)
         };
 
+        const selectedProducts = state.catalog?.products?.filter(p => Array.from(state.selected).includes(p.id)) || [];
+        const hasClp = selectedProducts.some(p => Number.isFinite(p.clp) && p.clp > 0);
+        const hasUsd = selectedProducts.some(p => Number.isFinite(p.usd) && p.usd > 0);
+
         try {
             const response = await fetch('/api/store/quote', {
                 method: 'POST',
@@ -504,12 +508,68 @@ function setupStoreExperience() {
             });
             if (!response.ok) throw new Error('quote failed');
             const data = await response.json();
+
+            let paymentButtons = '';
+            if (hasClp || hasUsd) {
+                let mpButton = '';
+                let paypalButton = '';
+
+                if (hasClp) {
+                    try {
+                        const mpRes = await fetch('/api/store/checkout', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (mpRes.ok) {
+                            const mpData = await mpRes.json();
+                            if (mpData.init_point) {
+                                mpButton = `<a class="btn-mp" href="${escapeHtml(mpData.init_point)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:8px;">
+                                    <img src="assets/mp-logo.svg" alt="" width="20" height="20" style="vertical-align:middle;margin-right:8px;border-radius:4px;">
+                                    Pagar con MercadoPago (CLP)
+                                </a>`;
+                            }
+                        }
+                    } catch (_) {}
+                }
+
+                if (hasUsd) {
+                    try {
+                        const ppRes = await fetch('/api/store/paypal/checkout', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (ppRes.ok) {
+                            const ppData = await ppRes.json();
+                            if (ppData.init_point) {
+                                paypalButton = `<a class="btn-paypal" href="${escapeHtml(ppData.init_point)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:8px;">
+                                    <img src="assets/paypal-logo.svg" alt="" width="20" height="20" style="vertical-align:middle;margin-right:8px;border-radius:4px;">
+                                    Pagar con PayPal (USD)
+                                </a>`;
+                            }
+                        }
+                    } catch (_) {}
+                }
+
+                if (mpButton || paypalButton) {
+                    paymentButtons = `<div class="store-payment-options" style="display:flex;flex-direction:column;gap:8px;margin:1.25rem 0 0.75rem 0;">
+                        ${mpButton}
+                        ${paypalButton}
+                    </div>`;
+                }
+            }
+
             if (result) {
                 result.hidden = false;
                 result.innerHTML = `
                     <strong>Solicitud ${escapeHtml(data.quoteId)} lista.</strong>
-                    <textarea readonly rows="7">${escapeHtml(data.ticketMessage)}</textarea>
-                    <a class="btn-discord" href="${escapeHtml(data.discordUrl)}" target="_blank" rel="noopener">Abrir Discord</a>
+                    ${paymentButtons}
+                    <details style="margin-top:0.75rem">
+                        <summary style="cursor:pointer;font-size:0.85rem;opacity:0.7">O abre ticket manual en Discord</summary>
+                        <textarea readonly rows="7" style="margin-top:0.5rem">${escapeHtml(data.ticketMessage)}</textarea>
+                        <a class="btn-discord" href="${escapeHtml(data.discordUrl)}" target="_blank" rel="noopener" style="width:100%;justify-content:center;margin-top:0.5rem;">Abrir Discord</a>
+                    </details>
                 `;
             }
             showToast('Solicitud generada.');
@@ -531,6 +591,43 @@ function setupStoreExperience() {
             document.getElementById('store-max-price').textContent = money(catalog.summary.maxPrice);
             document.getElementById('store-updated').textContent = 'Actualizado ' + catalog.updatedAt;
             renderAll();
+
+            // Detección de retorno de pago en la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const paymentStatus = urlParams.get('payment');
+            const paypalToken = urlParams.get('token');
+
+            if (paymentStatus === 'success') {
+                showToast('¡Pago de MercadoPago recibido con éxito! El staff procesará tu entrega.');
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else if (paymentStatus === 'failure') {
+                showToast('El pago de MercadoPago fue cancelado o rechazado.');
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else if (paymentStatus === 'paypal-success' && paypalToken) {
+                showToast('Procesando confirmación de PayPal...');
+                fetch('/api/store/paypal/capture', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId: paypalToken })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok && data.status === 'COMPLETED') {
+                        showToast('¡Pago de PayPal aprobado con éxito! Rangos en proceso de entrega.');
+                    } else {
+                        showToast('No se pudo confirmar el estado del pago de PayPal.');
+                    }
+                })
+                .catch(() => {
+                    showToast('Error de conexión al capturar el pago de PayPal.');
+                })
+                .finally(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                });
+            } else if (paymentStatus === 'paypal-cancel') {
+                showToast('El pago de PayPal fue cancelado.');
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
         })
         .catch(() => {
             grid.innerHTML = '<article class="store-loading-card">La tienda no está disponible temporalmente.</article>';
