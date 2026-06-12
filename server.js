@@ -115,13 +115,17 @@ async function getDiscord() {
 
 await loadVisits();
 
-app.addHook('onSend', async (_request, reply) => {
+app.addHook('onSend', async (request, reply) => {
   reply.header('X-Content-Type-Options', 'nosniff');
   reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
   reply.header('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   reply.header('X-Frame-Options', 'SAMEORIGIN');
   reply.header('X-XSS-Protection', '1; mode=block');
   reply.header('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self' data:; connect-src 'self' https://discord.com;");
+  const requestPath = request.raw.url?.split('?', 1)[0] || '';
+  if (requestPath === '/' || requestPath.endsWith('.html')) {
+    reply.header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+  }
 });
 
 app.get('/api/health', async () => ({
@@ -1215,11 +1219,6 @@ await app.register(fastifyStatic, {
   index: ['index.html'],
   maxAge: '1h',
   immutable: false,
-  setHeaders: (response, filePath) => {
-    if (filePath.endsWith('.html')) {
-      response.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate');
-    }
-  },
   allowedPath: (pathname) => {
     const publicFiles = new Set([
       'index.html',
