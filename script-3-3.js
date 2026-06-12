@@ -111,63 +111,245 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('particles-canvas');
     if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const ctx = canvas.getContext('2d');
-    let width;
-    let height;
-    const particles = [];
-
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor() {
-            this.init();
-        }
-        init() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.3;
-            this.vy = (Math.random() - 0.5) * 0.3;
-            const colors = ['rgba(6,182,212,', 'rgba(217,70,239,', 'rgba(234,179,8,'];
-            this.colorBase = colors[Math.floor(Math.random() * colors.length)];
-            this.size = Math.random() * 2 + 0.5;
-            this.alpha = Math.random() * 0.5 + 0.2;
-            this.wobble = Math.random() * Math.PI * 2;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.wobble += 0.05;
-            this.x += Math.sin(this.wobble) * 0.1;
-            if (this.x < -10) this.x = width + 10;
-            if (this.x > width + 10) this.x = -10;
-            if (this.y < -10) this.y = height + 10;
-            if (this.y > height + 10) this.y = -10;
-        }
+    if (!window.THREE) {
+        // fallback: simple 2D dots si Three.js no cargó
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        return;
     }
 
-    for (let i = 0; i < 55; i++) particles.push(new Particle());
+    const THREE = window.THREE;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 200);
+    camera.position.z = 32;
 
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-        const scrollY = window.scrollY;
-        particles.forEach((p) => {
-            p.update();
-            const py = p.y - scrollY * 0.05 * p.size;
-            let finalY = py % height;
-            if (finalY < 0) finalY += height;
-            ctx.beginPath();
-            ctx.arc(p.x, finalY, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.colorBase + p.alpha + ')';
-            ctx.fill();
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    // Genera textura pixelada estilo Minecraft en canvas 2D
+    function makeBlockTex(palette) {
+        const S = 16;
+        const c = document.createElement('canvas');
+        c.width = c.height = S;
+        const cx = c.getContext('2d');
+        for (let y = 0; y < S; y++) {
+            for (let x = 0; x < S; x++) {
+                const border = x === 0 || y === 0 || x === S - 1 || y === S - 1;
+                const col = border
+                    ? palette[0]
+                    : palette[1 + Math.floor(Math.random() * (palette.length - 1))];
+                cx.fillStyle = col;
+                cx.fillRect(x, y, 1, 1);
+            }
+        }
+        const t = new THREE.CanvasTexture(c);
+        t.magFilter = THREE.NearestFilter;
+        t.minFilter = THREE.NearestFilter;
+        return t;
+    }
+
+    const PALETTES = [
+        ['#7c3aed', '#8b5cf6', '#a78bfa', '#6d28d9'],   // amatista
+        ['#b45309', '#f59e0b', '#fbbf24', '#d97706'],   // oro
+        ['#1e1b4b', '#2e1065', '#3b0764', '#312e81'],   // obsidiana
+        ['#065f46', '#047857', '#059669', '#10b981'],   // esmeralda
+        ['#6b7280', '#78716c', '#9ca3af', '#57534e'],   // piedra
+        ['#831843', '#be185d', '#ec4899', '#9d174d'],   // netherita rosa
+    ];
+
+    const geo = new THREE.BoxGeometry(1, 1, 1);
+    const cubes = [];
+
+    for (let i = 0; i < 38; i++) {
+        const pal = PALETTES[i % PALETTES.length];
+        const mat = new THREE.MeshStandardMaterial({
+            map: makeBlockTex(pal),
+            roughness: 0.75,
+            metalness: pal === PALETTES[1] ? 0.55 : 0.05,
         });
-        requestAnimationFrame(animate);
+        const mesh = new THREE.Mesh(geo, mat);
+
+        // Distribución esférica + un poco de profundidad
+        const theta = Math.random() * Math.PI * 2;
+        const phi   = Math.acos(2 * Math.random() - 1);
+        const r     = 9 + Math.random() * 18;
+        mesh.position.set(
+            r * Math.sin(phi) * Math.cos(theta),
+            r * Math.sin(phi) * Math.sin(theta) * 0.6,
+            r * Math.cos(phi) - 8
+        );
+        mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        mesh.scale.setScalar(0.45 + Math.random() * 1.1);
+
+        cubes.push({
+            mesh,
+            rx: (Math.random() - 0.5) * 0.008,
+            ry: (Math.random() - 0.5) * 0.012,
+            floatOff: Math.random() * Math.PI * 2,
+            floatAmp: 0.15 + Math.random() * 0.25,
+            baseY: mesh.position.y,
+        });
+        scene.add(mesh);
     }
-    animate();
+
+    // Luces — dorado + morado para coincidir con la paleta del sitio
+    scene.add(new THREE.AmbientLight(0x8b5cf6, 0.5));
+    const gold  = new THREE.PointLight(0xf59e0b, 3, 60); gold.position.set(12, 6, 12);
+    const purp  = new THREE.PointLight(0x7c3aed, 2, 60); purp.position.set(-12, -4, 8);
+    const cyan  = new THREE.PointLight(0x06b6d4, 1, 40); cyan.position.set(0, 15, 5);
+    scene.add(gold, purp, cyan);
+
+    // ── B: Partículas 3D (Points) ─────────────────────────────────────────
+    const PART_COUNT = 420;
+    const positions  = new Float32Array(PART_COUNT * 3);
+    const partColors = new Float32Array(PART_COUNT * 3);
+    const partSpeeds = new Float32Array(PART_COUNT);   // velocidad Z individual
+    const partBaseZ  = new Float32Array(PART_COUNT);   // Z original para wrap
+
+    const pColorSet = [
+        new THREE.Color(0x8b5cf6), // violeta
+        new THREE.Color(0xf59e0b), // dorado
+        new THREE.Color(0x06b6d4), // cyan
+        new THREE.Color(0xec4899), // rosa
+        new THREE.Color(0xffffff), // blanco estrella
+    ];
+
+    for (let i = 0; i < PART_COUNT; i++) {
+        const i3 = i * 3;
+        positions[i3]     = (Math.random() - 0.5) * 90;
+        positions[i3 + 1] = (Math.random() - 0.5) * 55;
+        positions[i3 + 2] = (Math.random() - 0.5) * 80;
+        partBaseZ[i]      = positions[i3 + 2];
+        partSpeeds[i]     = 0.015 + Math.random() * 0.04;
+
+        const col = pColorSet[Math.floor(Math.random() * pColorSet.length)];
+        partColors[i3]     = col.r;
+        partColors[i3 + 1] = col.g;
+        partColors[i3 + 2] = col.b;
+    }
+
+    const partGeo = new THREE.BufferGeometry();
+    partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    partGeo.setAttribute('color',    new THREE.BufferAttribute(partColors, 3));
+
+    // Textura circular suave para cada punto
+    const dotCanvas = document.createElement('canvas');
+    dotCanvas.width = dotCanvas.height = 32;
+    const dotCtx = dotCanvas.getContext('2d');
+    const grd = dotCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    grd.addColorStop(0,   'rgba(255,255,255,1)');
+    grd.addColorStop(0.4, 'rgba(255,255,255,0.6)');
+    grd.addColorStop(1,   'rgba(255,255,255,0)');
+    dotCtx.fillStyle = grd;
+    dotCtx.fillRect(0, 0, 32, 32);
+    const dotTex = new THREE.CanvasTexture(dotCanvas);
+
+    const partMat = new THREE.PointsMaterial({
+        size: 0.28,
+        map: dotTex,
+        vertexColors: true,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+    });
+    const points = new THREE.Points(partGeo, partMat);
+    scene.add(points);
+
+    // ── C: Isla de vóxeles flotante (InstancedMesh para performance) ─────────
+    const IGRID = 13;
+    const IHALF = Math.floor(IGRID / 2);
+    const ivoxGeo = new THREE.BoxGeometry(0.46, 0.46, 0.46);
+
+    const grassPos = [], dirtPos = [], stonePos = [];
+    for (let ix = -IHALF; ix <= IHALF; ix++) {
+        for (let iz = -IHALF; iz <= IHALF; iz++) {
+            const d = Math.sqrt(ix * ix + iz * iz);
+            if (d > IHALF + 0.5) continue;
+            // Semilla fija por posición para reproducibilidad visual
+            const seed = Math.sin(ix * 127.1 + iz * 311.7) * 43758.5453;
+            const rand = seed - Math.floor(seed);
+            const maxH = Math.max(1, Math.round((IHALF - d) * 0.85 + rand * 0.7));
+            for (let iy = 0; iy < maxH; iy++) {
+                const p = [ix * 0.5, iy * 0.5, iz * 0.5];
+                if (iy === maxH - 1) grassPos.push(p);
+                else if (iy < 2)     stonePos.push(p);
+                else                 dirtPos.push(p);
+            }
+        }
+    }
+
+    function makeIM(posArr, color) {
+        const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.88 });
+        const im  = new THREE.InstancedMesh(ivoxGeo, mat, posArr.length);
+        const dummy = new THREE.Object3D();
+        posArr.forEach((p, i) => {
+            dummy.position.set(p[0], p[1], p[2]);
+            dummy.updateMatrix();
+            im.setMatrixAt(i, dummy.matrix);
+        });
+        im.instanceMatrix.needsUpdate = true;
+        return im;
+    }
+
+    const islandGroup = new THREE.Group();
+    islandGroup.add(makeIM(grassPos, 0x059669));
+    islandGroup.add(makeIM(dirtPos,  0x92400e));
+    islandGroup.add(makeIM(stonePos, 0x57534e));
+    islandGroup.position.set(0, -15, -8);
+    islandGroup.scale.setScalar(1.5);
+    scene.add(islandGroup);
+
+    // Parallax de mouse
+    const mouse = { x: 0, y: 0 };
+    window.addEventListener('mousemove', e => {
+        mouse.x = (e.clientX / innerWidth  - 0.5) * 2;
+        mouse.y = (e.clientY / innerHeight - 0.5) * 2;
+    });
+
+    window.addEventListener('resize', () => {
+        camera.aspect = innerWidth / innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(innerWidth, innerHeight);
+    });
+
+    let t = 0;
+    function animate3d() {
+        requestAnimationFrame(animate3d);
+        t += 0.008;
+
+        camera.position.x += (mouse.x * 2.5 - camera.position.x) * 0.025;
+        camera.position.y += (-mouse.y * 2  - camera.position.y) * 0.025;
+        camera.lookAt(scene.position);
+
+        cubes.forEach(c => {
+            c.mesh.rotation.x += c.rx;
+            c.mesh.rotation.y += c.ry;
+            c.mesh.position.y  = c.baseY + Math.sin(t + c.floatOff) * c.floatAmp;
+        });
+
+        // Brillo pulsante en las luces
+        gold.intensity = 2.5 + Math.sin(t * 0.9) * 0.8;
+        purp.intensity = 1.8 + Math.sin(t * 1.3 + 1) * 0.6;
+
+        // Isla: rotación lenta
+        islandGroup.rotation.y += 0.0015;
+
+        // Animar partículas: avance en Z + wrap
+        const pos = partGeo.attributes.position.array;
+        for (let i = 0; i < PART_COUNT; i++) {
+            const i3 = i * 3;
+            pos[i3 + 2] += partSpeeds[i];
+            if (pos[i3 + 2] > camera.position.z + 5) {
+                pos[i3 + 2] = partBaseZ[i] - 80;
+            }
+        }
+        partGeo.attributes.position.needsUpdate = true;
+
+        renderer.render(scene, camera);
+    }
+    animate3d();
 });
 
 function copyIp(ip) {
