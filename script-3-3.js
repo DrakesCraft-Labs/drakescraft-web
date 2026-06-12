@@ -121,8 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const THREE = window.THREE;
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 200);
-    camera.position.z = 32;
+    scene.fog = new THREE.FogExp2(0x050816, 0.016);
+    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 200);
+    camera.position.z = 28;
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
     renderer.setSize(innerWidth, innerHeight);
@@ -163,26 +164,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const geo = new THREE.BoxGeometry(1, 1, 1);
     const cubes = [];
 
-    for (let i = 0; i < 38; i++) {
+    for (let i = 0; i < 55; i++) {
         const pal = PALETTES[i % PALETTES.length];
         const mat = new THREE.MeshStandardMaterial({
             map: makeBlockTex(pal),
-            roughness: 0.75,
-            metalness: pal === PALETTES[1] ? 0.55 : 0.05,
+            roughness: 0.65,
+            metalness: pal === PALETTES[1] ? 0.65 : 0.1,
+            emissive: new THREE.Color(pal[1]).multiplyScalar(0.08),
         });
         const mesh = new THREE.Mesh(geo, mat);
 
-        // Distribución esférica + un poco de profundidad
+        // Distribución esférica concentrada frente a la cámara
         const theta = Math.random() * Math.PI * 2;
         const phi   = Math.acos(2 * Math.random() - 1);
-        const r     = 9 + Math.random() * 18;
+        const r     = 5 + Math.random() * 16;
         mesh.position.set(
             r * Math.sin(phi) * Math.cos(theta),
-            r * Math.sin(phi) * Math.sin(theta) * 0.6,
-            r * Math.cos(phi) - 8
+            r * Math.sin(phi) * Math.sin(theta) * 0.55,
+            r * Math.cos(phi) - 4
         );
         mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-        mesh.scale.setScalar(0.45 + Math.random() * 1.1);
+        mesh.scale.setScalar(0.5 + Math.random() * 1.4);
 
         cubes.push({
             mesh,
@@ -196,11 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Luces — dorado + morado para coincidir con la paleta del sitio
-    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-    const gold  = new THREE.PointLight(0xf59e0b, 6, 80); gold.position.set(12, 6, 20);
-    const purp  = new THREE.PointLight(0x8b5cf6, 5, 80); purp.position.set(-12, -4, 16);
-    const cyan  = new THREE.PointLight(0x06b6d4, 3, 60); cyan.position.set(0, 15, 18);
-    scene.add(gold, purp, cyan);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.6));
+    const gold  = new THREE.PointLight(0xf59e0b, 9, 90); gold.position.set(10, 5, 18);
+    const purp  = new THREE.PointLight(0x8b5cf6, 7, 90); purp.position.set(-10, -3, 14);
+    const cyan  = new THREE.PointLight(0x06b6d4, 4, 70); cyan.position.set(0, 12, 16);
+    const back  = new THREE.PointLight(0xec4899, 3, 60); back.position.set(0, -8, -10);
+    scene.add(gold, purp, cyan, back);
 
     // ── B: Partículas 3D (Points) ─────────────────────────────────────────
     const PART_COUNT = 420;
@@ -248,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotTex = new THREE.CanvasTexture(dotCanvas);
 
     const partMat = new THREE.PointsMaterial({
-        size: 0.28,
+        size: 0.45,
         map: dotTex,
         vertexColors: true,
         transparent: true,
@@ -298,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
     islandGroup.add(makeIM(grassPos, 0x059669));
     islandGroup.add(makeIM(dirtPos,  0x92400e));
     islandGroup.add(makeIM(stonePos, 0x57534e));
-    islandGroup.position.set(0, -15, -8);
-    islandGroup.scale.setScalar(1.5);
+    islandGroup.position.set(0, -7, -4);
+    islandGroup.scale.setScalar(2.2);
     scene.add(islandGroup);
 
     // Parallax de mouse
@@ -320,8 +323,8 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate3d);
         t += 0.008;
 
-        camera.position.x += (mouse.x * 2.5 - camera.position.x) * 0.025;
-        camera.position.y += (-mouse.y * 2  - camera.position.y) * 0.025;
+        camera.position.x += (mouse.x * 3.5 - camera.position.x) * 0.03;
+        camera.position.y += (-mouse.y * 2.5  - camera.position.y) * 0.03;
         camera.lookAt(scene.position);
 
         cubes.forEach(c => {
@@ -331,8 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Brillo pulsante en las luces
-        gold.intensity = 2.5 + Math.sin(t * 0.9) * 0.8;
-        purp.intensity = 1.8 + Math.sin(t * 1.3 + 1) * 0.6;
+        gold.intensity = 7 + Math.sin(t * 0.9) * 2;
+        purp.intensity = 5 + Math.sin(t * 1.3 + 1) * 2;
+        islandGroup.position.y = -7 + Math.sin(t * 0.4) * 0.6;
 
         // Isla: rotación lenta
         islandGroup.rotation.y += 0.0015;

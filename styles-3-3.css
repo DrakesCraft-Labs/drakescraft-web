@@ -196,6 +196,7 @@ img {
     border-radius: 16px;
     padding: 1.5rem 1.35rem;
     text-align: left;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .connect-card h3 {
@@ -803,13 +804,15 @@ img {
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.06), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid rgba(16, 185, 129, 0.5);
     border-radius: 10px;
-    padding: 10px 16px;
-    margin-bottom: 24px;
+    padding: 12px 18px;
+    margin-bottom: 28px;
     font-size: 0.875rem;
     color: var(--text-muted);
+    backdrop-filter: blur(8px);
 }
 
 .mc-status-dot {
@@ -2098,8 +2101,8 @@ img {
 .site-hero {
     min-height: 100vh;
     background:
-        linear-gradient(90deg, rgba(5, 3, 14, 0.45), rgba(5, 3, 14, 0.1) 48%, rgba(5, 3, 14, 0.45)),
-        linear-gradient(180deg, rgba(5, 3, 14, 0.05), rgba(5, 3, 14, 0.55));
+        linear-gradient(90deg, rgba(5, 3, 14, 0.35), rgba(5, 3, 14, 0.0) 50%, rgba(5, 3, 14, 0.35)),
+        linear-gradient(180deg, rgba(5, 3, 14, 0.15) 0%, transparent 40%, rgba(5, 3, 14, 0.7) 100%);
     padding-top: 9rem;
 }
 
@@ -2107,8 +2110,9 @@ img {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: -1;
-    background: linear-gradient(180deg, transparent 55%, var(--bg-dark));
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 60%, var(--bg-dark) 100%);
 }
 
 .portal-hero {
@@ -2140,7 +2144,7 @@ img {
     letter-spacing: -0.02em;
     line-height: 1;
     margin: 0.25rem 0 1.2rem;
-    filter: drop-shadow(0 0 28px rgba(250, 204, 21, 0.22));
+    filter: drop-shadow(0 0 42px rgba(250, 204, 21, 0.45)) drop-shadow(0 0 12px rgba(124, 58, 237, 0.3));
 }
 
 .portal-hero .site-hero__tagline {
@@ -2170,19 +2174,19 @@ img {
 
 .hero-dragon {
     position: absolute;
-    z-index: 0;
-    left: max(-120px, -8vw);
-    bottom: -10vh;
-    width: min(38vw, 520px);
-    opacity: 0.18;
-    filter: drop-shadow(0 0 35px rgba(124, 58, 237, 0.5));
+    z-index: 2;
+    left: max(-80px, -5vw);
+    bottom: -8vh;
+    width: min(40vw, 560px);
+    opacity: 0.28;
+    filter: drop-shadow(0 0 45px rgba(124, 58, 237, 0.6));
     pointer-events: none;
     transition: transform 0.1s linear;
     animation: dragonBreathe 7s ease-in-out infinite;
 }
 
 @keyframes dragonBreathe {
-    50% { opacity: 0.32; filter: drop-shadow(0 0 65px rgba(250, 204, 21, 0.36)); }
+    50% { opacity: 0.45; filter: drop-shadow(0 0 75px rgba(250, 204, 21, 0.45)); }
 }
 
 .command-deck {
