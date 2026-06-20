@@ -13,17 +13,42 @@ const dataDir = process.env.DATA_DIR || path.join(root, 'data');
 const counterFile = path.join(dataDir, 'visits.json');
 const quoteFile = path.join(dataDir, 'store-quotes.jsonl');
 const discordUrl = 'https://discord.com/api/guilds/699391897369575476/widget.json';
+const tebexPublicToken = process.env.TEBEX_PUBLIC_TOKEN || '';
+const tebexPrivateKey = process.env.TEBEX_PRIVATE_KEY || '';
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
+
+const tebexPackageIds = {
+  hercules: 7510343,
+  hestia: 7510348,
+  hermes: 7510349,
+  hefesto: 7510356,
+  artemisa: 7510357,
+  afrodita: 7510358,
+  zeus: 7510359,
+  minero: 7510361,
+  cazador: 7510363,
+  constructor: 7510364,
+  lenador: 7510365,
+  alquimista: 7510366,
+  nomada: 7510367,
+  'kit-hermes': 7510368,
+  'kit-zeus': 7510369,
+  'protection-177': 7510370,
+  'protection-481': 7510371,
+  'utility-economy': 7510372,
+  'dragmas-saco': 7510373,
+  'dragmas-cofre': 7510374,
+  'dragmas-anfora': 7510375
+};
 
 const storeCatalog = {
   updatedAt: '2026-06-11',
   currency: 'CLP',
   payment: {
-    mode: 'ticket',
+    mode: 'tebex',
     discord: 'https://discord.gg/rR7FbfCt9Y',
-    paypal: 'https://paypal.me/jackstar6677',
-    mercadoPago: 'https://link.mercadopago.cl/drakescraft'
+    checkout: 'https://pay.tebex.io'
   },
   categories: [
     { id: 'monthly', label: 'Rangos VIP', tagline: 'Identidad griega, utilidad progresiva y kits fuertes.' },
@@ -69,6 +94,99 @@ const storeCatalog = {
     { id: 'custom-guild', category: 'custom', tier: 5, name: 'Pack de Gremio (Cotización)', badge: 'Manual', clp: null, usd: null, featured: false, accent: 'violet', summary: 'Paquete personalizado de claims contiguos, canales de Discord VIP y perks para grupos.', includes: ['Cotización en base al número de integrantes', 'Entrevista inicial obligatoria con el Staff', 'No se aprueba contenido pay-to-win', 'Coordinación directa para la entrega'] }
   ]
 };
+
+function isTebexEnabledProduct(product) {
+  return Boolean(product && tebexPackageIds[product.id]);
+}
+
+function getStoreCatalogView() {
+  return {
+    ...storeCatalog,
+    products: storeCatalog.products.map((product) => ({
+      ...product,
+      tebexPackageId: tebexPackageIds[product.id] || null,
+      tebexEnabled: isTebexEnabledProduct(product)
+    }))
+  };
+}
+
+function getTebexAuthHeader() {
+  if (!tebexPublicToken || !tebexPrivateKey) {
+    throw new Error('Credenciales de Tebex no configuradas');
+  }
+  return `Basic ${Buffer.from(`${tebexPublicToken}:${tebexPrivateKey}`).toString('base64')}`;
+}
+
+async function tebexRequest(endpoint, { method = 'GET', body } = {}) {
+  const response = await fetch(`https://headless.tebex.io${endpoint}`, {
+    method,
+    headers: {
+      Authorization: getTebexAuthHeader(),
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+
+  const text = await response.text();
+  let payload = null;
+  try {
+    payload = text ? JSON.parse(text) : null;
+  } catch {
+    payload = text;
+  }
+
+  if (!response.ok) {
+    throw new Error(`Tebex ${method} ${endpoint} -> ${response.status}: ${JSON.stringify(payload)}`);
+  }
+
+  return payload;
+}
+
+async function createTebexBasket({ nick, contact, notes, items }) {
+  const basket = await tebexRequest(`/api/accounts/${tebexPublicToken}/baskets`, {
+    method: 'POST',
+    body: {
+      username: nick || 'JugadorDrakes',
+      complete_url: 'https://web.drakescraft.cl/store.html?payment=tebex-success',
+      cancel_url: 'https://web.drakescraft.cl/store.html?payment=tebex-cancel',
+      complete_auto_redirect: false,
+      custom: {
+        source: 'web.drakescraft.cl',
+        contact: contact || '',
+        notes: notes || ''
+      }
+    }
+  });
+
+  const ident = basket?.data?.ident;
+  if (!ident) {
+    throw new Error('Tebex no devolvió ident para el basket');
+  }
+
+  let latest = basket;
+  for (const item of items) {
+    latest = await tebexRequest(`/api/baskets/${ident}/packages`, {
+      method: 'POST',
+      body: {
+        package_id: tebexPackageIds[item.id],
+        quantity: 1
+      }
+    });
+  }
+
+  const checkoutUrl = latest?.data?.links?.checkout;
+  if (!checkoutUrl) {
+    throw new Error('Tebex no devolvió checkout para el basket');
+  }
+
+  return {
+    basketIdent: ident,
+    checkoutUrl,
+    currency: latest?.data?.currency || 'USD',
+    totalPrice: latest?.data?.total_price || 0
+  };
+}
 
 async function loadVisits() {
   try {
@@ -121,7 +239,10 @@ app.addHook('onSend', async (request, reply) => {
   reply.header('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   reply.header('X-Frame-Options', 'SAMEORIGIN');
   reply.header('X-XSS-Protection', '1; mode=block');
-  reply.header('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self' data:; connect-src 'self' https://discord.com;");
+  reply.header(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://discord.com https://static.cloudflareinsights.com;"
+  );
   const requestPath = request.raw.url?.split('?', 1)[0] || '';
   if (requestPath === '/' || requestPath.endsWith('.html')) {
     reply.header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
@@ -161,15 +282,15 @@ app.get('/api/discord', async (_request, reply) => {
 });
 
 app.get('/api/store', async () => {
-  
-  const allPriced = storeCatalog.products.map(p => p.clp).filter(Number.isFinite);
-  const monthly = storeCatalog.products.filter(p => p.category === 'monthly');
+  const catalog = getStoreCatalogView();
+  const allPriced = catalog.products.map(p => p.clp).filter(Number.isFinite);
+  const monthly = catalog.products.filter(p => p.category === 'monthly');
   const minPrice = Math.min(...allPriced);
   const maxPrice = Math.max(...allPriced);
   return {
-    ...storeCatalog,
+    ...catalog,
     summary: {
-      products: storeCatalog.products.length,
+      products: catalog.products.length,
       monthlyRanks: monthly.length,
       minPrice,
       maxPrice
@@ -232,6 +353,69 @@ app.post('/api/store/quote', async (request, reply) => {
   };
 });
 
+app.post('/api/store/tebex/checkout', async (request, reply) => {
+  const body = request.body || {};
+  const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
+  const validIds = new Set(storeCatalog.products.map((product) => product.id));
+  const items = storeCatalog.products.filter((product) => selectedIds.includes(product.id) && validIds.has(product.id));
+  const nick = String(body.nick || '').trim().slice(0, 40);
+  const contact = String(body.contact || '').trim().slice(0, 80);
+  const notes = String(body.notes || '').trim().slice(0, 500);
+
+  if (body.website) return reply.code(204).send();
+  if (!items.length) return reply.code(400).send({ error: 'Selecciona al menos un producto.' });
+
+  const nonTebexItems = items.filter((product) => !isTebexEnabledProduct(product));
+  if (nonTebexItems.length) {
+    return reply.code(400).send({
+      error: `Estos items siguen siendo manuales: ${nonTebexItems.map((product) => product.name).join(', ')}.`
+    });
+  }
+
+  try {
+    const quoteId = `dt-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+    const basket = await createTebexBasket({ nick, contact, notes, items });
+    const totalUsd = items.reduce((sum, product) => sum + (Number.isFinite(product.usd) ? product.usd : 0), 0);
+    const quote = {
+      id: quoteId,
+      createdAt: new Date().toISOString(),
+      type: 'tebex-checkout',
+      nick,
+      contact,
+      notes,
+      items: items.map((product) => product.id),
+      tebexBasketIdent: basket.basketIdent,
+      checkoutUrl: basket.checkoutUrl
+    };
+
+    await fs.mkdir(dataDir, { recursive: true });
+    await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
+
+    await notifyQuoteDiscord({
+      type: 'Checkout Tebex',
+      quoteId,
+      items,
+      nick,
+      contact,
+      notes,
+      total: totalUsd,
+      currency: 'USD'
+    });
+
+    return {
+      ok: true,
+      quoteId,
+      init_point: basket.checkoutUrl,
+      basket_ident: basket.basketIdent,
+      total_usd: Number(totalUsd.toFixed(2)),
+      currency: basket.currency
+    };
+  } catch (error) {
+    app.log.error(error, 'tebex checkout error');
+    return reply.code(502).send({ error: 'No se pudo crear el checkout de Tebex.' });
+  }
+});
+
 async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, total, currency }) {
   const webhook = process.env.DISCORD_PAYMENTS_WEBHOOK;
   if (!webhook) return;
@@ -243,6 +427,7 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
   
   let emoji = '📝';
   let color = 10181046; // Violeta para cotización manual
+  let description = `Se ha generado una solicitud para adquirir: **${names}**`;
   
   if (type.includes('Mercado Pago')) {
     color = 40675; // Celeste Mercado Pago
@@ -250,6 +435,10 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
   } else if (type.includes('PayPal')) {
     color = 12423; // Azul PayPal
     emoji = '🟡';
+  } else if (type.includes('Tebex')) {
+    color = 15844367; // Dorado Tebex
+    emoji = '🟠';
+    description = `Se generó un checkout de Tebex para: **${names}**`;
   }
 
   try {
@@ -261,7 +450,7 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
         avatar_url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png',
         embeds: [{
           title: `${emoji} ${type}`,
-          description: `Se ha generado una solicitud para adquirir: **${names}**`,
+          description,
           color,
           thumbnail: { url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png' },
           fields: [

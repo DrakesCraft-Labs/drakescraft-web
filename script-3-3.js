@@ -112,6 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('particles-canvas');
     if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const prefersReducedData = navigator.connection?.saveData;
+    const lowPowerDevice = window.innerWidth < 900 || (navigator.hardwareConcurrency || 8) <= 4 || prefersReducedData;
+
     if (!window.THREE) {
         // fallback: simple 2D dots si Three.js no cargó
         const ctx = canvas.getContext('2d');
@@ -125,9 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 200);
     camera.position.z = 28;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+    const renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: !lowPowerDevice,
+        preserveDrawingBuffer: false,
+        powerPreference: lowPowerDevice ? 'low-power' : 'high-performance',
+    });
     renderer.setSize(innerWidth, innerHeight);
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio, lowPowerDevice ? 1 : 1.5));
     renderer.setClearColor(0x000000, 0);
 
     // Genera textura pixelada estilo Minecraft en canvas 2D
@@ -164,7 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const geo = new THREE.BoxGeometry(1, 1, 1);
     const cubes = [];
 
-    for (let i = 0; i < 55; i++) {
+    const cubeCount = lowPowerDevice ? 24 : 55;
+    for (let i = 0; i < cubeCount; i++) {
         const pal = PALETTES[i % PALETTES.length];
         const mat = new THREE.MeshStandardMaterial({
             map: makeBlockTex(pal),
@@ -206,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(gold, purp, cyan, back);
 
     // ── B: Partículas 3D (Points) ─────────────────────────────────────────
-    const PART_COUNT = 420;
+    const PART_COUNT = lowPowerDevice ? 140 : 420;
     const positions  = new Float32Array(PART_COUNT * 3);
     const partColors = new Float32Array(PART_COUNT * 3);
     const partSpeeds = new Float32Array(PART_COUNT);   // velocidad Z individual
@@ -262,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(points);
 
     // ── C: Isla de vóxeles flotante (InstancedMesh para performance) ─────────
-    const IGRID = 13;
+    const IGRID = lowPowerDevice ? 9 : 13;
     const IHALF = Math.floor(IGRID / 2);
     const ivoxGeo = new THREE.BoxGeometry(0.46, 0.46, 0.46);
 
@@ -316,11 +326,18 @@ document.addEventListener('DOMContentLoaded', () => {
         camera.aspect = innerWidth / innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(innerWidth, innerHeight);
+        renderer.setPixelRatio(Math.min(devicePixelRatio, window.innerWidth < 900 ? 1 : 1.5));
     });
 
     let t = 0;
+    let animationActive = true;
+    document.addEventListener('visibilitychange', () => {
+        animationActive = !document.hidden;
+    });
+
     function animate3d() {
         requestAnimationFrame(animate3d);
+        if (!animationActive) return;
         t += 0.008;
 
         camera.position.x += (mouse.x * 3.5 - camera.position.x) * 0.03;
@@ -738,11 +755,9 @@ function setupStoreExperience() {
 
     const renderQuote = () => {
         const selected = Array.from(state.selected).map(productById).filter(Boolean);
-        const autoRenewContainer = document.getElementById('auto-renew-container');
         if (!selected.length) {
             quoteItems.innerHTML = '<p>No hay productos seleccionados todavía.</p>';
             quoteTotal.textContent = '$0 CLP';
-            if (autoRenewContainer) autoRenewContainer.style.display = 'none';
             return;
         }
 
@@ -755,15 +770,6 @@ function setupStoreExperience() {
                 <button type="button" data-remove-product="${product.id}" aria-label="Quitar ${escapeHtml(product.name)}">×</button>
             </div>
         `).join('');
-
-        if (autoRenewContainer) {
-            const hasOnlyMonthlyOrRoles = selected.length > 0 && selected.every(p => p.category === 'monthly' || p.category === 'roles');
-            autoRenewContainer.style.display = hasOnlyMonthlyOrRoles ? 'flex' : 'none';
-            if (!hasOnlyMonthlyOrRoles) {
-                const checkbox = document.getElementById('auto-renew-checkbox');
-                if (checkbox) checkbox.checked = false;
-            }
-        }
     };
 
     const renderAll = () => {
@@ -798,28 +804,55 @@ function setupStoreExperience() {
     quoteForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const result = document.getElementById('quote-result');
+        const submitButton = quoteForm.querySelector('button[type="submit"]');
         if (!state.selected.size) {
             showToast('Selecciona algo de la tienda primero.');
             return;
         }
         const formData = new FormData(quoteForm);
-        const autoRenewCheckbox = document.getElementById('auto-renew-checkbox');
-        const autoRenew = autoRenewCheckbox ? autoRenewCheckbox.checked : false;
 
         const payload = {
             nick: formData.get('nick'),
             contact: formData.get('contact'),
             notes: formData.get('notes'),
             website: formData.get('website'),
-            items: Array.from(state.selected),
-            autoRenew
+            items: Array.from(state.selected)
         };
 
         const selectedProducts = state.catalog?.products?.filter(p => Array.from(state.selected).includes(p.id)) || [];
-        const hasClp = selectedProducts.some(p => Number.isFinite(p.clp) && p.clp > 0);
-        const hasUsd = selectedProducts.some(p => Number.isFinite(p.usd) && p.usd > 0);
+        const allTebex = selectedProducts.length > 0 && selectedProducts.every((product) => product.tebexEnabled);
 
         try {
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Procesando...';
+            }
+
+            if (allTebex) {
+                const response = await fetch('/api/store/tebex/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'tebex checkout failed');
+                if (result) {
+                    result.hidden = false;
+                    result.innerHTML = `
+                        <strong>Checkout ${escapeHtml(data.quoteId)} listo.</strong>
+                        <div class="store-payment-options" style="display:flex;flex-direction:column;gap:8px;margin:1.25rem 0 0.75rem 0;">
+                            <a class="btn-paypal" href="${escapeHtml(data.init_point)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:8px;">
+                                Ir a Tebex Checkout (USD $${data.total_usd})
+                            </a>
+                        </div>
+                        <p style="font-size:0.82rem;opacity:0.72;margin:0;">Tebex procesará el pago y el delivery automático lo ejecutará desde la cola oficial.</p>
+                    `;
+                }
+                showToast('Checkout Tebex generado.');
+                window.open(data.init_point, '_blank', 'noopener');
+                return;
+            }
+
             const response = await fetch('/api/store/quote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -827,82 +860,30 @@ function setupStoreExperience() {
             });
             if (!response.ok) throw new Error('quote failed');
             const data = await response.json();
-
-            let paymentButtons = '';
-            if (hasClp || hasUsd) {
-                let mpButton = '';
-                let paypalButton = '';
-
-                if (hasClp) {
-                    try {
-                        const mpRes = await fetch('/api/store/checkout', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-                        if (mpRes.ok) {
-                            const mpData = await mpRes.json();
-                            if (mpData.init_point) {
-                                mpButton = `<a class="btn-mp" href="${escapeHtml(mpData.init_point)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:8px;">
-                                    <img src="assets/mp-logo.svg" alt="" width="20" height="20" style="vertical-align:middle;margin-right:8px;border-radius:4px;">
-                                    Pagar con MercadoPago (CLP)
-                                </a>`;
-                            }
-                        }
-                    } catch (_) {}
-                }
-
-                if (hasUsd) {
-                    try {
-                        const ppRes = await fetch('/api/store/paypal/checkout', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-                        if (ppRes.ok) {
-                            const ppData = await ppRes.json();
-                            if (ppData.init_point) {
-                                paypalButton = `<a class="btn-paypal" href="${escapeHtml(ppData.init_point)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:8px;">
-                                    <img src="assets/paypal-logo.svg" alt="" width="20" height="20" style="vertical-align:middle;margin-right:8px;border-radius:4px;">
-                                    Pagar con PayPal (USD$${ppData.total_usd || ''})
-                                </a>`;
-                            }
-                        }
-                    } catch (_) {
-                        // fallback manual si la API falla
-                        const usdTotal = selectedProducts.filter(p => Number.isFinite(p.usd)).reduce((s, p) => s + p.usd, 0);
-                        const ppUrl = `https://www.paypal.com/paypalme/jackstar6677${usdTotal > 0 ? '/' + usdTotal.toFixed(2) : ''}`;
-                        paypalButton = `<a class="btn-paypal" href="${escapeHtml(ppUrl)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:8px;">
-                            <img src="assets/paypal-logo.svg" alt="" width="20" height="20" style="vertical-align:middle;margin-right:8px;border-radius:4px;">
-                            Pagar con PayPal (manual)
-                        </a>
-                        <p style="font-size:0.78rem;opacity:0.65;margin:0 0 4px;text-align:center;">Envía el pago y abre ticket en Discord con captura.</p>`;
-                    }
-                }
-
-                if (mpButton || paypalButton) {
-                    paymentButtons = `<div class="store-payment-options" style="display:flex;flex-direction:column;gap:8px;margin:1.25rem 0 0.75rem 0;">
-                        ${mpButton}
-                        ${paypalButton}
-                    </div>`;
-                }
-            }
-
             if (result) {
                 result.hidden = false;
                 result.innerHTML = `
                     <strong>Solicitud ${escapeHtml(data.quoteId)} lista.</strong>
-                    ${paymentButtons}
-                    <details style="margin-top:0.75rem">
-                        <summary style="cursor:pointer;font-size:0.85rem;opacity:0.7">O abre ticket manual en Discord</summary>
+                    <details open style="margin-top:0.75rem">
+                        <summary style="cursor:pointer;font-size:0.85rem;opacity:0.7">Abrir ticket manual en Discord</summary>
                         <textarea readonly rows="7" style="margin-top:0.5rem">${escapeHtml(data.ticketMessage)}</textarea>
                         <a class="btn-discord" href="${escapeHtml(data.discordUrl)}" target="_blank" rel="noopener" style="width:100%;justify-content:center;margin-top:0.5rem;">Abrir Discord</a>
                     </details>
                 `;
             }
-            showToast('Solicitud generada.');
-        } catch (_error) {
-            showToast('No se pudo generar la solicitud.');
+            showToast('Solicitud manual generada.');
+        } catch (error) {
+            console.error('checkout error', error);
+            if (result) {
+                result.hidden = false;
+                result.innerHTML = '<strong>No se pudo generar el checkout.</strong><p style="margin:0.75rem 0 0 0;opacity:0.78;">Intenta nuevamente. Si persiste, abre ticket en Discord.</p>';
+            }
+            showToast('No se pudo generar el checkout.');
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Generar checkout';
+            }
         }
     });
 
@@ -913,7 +894,7 @@ function setupStoreExperience() {
         })
         .then((catalog) => {
             state.catalog = catalog;
-            document.getElementById('store-health').textContent = 'Catálogo online';
+            document.getElementById('store-health').textContent = 'Catálogo y checkout online';
             document.getElementById('store-product-count').textContent = catalog.summary.products.toLocaleString('es-CL');
             document.getElementById('store-min-price').textContent = money(catalog.summary.minPrice);
             document.getElementById('store-max-price').textContent = money(catalog.summary.maxPrice);
@@ -923,62 +904,12 @@ function setupStoreExperience() {
             // Detección de retorno de pago en la URL
             const urlParams = new URLSearchParams(window.location.search);
             const paymentStatus = urlParams.get('payment');
-            const paypalToken = urlParams.get('token');
-            const paypalSubId = urlParams.get('subscription_id');
 
-            if (paymentStatus === 'success') {
-                showToast('¡Pago de MercadoPago recibido con éxito! El staff procesará tu entrega.');
+            if (paymentStatus === 'tebex-success') {
+                showToast('Pago completado en Tebex. El delivery automático procesará tu compra.');
                 window.history.replaceState({}, document.title, window.location.pathname);
-            } else if (paymentStatus === 'mp-sub-success') {
-                showToast('¡Suscripción de Mercado Pago autorizada con éxito! Tu rango se activará en breve.');
-                window.history.replaceState({}, document.title, window.location.pathname);
-            } else if (paymentStatus === 'failure') {
-                showToast('El pago de MercadoPago fue cancelado o rechazado.');
-                window.history.replaceState({}, document.title, window.location.pathname);
-            } else if (paymentStatus === 'paypal-success' && paypalToken) {
-                showToast('Procesando confirmación de PayPal...');
-                fetch('/api/store/paypal/capture', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ orderId: paypalToken })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.ok && data.status === 'COMPLETED') {
-                        showToast('¡Pago de PayPal aprobado con éxito! Rangos en proceso de entrega.');
-                    } else {
-                        showToast('No se pudo confirmar el estado del pago de PayPal.');
-                    }
-                })
-                .catch(() => {
-                    showToast('Error de conexión al capturar el pago de PayPal.');
-                })
-                .finally(() => {
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                });
-            } else if (paymentStatus === 'paypal-sub-success' && paypalSubId) {
-                showToast('Confirmando tu suscripción de PayPal...');
-                fetch('/api/store/paypal/capture-subscription', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ subscriptionId: paypalSubId })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.ok && (data.status === 'ACTIVE' || data.status === 'APPROVED')) {
-                        showToast('¡Suscripción de PayPal activada! El rango se entregará al confirmarse el primer cobro.');
-                    } else {
-                        showToast('No se pudo confirmar la suscripción de PayPal.');
-                    }
-                })
-                .catch(() => {
-                    showToast('Error al confirmar suscripción de PayPal.');
-                })
-                .finally(() => {
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                });
-            } else if (paymentStatus === 'paypal-sub-cancel') {
-                showToast('La suscripción de PayPal fue cancelada.');
+            } else if (paymentStatus === 'tebex-cancel') {
+                showToast('El checkout de Tebex fue cancelado.');
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
         })

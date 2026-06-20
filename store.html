@@ -55,7 +55,7 @@
     <header class="store-hero page-hero">
         <div class="container store-hero__grid">
             <div>
-                <p class="badge-status"><span class="live-pulse"></span> Tienda conectada al backend de star</p>
+                <p class="badge-status"><span class="live-pulse"></span> Tienda conectada a Tebex + backend de star</p>
                 <h1 class="site-hero__title">Tienda de la Odisea</h1>
                 <p class="site-hero__tagline">Rangos, protecciones y encargos premium sin romper la economía del servidor.</p>
                 <div class="store-hero__actions">
@@ -66,7 +66,7 @@
             <aside class="store-console">
                 <span class="store-console__label">Estado de tienda</span>
                 <strong id="store-health">Sincronizando...</strong>
-                <p>Las compras se confirman por ticket. El backend prepara tu resumen y deja registro local.</p>
+                <p>Los productos web comprables abren checkout de Tebex. Los encargos manuales siguen yéndose a Discord.</p>
                 <div class="store-console__stats">
                     <div><span>Productos</span><strong id="store-product-count">--</strong></div>
                     <div><span>Desde</span><strong id="store-min-price">--</strong></div>
@@ -82,7 +82,7 @@
                 <div class="store-board__head">
                     <div>
                         <h2>Catálogo vivo</h2>
-                        <p>Filtra, compara y arma una solicitud limpia antes de abrir ticket.</p>
+                        <p>Filtra, compara y abre checkout de Tebex para compras automáticas o ticket para encargos manuales.</p>
                     </div>
                     <div class="store-sync">
                         <span id="store-updated">Backend</span>
@@ -99,7 +99,7 @@
                 <div class="quote-panel__sticky">
                     <p class="quote-panel__eyebrow">Solicitud</p>
                     <h2>Arma tu ticket</h2>
-                    <p class="quote-panel__desc">Selecciona productos y genera un resumen para pegar en Discord.</p>
+                    <p class="quote-panel__desc">Selecciona productos y genera checkout Tebex o resumen manual según corresponda.</p>
 
                     <div id="quote-items" class="quote-items">
                         <p>No hay productos seleccionados todavía.</p>
@@ -115,7 +115,7 @@
                         <ul style="margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:4px;">
                             <li>Ingresa tu <strong>Nick de Minecraft exacto</strong> (sensible a mayúsculas/minúsculas).</li>
                             <li>Ingresa tu contacto para coordinar la entrega si es manual.</li>
-                            <li>Al hacer clic en <strong>Generar solicitud</strong>, se habilitarán los botones de pago online inmediato (Mercado Pago / PayPal) y la opción de ticket manual.</li>
+                            <li>Al hacer clic en <strong>Generar checkout</strong>, se abrirá Tebex para productos automáticos o un ticket manual si el item sigue fuera de checkout.</li>
                         </ul>
                     </div>
 
@@ -137,11 +137,7 @@
                             <textarea name="notes" maxlength="500" rows="3"
                                 placeholder="Indica detalles adicionales del pedido o dudas..."></textarea>
                         </label>
-                        <label id="auto-renew-container" style="display:none;flex-direction:row;align-items:center;gap:8px;cursor:pointer;margin-bottom:1rem;user-select:none;">
-                            <input type="checkbox" id="auto-renew-checkbox" name="auto_renew" style="width:auto;margin:0;cursor:pointer;">
-                            <span style="font-size:0.9rem;font-weight:500;">Renovar y cobrar automáticamente cada mes. Desmárcalo si prefieres volver a comprar manualmente.</span>
-                        </label>
-                        <button type="submit" class="btn-discord" style="width:100%;font-weight:600;">Generar solicitud de pago</button>
+                        <button type="submit" class="btn-discord" style="width:100%;font-weight:600;">Generar checkout</button>
                     </form>
 
                     <div id="quote-result" class="quote-result" hidden></div>
@@ -181,7 +177,7 @@
                 <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
                 <a href="mailto:contacto@drakescraft.cl">Contacto</a>
             </div>
-            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl · tienda manual</p>
+            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl · checkout Tebex</p>
             <p class="disclaimer">Minecraft es una marca de Mojang AB. No afiliado.</p>
         </div>
     </footer>
