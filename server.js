@@ -17,6 +17,7 @@ const tebexPublicToken = process.env.TEBEX_PUBLIC_TOKEN || '';
 const tebexPrivateKey = process.env.TEBEX_PRIVATE_KEY || '';
 const adminToken = process.env.ADMIN_TOKEN || '';
 const discordSalesWebhook = process.env.DISCORD_SALES_WEBHOOK || '';
+const tebexWebhookSecret = process.env.TEBEX_WEBHOOK_SECRET || '';
 const CUSTOM_KIT_PACKAGE_ID = 7516648;
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
@@ -1593,10 +1594,10 @@ app.get('/api/mcstatus', async (_request, reply) => {
 app.post('/api/tebex/webhook', async (request, reply) => {
   try {
     const sig = request.headers['x-signature'] || '';
-    const body = JSON.stringify(request.body);
-    const expected = createHmac('sha256', tebexPrivateKey).update(body).digest('hex');
-    if (sig !== expected) {
-      app.log.warn('Tebex webhook: firma inválida');
+    const rawBody = JSON.stringify(request.body);
+    const expected = createHmac('sha256', tebexWebhookSecret).update(rawBody).digest('hex');
+    if (!tebexWebhookSecret || sig !== expected) {
+      app.log.warn({ sig, expected }, 'Tebex webhook: firma inválida');
       return reply.code(401).send({ error: 'Firma inválida' });
     }
 
