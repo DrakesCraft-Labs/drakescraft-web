@@ -327,6 +327,12 @@ app.addHook('onSend', async (request, reply) => {
   }
 });
 
+// Guarda raw body para verificación HMAC de webhooks (Tebex, etc.)
+app.addContentTypeParser('application/json', { parseAs: 'buffer' }, (req, body, done) => {
+  req.rawBody = body.toString('utf8');
+  try { done(null, JSON.parse(req.rawBody)); } catch (e) { done(e); }
+});
+
 app.get('/api/health', async () => ({
   status: 'ok',
   service: 'drakescraft-web',
@@ -1594,8 +1600,7 @@ app.get('/api/mcstatus', async (_request, reply) => {
 app.post('/api/tebex/webhook', async (request, reply) => {
   try {
     const sig = request.headers['x-signature'] || '';
-    const rawBody = JSON.stringify(request.body);
-    const expected = createHmac('sha256', tebexWebhookSecret).update(rawBody).digest('hex');
+    const expected = createHmac('sha256', tebexWebhookSecret).update(request.rawBody || '').digest('hex');
     if (!tebexWebhookSecret || sig !== expected) {
       app.log.warn({ sig, expected }, 'Tebex webhook: firma inválida');
       return reply.code(401).send({ error: 'Firma inválida' });
