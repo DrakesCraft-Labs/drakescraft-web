@@ -38,6 +38,7 @@ PAYPAL_WEBHOOK_ID
 STORE_API_KEY
 DISCORD_PAYMENTS_WEBHOOK
 DISCORD_STORE_WEBHOOK
+ADMIN_TOKEN
 ```
 
 No se deben guardar tokens, claves API ni URLs completas de webhooks en Git.

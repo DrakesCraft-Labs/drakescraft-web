@@ -2416,6 +2416,21 @@ img {
     color: var(--text-muted);
     margin-top: 2px;
 }
+.card-period {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent, var(--text-muted));
+    opacity: 0.85;
+    margin-top: 3px;
+}
+.modal-period {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
 .card-actions {
     display: flex;
     gap: 8px;

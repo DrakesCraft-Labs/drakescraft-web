@@ -15,6 +15,8 @@ const quoteFile = path.join(dataDir, 'store-quotes.jsonl');
 const discordUrl = 'https://discord.com/api/guilds/699391897369575476/widget.json';
 const tebexPublicToken = process.env.TEBEX_PUBLIC_TOKEN || '';
 const tebexPrivateKey = process.env.TEBEX_PRIVATE_KEY || '';
+const adminToken = process.env.ADMIN_TOKEN || '';
+const CUSTOM_KIT_PACKAGE_ID = 7516648;
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
 
@@ -51,8 +53,8 @@ const storeCatalog = {
     checkout: 'https://pay.tebex.io'
   },
   categories: [
-    { id: 'monthly', label: 'Rangos VIP', tagline: 'Identidad griega, utilidad progresiva y kits fuertes.' },
-    { id: 'roles', label: 'Roles de Juego', tagline: 'Subrangos con prefijo secundario y kit diario.' },
+    { id: 'monthly', label: 'Rangos VIP', tagline: 'Suscripción mensual (30 días). Identidad griega, utilidad progresiva y kits fuertes.' },
+    { id: 'roles', label: 'Roles de Juego', tagline: 'Suscripción mensual (30 días). Subrangos con prefijo secundario y kit diario.' },
     { id: 'kits', label: 'Kits y equipo', tagline: 'Resumen de lo que trae cada línea de rango.' },
     { id: 'protection', label: 'Protecciones', tagline: 'Territorio VIP para bases, gremios y proyectos.' },
     { id: 'utility', label: 'Utilidad', tagline: 'Dragmas de plata y beneficios de economía.' },
@@ -62,9 +64,9 @@ const storeCatalog = {
   products: [
     { id: 'hercules', category: 'monthly', tier: 1, name: 'Hércules', badge: 'Entrada VIP', clp: 4990, usd: 4.99, featured: false, accent: 'bronze', summary: 'El primer gran paso en tu odisea. Ideal para empezar tu aventura con comodidad y estilo.', includes: ['3 homes y 5 warps de jugador (/pw)', 'Chat con formato de colores y comando /hat', 'Comando /clearinventory (/ci) para limpieza', '2 regiones de protección personal de 49x49', 'Kit (24h): Diamante Protec VIII, Irromp V', 'Espada Sharpness X, Saqueo V', 'Herramientas Eficiencia VIII, Fortuna VI', '48 zanahorias doradas, 64 filetes, 4 gapples, 1 Tótem', '$25,000 ₯ al reclamar el kit'] },
     { id: 'hestia', category: 'monthly', tier: 2, name: 'Hestia', badge: 'Social', clp: 7990, usd: 7.99, featured: false, accent: 'rose', summary: 'Diseñado para constructores sociales y jugadores que disfrutan de personalizar su entorno.', includes: ['5 homes y comando /nick', 'Hora (/ptime) y clima (/pweather) personal', 'Comando /ext para apagarte al instante', '3 regiones de protección personal de 81x81', 'Kit (24h): Diamante Protec X, Irromp VI, Espinas III', 'Espada Sharpness XII, Saqueo VI', 'Arco del Olimpo Poder X, Infinidad', 'Herramientas Eficiencia X, Silk Touch', '1 Shulker, 6 gapples, 2 Tótems', '$50,000 ₯ al reclamar. Hereda Hércules'] },
-    { id: 'hermes', category: 'monthly', tier: 3, name: 'Hermes', badge: 'Recomendado', clp: 10990, usd: 10.99, featured: true, accent: 'violet', summary: '¡Movilidad absoluta! Explora el mapa a toda velocidad y viaja sin límites.', includes: ['Vuelo con /fly y velocidad con /speed', '/workbench y /enderchest virtuales', '/back para retornar (y al morir)', '/compass y /wild (RTP instantáneo)', '4 regiones de protección de 113x113', 'Kit (24h): Alas de Ícaro (Elytra) incluidas', 'Armadura Protec XII, Irromp VII, Soul Speed IV, Feather Falling X', 'Espada Sharpness XIV, Saqueo VII', 'Arco del Olimpo Poder XII, Infinidad', 'Herramientas Eficiencia XII, Fortuna VIII', '1 Shulker, 64 cohetes, 10 gapples, 3 Tótems', '$100,000 ₯ al reclamar. Hereda anteriores'] },
+    { id: 'hermes', category: 'monthly', tier: 3, name: 'Hermes', badge: 'Recomendado', clp: 10990, usd: 10.99, featured: true, accent: 'violet', summary: '¡Movilidad absoluta! Explora el mapa a toda velocidad y viaja sin límites.', includes: ['6 homes y 8 warps de jugador (/pw)', 'Vuelo con /fly y velocidad con /speed', '/workbench y /enderchest virtuales', '/back para retornar (y al morir)', '/compass y /wild (RTP instantáneo)', '4 regiones de protección de 113x113', 'Kit (24h): Alas de Ícaro (Elytra) incluidas', 'Armadura Protec XII, Irromp VII, Soul Speed IV, Feather Falling X', 'Espada Sharpness XIV, Saqueo VII', 'Arco del Olimpo Poder XII, Infinidad', 'Herramientas Eficiencia XII, Fortuna VIII', '1 Shulker, 64 cohetes, 10 gapples, 3 Tótems', '$100,000 ₯ al reclamar. Hereda anteriores'] },
     { id: 'hefesto', category: 'monthly', tier: 4, name: 'Hefesto', badge: 'Técnico', clp: 15990, usd: 15.99, featured: false, accent: 'ember', summary: 'El rango predilecto para los creadores de granjas, mineros técnicos y entusiastas del metal.', includes: ['8 homes y comando /feed', '/anvil, /grindstone, /loom, /stonecutter, /smithingtable virtuales', 'Comando /condense para compactar recursos', '5 regiones de protección de 177x177', '/wild (RTP) sin cooldown', 'Kit (24h): Primer kit con NETHERITA completa', 'Armadura Netherita Protec XVI, Irromp VIII', 'Espada Netherita Sharpness XVIII, Saqueo VIII, Knockback I', 'Pico Netherita Eficiencia XIV, Fortuna X', '1 Beacon, 1 Shulker, 14 gapples, 1 notch apple, 4 Tótems', '$175,000 ₯ al reclamar. Hereda anteriores'] },
-    { id: 'artemisa', category: 'monthly', tier: 5, name: 'Artemisa', badge: 'Exploración', clp: 22990, usd: 22.99, featured: false, accent: 'cyan', summary: 'Equipamiento mítico y verticalidad. Conquista los cielos y los abismos marinos sin temor a la muerte.', includes: ['12 warps de jugador (/pw) y comando /jump', 'Conserva tu XP al morir (keepxp)', '5 regiones de protección de 241x241', 'Kit (24h): Tridente Impaling XII, Loyalty VIII, Channeling I', 'Armadura Netherita Protec XVIII, Irromp IX, Feather Falling XIV', 'Espada Netherita Sharpness XX, Saqueo IX', 'Herramientas Netherita Eficiencia XVI, Fortuna XII', '1 Beacon, 1 Shulker, 18 gapples, 2 notch apples, 6 Tótems', '$300,000 ₯ al reclamar. Hereda anteriores'] },
+    { id: 'artemisa', category: 'monthly', tier: 5, name: 'Artemisa', badge: 'Exploración', clp: 22990, usd: 22.99, featured: false, accent: 'cyan', summary: 'Equipamiento mítico y verticalidad. Conquista los cielos y los abismos marinos sin temor a la muerte.', includes: ['10 homes y 12 warps de jugador (/pw)', 'Comando /jump para altura extrema', 'Conserva tu XP al morir (keepxp)', '5 regiones de protección de 241x241', 'Kit (24h): Tridente Impaling XII, Loyalty VIII, Channeling I', 'Armadura Netherita Protec XVIII, Irromp IX, Feather Falling XIV', 'Espada Netherita Sharpness XX, Saqueo IX', 'Herramientas Netherita Eficiencia XVI, Fortuna XII', '1 Beacon, 1 Shulker, 18 gapples, 2 notch apples, 6 Tótems', '$300,000 ₯ al reclamar. Hereda anteriores'] },
     { id: 'afrodita', category: 'monthly', tier: 6, name: 'Afrodita', badge: 'Economía', clp: 31990, usd: 31.99, featured: false, accent: 'pink', summary: 'Domina la economía del servidor. Repara tus armas gratis, vende al instante y abre tiendas sin pagar tarifas.', includes: ['12 homes y 15 warps de jugador (/pw)', 'Comando /repair gratis para reparar en mano', 'Comando /sell para vender al server', 'Abre ChestShop sin pagar fee inicial ($100 ₯)', '6 regiones de protección de 353x353', 'Kit (24h): Elytra mítica Unbreaking V, Mending IV', 'Armadura Netherita Protec XXII, Irromp X, Espinas VII', 'Espada Netherita Sharpness XXIV, Saqueo X', 'Herramientas Netherita Eficiencia XVIII, Fortuna XIV', '2 Beacons, 2 Shulkers, 24 gapples, 3 notch apples, 8 Tótems', '$500,000 ₯ al reclamar. Hereda anteriores'] },
     { id: 'zeus', category: 'monthly', tier: 7, name: 'Zeus', badge: 'Rango top', clp: 44990, usd: 44.99, featured: true, accent: 'gold', summary: 'El rango insignia de DrakesCraft. El poder total del Olimpo bajo tu control.', includes: ['20 homes, 25 warps de jugador (/pw)', '/repair all y /heal al instante', '/near y conserva inventario al morir (keepinv)', 'Exención de impuestos en transacciones ChestShop', '7 regiones de protección de 481x481', 'Kit (24h): Netherita definitiva Protec XXX, Irromp XII, Espinas X', 'Espada del Olimpo Sharpness XXX, Saqueo XII, Fire Aspect V, Knockback III', 'Pico Efic XX + Fortune XVI y Pico Efic XX + Silk Touch', 'Arco del Olimpo Poder XX, Infinidad y Elytra Unbreaking V + Mending IV', '3 Beacons, 3 Shulkers, 32 gapples, 8 notch apples, 12 Tótems', '$1,000,000 ₯ al reclamar el kit'] },
     
@@ -90,6 +92,7 @@ const storeCatalog = {
     { id: 'economy-piedra', category: 'economy-kits', tier: 1, name: 'Kit Piedra', badge: 'Survival In-Game', clp: null, usd: null, coins: 2000, featured: false, accent: 'violet', summary: 'Bloques de piedra labrada para tus estructuras. Adquirible en el juego.', includes: ['64 Smooth Stone', '64 Stone Bricks', '64 Mossy Stone Bricks', '64 Deepslate Bricks', 'Cooldown de uso: 30 minutos'] },
     { id: 'economy-armadura', category: 'economy-kits', tier: 1, name: 'Kit Armadura', badge: 'Survival In-Game', clp: null, usd: null, coins: 5000, featured: false, accent: 'ember', summary: 'Set de armadura de hierro reforzado para supervivencia. Adquirible en el juego.', includes: ['Casco de hierro con Protección V, Irromp V', 'Pechera de hierro con Protección V, Irromp V', 'Grebas de hierro con Protección V, Irromp V', 'Botas de hierro con Protección V, Irromp V', 'Cooldown de uso: 1 hora'] },
 
+    { id: 'custom-kit', category: 'custom', tier: 4, name: 'Kit Personalizado (Cotización)', badge: 'Manual', clp: null, usd: null, featured: true, accent: 'violet', summary: 'Diseña tu propio kit a medida. El staff arma el equipo según lo que necesites y te da un precio justo.', includes: ['Descripción libre de lo que quieres en el kit', 'Precio calculado según ítems y encantamientos', 'Ticket en Discord requerido para coordinar', 'Entrega manual supervisada por admin', 'Rango mínimo sugerido: ninguno — para todos'] },
     { id: 'custom-slimefun', category: 'custom', tier: 5, name: 'Encargo Slimefun (Cotización)', badge: 'Manual', clp: null, usd: null, featured: false, accent: 'cyan', summary: 'Encargos específicos de máquinas avanzadas o componentes técnicos.', includes: ['Precio final calculado post-evaluación', 'Apertura de ticket en Discord requerida', 'Viabilidad técnica revisada por admins', 'Precios de referencia: 50k a 300k Dragmas'] },
     { id: 'custom-guild', category: 'custom', tier: 5, name: 'Pack de Gremio (Cotización)', badge: 'Manual', clp: null, usd: null, featured: false, accent: 'violet', summary: 'Paquete personalizado de claims contiguos, canales de Discord VIP y perks para grupos.', includes: ['Cotización en base al número de integrantes', 'Entrevista inicial obligatoria con el Staff', 'No se aprueba contenido pay-to-win', 'Coordinación directa para la entrega'] }
   ]
@@ -115,6 +118,22 @@ function getTebexAuthHeader() {
     throw new Error('Credenciales de Tebex no configuradas');
   }
   return `Basic ${Buffer.from(`${tebexPublicToken}:${tebexPrivateKey}`).toString('base64')}`;
+}
+
+function isAdminTokenValid(request) {
+  if (!adminToken) {
+    app.log.warn('[WARN] ADMIN_TOKEN no configurado; /api/quote-checkout queda sin validacion extra');
+    return true;
+  }
+
+  const provided = request.headers['x-admin-token'];
+  if (typeof provided !== 'string' || !provided.length) return false;
+
+  const expectedBuffer = Buffer.from(adminToken, 'utf8');
+  const providedBuffer = Buffer.from(provided, 'utf8');
+  if (expectedBuffer.length !== providedBuffer.length) return false;
+
+  return timingSafeEqual(expectedBuffer, providedBuffer);
 }
 
 async function tebexRequest(endpoint, { method = 'GET', body } = {}) {
@@ -186,6 +205,63 @@ async function createTebexBasket({ nick, contact, notes, items }) {
     currency: latest?.data?.currency || 'USD',
     totalPrice: latest?.data?.total_price || 0
   };
+}
+
+// Paquetes de crédito de denominación fija — descomposición greedy para precio exacto
+const CREDIT_DENOMINATIONS = [
+  { cents: 5000, id: 7516695 }, // $50
+  { cents: 2000, id: 7516694 }, // $20
+  { cents: 1000, id: 7516692 }, // $10
+  { cents:  500, id: 7516691 }, // $5
+  { cents:  200, id: 7516690 }, // $2
+  { cents:  100, id: 7516688 }, // $1
+];
+
+function decomposeToCents(totalCents) {
+  const packages = [];
+  let remaining = totalCents;
+  for (const { cents, id } of CREDIT_DENOMINATIONS) {
+    if (remaining <= 0) break;
+    const qty = Math.floor(remaining / cents);
+    if (qty > 0) {
+      packages.push({ id, quantity: qty });
+      remaining -= qty * cents;
+    }
+  }
+  if (remaining > 0) throw new Error(`No se puede componer exactamente $${(totalCents/100).toFixed(2)} con las denominaciones disponibles.`);
+  return packages;
+}
+
+async function createTebexQuoteBasket({ nick, contact, notes, priceUsd }) {
+  const totalCents = Math.round(priceUsd * 100);
+  const packages = decomposeToCents(totalCents);
+
+  const basket = await tebexRequest(`/api/accounts/${tebexPublicToken}/baskets`, {
+    method: 'POST',
+    body: {
+      username: nick || 'JugadorDrakes',
+      complete_url: 'https://web.drakescraft.cl/store.html?payment=tebex-success',
+      cancel_url: 'https://web.drakescraft.cl/store.html?payment=tebex-cancel',
+      complete_auto_redirect: false,
+      custom: { source: 'web.drakescraft.cl', contact: contact || '', notes: notes || '', quote_type: 'custom-kit' }
+    }
+  });
+
+  const ident = basket?.data?.ident;
+  if (!ident) throw new Error('Tebex no devolvió ident para el basket de cotizacion');
+
+  let latest;
+  for (const pkg of packages) {
+    latest = await tebexRequest(`/api/baskets/${ident}/packages`, {
+      method: 'POST',
+      body: { package_id: pkg.id, quantity: pkg.quantity }
+    });
+  }
+
+  const checkoutUrl = latest?.data?.links?.checkout;
+  if (!checkoutUrl) throw new Error('Tebex no devolvió checkout URL');
+
+  return { basketIdent: ident, checkoutUrl, totalPrice: priceUsd };
 }
 
 async function loadVisits() {
@@ -413,6 +489,39 @@ app.post('/api/store/tebex/checkout', async (request, reply) => {
   } catch (error) {
     app.log.error(error, 'tebex checkout error');
     return reply.code(502).send({ error: 'No se pudo crear el checkout de Tebex.' });
+  }
+});
+
+app.post('/api/quote-checkout', async (request, reply) => {
+  const body = request.body || {};
+  const nick = String(body.nick || '').trim().slice(0, 40);
+  const contact = String(body.contact || '').trim().slice(0, 120);
+  const notes = String(body.notes || '').trim().slice(0, 500);
+  const parsedPrice = Number(body.price_usd);
+
+  if (!isAdminTokenValid(request)) {
+    return reply.code(401).send({ error: 'No autorizado.' });
+  }
+
+  if (!nick) {
+    return reply.code(400).send({ error: 'nick es obligatorio.' });
+  }
+
+  if (!Number.isFinite(parsedPrice) || parsedPrice < 1 || parsedPrice > 500) {
+    return reply.code(400).send({ error: 'price_usd debe ser un numero entre 1 y 500.' });
+  }
+
+  try {
+    const basket = await createTebexQuoteBasket({ nick, contact, notes, priceUsd: parsedPrice });
+
+    return {
+      checkoutUrl: basket.checkoutUrl,
+      price_usd: Number(parsedPrice.toFixed(2)),
+      nick
+    };
+  } catch (error) {
+    app.log.error(error, 'quote checkout error');
+    return reply.code(502).send({ error: 'No se pudo crear el checkout de cotizacion.' });
   }
 });
 
@@ -1413,6 +1522,7 @@ await app.register(fastifyStatic, {
       'index.html',
       'rules.html',
       'store.html',
+      'admin-quote.html',
       'styles-3-2.css',
       'script-3-2.js',
       'styles-3-3.css',

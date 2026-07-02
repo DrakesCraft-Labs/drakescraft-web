@@ -684,7 +684,8 @@ function setupStoreExperience() {
         document.getElementById('modal-name').textContent = product.name;
         document.getElementById('modal-summary').textContent = product.summary;
         document.getElementById('modal-price').innerHTML = money(product.clp, product)
-            + (Number.isFinite(product.usd) ? `<span>/ USD ${product.usd}</span>` : '');
+            + (Number.isFinite(product.usd) ? `<span>/ USD ${product.usd}</span>` : '')
+            + ((product.category === 'monthly' || product.category === 'roles') ? '<span class="modal-period"> · suscripción mensual (30 días)</span>' : '');
         document.getElementById('modal-includes').innerHTML = (product.includes || [])
             .map(i => `<li>${escapeHtml(i)}</li>`).join('');
         const btn = document.getElementById('modal-add-btn');
@@ -732,7 +733,7 @@ function setupStoreExperience() {
                 </div>
                 <h3 class="card-name">${escapeHtml(product.name)}</h3>
                 <p class="card-summary">${escapeHtml(product.summary)}</p>
-                <div class="card-price">${priceHtml}${usdHtml}</div>
+                <div class="card-price">${priceHtml}${usdHtml}${(product.category === 'monthly' || product.category === 'roles') ? '<span class="card-period">/mes · 30 días</span>' : ''}</div>
                 <div class="card-actions">
                     <button type="button" class="btn-detail" data-detail-id="${product.id}">Ver detalles</button>
                     ${inGameOnly
