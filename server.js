@@ -1600,7 +1600,7 @@ app.get('/api/mcstatus', async (_request, reply) => {
 app.post('/api/tebex/webhook', async (request, reply) => {
   try {
     const sig = request.headers['x-signature'] || '';
-    const expected = createHmac('sha256', tebexWebhookSecret).update(request.rawBody || '').digest('hex');
+    const expected = createHmac('sha256', tebexWebhookSecret).update(request.raw.rawBody || '').digest('hex');
     if (!tebexWebhookSecret || sig !== expected) {
       app.log.warn({ sig, expected }, 'Tebex webhook: firma inválida');
       return reply.code(401).send({ error: 'Firma inválida' });
