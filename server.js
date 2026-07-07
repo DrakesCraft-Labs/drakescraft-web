@@ -43,7 +43,9 @@ const tebexPackageIds = {
   'utility-economy': 7510372,
   'dragmas-saco': 7510373,
   'dragmas-cofre': 7510374,
-  'dragmas-anfora': 7510375
+  'dragmas-anfora': 7510375,
+  'sfmaster-1h': 7545828,
+  'sfmaster-24h': 7545831
 };
 
 const storeCatalog = {
@@ -88,6 +90,8 @@ const storeCatalog = {
     { id: 'dragmas-saco', category: 'utility', tier: 3, name: 'Saco de Dragmas (50.000 ₯)', badge: 'Comercio', clp: 1990, usd: 1.99, featured: false, accent: 'bronze', summary: 'Un saco mediano de dragmas de plata para impulsar tu economía.', includes: ['50.000 Dragmas (₯) depositados en el juego', 'Comercio instantáneo en tiendas de jugadores', 'Ideal para compra de materias primas', 'Entrega automatizada vía comando o ticket'] },
     { id: 'dragmas-cofre', category: 'utility', tier: 5, name: 'Cofre de Dragmas (250.000 ₯)', badge: 'Popular', clp: 7990, usd: 7.99, featured: true, accent: 'violet', summary: 'Cofre robusto de dragmas con un 20% de descuento incluido.', includes: ['250.000 Dragmas (₯) depositados en el juego', 'Mayor capital para comprar claims o máquinas', 'Descuento por volumen pre-aplicado', 'Entrega automatizada vía comando o ticket'] },
     { id: 'dragmas-anfora', category: 'utility', tier: 7, name: 'Ánfora de Dragmas (1.000.000 ₯)', badge: 'Olimpo', clp: 24990, usd: 24.99, featured: true, accent: 'gold', summary: 'La ánfora colosal del templo para los más influyentes. Ahorra 37%.', includes: ['1.000.000 Dragmas (₯) depositados en el juego', 'Máximo poder adquisitivo en el servidor', 'Comercio pesado y compra de items míticos', 'Entrega automatizada vía comando o ticket'] },
+    { id: 'sfmaster-1h', category: 'custom', tier: 6, name: 'Pase SFMaster (1 Hora)', badge: 'Especial', clp: 5000, usd: 4.99, featured: true, accent: 'violet', summary: 'Alquiler exacto de 1 hora del rango SFMaster. Ideal para construir rápidamente con Slimefun Cheat.', includes: ['Rango SFMaster por 60 minutos cronológicos', 'Acceso irrestricto al libro Slimefun Cheat', 'Generación de ítems marcada (No comerciable)', 'Herramientas avanzadas de redes', 'Se retira automáticamente al cumplir el tiempo'] },
+    { id: 'sfmaster-24h', category: 'custom', tier: 7, name: 'Pase SFMaster (24 Horas)', badge: 'Especial', clp: 20000, usd: 19.99, featured: true, accent: 'gold', summary: 'Un día completo como dios de la ingeniería. Todo el poder de Slimefun Cheat en tus manos.', includes: ['Rango SFMaster por 24 horas cronológicas', 'Acceso irrestricto al libro Slimefun Cheat', 'Generación de ítems marcada (No comerciable)', 'Ideal para reconstruir ciudades y bases técnicas', 'Se retira automáticamente al cumplir el tiempo'] },
 
     { id: 'economy-comida', category: 'economy-kits', tier: 1, name: 'Kit Comida', badge: 'Survival In-Game', clp: null, usd: null, coins: 1000, featured: false, accent: 'bronze', summary: 'Provisiones básicas de comida para tus viajes. Adquirible en el juego.', includes: ['32 Filetes cocinados', '16 Zanahorias doradas', '32 Panes', '16 Galletas', 'Cooldown de uso: 30 minutos'] },
     { id: 'economy-madera', category: 'economy-kits', tier: 1, name: 'Kit Madera', badge: 'Survival In-Game', clp: null, usd: null, coins: 2000, featured: false, accent: 'rose', summary: 'Lote de madera variada para construcción. Adquirible en el juego.', includes: ['64 Troncos de roble', '64 Troncos de abeto', '64 Troncos de abedul', '64 Troncos de roble oscuro', 'Cooldown de uso: 30 minutos'] },
