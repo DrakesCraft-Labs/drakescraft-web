@@ -164,7 +164,7 @@ async function loadManifest() {
     const page = document.body.dataset.page;
     if (!page) return;
 
-    const response = await fetch(`data/${page}.json`);
+    const response = await fetch(`content/${page}.json`);
     if (!response.ok) throw new Error(`manifest ${page} unavailable`);
     const manifest = await response.json();
 

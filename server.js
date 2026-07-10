@@ -9,6 +9,9 @@ import { MercadoPagoConfig, Preference, Payment } from 'mercadopago';
 
 const app = Fastify({ logger: true, trustProxy: true });
 const root = path.dirname(fileURLToPath(import.meta.url));
+// Editorial manifests ship with the application; the mounted data directory is
+// reserved for mutable checkout, visitor, and payment records.
+const contentDir = path.join(root, 'data');
 const dataDir = process.env.DATA_DIR || path.join(root, 'data');
 const counterFile = path.join(dataDir, 'visits.json');
 const quoteFile = path.join(dataDir, 'store-quotes.jsonl');
@@ -1729,6 +1732,13 @@ app.post('/api/store/confirm', async (request, reply) => {
   const filtered = pending.filter(p => p.id !== id);
   await savePendingPurchases(filtered);
   return { ok: true };
+});
+
+await app.register(fastifyStatic, {
+  root: contentDir,
+  prefix: '/content/',
+  wildcard: false,
+  decorateReply: false
 });
 
 await app.register(fastifyStatic, {

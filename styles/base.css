@@ -78,7 +78,18 @@ textarea {
 
 .page-shell {
     position: relative;
-    overflow: hidden;
+    /* Keep decorative layers from creating side-scroll without clipping pages. */
+    overflow-x: hidden;
+}
+
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.72;
 }
 
 .page-shell::before,
