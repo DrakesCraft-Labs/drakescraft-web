@@ -1833,10 +1833,15 @@ app.post('/api/tebex/webhook', async (request, reply) => {
   try {
     const rawBody = request.rawBody || '';
     const sig = request.headers['x-signature'] || '';
+
+    if (!tebexWebhookSecret) {
+      app.log.error('Tebex webhook recibido sin TEBEX_WEBHOOK_SECRET configurado');
+      return reply.code(503).send({ error: 'Webhook no configurado' });
+    }
+
     const expected = createHmac('sha256', tebexWebhookSecret).update(rawBody).digest('hex');
-    app.log.info({ sig, expected, rawBodyLen: rawBody.length }, 'Tebex webhook');
-    if (!tebexWebhookSecret || sig !== expected) {
-      app.log.warn({ sig, expected }, 'Tebex webhook: firma inválida');
+    if (!safeEqualText(sig, expected)) {
+      app.log.warn({ rawBodyLen: rawBody.length }, 'Tebex webhook: firma inválida');
       return reply.code(401).send({ error: 'Firma inválida' });
     }
 
