@@ -1,279 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrakesCraft — Odisea | Minecraft Chile</title>
-    <meta name="description"
-        content="DrakesCraft: servidor Paper 1.21 con temática de la Odisea, Slimefun y comunidad en Discord. Java y Bedrock (Geyser).">
+    <title>DrakesCraft | Portal Oficial</title>
+    <meta name="description" content="Portal oficial de DrakesCraft.">
     <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="styles-3-3.css?v=20260612j">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css?v=20260710-rebuild">
+    <link rel="stylesheet" href="styles/index.css?v=20260710-rebuild">
 </head>
-
-<body>
-    <div id="background-layers" aria-hidden="true">
-        <div class="gradient-layer"></div>
-        <div class="nebula nebula-a"></div>
-        <div class="nebula nebula-b"></div>
-    </div>
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
-    <nav class="navbar" aria-label="Principal">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logo-drakescraft.png" alt="" class="logo-img" width="44" height="44">
-                <span class="logo-text">DrakesCraft</span>
+<body class="page-shell" data-page="index">
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <nav class="site-nav" aria-label="Principal">
+        <div class="container site-nav__bar">
+            <a class="brand" href="index.html">
+                <img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft">
+                <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
             </a>
-            <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu"
-                aria-label="Abrir menú">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link">Inicio</a></li>
-                <li><a href="#conectar" class="nav-link">Conectar</a></li>
-                <li><a href="#comunidad" class="nav-link">Comunidad</a></li>
-                <li><a href="#odisea" class="nav-link">Odisea</a></li>
-                <li><a href="#slimefun" class="nav-link">Slimefun</a></li>
-                <li><a href="store.html" class="nav-link">Tienda</a></li>
-                <li><a href="rules.html" class="nav-link">Reglas</a></li>
-                <li><a href="#faq" class="nav-link">FAQ</a></li>
-                <li><a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord nav-btn" target="_blank"
-                        rel="noopener">Discord</a></li>
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+            <ul class="site-nav__links" id="nav-menu">
+                <li><a class="active" href="index.html">Inicio</a></li>
+                <li><a href="server.html">Servidor</a></li>
+                <li><a href="jack.html">Jack</a></li>
+                <li><a href="odysseia.html">Odysseia</a></li>
+                <li><a href="slimefun.html">Slimefun</a></li>
+                <li><a href="community.html">Comunidad</a></li>
+                <li><a href="bosses.html">Bosses</a></li>
+                <li><a href="store.html">Tienda</a></li>
+                <li><a href="rules.html">Reglas</a></li>
+                <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
             </ul>
         </div>
     </nav>
 
-    <header id="home" class="site-hero">
-        <canvas id="particles-canvas"></canvas>
-        <div class="site-hero__glow" aria-hidden="true"></div>
-        <img src="dragon_fly.png" alt="" class="hero-dragon" aria-hidden="true">
-        <div class="container site-hero__inner portal-hero">
-            <div class="hero-copy">
-                <p class="badge-status"><span class="live-pulse"></span> Portal oficial conectado a star</p>
-                <p class="hero-kicker">Minecraft Survival · Slimefun · Crossplay</p>
-                <h1 class="site-hero__title">DrakesCraft</h1>
-                <p class="site-hero__tagline">Tu próxima odisea no se mira desde lejos. Se construye bloque a bloque.</p>
-                <p class="site-hero__note">Mitología, tecnología y una comunidad latina viva detrás de cada expedición.</p>
-                <div class="site-hero__actions">
-                    <button type="button" class="btn-primary portal-enter" onclick="copyIp('mc.drakescraft.cl')">Copiar IP Java</button>
-                    <a href="store.html" class="btn-primary" style="background:var(--secondary);border-color:var(--secondary);color:#000;font-weight:700;box-shadow:0 0 15px var(--secondary-glow);display:inline-flex;align-items:center;gap:6px;">🛒 Ver Tienda</a>
-                    <a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord" target="_blank" rel="noopener">Entrar al Discord</a>
+    <header class="hero">
+        <div class="container hero__grid">
+            <div>
+                <p class="eyebrow" id="hero-eyebrow"></p>
+                <h1 id="hero-title"></h1>
+                <p class="hero__tagline" id="hero-tagline"></p>
+                <p class="hero__intro" id="hero-intro"></p>
+                <div class="hero__actions">
+                    <button class="btn btn-primary" type="button" data-copy="mc.drakescraft.cl">Copiar IP Java</button>
+                    <button class="btn btn-secondary" type="button" data-copy="mc.drakescraft.cl:25565">Copiar Bedrock</button>
+                    <a class="btn btn-secondary" href="server.html">Empezar recorrido</a>
                 </div>
+                <div class="metrics" id="manifest-metrics"></div>
             </div>
-            <aside class="command-deck" aria-label="Telemetría del portal">
-                <div class="command-deck__head"><span>TELEMETRÍA DE LA ODISEA</span><span class="deck-signal">EN VIVO</span></div>
-                <div class="command-deck__logo"><div class="portal-ring"></div><img src="assets/logo-drakescraft.png" alt="DrakesCraft" width="180" height="180"></div>
-                <div class="deck-grid" aria-live="polite">
-                    <div><span>Viajeros</span><strong id="visit-count">...</strong></div>
-                    <div><span>Discord</span><strong id="hero-discord-count">...</strong></div>
-                    <div><span>Origen</span><strong id="viewer-location">...</strong></div>
-                    <div><span>Hora local</span><strong id="viewer-datetime">...</strong></div>
+            <div class="hero-stage">
+                <div class="hero-stage__core">
+                    <div class="orbital-logo">
+                        <div class="orbital-logo__ring"></div>
+                        <div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div>
+                    </div>
                 </div>
-                <div class="deck-bar"><span></span></div>
-            </aside>
+                <aside class="stage-card stage-card--a tilt-card"><strong>Servidor</strong><p>Presentación clara del survival, su tono y su arquitectura.</p></aside>
+                <aside class="stage-card stage-card--b tilt-card"><strong>Jack</strong><p>Página propia del dueño actual y de lo que mantiene.</p></aside>
+                <aside class="stage-card stage-card--c tilt-card"><strong>Odysseia</strong><p>Bosses, tienda, auras VIP y sistemas custom con casa propia.</p></aside>
+            </div>
         </div>
     </header>
 
-    <section id="conectar" class="section section-tight">
-        <div class="container">
-            <h2 class="section-title">Conectar</h2>
-            <p class="section-desc">El mismo mundo: Java en PC y Bedrock en consola o móvil gracias a Geyser.</p>
-            <!-- Banner de estado del servidor -->
-            <div class="mc-status-banner" id="mc-status-banner" aria-live="polite">
-                <span class="mc-status-dot" id="mc-status-dot"></span>
-                <span id="mc-status-label">Consultando servidor...</span>
-                <span class="mc-status-motd" id="mc-status-motd"></span>
-                <span class="mc-status-players" id="mc-status-players"></span>
-                <span class="mc-status-version" id="mc-status-version"></span>
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Qué resuelve esta nueva portada</h2>
+                    <p>Sirve como punto de partida real: presenta el mapa del sitio, baja la ansiedad de entrar a una web revuelta y deja claro que el proyecto tiene una secuencia lógica.</p>
+                </div>
+                <div class="panel-grid" id="manifest-pillars"></div>
             </div>
+        </section>
 
-            <div class="connect-grid">
-                <article class="connect-card">
-                    <h3>Java (PC)</h3>
-                    <p class="connect-card__meta">Dirección recomendada</p>
-                    <code class="ip-block">mc.drakescraft.cl</code>
-                    <button type="button" class="btn-copy" onclick="copyIp('mc.drakescraft.cl')">Copiar IP</button>
-                    <p class="connect-card__hint java-status-hint" id="java-status-hint"></p>
-                </article>
-                <article class="connect-card">
-                    <h3>Bedrock / consola</h3>
-                    <p class="connect-card__meta">Servidor y puerto UDP (Geyser)</p>
-                    <code class="ip-block">mc.drakescraft.cl:25565</code>
-                    <button type="button" class="btn-copy" onclick="copyIp('mc.drakescraft.cl:25565')">Copiar</button>
-                    <p class="connect-card__hint">Si tu cliente solo pide el host, usa <strong>play.drakescraft.cl</strong>
-                        y el puerto <strong>25565</strong>.</p>
-                    <p class="connect-card__hint bedrock-status-hint" id="bedrock-status-hint"></p>
-                </article>
-                <article class="connect-card connect-card--discord">
-                    <h3>Comunidad</h3>
-                    <p class="connect-card__meta">Anuncios, soporte y whitelist / aperturas</p>
-                    <a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord" target="_blank" rel="noopener">discord.gg
-                        / rR7FbfCt9Y</a>
-                    <p class="connect-card__hint">Unete al Discord para novedades, soporte y reportes.</p>
-                </article>
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Recorrido recomendado</h2>
+                    <p>La idea es simple: primero entender el servidor, luego quién lo sostiene, después sus sistemas y recién al final entrar a bosses, tienda y reglas.</p>
+                </div>
+                <div class="journey-grid" id="manifest-journey"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="comunidad" class="section section-dark">
-        <div class="container community-widget-block">
-            <h2 class="section-title">Comunidad en Discord</h2>
-            <p class="section-desc">Datos servidos por nuestro backend en star, con caché para mantener el portal rápido y estable.</p>
-            <div class="community-layout">
-                <div class="discord-live-panel">
-                    <div class="discord-live-panel__metrics">
-                        <article class="discord-metric-card">
-                            <p class="discord-metric-card__label">Estado</p>
-                            <p class="discord-metric-card__value"><span id="discord-status-dot" class="status-dot"></span><span id="discord-status-text">Cargando...</span></p>
-                        </article>
-                        <article class="discord-metric-card">
-                            <p class="discord-metric-card__label">Miembros online</p>
-                            <p class="discord-metric-card__value" id="discord-presence-count">--</p>
-                        </article>
-                        <article class="discord-metric-card">
-                            <p class="discord-metric-card__label">Miembros listados</p>
-                            <p class="discord-metric-card__value" id="discord-total-count">--</p>
-                        </article>
-                    </div>
-                    <div class="discord-live-panel__channels">
-                        <p class="discord-live-panel__subtitle">Canales visibles</p>
-                        <ul id="discord-channels-list" class="discord-channels-list">
-                            <li>Cargando canales...</li>
-                        </ul>
-                    </div>
-                    <a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord" target="_blank" rel="noopener">Unirme al Discord</a>
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Telemetría del portal</h2>
+                    <p>Datos servidos por el backend para que la portada también se sienta viva.</p>
                 </div>
-                <div class="discord-widget-wrap member-radar">
-                    <div class="member-radar__head"><span>Tripulación conectada</span><span class="radar-sweep"></span></div>
-                    <div id="discord-members" class="discord-members"><p class="member-loading">Sincronizando presencias...</p></div>
-                </div>
+                <div class="live-grid" id="overview-live"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="odisea" class="section section-dark">
-        <div class="container">
-            <h2 class="section-title">Identidad <span class="text-gold">Odisea</span></h2>
-            <p class="section-desc">El servidor se presenta en el MOTD y en la interfaz como una odisea: tonos
-                dorados y púrpuras, bossbar y ambientación alrededor del viaje de vuelta a casa — en bloques.</p>
-            <div class="two-col">
-                <div class="prose-card">
-                    <h3>Rangos VIP</h3>
-                    <p>Hay nombres pensados en clave griega y odisea; <strong>sin prometer comandos ni perks</strong> en
-                        la web. La lista corta (solo nombres) está en la <a href="store.html#store">Tienda</a>.</p>
-                </div>
-                <div class="prose-card">
-                    <h3>Qué esperar</h3>
-                    <ul class="checklist">
-                        <li>Progresión con items y máquinas (Slimefun y addon ecosystem).</li>
-                        <li>Servidor semipremium / orientado a comunidad latina.</li>
-                        <li>Reglas claras: convivencia, sin ventajas injustas, reportes por Discord.</li>
-                    </ul>
-                </div>
+        <section class="section">
+            <div class="container">
+                <div class="facts-grid" id="manifest-facts"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="slimefun" class="section">
-        <div class="container">
-            <h2 class="section-title">Slimefun y <span class="text-gradient">tecnología</span></h2>
-            <p class="section-desc">DrakesCraft apuesta por contenido técnico sobre vanilla: cadenas de crafteo,
-                energía, almacenes y expansión progresiva. Los detalles concretos de addons y recetas viven en el
-                juego y en los canales del Discord.</p>
-            <div class="labs-cta">
-                <p>El laboratorio de parches y experimentos del proyecto vive en el ecosistema GitHub del equipo; la web
-                    que estás leyendo también es código abierto.</p>
-                <div class="labs-cta__links">
-                    <a href="https://github.com/JackStar6677-1/drakescraft-web" class="btn-secondary" target="_blank"
-                        rel="noopener">Código de esta web</a>
-                </div>
+        <section class="section">
+            <div class="container">
+                <div class="cta-banner" id="manifest-cta"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section-store-promo" aria-labelledby="store-promo-title">
-        <div class="container store-promo">
-            <a href="store.html" class="store-promo__art" aria-label="Abrir la Tienda de la Odisea">
-                <img src="bannerdrakes.jpg" alt="DrakesCraft Survival y Slimefun Magic" loading="lazy">
-            </a>
-            <div class="store-promo__action">
-                <div>
-                    <p class="store-promo__eyebrow"><span class="live-pulse"></span> Comercio del Olimpo</p>
-                    <h2 id="store-promo-title">Tienda de la Odisea</h2>
-                    <p>Rangos, Dragmas, protecciones y encargos de Slimefun con entrega y soporte directo.</p>
-                </div>
-                <a href="store.html" class="btn-primary store-promo__button">Ingresar a la tienda</a>
+        <section class="section">
+            <div class="container">
+                <div class="sequence-nav" id="page-sequence"></div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section id="faq" class="section section-dark">
-        <div class="container">
-            <h2 class="section-title">Preguntas frecuentes</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        ¿Qué versión de Minecraft?
-                        <span class="icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>El backend está pensado para <strong>Paper 1.21.x</strong>. Usa el cliente compatible con esa
-                            línea; si hay eventos en otra versión, se anuncian en Discord.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        ¿Puedo entrar sin cuenta premium de Java?
-                        <span class="icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>La política exacta (premium, Bedrock-only, etc.) la confirma el staff en Discord según la
-                            fase del servidor. Bedrock suele ir por <strong>Geyser</strong> en el puerto indicado arriba.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        ¿Dónde reporto bugs o jugadores tóxicos?
-                        <span class="icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Abre un hilo o ticket en Discord siguiendo las <a href="rules.html">reglas</a>. No uses el
-                            chat del juego como único canal para reportes serios.</p>
-                    </div>
-                </div>
+    <footer class="site-footer">
+        <div class="container site-footer__grid">
+            <div>
+                <strong>DrakesCraft</strong>
+                <p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Portal oficial reestructurado.</p>
             </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <img src="assets/logo-drakescraft.png" alt="" width="36" height="36">
-                <span>DrakesCraft</span>
-            </div>
-            <div class="footer-links">
-                <a href="index.html">Inicio</a>
-                <a href="rules.html">Reglas</a>
+            <div class="site-footer__links">
+                <a href="server.html">Servidor</a>
+                <a href="jack.html">Jack</a>
                 <a href="store.html">Tienda</a>
-                <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
-                <a href="mailto:contacto@drakescraft.cl">Contacto</a>
+                <a href="rules.html">Reglas</a>
             </div>
-            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl · impulsado por star</p>
-            <p class="disclaimer">Minecraft es una marca de Mojang AB. No afiliado.</p>
         </div>
     </footer>
 
-    <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
-    <script src="three.min.js?v=20260612g"></script>
-    <script src="script-3-3.js?v=20260612j"></script>
+    <script src="scripts/site.js?v=20260710-rebuild"></script>
 </body>
-
 </html>

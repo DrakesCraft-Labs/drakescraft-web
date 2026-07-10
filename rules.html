@@ -1,314 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reglas - DrakesCraft</title>
+    <title>DrakesCraft | Reglas</title>
+    <meta name="description" content="Reglas oficiales de DrakesCraft.">
     <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="styles-3-3.css?v=20260612h">
-    <style>
-        .rules-hero {
-            padding: 125px 0 58px;
-            text-align: center;
-            background:
-                linear-gradient(90deg, rgba(5, 3, 14, 0.96), rgba(5, 3, 14, 0.8) 48%, rgba(5, 3, 14, 0.96)),
-                linear-gradient(180deg, rgba(5, 3, 14, 0.35), rgba(5, 3, 14, 0.95)),
-                url('assets/portal-background-v1.png') center / cover no-repeat;
-        }
-
-        .rules-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .rule-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: 0.3s;
-        }
-
-        .rule-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
-        }
-
-        .rule-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-        }
-
-        .rule-number {
-            background: var(--secondary);
-            color: #000;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .rule-title {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            color: var(--secondary);
-        }
-
-        .rule-content ul {
-            list-style: disc;
-            padding-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .rule-content li {
-            margin-bottom: 8px;
-            color: var(--text-muted);
-        }
-
-        .sanction {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 3px solid #ef4444;
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            color: #fca5a5;
-        }
-
-        .important-note {
-            background: rgba(250, 204, 21, 0.1);
-            border: 1px solid var(--secondary);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            margin-top: 50px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css?v=20260710-rebuild">
+    <link rel="stylesheet" href="styles/rules.css?v=20260710-rebuild">
 </head>
-
-<body>
-    <div id="background-layers" aria-hidden="true">
-        <div class="gradient-layer"></div>
-        <div class="nebula nebula-a"></div>
-        <div class="nebula nebula-b"></div>
-        <canvas id="particles-canvas"></canvas>
-    </div>
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
-    <!-- Navbar -->
-    <nav class="navbar" aria-label="Principal">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logo-drakescraft.png" alt="" class="logo-img" width="40" height="40">
-                <span class="logo-text">DrakesCraft</span>
+<body class="page-shell" data-page="rules">
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <nav class="site-nav" aria-label="Principal">
+        <div class="container site-nav__bar">
+            <a class="brand" href="index.html">
+                <img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft">
+                <span class="brand__meta"><strong>DrakesCraft</strong><span>Reglas oficiales</span></span>
             </a>
-            <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu"
-                aria-label="Abrir menú">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html#home" class="nav-link">Inicio</a></li>
-                <li><a href="index.html#conectar" class="nav-link">Conectar</a></li>
-                <li><a href="index.html#odisea" class="nav-link">Odisea</a></li>
-                <li><a href="index.html#slimefun" class="nav-link">Slimefun</a></li>
-                <li><a href="store.html" class="nav-link">Tienda</a></li>
-                <li><a href="rules.html" class="nav-link active">Reglas</a></li>
-                <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
-                <li><a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord nav-btn" target="_blank"
-                        rel="noopener">Discord</a></li>
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+            <ul class="site-nav__links" id="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="server.html">Servidor</a></li>
+                <li><a href="jack.html">Jack</a></li>
+                <li><a href="odysseia.html">Odysseia</a></li>
+                <li><a href="slimefun.html">Slimefun</a></li>
+                <li><a href="community.html">Comunidad</a></li>
+                <li><a href="bosses.html">Bosses</a></li>
+                <li><a href="store.html">Tienda</a></li>
+                <li><a class="active" href="rules.html">Reglas</a></li>
+                <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="rules-hero">
-        <div class="container">
-            <h1 class="section-title">Reglamento <span class="text-gold">Oficial</span></h1>
-            <p class="section-desc">Reglas generales para el servidor de Minecraft y Discord.</p>
+    <header class="hero">
+        <div class="container hero__grid">
+            <div>
+                <p class="eyebrow" id="hero-eyebrow"></p>
+                <h1 id="hero-title"></h1>
+                <p class="hero__tagline" id="hero-tagline"></p>
+                <p class="hero__intro" id="hero-intro"></p>
+                <div class="metrics" id="manifest-metrics"></div>
+            </div>
+            <div class="hero-stage">
+                <div class="hero-stage__core">
+                    <div class="orbital-logo">
+                        <div class="orbital-logo__ring"></div>
+                        <div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div>
+                    </div>
+                </div>
+                <aside class="stage-card stage-card--a tilt-card"><strong>Convivencia</strong><p>Respeto y reglas claras para juego y Discord.</p></aside>
+                <aside class="stage-card stage-card--b tilt-card"><strong>Integridad</strong><p>Cheats, exploits y abusos se tratan como daño directo al proyecto.</p></aside>
+                <aside class="stage-card stage-card--c tilt-card"><strong>Soporte</strong><p>Los conflictos se llevan a reportes y tickets, no al caos del chat.</p></aside>
+            </div>
         </div>
     </header>
 
-    <!-- Rules Content -->
-    <section class="section">
-        <div class="rules-container">
-
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">1</div>
-                    <h3 class="rule-title">Respeto y Convivencia</h3>
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Marco de convivencia</h2>
+                    <p>Las reglas ahora viven como cierre natural del recorrido y no como una página perdida a un costado.</p>
                 </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Tratar con respeto a todos los miembros, sin importar su rango o antigüedad.</li>
-                        <li>Está prohibido insultar, acosar, discriminar o provocar conflictos.</li>
-                        <li>Evitar spam, flood o uso excesivo de mayúsculas.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Advertencia o mute temporal (1h-24h). Reincidencia → ban 7 días.
-                    </div>
-                </div>
+                <div class="panel-grid" id="manifest-pillars"></div>
             </div>
+        </section>
 
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">2</div>
-                    <h3 class="rule-title">Contenido Inapropiado</h3>
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Reglamento base</h2>
+                    <p>Las categorías más críticas del servidor quedan documentadas de forma legible y directa.</p>
                 </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Prohibido contenido sexual explícito, gore o NSFW fuera de canales permitidos.</li>
-                        <li>No se tolera apología de violencia, terrorismo o actividades ilegales.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Ban permanente en casos graves.
-                    </div>
-                </div>
+                <div class="panel-grid" id="rules-grid"></div>
             </div>
+        </section>
 
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">3</div>
-                    <h3 class="rule-title">Hacks, Mods y Ventajas Injustas</h3>
-                </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Prohibido el uso de hacks, cheats, mods, texturas o scripts que otorguen ventajas injustas.
-                        </li>
-                        <li>Se podrán solicitar screenshots (SS) o grabaciones para verificar sospechas.</li>
-                        <li>Negarse injustificadamente a entregar pruebas = sanción directa.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Ban permanente o mínimo 30 días según el caso.
-                    </div>
-                </div>
+        <section class="section">
+            <div class="container">
+                <div class="facts-grid" id="manifest-facts"></div>
             </div>
+        </section>
 
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">4</div>
-                    <h3 class="rule-title">Publicidad y Spam</h3>
-                </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>No hacer publicidad de otros servidores o comunidades sin permiso del staff.</li>
-                        <li>Prohibido spam en chat, voz o mensajes privados.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Advertencia → mute 24h → ban 7 días.
-                    </div>
-                </div>
+        <section class="section">
+            <div class="container">
+                <div class="cta-banner" id="manifest-cta"></div>
             </div>
+        </section>
 
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">5</div>
-                    <h3 class="rule-title">Suplantación de Identidad</h3>
-                </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Prohibido hacerse pasar por otros jugadores, staff o personas públicas.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Ban temporal (7-30 días) o permanente si hay intención maliciosa.
-                    </div>
-                </div>
+        <section class="section">
+            <div class="container">
+                <div class="sequence-nav" id="page-sequence"></div>
             </div>
+        </section>
+    </main>
 
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">6</div>
-                    <h3 class="rule-title">Respeto al Staff</h3>
-                </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Las decisiones del staff deben respetarse.</li>
-                        <li>Si tienes una queja, usa el canal de reportes, no el chat general.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Advertencia → mute 1h → ban 7 días.
-                    </div>
-                </div>
-            </div>
-
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">7</div>
-                    <h3 class="rule-title">Uso de Bugs y Exploits</h3>
-                </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Reportar cualquier bug o glitch inmediatamente al staff.</li>
-                        <li>Prohibido aprovecharse de errores para obtener ventajas.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Ban temporal (15-30 días) o permanente si es grave.
-                    </div>
-                </div>
-            </div>
-
-            <div class="rule-card">
-                <div class="rule-header">
-                    <div class="rule-number">8</div>
-                    <h3 class="rule-title">Lenguaje y Chat</h3>
-                </div>
-                <div class="rule-content">
-                    <ul>
-                        <li>Evitar lenguaje ofensivo, tóxico o que provoque conflictos.</li>
-                        <li>Se permiten bromas o roleplay sin sobrepasar límites de respeto.</li>
-                    </ul>
-                    <div class="sanction">
-                        <strong>Sanción:</strong> Advertencia → mute 1h-24h → ban temporal si hay reincidencia.
-                    </div>
-                </div>
-            </div>
-
-            <div class="important-note">
-                <h3>⚠️ Notas Importantes</h3>
-                <p>Las sanciones pueden variar según la gravedad y el historial del jugador.</p>
-                <p>El staff puede aplicar medidas no escritas si la situación lo requiere.</p>
-                <p>Ignorar estas reglas no te exime de responsabilidad.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-links" style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px;">
-                <a href="index.html" style="color: var(--text-muted); text-decoration: none;">Inicio</a>
-                <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener"
-                    style="color: var(--text-muted); text-decoration: none;">Discord</a>
-                <a href="store.html" style="color: var(--text-muted); text-decoration: none;">Tienda</a>
-                <a href="mailto:contacto@drakescraft.cl"
-                    style="color: var(--text-muted); text-decoration: none;">Contacto</a>
-            </div>
-            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl</p>
-            <p class="disclaimer">Minecraft es una marca registrada de Mojang AB.</p>
+    <footer class="site-footer">
+        <div class="container site-footer__grid">
+            <div><strong>DrakesCraft</strong><p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Reglamento oficial.</p></div>
+            <div class="site-footer__links"><a href="index.html">Inicio</a><a href="community.html">Comunidad</a><a href="store.html">Tienda</a></div>
         </div>
     </footer>
 
-    <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
-    <script src="three.min.js?v=20260612g"></script>
-    <script src="script-3-3.js?v=20260612g"></script>
+    <script src="scripts/site.js?v=20260710-rebuild"></script>
 </body>
-
 </html>

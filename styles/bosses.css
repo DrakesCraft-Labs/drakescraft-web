@@ -1,0 +1,5 @@
+body[data-page="bosses"] {
+    --page-accent: #f4c95d;
+    --page-accent-soft: rgba(244, 201, 93, 0.2);
+    --page-glow: rgba(149, 136, 255, 0.18);
+}

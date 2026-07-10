@@ -1,0 +1,5 @@
+body[data-page="community"] {
+    --page-accent: #79d7ff;
+    --page-accent-soft: rgba(121, 215, 255, 0.2);
+    --page-glow: rgba(255, 154, 195, 0.15);
+}

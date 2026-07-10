@@ -1,0 +1,37 @@
+{
+  "metaTitle": "DrakesCraft | Bosses",
+  "metaDescription": "Bosses míticos oficiales de DrakesCraft: invocación, identidad de combate y loot documentado desde el backend del sitio.",
+  "eyebrow": "Endgame mítico",
+  "title": "Un panteón real, no una lista suelta de mobs inflados.",
+  "tagline": "Aquí los bosses tienen identidad, invocador, estilo de combate y drops documentados. Esta página separa el endgame del catálogo para que ambos se entiendan mejor.",
+  "intro": "La capa de bosses existe para mostrar que DrakesCraft no termina en vanilla ni en Slimefun. El objetivo de esta página es presentar el panteón con orden, claridad y peso visual propio.",
+  "metrics": [
+    { "label": "Fuente", "value": "API de bosses" },
+    { "label": "Invocación", "value": "Individual" },
+    { "label": "Loot", "value": "Reliquias" },
+    { "label": "Objetivo", "value": "Endgame" }
+  ],
+  "pillars": [
+    { "title": "Invocadores únicos", "text": "Cada boss se despierta con su propio objeto y no con un activador genérico." },
+    { "title": "Peleas con rol", "text": "Burst, control, fuego, veneno o movilidad marcan por qué una pelea importa." },
+    { "title": "Drops con nombre", "text": "Las reliquias se explican como fantasías de combate concretas y no como premios anónimos." }
+  ],
+  "journey": [
+    { "step": "1", "title": "Preparar", "text": "Conseguir el invocador correcto y entender el riesgo." },
+    { "step": "2", "title": "Despertar", "text": "Llamar a la entidad y entrar en combate inmediato." },
+    { "step": "3", "title": "Reclamar", "text": "Perseguir reliquias con identidad propia." }
+  ],
+  "facts": [
+    { "title": "Por qué esta página existe", "items": ["Separar tienda y endgame", "Dar contexto al panteón", "Mostrar drops reales"] },
+    { "title": "Qué sigue después", "items": ["Tienda", "Rangos", "Apoyo al servidor"] },
+    { "title": "Cierre", "items": ["Reglas", "Soporte", "Discord"] }
+  ],
+  "cta": {
+    "title": "Si te interesa apoyar el proyecto, el siguiente paso es la tienda.",
+    "text": "Después del endgame, la tienda entra con mucho más sentido y contexto.",
+    "primary": { "href": "store.html", "label": "Abrir tienda" },
+    "secondary": { "href": "rules.html", "label": "Ver reglas" }
+  },
+  "prev": { "href": "community.html", "label": "Comunidad" },
+  "next": { "href": "store.html", "label": "Tienda" }
+}

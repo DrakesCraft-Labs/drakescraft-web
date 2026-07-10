@@ -1,0 +1,37 @@
+{
+  "metaTitle": "DrakesCraft | El Servidor",
+  "metaDescription": "Qué es DrakesCraft hoy, cómo funciona y qué sistemas sostienen la experiencia survival mítica del servidor.",
+  "eyebrow": "Mapa del servidor",
+  "title": "Qué es DrakesCraft hoy y qué mantiene unido al proyecto.",
+  "tagline": "Un survival temático que mezcla progreso, bosses, Slimefun, backend web y sistemas propios en una sola experiencia.",
+  "intro": "Esta página aterriza el servidor como producto: qué juegas, qué capas hay, cómo entra la gente, qué sistemas pesan de verdad y cuál es el orden lógico para entenderlo.",
+  "metrics": [
+    { "label": "Modo", "value": "Survival" },
+    { "label": "Crossplay", "value": "Java + Bedrock" },
+    { "label": "Economía", "value": "Dragmas" },
+    { "label": "Backbone", "value": "Odysseia" }
+  ],
+  "pillars": [
+    { "title": "Survival con endgame", "text": "La progresión no se queda en vanilla; bosses, reliquias y Slimefun empujan el late game." },
+    { "title": "Infraestructura real", "text": "Web, Discord, tienda y backend no son extras separados: forman parte de la operación del servidor." },
+    { "title": "Identidad curada", "text": "La temática mítica existe en rangos, bosses, arte, nombres y mensajes; no es un simple skin superficial." }
+  ],
+  "journey": [
+    { "step": "A", "title": "Entrar", "text": "Java y Bedrock comparten el mismo ecosistema." },
+    { "step": "B", "title": "Progresar", "text": "Economía, claims, roles, kits y máquinas sostienen el survival diario." },
+    { "step": "C", "title": "Escalar", "text": "Bosses, reliquias y perks custom marcan el verdadero techo del servidor." }
+  ],
+  "facts": [
+    { "title": "Capas jugables", "items": ["Vanilla base", "Slimefun", "Bosses míticos"] },
+    { "title": "Capas operativas", "items": ["Discord", "Web", "Tienda", "Backend"] },
+    { "title": "Qué visitar luego", "items": ["Jack", "Odysseia", "Slimefun"] }
+  ],
+  "cta": {
+    "title": "Conoce primero a quien sostiene el proyecto.",
+    "text": "El siguiente paso lógico es mostrar quién coordina la identidad, la infraestructura y las decisiones del servidor.",
+    "primary": { "href": "jack.html", "label": "Abrir página de Jack" },
+    "secondary": { "href": "community.html", "label": "Ver comunidad" }
+  },
+  "prev": { "href": "index.html", "label": "Inicio" },
+  "next": { "href": "jack.html", "label": "Jack" }
+}

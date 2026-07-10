@@ -1,0 +1,5 @@
+body[data-page="odysseia"] {
+    --page-accent: #9588ff;
+    --page-accent-soft: rgba(149, 136, 255, 0.2);
+    --page-glow: rgba(121, 215, 255, 0.16);
+}

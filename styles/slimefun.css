@@ -1,0 +1,5 @@
+body[data-page="slimefun"] {
+    --page-accent: #64f2bf;
+    --page-accent-soft: rgba(100, 242, 191, 0.18);
+    --page-glow: rgba(121, 215, 255, 0.16);
+}

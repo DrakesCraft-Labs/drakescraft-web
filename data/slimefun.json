@@ -1,0 +1,37 @@
+{
+  "metaTitle": "DrakesCraft | Slimefun",
+  "metaDescription": "La capa técnica e industrial de DrakesCraft explicada con orden: máquinas, progresión, automatización y por qué sigue importando en el servidor.",
+  "eyebrow": "Tecnología survival",
+  "title": "Slimefun es la capa industrial que convierte el survival en una obsesión técnica.",
+  "tagline": "Aquí no se usa solo como decoración: sostiene farms, cadenas de producción, herramientas especiales y parte del atractivo de largo plazo del servidor.",
+  "intro": "Slimefun en DrakesCraft existe como segunda columna jugable. Permite pasar de la exploración vanilla al diseño de líneas productivas, máquinas, recursos raros y sistemas que le dan densidad al progreso diario.",
+  "metrics": [
+    { "label": "Foco", "value": "Automatización" },
+    { "label": "Meta", "value": "Progreso largo" },
+    { "label": "Sin mods", "value": "Sí" },
+    { "label": "Sinergia", "value": "Roles + tienda" }
+  ],
+  "pillars": [
+    { "title": "Progreso prolongado", "text": "Alarga la vida del survival con metas técnicas más densas que el simple gear final." },
+    { "title": "Ecosistema de roles", "text": "Varios roles y kits se sienten mejor porque dialogan con materiales, máquinas y herramientas de Slimefun." },
+    { "title": "Construcción de imperios", "text": "Bases, ciudades y gremios ganan sentido cuando la infraestructura técnica importa de verdad." }
+  ],
+  "journey": [
+    { "step": "01", "title": "Recolectar", "text": "Materiales y recursos dejan de ser solo minería lineal." },
+    { "step": "02", "title": "Procesar", "text": "Máquinas y estaciones abren nuevas cadenas de valor." },
+    { "step": "03", "title": "Escalar", "text": "La base técnica se vuelve parte de tu identidad en el servidor." }
+  ],
+  "facts": [
+    { "title": "Qué habilita", "items": ["Máquinas", "Automatización", "Herramientas especiales"] },
+    { "title": "Qué conecta", "items": ["Roles", "Economía", "SFMaster", "Construcción"] },
+    { "title": "Qué sigue", "items": ["Comunidad", "Bosses", "Tienda"] }
+  ],
+  "cta": {
+    "title": "Sigue con la capa social y operativa.",
+    "text": "Después de explicar el progreso, toca mostrar la comunidad, el estado vivo y los canales donde se mueve el proyecto.",
+    "primary": { "href": "community.html", "label": "Ver comunidad" },
+    "secondary": { "href": "store.html", "label": "Ir a tienda" }
+  },
+  "prev": { "href": "odysseia.html", "label": "Odysseia" },
+  "next": { "href": "community.html", "label": "Comunidad" }
+}

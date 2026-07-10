@@ -1,0 +1,37 @@
+{
+  "metaTitle": "DrakesCraft | Tienda",
+  "metaDescription": "Tienda oficial de DrakesCraft con catálogo organizado, checkout, rangos reales y relación clara entre perks, auras y apoyo al servidor.",
+  "eyebrow": "Apoyo oficial al proyecto",
+  "title": "Una tienda ordenada por categorías, contexto y progreso real.",
+  "tagline": "La tienda deja de ser un bloque mezclado con lore o bosses. Aquí vive el catálogo con suscripciones, roles, kits, dragmas y especiales, conectado al backend productivo.",
+  "intro": "Esta página se enfoca solo en lo comercial y lo explica con una relación más limpia respecto al juego: qué compras, cómo se entrega y cómo se vincula con los perks reales que hoy existen en Odysseia.",
+  "metrics": [
+    { "label": "Checkout", "value": "Tebex + respaldo" },
+    { "label": "Rangos", "value": "30 días" },
+    { "label": "Delivery", "value": "Automático" },
+    { "label": "Perks", "value": "Reales" }
+  ],
+  "pillars": [
+    { "title": "Catálogo vivo", "text": "Los productos se sirven desde el backend y ya no se documentan como texto inventado aparte." },
+    { "title": "Rangos aterrizados", "text": "Auras, claims, utilidades y montos se alinean con la realidad actual del plugin." },
+    { "title": "Compra con respaldo", "text": "Si algo necesita ayuda manual, Discord queda como segunda capa y no como parche improvisado." }
+  ],
+  "journey": [
+    { "step": "I", "title": "Filtrar", "text": "Separar rangos, roles, kits, utilidades y especiales." },
+    { "step": "II", "title": "Seleccionar", "text": "Elegir productos con contexto, precio y detalle suficiente." },
+    { "step": "III", "title": "Cerrar", "text": "Generar checkout o respaldo manual según corresponda." }
+  ],
+  "facts": [
+    { "title": "Qué ordena esta página", "items": ["Rangos", "Roles", "Kits", "Especiales"] },
+    { "title": "Qué ya no mezcla", "items": ["Bosses", "Lore del dueño", "FAQ general"] },
+    { "title": "Qué viene después", "items": ["Reglas", "Discord", "Soporte"] }
+  ],
+  "cta": {
+    "title": "Antes de cerrar, revisa las reglas y canales de soporte.",
+    "text": "La última página del recorrido deja claras las normas y dónde pedir ayuda si la necesitas.",
+    "primary": { "href": "rules.html", "label": "Ir a reglas" },
+    "secondary": { "href": "community.html", "label": "Volver a comunidad" }
+  },
+  "prev": { "href": "bosses.html", "label": "Bosses" },
+  "next": { "href": "rules.html", "label": "Reglas" }
+}

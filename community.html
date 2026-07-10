@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrakesCraft | Bosses</title>
-    <meta name="description" content="Panteón de bosses de DrakesCraft.">
+    <title>DrakesCraft | Comunidad</title>
+    <meta name="description" content="Comunidad y soporte de DrakesCraft.">
     <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/base.css?v=20260710-rebuild">
-    <link rel="stylesheet" href="styles/bosses.css?v=20260710-rebuild">
+    <link rel="stylesheet" href="styles/community.css?v=20260710-rebuild">
 </head>
-<body class="page-shell" data-page="bosses">
+<body class="page-shell" data-page="community">
     <div class="scroll-progress" id="scroll-progress"></div>
     <nav class="site-nav" aria-label="Principal">
         <div class="container site-nav__bar">
-            <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Panteón de bosses</span></span></a>
+            <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Comunidad</span></span></a>
             <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
             <ul class="site-nav__links" id="nav-menu">
                 <li><a href="index.html">Inicio</a></li>
@@ -24,8 +24,8 @@
                 <li><a href="jack.html">Jack</a></li>
                 <li><a href="odysseia.html">Odysseia</a></li>
                 <li><a href="slimefun.html">Slimefun</a></li>
-                <li><a href="community.html">Comunidad</a></li>
-                <li><a class="active" href="bosses.html">Bosses</a></li>
+                <li><a class="active" href="community.html">Comunidad</a></li>
+                <li><a href="bosses.html">Bosses</a></li>
                 <li><a href="store.html">Tienda</a></li>
                 <li><a href="rules.html">Reglas</a></li>
                 <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
@@ -39,27 +39,26 @@
                 <h1 id="hero-title"></h1>
                 <p class="hero__tagline" id="hero-tagline"></p>
                 <p class="hero__intro" id="hero-intro"></p>
-                <div class="hero__actions"><a class="btn btn-primary" href="#boss-codex-grid">Abrir códice</a><a class="btn btn-secondary" href="store.html">Ir a tienda</a></div>
+                <div class="hero__actions"><a class="btn btn-primary" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Entrar al Discord</a><a class="btn btn-secondary" href="bosses.html">Seguir a bosses</a></div>
                 <div class="metrics" id="manifest-metrics"></div>
             </div>
             <div class="hero-stage">
                 <div class="hero-stage__core"><div class="orbital-logo"><div class="orbital-logo__ring"></div><div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div></div></div>
-                <aside class="stage-card stage-card--a tilt-card"><strong>Invocadores</strong><p>Cada entidad usa su propio activador y su propia fantasía.</p></aside>
-                <aside class="stage-card stage-card--b tilt-card"><strong>Reliquias</strong><p>El loot se documenta con nombre, rol y sabor de combate.</p></aside>
-                <aside class="stage-card stage-card--c tilt-card"><strong>Endgame</strong><p>El panteón existe como capa separada y con peso visual propio.</p></aside>
+                <aside class="stage-card stage-card--a tilt-card"><strong>Soporte</strong><p>Tickets, respaldo y coordinación real para jugadores y tienda.</p></aside>
+                <aside class="stage-card stage-card--b tilt-card"><strong>Operación</strong><p>El Discord no es adorno: mueve anuncios, moderación y ayuda.</p></aside>
+                <aside class="stage-card stage-card--c tilt-card"><strong>Comunidad</strong><p>La entrada social del proyecto queda visible y ordenada.</p></aside>
             </div>
         </div>
     </header>
     <main>
-        <section class="section"><div class="container"><div class="section__head"><h2>Qué hace especial a este panteón</h2><p>Los bosses salen del pie de página de la tienda y obtienen un hogar propio.</p></div><div class="panel-grid" id="manifest-pillars"></div></div></section>
-        <section class="section"><div class="container"><div class="section__head"><h2>Invocación</h2><p>La API sirve el método real de activación y el sitio lo presenta con claridad.</p></div><div class="journey-grid" id="summon-steps"></div><p id="summon-note" style="margin-top:1rem;color:var(--muted);"></p></div></section>
-        <section class="section"><div class="container"><div class="section__head"><h2>Códice del panteón</h2><p>Una card por boss, con estilo de combate, invocador y drops reales.</p></div><div class="panel-grid" id="boss-codex-grid"></div></div></section>
+        <section class="section"><div class="container"><div class="section__head"><h2>Por qué esta capa importa</h2><p>La comunidad y el soporte ya no quedan reducidos a un botón aislado en el menú.</p></div><div class="panel-grid" id="manifest-pillars"></div></div></section>
+        <section class="section"><div class="container"><div class="section__head"><h2>Discord en vivo</h2><p>El backend trae una vista resumida para reforzar que la comunidad es parte del sitio.</p></div><div class="live-grid" id="discord-live"></div></div></section>
+        <section class="section"><div class="container"><div class="section__head"><h2>Flujo comunitario</h2><p>Así se usa realmente la capa social del proyecto.</p></div><div class="journey-grid" id="manifest-journey"></div></div></section>
         <section class="section"><div class="container"><div class="facts-grid" id="manifest-facts"></div></div></section>
         <section class="section"><div class="container"><div class="cta-banner" id="manifest-cta"></div></div></section>
         <section class="section"><div class="container"><div class="sequence-nav" id="page-sequence"></div></div></section>
     </main>
-    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Panteón de DrakesCraft</strong><p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Endgame mítico documentado.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="rules.html">Reglas</a><a href="community.html">Comunidad</a></div></div></footer>
+    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Comunidad · DrakesCraft</strong><p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Discord, soporte y operación.</p></div><div class="site-footer__links"><a href="bosses.html">Bosses</a><a href="store.html">Tienda</a><a href="rules.html">Reglas</a></div></div></footer>
     <script src="scripts/site.js?v=20260710-rebuild"></script>
-    <script src="scripts/bosses.js?v=20260710-rebuild"></script>
 </body>
 </html>

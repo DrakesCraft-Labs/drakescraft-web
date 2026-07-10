@@ -1,0 +1,5 @@
+body[data-page="rules"] {
+    --page-accent: #ffb06f;
+    --page-accent-soft: rgba(255, 176, 111, 0.18);
+    --page-glow: rgba(255, 130, 117, 0.16);
+}

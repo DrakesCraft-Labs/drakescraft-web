@@ -1731,6 +1731,11 @@ await app.register(fastifyStatic, {
   allowedPath: (pathname) => {
     const publicFiles = new Set([
       'index.html',
+      'server.html',
+      'jack.html',
+      'odysseia.html',
+      'slimefun.html',
+      'community.html',
       'rules.html',
       'store.html',
       'bosses.html',
@@ -1747,7 +1752,11 @@ await app.register(fastifyStatic, {
       'three.min.js'
     ]);
     const normalized = pathname.replace(/^[/\\]+/, '').replaceAll('\\', '/');
-    return publicFiles.has(normalized) || normalized.startsWith('assets/');
+    return publicFiles.has(normalized)
+      || normalized.startsWith('assets/')
+      || normalized.startsWith('styles/')
+      || normalized.startsWith('scripts/')
+      || normalized.startsWith('data/');
   }
 });
 

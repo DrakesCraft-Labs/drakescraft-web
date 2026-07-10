@@ -1,0 +1,65 @@
+{
+  "metaTitle": "DrakesCraft | Reglas",
+  "metaDescription": "Reglas oficiales de DrakesCraft para juego, convivencia, staff, cheats, exploits y conducta general.",
+  "eyebrow": "Marco oficial",
+  "title": "Las reglas cierran el recorrido y anclan la convivencia del proyecto.",
+  "tagline": "Después de mostrar servidor, dueño, sistemas, comunidad, bosses y tienda, esta página aterriza el marco que sostiene la experiencia sin dejarla en tierra de nadie.",
+  "intro": "Las reglas no deberían aparecer perdidas entre el resto del contenido. Aquí quedan como cierre natural del recorrido, con categorías claras y sanciones comprensibles.",
+  "metrics": [
+    { "label": "Alcance", "value": "Juego + Discord" },
+    { "label": "Enfoque", "value": "Convivencia" },
+    { "label": "Riesgo alto", "value": "Cheats y exploits" },
+    { "label": "Canal", "value": "Reportes" }
+  ],
+  "rules": [
+    {
+      "title": "Respeto y convivencia",
+      "items": [
+        "Sin insultos, acoso, hostigamiento ni provocación constante.",
+        "Nada de spam, flood o chat ilegible por abuso de mayúsculas.",
+        "El tono del servidor puede ser relajado, pero no se tolera toxicidad sostenida."
+      ],
+      "sanction": "Advertencia, mute temporal o ban según reincidencia."
+    },
+    {
+      "title": "Cheats, texturas y ventajas injustas",
+      "items": [
+        "Se prohíben hacks, clientes, macros, scripts o texturas con ventaja real.",
+        "Negarse a colaborar ante revisión fundada puede contar como admisión de culpa.",
+        "El uso de herramientas no permitidas pesa más que el rango del jugador."
+      ],
+      "sanction": "Ban fuerte o permanente según gravedad."
+    },
+    {
+      "title": "Bugs, duplicaciones y exploits",
+      "items": [
+        "Aprovechar fallos del servidor o de plugins está prohibido.",
+        "Los bugs se reportan; no se monetizan ni se esconden.",
+        "Duplicaciones, bypasses y abusos de economía se tratan como daño directo al proyecto."
+      ],
+      "sanction": "Retiro de objetos, reversión y sanción severa."
+    },
+    {
+      "title": "Relación con el staff",
+      "items": [
+        "Las apelaciones van por los canales correctos, no por pelea en chat global.",
+        "Suplantación de staff o manipulación maliciosa de reportes es falta grave.",
+        "El respeto al staff no elimina el derecho a reclamar, pero sí exige orden."
+      ],
+      "sanction": "Advertencia, mute o ban según el caso."
+    }
+  ],
+  "facts": [
+    { "title": "Dónde pedir ayuda", "items": ["Discord", "Tickets", "Canales de soporte"] },
+    { "title": "Qué cuidar", "items": ["Convivencia", "Economía", "Integridad técnica"] },
+    { "title": "Recorrido completo", "items": ["Inicio", "Servidor", "Jack", "Odysseia", "Slimefun", "Comunidad", "Bosses", "Tienda"] }
+  ],
+  "cta": {
+    "title": "Con esto el sitio ya cierra con una secuencia lógica.",
+    "text": "Desde aquí el jugador puede volver al inicio o entrar al Discord con el mapa completo del proyecto en la cabeza.",
+    "primary": { "href": "index.html", "label": "Volver al inicio" },
+    "secondary": { "href": "community.html", "label": "Abrir comunidad" }
+  },
+  "prev": { "href": "store.html", "label": "Tienda" },
+  "next": null
+}

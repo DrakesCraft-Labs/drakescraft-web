@@ -1,0 +1,5 @@
+body[data-page="server"] {
+    --page-accent: #79d7ff;
+    --page-accent-soft: rgba(121, 215, 255, 0.2);
+    --page-glow: rgba(100, 242, 191, 0.16);
+}

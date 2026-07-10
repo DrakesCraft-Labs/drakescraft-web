@@ -1,0 +1,5 @@
+body[data-page="jack"] {
+    --page-accent: #ff9ac3;
+    --page-accent-soft: rgba(255, 154, 195, 0.2);
+    --page-glow: rgba(149, 136, 255, 0.16);
+}

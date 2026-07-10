@@ -1,0 +1,37 @@
+{
+  "metaTitle": "DrakesCraft | Jack",
+  "metaDescription": "Página de Jack como dueño actual de DrakesCraft: qué dirige, qué mantiene y qué capas técnicas y creativas dependen de él.",
+  "eyebrow": "Dueño actual",
+  "title": "Jack no es una nota al pie: es la cabeza operativa y creativa del proyecto.",
+  "tagline": "Esta página existe para dejar claro quién empuja la visión del servidor, qué áreas mantiene y por qué su rol atraviesa tanto la experiencia in-game como la infraestructura externa.",
+  "intro": "Jack dirige DrakesCraft como servidor, como marca y como ecosistema técnico. Mantiene la visión general, coordina el rumbo del plugin Odysseia, la tienda, el sitio web, los despliegues y buena parte de la identidad visible del proyecto.",
+  "metrics": [
+    { "label": "Rol", "value": "Dueño / director" },
+    { "label": "Áreas", "value": "Juego + web + tienda" },
+    { "label": "Marca", "value": "DrakesCraft" },
+    { "label": "Núcleo custom", "value": "Odysseia" }
+  ],
+  "pillars": [
+    { "title": "Dirección creativa", "text": "Jack define el tono mítico, qué sistemas se sienten premium y cómo se cuenta el servidor." },
+    { "title": "Operación técnica", "text": "También toca despliegues, rutas web, catálogo, integraciones, backend y mantenimiento del stack." },
+    { "title": "Curaduría del gameplay", "text": "Rangos, perks, bosses, packs y contenido custom no viven sueltos; responden a una visión concreta." }
+  ],
+  "journey": [
+    { "step": "I", "title": "Diseña", "text": "Decide identidad, presentación y jerarquía del proyecto." },
+    { "step": "II", "title": "Mantiene", "text": "Supervisa tienda, plugin, web, Discord y servidor." },
+    { "step": "III", "title": "Empuja", "text": "Ajusta el rumbo cuando algo está desordenado, corto o fuera de la realidad actual." }
+  ],
+  "facts": [
+    { "title": "Qué toca hoy", "items": ["DrakesCraft", "Odysseia", "drakescraft-web"] },
+    { "title": "Qué ordena", "items": ["Rangos", "Bosses", "Tienda", "Branding"] },
+    { "title": "Por qué esta página existe", "items": ["Para que el dueño tenga rostro", "Para dar contexto", "Para dejar clara la autoría del proyecto"] }
+  ],
+  "cta": {
+    "title": "Después de Jack, toca ver la pieza custom más importante.",
+    "text": "La siguiente página explica Odysseia como el núcleo que convierte a DrakesCraft en algo más que un servidor con plugins sueltos.",
+    "primary": { "href": "odysseia.html", "label": "Entrar a Odysseia" },
+    "secondary": { "href": "store.html", "label": "Ver tienda" }
+  },
+  "prev": { "href": "server.html", "label": "Servidor" },
+  "next": { "href": "odysseia.html", "label": "Odysseia" }
+}
