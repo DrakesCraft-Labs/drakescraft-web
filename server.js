@@ -66,7 +66,7 @@ const storeCatalog = {
     { id: 'protection', label: 'Protecciones', tagline: 'Territorio VIP para bases, gremios y proyectos.' },
     { id: 'utility', label: 'Utilidad', tagline: 'Dragmas de plata y beneficios de economía.' },
     { id: 'economy-kits', label: 'Kits del Survival', tagline: 'Kits comprables in-game usando Dragmas (₯).' },
-    { id: 'custom', label: 'Especiales', tagline: 'Cotizaciones manuales sin romper el balance.' }
+    { id: 'custom', label: 'Pases especiales', tagline: 'Accesos temporales con checkout y activación gestionados por Tebex.' }
   ],
   products: [
     { id: 'hercules', category: 'monthly', tier: 1, name: 'Hércules', badge: 'Entrada VIP', clp: 4990, usd: 4.99, featured: false, accent: 'bronze', summary: 'El punto de partida VIP para entrar fuerte al survival sin romper el balance del servidor.', includes: ['Suscripción mensual por 30 días, rango temporal y claim visual VIP Hércules', '2 regiones personales de 49x49, 3 homes y 5 warps de jugador (/pw)', 'Chat con colores, /hat y /clearinventory (/ci)', 'Kit celestial de arranque con diamante fuerte, herramientas mejoradas y consumibles premium', 'Aura de armadura Odysseia al usar set completo de diamante: Velocidad I + Resistencia I', 'Entrega automática del kit Hércules + visual PS y $25.000 ₯ en Dragmas'] },
@@ -101,9 +101,6 @@ const storeCatalog = {
     { id: 'economy-piedra', category: 'economy-kits', tier: 1, name: 'Kit Piedra', badge: 'Survival In-Game', clp: null, usd: null, coins: 2000, featured: false, accent: 'violet', summary: 'Bloques de piedra labrada para tus estructuras. Adquirible en el juego.', includes: ['64 Smooth Stone', '64 Stone Bricks', '64 Mossy Stone Bricks', '64 Deepslate Bricks', 'Cooldown de uso: 30 minutos'] },
     { id: 'economy-armadura', category: 'economy-kits', tier: 1, name: 'Kit Armadura', badge: 'Survival In-Game', clp: null, usd: null, coins: 5000, featured: false, accent: 'ember', summary: 'Set de armadura de hierro reforzado para supervivencia. Adquirible en el juego.', includes: ['Casco de hierro con Protección V, Irromp V', 'Pechera de hierro con Protección V, Irromp V', 'Grebas de hierro con Protección V, Irromp V', 'Botas de hierro con Protección V, Irromp V', 'Cooldown de uso: 1 hora'] },
 
-    { id: 'custom-kit', category: 'custom', tier: 4, name: 'Kit Personalizado (Cotización)', badge: 'Manual', clp: null, usd: null, featured: true, accent: 'violet', summary: 'Diseña tu propio kit a medida. El staff arma el equipo según lo que necesites y te da un precio justo.', includes: ['Descripción libre de lo que quieres en el kit', 'Precio calculado según ítems y encantamientos', 'Ticket en Discord requerido para coordinar', 'Entrega manual supervisada por admin', 'Rango mínimo sugerido: ninguno — para todos'] },
-    { id: 'custom-slimefun', category: 'custom', tier: 5, name: 'Encargo Slimefun (Cotización)', badge: 'Manual', clp: null, usd: null, featured: false, accent: 'cyan', summary: 'Encargos específicos de máquinas avanzadas o componentes técnicos.', includes: ['Precio final calculado post-evaluación', 'Apertura de ticket en Discord requerida', 'Viabilidad técnica revisada por admins', 'Precios de referencia: 50k a 300k Dragmas'] },
-    { id: 'custom-guild', category: 'custom', tier: 5, name: 'Pack de Gremio (Cotización)', badge: 'Manual', clp: null, usd: null, featured: false, accent: 'violet', summary: 'Paquete personalizado de claims contiguos, canales de Discord VIP y perks para grupos.', includes: ['Cotización en base al número de integrantes', 'Entrevista inicial obligatoria con el Staff', 'No se aprueba contenido pay-to-win', 'Coordinación directa para la entrega'] }
   ]
 };
 
