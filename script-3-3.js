@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupTiltPanels() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const cards = document.querySelectorAll('.store-card--compact, .rank-brief-card, .boss-codex-card, .boss-guide-card, .prose-card--myth');
+    const cards = document.querySelectorAll('.store-card--compact, .boss-codex-card, .boss-guide-card, .prose-card--myth');
     cards.forEach((card) => {
         card.addEventListener('mousemove', (event) => {
             const rect = card.getBoundingClientRect();
