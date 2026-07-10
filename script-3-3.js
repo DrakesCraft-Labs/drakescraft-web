@@ -2,9 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setupVisitorStats();
     setupDiscordLivePanel();
     setupStoreExperience();
+    setupBossesExperience();
     setupPortalEffects();
     setupAmbientSound();
     setupMcStatus();
+    setupTiltPanels();
 
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -123,8 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const THREE = window.THREE;
+    const page = document.body.dataset.page || 'default';
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050816, 0.016);
+    scene.fog = new THREE.FogExp2(page === 'bosses' ? 0x090511 : 0x050816, page === 'bosses' ? 0.019 : 0.016);
     const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 200);
     camera.position.z = 28;
 
@@ -161,7 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return t;
     }
 
-    const PALETTES = [
+    const PALETTES = page === 'bosses' ? [
+        ['#1f2937', '#ef4444', '#f97316', '#7f1d1d'],
+        ['#111827', '#8b5cf6', '#c084fc', '#4c1d95'],
+        ['#172554', '#38bdf8', '#60a5fa', '#1d4ed8'],
+        ['#1a2e05', '#84cc16', '#4ade80', '#166534'],
+        ['#2b0a3d', '#ec4899', '#fb7185', '#9d174d'],
+        ['#2f1700', '#f59e0b', '#fbbf24', '#92400e'],
+    ] : [
         ['#7c3aed', '#8b5cf6', '#a78bfa', '#6d28d9'],   // amatista
         ['#b45309', '#f59e0b', '#fbbf24', '#d97706'],   // oro
         ['#1e1b4b', '#2e1065', '#3b0764', '#312e81'],   // obsidiana
@@ -173,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const geo = new THREE.BoxGeometry(1, 1, 1);
     const cubes = [];
 
-    const cubeCount = lowPowerDevice ? 24 : 55;
+    const cubeCount = lowPowerDevice ? (page === 'bosses' ? 22 : 24) : (page === 'bosses' ? 70 : 55);
     for (let i = 0; i < cubeCount; i++) {
         const pal = PALETTES[i % PALETTES.length];
         const mat = new THREE.MeshStandardMaterial({
@@ -208,11 +218,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Luces — dorado + morado para coincidir con la paleta del sitio
-    scene.add(new THREE.AmbientLight(0xffffff, 1.6));
-    const gold  = new THREE.PointLight(0xf59e0b, 9, 90); gold.position.set(10, 5, 18);
-    const purp  = new THREE.PointLight(0x8b5cf6, 7, 90); purp.position.set(-10, -3, 14);
-    const cyan  = new THREE.PointLight(0x06b6d4, 4, 70); cyan.position.set(0, 12, 16);
-    const back  = new THREE.PointLight(0xec4899, 3, 60); back.position.set(0, -8, -10);
+    scene.add(new THREE.AmbientLight(0xffffff, page === 'bosses' ? 1.35 : 1.6));
+    const gold  = new THREE.PointLight(page === 'bosses' ? 0xef4444 : 0xf59e0b, 9, 90); gold.position.set(10, 5, 18);
+    const purp  = new THREE.PointLight(0x8b5cf6, page === 'bosses' ? 8 : 7, 90); purp.position.set(-10, -3, 14);
+    const cyan  = new THREE.PointLight(page === 'bosses' ? 0x38bdf8 : 0x06b6d4, 4, 70); cyan.position.set(0, 12, 16);
+    const back  = new THREE.PointLight(page === 'bosses' ? 0xf97316 : 0xec4899, 3, 60); back.position.set(0, -8, -10);
     scene.add(gold, purp, cyan, back);
 
     // ── B: Partículas 3D (Points) ─────────────────────────────────────────
@@ -222,7 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const partSpeeds = new Float32Array(PART_COUNT);   // velocidad Z individual
     const partBaseZ  = new Float32Array(PART_COUNT);   // Z original para wrap
 
-    const pColorSet = [
+    const pColorSet = page === 'bosses' ? [
+        new THREE.Color(0xef4444),
+        new THREE.Color(0xf59e0b),
+        new THREE.Color(0x8b5cf6),
+        new THREE.Color(0x38bdf8),
+        new THREE.Color(0xffffff),
+    ] : [
         new THREE.Color(0x8b5cf6), // violeta
         new THREE.Color(0xf59e0b), // dorado
         new THREE.Color(0x06b6d4), // cyan
@@ -311,9 +327,25 @@ document.addEventListener('DOMContentLoaded', () => {
     islandGroup.add(makeIM(grassPos, 0x059669));
     islandGroup.add(makeIM(dirtPos,  0x92400e));
     islandGroup.add(makeIM(stonePos, 0x57534e));
-    islandGroup.position.set(0, -7, -4);
-    islandGroup.scale.setScalar(2.2);
+    islandGroup.position.set(0, page === 'bosses' ? -7.8 : -7, page === 'bosses' ? -3.4 : -4);
+    islandGroup.scale.setScalar(page === 'bosses' ? 2.45 : 2.2);
     scene.add(islandGroup);
+
+    let ring = null;
+    if (page === 'bosses') {
+        const ringGeo = new THREE.TorusGeometry(7.4, 0.16, 14, 80);
+        const ringMat = new THREE.MeshStandardMaterial({
+            color: 0xf59e0b,
+            emissive: 0xf97316,
+            emissiveIntensity: 0.25,
+            roughness: 0.3,
+            metalness: 0.8
+        });
+        ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2.35;
+        ring.position.set(0, 2.4, -4.5);
+        scene.add(ring);
+    }
 
     // Parallax de mouse
     const mouse = { x: 0, y: 0 };
@@ -353,10 +385,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Brillo pulsante en las luces
         gold.intensity = 7 + Math.sin(t * 0.9) * 2;
         purp.intensity = 5 + Math.sin(t * 1.3 + 1) * 2;
-        islandGroup.position.y = -7 + Math.sin(t * 0.4) * 0.6;
+        islandGroup.position.y = (page === 'bosses' ? -7.8 : -7) + Math.sin(t * 0.4) * 0.6;
 
         // Isla: rotación lenta
         islandGroup.rotation.y += 0.0015;
+        if (ring) {
+            ring.rotation.z += 0.004;
+            ring.position.y = 2.4 + Math.sin(t * 1.1) * 0.18;
+        }
 
         // Animar partículas: avance en Z + wrap
         const pos = partGeo.attributes.position.array;
@@ -373,6 +409,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animate3d();
 });
+
+function setupTiltPanels() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cards = document.querySelectorAll('.store-card--compact, .rank-brief-card, .boss-codex-card, .boss-guide-card, .prose-card--myth');
+    cards.forEach((card) => {
+        card.addEventListener('mousemove', (event) => {
+            const rect = card.getBoundingClientRect();
+            const px = (event.clientX - rect.left) / rect.width;
+            const py = (event.clientY - rect.top) / rect.height;
+            const rx = (0.5 - py) * 8;
+            const ry = (px - 0.5) * 10;
+            card.style.transform = `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+function setupBossesExperience() {
+    const grid = document.getElementById('boss-codex-grid');
+    if (!grid) return;
+
+    const countEl = document.getElementById('bosses-count');
+    const totalEl = document.getElementById('bosses-total');
+    const naturalEl = document.getElementById('bosses-natural');
+    const topDifficultyEl = document.getElementById('bosses-top-difficulty');
+    const stepsEl = document.getElementById('summon-steps');
+    const noteEl = document.getElementById('summon-note');
+
+    const difficultyClass = (value) => {
+        const normalized = (value || '').toLowerCase();
+        if (normalized.includes('extrema')) return 'boss-difficulty--extrema';
+        if (normalized.includes('media')) return 'boss-difficulty--media-alta';
+        return 'boss-difficulty--alta';
+    };
+
+    fetch('/api/bosses')
+        .then((response) => {
+            if (!response.ok) throw new Error('bosses unavailable');
+            return response.json();
+        })
+        .then((catalog) => {
+            if (countEl) countEl.textContent = String(catalog.summary.bosses);
+            if (totalEl) totalEl.textContent = `${catalog.summary.bosses} entidades míticas activas en el códice`;
+            if (naturalEl) naturalEl.textContent = catalog.summary.naturalSpawnEnabled ? 'Activo' : 'Desactivado';
+            if (topDifficultyEl) topDifficultyEl.textContent = catalog.summary.topDifficulty;
+            if (stepsEl && Array.isArray(catalog.invocation.steps)) {
+                stepsEl.innerHTML = catalog.invocation.steps.map((step, index) => `
+                    <article class="summon-step">
+                        <span>${String(index + 1).padStart(2, '0')}</span>
+                        <p>${escapeHtml(step)}</p>
+                    </article>
+                `).join('');
+            }
+            if (noteEl) noteEl.textContent = catalog.invocation.note || '';
+
+            grid.innerHTML = catalog.bosses.map((boss) => `
+                <article class="boss-codex-card accent-${escapeHtml(boss.accent || 'violet')}">
+                    <div class="boss-codex-card__top">
+                        <div class="boss-codex-card__title">
+                            <h3>${escapeHtml(boss.name)}</h3>
+                            <p>${escapeHtml(boss.title)}</p>
+                        </div>
+                        <span class="boss-difficulty ${difficultyClass(boss.difficulty)}">${escapeHtml(boss.difficulty)}</span>
+                    </div>
+                    <div class="boss-codex-card__chips">
+                        <span class="boss-chip">${escapeHtml(boss.pantheon)}</span>
+                        <span class="boss-chip">${escapeHtml(boss.invocationItem)}</span>
+                    </div>
+                    <div class="boss-codex-card__meta">
+                        <p>${escapeHtml(boss.arena)}</p>
+                    </div>
+                    <div class="boss-codex-card__drops">
+                        <strong>Drops confirmados</strong>
+                        <ul>${(boss.drops || []).map((drop) => `<li>${escapeHtml(drop)}</li>`).join('')}</ul>
+                    </div>
+                    <div class="boss-codex-card__reward">
+                        <strong>Fantasia del loot</strong>
+                        <p>${escapeHtml(boss.rewards)}</p>
+                    </div>
+                </article>
+            `).join('');
+            setupTiltPanels();
+        })
+        .catch(() => {
+            grid.innerHTML = '<article class="store-loading-card">No se pudo cargar el códice mítico desde star.</article>';
+        });
+}
 
 function setupMcStatus() {
     const dot      = document.getElementById('mc-status-dot');

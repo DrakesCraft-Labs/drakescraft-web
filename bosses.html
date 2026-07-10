@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosses Míticos - DrakesCraft</title>
+    <meta name="description" content="Guía oficial de los bosses míticos de DrakesCraft: invocación, drops legendarios y panorama del endgame.">
+    <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles-3-3.css?v=20260710b">
+</head>
+
+<body data-page="bosses">
+    <div id="background-layers" aria-hidden="true">
+        <div class="gradient-layer"></div>
+        <div class="nebula nebula-a"></div>
+        <div class="nebula nebula-b"></div>
+        <canvas id="particles-canvas"></canvas>
+    </div>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <nav class="navbar" aria-label="Principal">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo-drakescraft.png" alt="" class="logo-img" width="44" height="44">
+                <span class="logo-text">DrakesCraft</span>
+            </a>
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Inicio</a></li>
+                <li><a href="index.html#conectar" class="nav-link">Conectar</a></li>
+                <li><a href="index.html#slimefun" class="nav-link">Slimefun</a></li>
+                <li><a href="store.html" class="nav-link">Tienda</a></li>
+                <li><a href="bosses.html" class="nav-link active">Bosses</a></li>
+                <li><a href="rules.html" class="nav-link">Reglas</a></li>
+                <li><a href="https://discord.gg/rR7FbfCt9Y" class="btn-discord nav-btn" target="_blank" rel="noopener">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="bosses-hero page-hero">
+        <div class="container bosses-hero__grid">
+            <div class="bosses-hero__copy">
+                <p class="badge-status"><span class="live-pulse"></span> Endgame mítico documentado</p>
+                <h1 class="site-hero__title">Panteón de Bosses</h1>
+                <p class="site-hero__tagline">Invocadores únicos, reliquias legendarias y peleas pensadas para que el final del survival se sienta como una guerra divina, no como una lista de mobs inflados.</p>
+                <div class="store-hero__actions">
+                    <a href="#bosses-codex" class="btn-primary">Ver el códice</a>
+                    <a href="store.html" class="btn-secondary">Volver a la tienda</a>
+                </div>
+            </div>
+            <aside class="bosses-console">
+                <span class="store-console__label">Estado del panteón</span>
+                <strong id="bosses-total">Cargando...</strong>
+                <p>Los bosses actuales se invocan con objetos individuales. Cada pelea abre acceso a armas y reliquias que no se consiguen por la vía normal del survival.</p>
+                <div class="store-console__stats">
+                    <div><span>Bosses</span><strong id="bosses-count">--</strong></div>
+                    <div><span>Spawn natural</span><strong id="bosses-natural">--</strong></div>
+                    <div><span>Tope</span><strong id="bosses-top-difficulty">--</strong></div>
+                </div>
+            </aside>
+        </div>
+    </header>
+
+    <main>
+        <section class="section boss-summon-flow">
+            <div class="container">
+                <div class="store-guide__header">
+                    <h2 class="section-title">Cómo se despierta un boss</h2>
+                    <p class="store-guide__lead">Nada de huevos genéricos ni activadores sin identidad. El sistema actual usa invocadores individuales, una pieza por cada deidad o bestia del endgame.</p>
+                </div>
+                <div class="summon-steps" id="summon-steps">
+                    <article class="summon-step"><span>01</span><p>Obtener invocador</p></article>
+                    <article class="summon-step"><span>02</span><p>Preparar terreno</p></article>
+                    <article class="summon-step"><span>03</span><p>Desatar el combate</p></article>
+                </div>
+                <p class="summon-note" id="summon-note">Cargando método de invocación...</p>
+            </div>
+        </section>
+
+        <section id="bosses-codex" class="section section-dark bosses-codex">
+            <div class="container">
+                <div class="store-guide__header">
+                    <h2 class="section-title">Códice de reliquias y jefes</h2>
+                    <p class="store-guide__lead">Cada card resume identidad, tono del combate, invocador requerido y drops reales. Si una reliquia aparece aquí, es porque hoy existe en el plugin y puede caer en el servidor.</p>
+                </div>
+                <div class="boss-codex-grid" id="boss-codex-grid">
+                    <article class="store-loading-card">Cargando bosses desde star...</article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section boss-lore-band">
+            <div class="container boss-lore-band__grid">
+                <article class="prose-card prose-card--myth">
+                    <h3>No son cosméticos</h3>
+                    <p>Los bosses existen para abrir una capa de progreso que cambia cómo peleas: control, burst, movilidad, daño en área o presión táctica real.</p>
+                </article>
+                <article class="prose-card prose-card--myth">
+                    <h3>Invocación con intención</h3>
+                    <p>La filosofía del sistema evita el spam absurdo: cada invocador tiene identidad propia y el anuncio global ya fue limitado para no saturar el chat.</p>
+                </article>
+                <article class="prose-card prose-card--myth">
+                    <h3>Loot con nombre</h3>
+                    <p>No matas un boss por una caja abstracta. Matas a una deidad concreta para perseguir reliquias concretas y una fantasía de combate bien definida.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo-drakescraft.png" alt="" width="36" height="36">
+                <span>DrakesCraft</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="store.html">Tienda</a>
+                <a href="bosses.html">Bosses</a>
+                <a href="rules.html">Reglas</a>
+                <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
+            </div>
+            <p class="copyright">© 2026 DrakesCraft · web.drakescraft.cl · endgame mítico</p>
+            <p class="disclaimer">Minecraft es una marca de Mojang AB. No afiliado.</p>
+        </div>
+    </footer>
+
+    <button type="button" id="sound-toggle" class="sound-toggle-btn muted" aria-label="Activar ambientación sonora">♪</button>
+    <script src="three.min.js?v=20260612g"></script>
+    <script src="script-3-3.js?v=20260710b"></script>
+</body>
+
+</html>

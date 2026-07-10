@@ -104,6 +104,190 @@ const storeCatalog = {
   ]
 };
 
+const bossesCatalog = {
+  updatedAt: '2026-07-10',
+  invocation: {
+    mode: 'summoner-only',
+    naturalSpawnEnabled: false,
+    steps: [
+      'Consigue el invocador exacto del jefe mítico que quieres despertar.',
+      'Haz clic derecho en el suelo con ese invocador en la mano.',
+      'El invocador se consume, caen rayos y el boss aparece en combate inmediatamente.'
+    ],
+    note: 'Cada jefe usa su propio invocador. No existe un huevo genérico único para todos.'
+  },
+  bosses: [
+    {
+      id: 'thor',
+      name: 'Thor',
+      title: 'Señor del Trueno',
+      pantheon: 'Nórdico',
+      accent: 'gold',
+      difficulty: 'Alta',
+      arena: 'Combate de presión con daño explosivo y castigos eléctricos.',
+      invocationItem: 'Invocador de Thor',
+      drops: ['Mjolnir'],
+      rewards: 'Martillo mítico orientado a relámpagos y burst frontal.'
+    },
+    {
+      id: 'ares',
+      name: 'Ares',
+      title: 'General de la Guerra',
+      pantheon: 'Griego',
+      accent: 'ember',
+      difficulty: 'Alta',
+      arena: 'Castiga el melee descuidado y premia bloqueos bien medidos.',
+      invocationItem: 'Invocador de Ares',
+      drops: ['Filo de Ares', 'Escudo Espartano'],
+      rewards: 'Set ofensivo-defensivo para duelo cerrado y snowball de kills.'
+    },
+    {
+      id: 'hades',
+      name: 'Hades',
+      title: 'Rey del Inframundo',
+      pantheon: 'Griego',
+      accent: 'violet',
+      difficulty: 'Alta',
+      arena: 'Combate oscuro con drenaje y sensación de attrition constante.',
+      invocationItem: 'Invocador de Hades',
+      drops: ['Guadaña de Hades'],
+      rewards: 'Arma de robo de vida pensada para dominar peleas largas.'
+    },
+    {
+      id: 'poseidon',
+      name: 'Poseidón',
+      title: 'Dueño del Abismo',
+      pantheon: 'Griego',
+      accent: 'cyan',
+      difficulty: 'Alta',
+      arena: 'Controla espacio con empujes, agua y desplazamiento forzado.',
+      invocationItem: 'Invocador de Poseidón',
+      drops: ['Tridente de Poseidón'],
+      rewards: 'Tridente de control de masas con tsunami al impactar.'
+    },
+    {
+      id: 'zeus',
+      name: 'Zeus',
+      title: 'Padre del Olimpo',
+      pantheon: 'Griego',
+      accent: 'gold',
+      difficulty: 'Extrema',
+      arena: 'Presión global, tormenta y castigo brutal a grupos mal posicionados.',
+      invocationItem: 'Invocador de Zeus',
+      drops: ['Maza de Zeus'],
+      rewards: 'Reliquia de tormenta divina para castigo radial y golpes pesados.'
+    },
+    {
+      id: 'loki',
+      name: 'Loki',
+      title: 'Embaucador del Vacío',
+      pantheon: 'Nórdico',
+      accent: 'pink',
+      difficulty: 'Media-Alta',
+      arena: 'Ilusiones, control visual y ventanas de burst traicioneras.',
+      invocationItem: 'Invocador de Loki',
+      drops: ['Daga de Loki', 'Cetro de Loki'],
+      rewards: 'Kit de engaño, ceguera e invisibilidad para PvP táctico.'
+    },
+    {
+      id: 'odin',
+      name: 'Odin',
+      title: 'El Padre de Todo',
+      pantheon: 'Nórdico',
+      accent: 'rose',
+      difficulty: 'Extrema',
+      arena: 'Daño celestial, utilidades híbridas y ritmo de combate impredecible.',
+      invocationItem: 'Invocador de Odin',
+      drops: ['Lanza de Odin', 'Casco de Odin'],
+      rewards: 'Lanza eléctrica y casco mítico con ventajas permanentes de visión.'
+    },
+    {
+      id: 'kratos',
+      name: 'Kratos',
+      title: 'Fantasma de Esparta',
+      pantheon: 'Leyenda',
+      accent: 'ember',
+      difficulty: 'Extrema',
+      arena: 'Melee agresivo, tirones, fuego y reliquias duales de castigo.',
+      invocationItem: 'Invocador de Kratos',
+      drops: ['Espadas del Caos', 'Hacha Leviatán'],
+      rewards: 'Doble identidad de combate: combo brutal en melee y retorno rúnico.'
+    },
+    {
+      id: 'heimdall',
+      name: 'Heimdall',
+      title: 'Vigía del Bifröst',
+      pantheon: 'Nórdico',
+      accent: 'cyan',
+      difficulty: 'Alta',
+      arena: 'Herramientas sónicas, movilidad y lectura fina de espacios.',
+      invocationItem: 'Invocador de Heimdall',
+      drops: ['Gjallarhorn', 'Alas del Bifröst'],
+      rewards: 'Movilidad aérea y shockwave de utilidad mítica.'
+    },
+    {
+      id: 'hidra',
+      name: 'Hidra',
+      title: 'Bestia de Lerna',
+      pantheon: 'Griego',
+      accent: 'emerald',
+      difficulty: 'Alta',
+      arena: 'Veneno, desgaste acelerado y control de curaciones enemigas.',
+      invocationItem: 'Invocador de Hidra',
+      drops: ['Colmillo de la Hidra', 'Escama de la Hidra'],
+      rewards: 'Set tóxico para presión de debuffs y resistencia temática.'
+    },
+    {
+      id: 'cerbero',
+      name: 'Cerbero',
+      title: 'Guardián del Umbral',
+      pantheon: 'Griego',
+      accent: 'violet',
+      difficulty: 'Media-Alta',
+      arena: 'Embestidas frontales y presión simple pero muy física.',
+      invocationItem: 'Invocador de Cerbero',
+      drops: ['Piel de Cerbero'],
+      rewards: 'Material mítico defensivo de línea oscura.'
+    },
+    {
+      id: 'artemisa',
+      name: 'Artemisa',
+      title: 'Cazadora Lunar',
+      pantheon: 'Griego',
+      accent: 'cyan',
+      difficulty: 'Alta',
+      arena: 'Control a distancia, slow severo y castigo por mala cobertura.',
+      invocationItem: 'Invocador de Artemisa',
+      drops: ['Arco Lunar de Artemisa'],
+      rewards: 'Arco de seguimiento con debuffs de cazadora mítica.'
+    },
+    {
+      id: 'tifon',
+      name: 'Tifón',
+      title: 'Padre Monstruo',
+      pantheon: 'Primordial',
+      accent: 'ember',
+      difficulty: 'Extrema',
+      arena: 'Caos volcánico, daño porcentual y castigo vertical brutal.',
+      invocationItem: 'Invocador de Tifón',
+      drops: ['Garra de Tifón', 'Coraza del Padre Monstruo'],
+      rewards: 'Set volcánico para presión explosiva y aguante monstruoso.'
+    },
+    {
+      id: 'prometeo',
+      name: 'Prometeo',
+      title: 'Llama Robada',
+      pantheon: 'Titán',
+      accent: 'gold',
+      difficulty: 'Alta',
+      arena: 'Fuego persistente, resurrección y castigo en área.',
+      invocationItem: 'Invocador de Prometeo',
+      drops: ['Llama Eterna de Prometeo'],
+      rewards: 'Reliquia ígnea para daño en cleave y ambientación divina.'
+    }
+  ]
+};
+
 function isTebexEnabledProduct(product) {
   return Boolean(product && tebexPackageIds[product.id]);
 }
@@ -386,6 +570,17 @@ app.get('/api/store', async () => {
       monthlyRanks: monthly.length,
       minPrice,
       maxPrice
+    }
+  };
+});
+
+app.get('/api/bosses', async () => {
+  return {
+    ...bossesCatalog,
+    summary: {
+      bosses: bossesCatalog.bosses.length,
+      naturalSpawnEnabled: bossesCatalog.invocation.naturalSpawnEnabled,
+      topDifficulty: 'Extrema'
     }
   };
 });
@@ -1538,6 +1733,7 @@ await app.register(fastifyStatic, {
       'index.html',
       'rules.html',
       'store.html',
+      'bosses.html',
       'admin-quote.html',
       'styles-3-2.css',
       'script-3-2.js',
