@@ -2,36 +2,104 @@
   "metaTitle": "DrakesCraft | Odysseia",
   "metaDescription": "Odysseia explicado como columna vertebral custom de DrakesCraft: bosses, tienda, vanish, presencia, utilidades y sistemas propios.",
   "eyebrow": "Plugin central",
-  "title": "Odysseia es la columna vertebral mítica y técnica del servidor.",
-  "tagline": "Bosses, tienda, efectos VIP, presencia, utilidades y sistemas de staff viven aquí porque el proyecto necesitaba una pieza propia, no un collage de automatizaciones frágiles.",
-  "intro": "Esta página resume por qué Odysseia importa: sostiene la personalidad del servidor, organiza capas que antes estaban dispersas y hace posible que tienda, gameplay y presentación hablen el mismo idioma.",
+  "title": "Odysseia",
+  "tagline": "Bosses, tienda, auras VIP, presencia, utilidades y sistemas de staff viven aquí como una sola pieza custom.",
+  "intro": "Odysseia concentra buena parte de la lógica propia de DrakesCraft y le da continuidad entre juego, tienda, Discord y operación diaria.",
   "metrics": [
-    { "label": "Java", "value": "21" },
-    { "label": "Target", "value": "Paper/Purpur" },
-    { "label": "Áreas", "value": "Bosses + tienda + staff" },
-    { "label": "Estado", "value": "En producción" }
+    {
+      "label": "Java",
+      "value": "21"
+    },
+    {
+      "label": "Target",
+      "value": "Paper/Purpur"
+    },
+    {
+      "label": "Áreas",
+      "value": "Bosses + tienda + staff"
+    },
+    {
+      "label": "Estado",
+      "value": "En producción"
+    }
   ],
   "pillars": [
-    { "title": "Bosses y reliquias", "text": "El panteón mítico y sus drops reales viven en código propio y no como contenido fantasma." },
-    { "title": "Tienda conectada", "text": "Delivery, webhooks y anuncios se mantienen integrados con el flujo comercial del server." },
-    { "title": "Calidad de vida interna", "text": "Vanish, presencia, auras VIP, utilidades survival y control SFMaster aterrizan como sistemas coherentes." }
+    {
+      "title": "Bosses y reliquias",
+      "text": "El panteón mítico y su loot salen de aquí."
+    },
+    {
+      "title": "Tienda conectada",
+      "text": "Delivery, anuncios y flujo comercial pasan por el plugin."
+    },
+    {
+      "title": "Utilidad interna",
+      "text": "Vanish, auras, presencia y control SFMaster comparten la misma base."
+    }
   ],
   "journey": [
-    { "step": "α", "title": "Integra", "text": "Conecta gameplay, web y Discord." },
-    { "step": "β", "title": "Protege", "text": "Reduce exploits, duplicaciones y lógica repartida en scripts viejos." },
-    { "step": "γ", "title": "Expande", "text": "Permite crecer el servidor sin perder identidad." }
+    {
+      "step": "α",
+      "title": "Conecta",
+      "text": "Cruza gameplay, web y Discord."
+    },
+    {
+      "step": "β",
+      "title": "Ordena",
+      "text": "Junta sistemas que no conviene tener repartidos."
+    },
+    {
+      "step": "γ",
+      "title": "Escala",
+      "text": "Permite seguir expandiendo el servidor desde una base propia."
+    }
   ],
   "facts": [
-    { "title": "Módulos visibles", "items": ["Bosses", "Store delivery", "Vanish", "Armor effects"] },
-    { "title": "Módulos operativos", "items": ["Webhooks", "Presence", "Anti abuse", "Moderación"] },
-    { "title": "Qué ver luego", "items": ["Slimefun", "Bosses", "Tienda"] }
+    {
+      "title": "Módulos visibles",
+      "items": [
+        "Bosses",
+        "Store delivery",
+        "Vanish",
+        "Armor effects"
+      ]
+    },
+    {
+      "title": "Módulos internos",
+      "items": [
+        "Webhooks",
+        "Presence",
+        "Anti abuse",
+        "Moderación"
+      ]
+    },
+    {
+      "title": "Qué ver luego",
+      "items": [
+        "Slimefun",
+        "Bosses",
+        "Tienda"
+      ]
+    }
   ],
   "cta": {
-    "title": "Ahora sí toca la capa técnica del survival.",
-    "text": "Después de Odysseia, lo lógico es mostrar la parte de Slimefun y progreso industrial que alimenta el día a día del servidor.",
-    "primary": { "href": "slimefun.html", "label": "Ver Slimefun" },
-    "secondary": { "href": "bosses.html", "label": "Ir a bosses" }
+    "title": "Sigue con Slimefun.",
+    "text": "La siguiente parada muestra el progreso técnico del survival.",
+    "primary": {
+      "href": "slimefun.html",
+      "label": "Ver Slimefun"
+    },
+    "secondary": {
+      "href": "bosses.html",
+      "label": "Ir a bosses"
+    }
   },
-  "prev": { "href": "jack.html", "label": "Jack" },
-  "next": { "href": "slimefun.html", "label": "Slimefun" }
+  "prev": {
+    "href": "jack.html",
+    "label": "Jack"
+  },
+  "next": {
+    "href": "slimefun.html",
+    "label": "Slimefun"
+  }
 }

@@ -1,37 +1,99 @@
 {
   "metaTitle": "DrakesCraft | Portal Oficial",
-  "metaDescription": "Portal oficial de DrakesCraft: recorrido claro por el servidor, su dueño, Odysseia, Slimefun, bosses, tienda y reglas.",
-  "eyebrow": "Portal vivo de DrakesCraft",
-  "title": "Una odisea con orden, identidad y mantenimiento real.",
-  "tagline": "DrakesCraft ya no se presenta como un prototipo suelto: entra por una portada que te guía hacia el servidor, Jack, Odysseia, Slimefun, la comunidad, los bosses y la tienda.",
-  "intro": "Este portal organiza la experiencia para que un jugador nuevo entienda qué está jugando, quién lo mantiene, qué sistemas lo vuelven único y cómo se conecta todo sin perder la estética mítica del proyecto.",
+  "metaDescription": "Portal oficial de DrakesCraft: servidor, Jack, Odysseia, Slimefun, bosses, tienda y reglas.",
+  "eyebrow": "DrakesCraft",
+  "title": "Survival, tecnología y mitología en un mismo mundo.",
+  "tagline": "Java y Bedrock comparten un servidor con progresión, Slimefun, bosses y sistemas propios.",
+  "intro": "Entra al servidor, conoce a Jack, revisa Odysseia, mira el panteón de bosses o pasa directo a la tienda y las reglas.",
   "metrics": [
-    { "label": "Ruta del sitio", "value": "9 páginas" },
-    { "label": "Servidor base", "value": "Paper 1.21.x" },
-    { "label": "Capas custom", "value": "Odysseia + Web" },
-    { "label": "Enfoque", "value": "Survival mítico" }
+    {
+      "label": "Páginas",
+      "value": "9 páginas"
+    },
+    {
+      "label": "Servidor base",
+      "value": "Paper 1.21.x"
+    },
+    {
+      "label": "Custom",
+      "value": "Odysseia + Web"
+    },
+    {
+      "label": "Enfoque",
+      "value": "Survival mítico"
+    }
   ],
   "pillars": [
-    { "title": "Entrada limpia", "text": "La portada ahora funciona como puerta de acceso real y no como mezcla de tienda, lore y FAQ." },
-    { "title": "Identidad visible", "text": "Logo, cámara 3D, navegación lineal y secciones separadas para que cada tema respire." },
-    { "title": "Arquitectura escalable", "text": "Cada página tiene su propio CSS y JSON para crecer sin volver a enredar todo el sitio." }
+    {
+      "title": "Entrada",
+      "text": "Una portada clara para moverse entre servidor, comunidad, sistemas y tienda."
+    },
+    {
+      "title": "Ambientación",
+      "text": "Logo, escena orbital y navegación clara para sostener el tono del proyecto."
+    },
+    {
+      "title": "Orden",
+      "text": "Cada tema tiene su propio espacio para crecer sin mezclar juego, comunidad y tienda."
+    }
   ],
   "journey": [
-    { "step": "01", "title": "Descubrir", "text": "Entender qué es DrakesCraft y qué lo diferencia." },
-    { "step": "02", "title": "Contextualizar", "text": "Conocer a Jack, Odysseia, Slimefun y la capa técnica del proyecto." },
-    { "step": "03", "title": "Jugar o apoyar", "text": "Pasar a bosses, tienda y reglas con una secuencia lógica." }
+    {
+      "step": "01",
+      "title": "Servidor",
+      "text": "Entender qué se juega y cómo está armado DrakesCraft."
+    },
+    {
+      "step": "02",
+      "title": "Sistemas",
+      "text": "Pasar por Jack, Odysseia y Slimefun antes del endgame."
+    },
+    {
+      "step": "03",
+      "title": "Cierre",
+      "text": "Terminar en bosses, tienda y reglas sabiendo dónde estás parado."
+    }
   ],
   "facts": [
-    { "title": "Qué ver primero", "items": ["Servidor", "Jack", "Odysseia"] },
-    { "title": "Qué ver después", "items": ["Slimefun", "Comunidad", "Bosses"] },
-    { "title": "Cierre natural", "items": ["Tienda", "Reglas"] }
+    {
+      "title": "Qué ver primero",
+      "items": [
+        "Servidor",
+        "Jack",
+        "Odysseia"
+      ]
+    },
+    {
+      "title": "Qué ver después",
+      "items": [
+        "Slimefun",
+        "Comunidad",
+        "Bosses"
+      ]
+    },
+    {
+      "title": "Cierre natural",
+      "items": [
+        "Tienda",
+        "Reglas"
+      ]
+    }
   ],
   "cta": {
-    "title": "Empieza por el mapa completo del proyecto.",
-    "text": "Si alguien llega nuevo, lo primero debería ser entender el servidor antes de caer directo en la tienda.",
-    "primary": { "href": "server.html", "label": "Ir al servidor" },
-    "secondary": { "href": "jack.html", "label": "Ver página de Jack" }
+    "title": "Empieza por el servidor.",
+    "text": "Desde ahí ya se entiende el resto del portal.",
+    "primary": {
+      "href": "server.html",
+      "label": "Ir al servidor"
+    },
+    "secondary": {
+      "href": "jack.html",
+      "label": "Ver a Jack"
+    }
   },
   "prev": null,
-  "next": { "href": "server.html", "label": "Servidor" }
+  "next": {
+    "href": "server.html",
+    "label": "Servidor"
+  }
 }

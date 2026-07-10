@@ -2,36 +2,103 @@
   "metaTitle": "DrakesCraft | Comunidad",
   "metaDescription": "Comunidad y operación viva de DrakesCraft: Discord, soporte, anuncios, estado del proyecto y entrada para nuevos jugadores.",
   "eyebrow": "Comunidad y soporte",
-  "title": "La comunidad no es un enlace suelto: es una capa operativa del servidor.",
-  "tagline": "Discord, anuncios, soporte y coordinación son parte del flujo real de DrakesCraft, tanto para jugadores nuevos como para compra, eventos y reportes.",
-  "intro": "Esta página concentra la entrada social del proyecto. Sirve para mostrar el pulso de la comunidad, los canales visibles y los puntos por donde se mueve el soporte, la moderación y la coordinación del día a día.",
+  "title": "Comunidad",
+  "tagline": "Discord, anuncios, soporte y reportes acompañan el día a día del servidor.",
+  "intro": "Aquí se juntan la parte social del proyecto, los tickets, las novedades y el apoyo a jugadores.",
   "metrics": [
-    { "label": "Soporte", "value": "Discord" },
-    { "label": "Backend", "value": "Star" },
-    { "label": "Canal clave", "value": "Tickets" },
-    { "label": "Uso", "value": "Operativo" }
+    {
+      "label": "Soporte",
+      "value": "Discord"
+    },
+    {
+      "label": "Backend",
+      "value": "Star"
+    },
+    {
+      "label": "Canal clave",
+      "value": "Tickets"
+    },
+    {
+      "label": "Uso",
+      "value": "Diario"
+    }
   ],
   "pillars": [
-    { "title": "Entrada de jugadores", "text": "El Discord sirve para anuncios, novedades y primer contacto con la comunidad." },
-    { "title": "Soporte y tienda", "text": "Cuando una entrega necesita respaldo, el ticket queda como segunda capa confiable." },
-    { "title": "Moderación y reportes", "text": "Las reglas no viven aisladas; se aplican con contexto y canales concretos." }
+    {
+      "title": "Entrada",
+      "text": "Discord es la puerta principal para novedades y primer contacto."
+    },
+    {
+      "title": "Soporte",
+      "text": "Los tickets respaldan compras, dudas y problemas del juego."
+    },
+    {
+      "title": "Moderación",
+      "text": "Reportes y seguimiento pasan por canales concretos."
+    }
   ],
   "journey": [
-    { "step": "I", "title": "Entrar", "text": "Conocer el tono y canales principales." },
-    { "step": "II", "title": "Coordinar", "text": "Usar Discord para soporte, reportes y dudas." },
-    { "step": "III", "title": "Profundizar", "text": "Pasar luego a bosses y tienda con contexto." }
+    {
+      "step": "I",
+      "title": "Entrar",
+      "text": "Conocer el tono y canales principales."
+    },
+    {
+      "step": "II",
+      "title": "Coordinar",
+      "text": "Usar Discord para soporte, reportes y dudas."
+    },
+    {
+      "step": "III",
+      "title": "Profundizar",
+      "text": "Pasar luego a bosses y tienda con contexto."
+    }
   ],
   "facts": [
-    { "title": "Canales clave", "items": ["Anuncios", "Soporte", "Tickets"] },
-    { "title": "Usos reales", "items": ["Entradas", "Eventos", "Compras", "Reportes"] },
-    { "title": "Siguiente tramo", "items": ["Bosses", "Tienda", "Reglas"] }
+    {
+      "title": "Canales clave",
+      "items": [
+        "Anuncios",
+        "Soporte",
+        "Tickets"
+      ]
+    },
+    {
+      "title": "Usos",
+      "items": [
+        "Entradas",
+        "Eventos",
+        "Compras",
+        "Reportes"
+      ]
+    },
+    {
+      "title": "Siguiente tramo",
+      "items": [
+        "Bosses",
+        "Tienda",
+        "Reglas"
+      ]
+    }
   ],
   "cta": {
-    "title": "Desde aquí ya puedes saltar al endgame.",
-    "text": "El siguiente paso lógico es ver el panteón de bosses antes de aterrizar en la tienda.",
-    "primary": { "href": "bosses.html", "label": "Abrir bosses" },
-    "secondary": { "href": "store.html", "label": "Abrir tienda" }
+    "title": "Sigue con los bosses.",
+    "text": "Después de la comunidad, toca entrar al panteón.",
+    "primary": {
+      "href": "bosses.html",
+      "label": "Abrir bosses"
+    },
+    "secondary": {
+      "href": "store.html",
+      "label": "Abrir tienda"
+    }
   },
-  "prev": { "href": "slimefun.html", "label": "Slimefun" },
-  "next": { "href": "bosses.html", "label": "Bosses" }
+  "prev": {
+    "href": "slimefun.html",
+    "label": "Slimefun"
+  },
+  "next": {
+    "href": "bosses.html",
+    "label": "Bosses"
+  }
 }
