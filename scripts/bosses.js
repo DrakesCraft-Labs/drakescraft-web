@@ -10,6 +10,7 @@ function bossesEscapeHtml(value) {
 document.addEventListener("DOMContentLoaded", () => {
     const steps = document.getElementById("summon-steps");
     const note = document.getElementById("summon-note");
+    const obtain = document.getElementById("summon-obtain");
     const grid = document.getElementById("boss-codex-grid");
     if (!steps || !note || !grid) return;
 
@@ -30,6 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join("");
 
             note.textContent = catalog.invocation.note || "";
+
+            if (obtain && catalog.invocation.obtain) {
+                obtain.innerHTML = `
+                    <article class="panel-card tilt-card">
+                        <h3>${bossesEscapeHtml(catalog.invocation.obtain.title || "Cómo se consiguen")}</h3>
+                        <ul style="margin:0;padding-left:1rem;">
+                            ${(catalog.invocation.obtain.items || []).map((item) => `<li>${bossesEscapeHtml(item)}</li>`).join("")}
+                        </ul>
+                    </article>
+                `;
+            }
 
             grid.innerHTML = catalog.bosses.map((boss) => `
                 <article class="boss-card tilt-card">

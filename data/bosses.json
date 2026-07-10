@@ -13,11 +13,12 @@
   ],
   "pillars": [
     { "title": "Invocadores únicos", "text": "Cada boss se despierta con su propio objeto y no con un activador genérico." },
+    { "title": "Obtención honesta", "text": "La web debe explicar si el invocador se craftea o si hoy se entrega por vía administrativa." },
     { "title": "Peleas con rol", "text": "Burst, control, fuego, veneno o movilidad marcan por qué una pelea importa." },
     { "title": "Drops con nombre", "text": "Las reliquias se explican como fantasías de combate concretas y no como premios anónimos." }
   ],
   "journey": [
-    { "step": "1", "title": "Preparar", "text": "Conseguir el invocador correcto y entender el riesgo." },
+    { "step": "1", "title": "Preparar", "text": "Saber cómo se obtiene el invocador correcto y entender el riesgo." },
     { "step": "2", "title": "Despertar", "text": "Llamar a la entidad y entrar en combate inmediato." },
     { "step": "3", "title": "Reclamar", "text": "Perseguir reliquias con identidad propia." }
   ],

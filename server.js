@@ -110,11 +110,20 @@ const bossesCatalog = {
     mode: 'summoner-only',
     naturalSpawnEnabled: false,
     steps: [
-      'Consigue el invocador exacto del jefe mítico que quieres despertar.',
+      'Obtén el invocador exacto del jefe mítico que quieres despertar.',
       'Haz clic derecho en el suelo con ese invocador en la mano.',
       'El invocador se consume, caen rayos y el boss aparece en combate inmediatamente.'
     ],
-    note: 'Cada jefe usa su propio invocador. No existe un huevo genérico único para todos.'
+    note: 'Cada jefe usa su propio invocador. No existe un huevo genérico único para todos.',
+    obtain: {
+      craftable: false,
+      title: 'Cómo se consiguen hoy',
+      items: [
+        'Odysseia no registra una receta pública de crafteo para invocadores de bosses.',
+        'La vía explícita implementada en el plugin hoy es la entrega administrativa del invocador.',
+        'Comando actual detectado en el plugin: /boss give <jugador> <tipo>.'
+      ]
+    }
   },
   bosses: [
     {
