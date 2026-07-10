@@ -162,6 +162,55 @@ function renderSequence(prev, next) {
     `;
 }
 
+function renderEditorialExperience(page, manifest) {
+    if (!new Set(["server", "odysseia", "slimefun", "community", "rules"]).has(page)) return false;
+
+    const hero = document.querySelector(".hero");
+    const main = document.querySelector("main");
+    if (!hero || !main) return false;
+
+    hero.className = "brief-hero";
+    hero.innerHTML = `<div class="container brief-hero__inner">
+        <p class="eyebrow">${escapeHtml(manifest.eyebrow || "DrakesCraft")}</p>
+        <h1>${escapeHtml(manifest.title || "DrakesCraft")}</h1>
+        <p class="brief-hero__tagline">${escapeHtml(manifest.tagline || "")}</p>
+        <p class="brief-hero__intro">${escapeHtml(manifest.intro || "")}</p>
+        <div class="brief-hero__actions" id="brief-hero-actions"></div>
+    </div>`;
+
+    main.className = "editorial-main";
+    main.innerHTML = `<section class="editorial-section"><div class="container">
+        <div class="editorial-heading"><p class="eyebrow">Lo esencial</p><h2>${page === "rules" ? "Un marco claro para jugar" : "Qué resuelve esta parte del proyecto"}</h2></div>
+        <div class="editorial-grid" id="editorial-pillars"></div>
+    </div></section>
+    ${page === "community" ? `<section class="editorial-section editorial-section--tint"><div class="container"><div class="editorial-heading"><p class="eyebrow">Actividad pública</p><h2>Discord</h2><p>Canales y presencia disponibles en este momento.</p></div><div class="live-grid" id="discord-live"></div></div></section>` : ""}
+    ${page === "rules" ? `<section class="editorial-section"><div class="container"><div class="editorial-heading"><p class="eyebrow">Reglamento</p><h2>Lo que protege el servidor</h2></div><div class="editorial-grid editorial-grid--rules" id="rules-grid"></div></div></section>` : ""}
+    <section class="editorial-section editorial-section--tint"><div class="container"><div class="facts-grid editorial-facts" id="editorial-facts"></div></div></section>
+    <section class="editorial-section"><div class="container"><div class="cta-banner" id="editorial-cta"></div></div></section>`;
+
+    const actionTarget = document.getElementById("brief-hero-actions");
+    if (actionTarget && manifest.cta) {
+        actionTarget.innerHTML = `${manifest.cta.primary ? `<a class="btn btn-primary" href="${escapeHtml(manifest.cta.primary.href)}">${escapeHtml(manifest.cta.primary.label)}</a>` : ""}${manifest.cta.secondary ? `<a class="btn btn-secondary" href="${escapeHtml(manifest.cta.secondary.href)}">${escapeHtml(manifest.cta.secondary.label)}</a>` : ""}`;
+    }
+    renderPanelGrid("editorial-pillars", manifest.pillars);
+    renderFactsForTarget("editorial-facts", manifest.facts);
+    renderRules(manifest.rules);
+    renderCtaForTarget("editorial-cta", manifest.cta);
+    return true;
+}
+
+function renderFactsForTarget(targetId, items) {
+    const target = document.getElementById(targetId);
+    if (!target || !items?.length) return;
+    target.innerHTML = items.map((item) => `<article class="fact-card"><h3>${escapeHtml(item.title)}</h3><ul>${(item.items || []).map((entry) => `<li>${escapeHtml(entry)}</li>`).join("")}</ul></article>`).join("");
+}
+
+function renderCtaForTarget(targetId, cta) {
+    const target = document.getElementById(targetId);
+    if (!target || !cta) return;
+    target.innerHTML = `<div><h2>${escapeHtml(cta.title)}</h2><p>${escapeHtml(cta.text)}</p></div><div class="cta-actions">${cta.primary ? `<a class="btn btn-primary" href="${escapeHtml(cta.primary.href)}">${escapeHtml(cta.primary.label)}</a>` : ""}${cta.secondary ? `<a class="btn btn-secondary" href="${escapeHtml(cta.secondary.href)}">${escapeHtml(cta.secondary.label)}</a>` : ""}</div>`;
+}
+
 async function loadManifest() {
     const page = document.body.dataset.page;
     if (!page) return;
@@ -185,6 +234,11 @@ async function loadManifest() {
     if (heroTitle) heroTitle.textContent = manifest.title || "";
     if (heroTagline) heroTagline.textContent = manifest.tagline || "";
     if (heroIntro) heroIntro.textContent = manifest.intro || "";
+
+    if (renderEditorialExperience(page, manifest)) {
+        setupTilt();
+        return;
+    }
 
     renderMetrics(manifest.metrics);
     renderPanelGrid("manifest-pillars", manifest.pillars);

@@ -3,3 +3,6 @@ body[data-page="bosses"] {
     --page-accent-soft: rgba(244, 201, 93, 0.2);
     --page-glow: rgba(149, 136, 255, 0.18);
 }
+
+.boss-note { max-width: 760px; margin: 1.2rem 0 0; color: var(--muted); line-height: 1.65; }
+.boss-codex-grid .boss-card { border: 0; border-radius: 0; box-shadow: none; background: rgba(10,15,28,.94); }
