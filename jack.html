@@ -3,62 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrakesCraft | Jack</title>
-    <meta name="description" content="Página del dueño actual Jack.">
+    <title>Jack | Sistemas que sostienen DrakesCraft</title>
+    <meta name="description" content="Jack mantiene DrakesCraft, Slimefun, infraestructura Docker, automatizaciones y proyectos de software propios.">
     <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/base.css?v=20260710-scroll3d">
-    <link rel="stylesheet" href="styles/jack.css?v=20260710-rebuild">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css?v=20260710-scroll3d"><link rel="stylesheet" href="styles/portal.css?v=20260710-vision">
 </head>
-<body class="page-shell" data-page="jack">
-    <canvas id="particles-canvas" aria-hidden="true"></canvas>
-    <div class="scroll-progress" id="scroll-progress"></div>
-    <nav class="site-nav" aria-label="Principal">
-        <div class="container site-nav__bar">
-            <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Jack · dueño actual</span></span></a>
-            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
-            <ul class="site-nav__links" id="nav-menu">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="server.html">Servidor</a></li>
-                <li><a class="active" href="jack.html">Jack</a></li>
-                <li><a href="odysseia.html">Odysseia</a></li>
-                <li><a href="slimefun.html">Slimefun</a></li>
-                <li><a href="community.html">Comunidad</a></li>
-                <li><a href="bosses.html">Bosses</a></li>
-                <li><a href="store.html">Tienda</a></li>
-                <li><a href="rules.html">Reglas</a></li>
-                <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
-            </ul>
-        </div>
+<body class="page-shell portal-page jack-page">
+    <nav class="portal-nav" aria-label="Principal">
+        <a class="portal-brand" href="index.html"><img src="assets/logo-drakescraft.png" alt="DrakesCraft"><span><strong>DrakesCraft</strong><small>Plataforma y proyectos</small></span></a>
+        <div class="portal-nav__links"><a href="index.html">Inicio</a><a href="server.html">Servidor</a><a href="odysseia.html">Sistemas</a><a href="bosses.html">Bosses</a><a class="is-active" href="jack.html">Jack</a></div>
+        <a class="portal-nav__cta" href="https://github.com/JackStar6677-1" target="_blank" rel="noopener">GitHub</a>
     </nav>
-    <header class="hero">
-        <div class="container hero__grid">
-            <div>
-                <p class="eyebrow" id="hero-eyebrow"></p>
-                <h1 id="hero-title"></h1>
-                <p class="hero__tagline" id="hero-tagline"></p>
-                <p class="hero__intro" id="hero-intro"></p>
-                <div class="hero__actions"><a class="btn btn-primary" href="odysseia.html">Ver Odysseia</a><a class="btn btn-secondary" href="store.html">Ver tienda</a></div>
-                <div class="metrics" id="manifest-metrics"></div>
-            </div>
-            <div class="hero-stage">
-                <div class="hero-stage__core"><div class="orbital-logo"><div class="orbital-logo__ring"></div><div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div></div></div>
-                <aside class="stage-card stage-card--a tilt-card"><strong>Marca</strong><p>Jack decide tono, presentación y dirección general del proyecto.</p></aside>
-                <aside class="stage-card stage-card--b tilt-card"><strong>Stack</strong><p>Toca plugin, tienda, backend, web y operaciones del servidor.</p></aside>
-                <aside class="stage-card stage-card--c tilt-card"><strong>Curaduría</strong><p>Rangos, bosses y perks pasan por una visión concreta, no por azar.</p></aside>
-            </div>
-        </div>
-    </header>
     <main>
-        <section class="section"><div class="container"><div class="section__head"><h2>Qué mantiene hoy</h2><p>Servidor, plugin, tienda, web y criterio general del proyecto.</p></div><div class="panel-grid" id="manifest-pillars"></div></div></section>
-        <section class="section"><div class="container"><div class="section__head"><h2>Cómo atraviesa el proyecto</h2><p>Su rol cruza decisiones creativas, técnicas y operativas.</p></div><div class="journey-grid" id="manifest-journey"></div></div></section>
-        <section class="section"><div class="container"><div class="facts-grid" id="manifest-facts"></div></div></section>
-        <section class="section"><div class="container"><div class="cta-banner" id="manifest-cta"></div></div></section>
-        <section class="section"><div class="container"><div class="sequence-nav" id="page-sequence"></div></div></section>
+        <section class="builder-hero"><div><p class="portal-kicker">Dirección técnica · Desarrollo · Infraestructura</p><h1>Jack construye<br><em>lo que DrakesCraft usa.</em></h1><p>No se trata solo de mantener un servidor. El trabajo abarca código, servicios, automatización, despliegues y las decisiones que permiten que proyectos distintos convivan y evolucionen.</p></div><aside><span>En foco</span><strong>Software, servidores y sistemas que duran.</strong><small>DrakesCraft es el frente jugable de una plataforma más amplia.</small></aside></section>
+
+        <section class="portal-section"><div class="section-intro"><p class="portal-kicker">Trabajo conectado</p><h2>Una misma mano entre juego, software e infraestructura.</h2></div><div class="discipline-grid"><article><span>01</span><h3>Slimefun y código abierto</h3><p>Mantención, ports y compatibilidad para múltiples versiones; no solo configuración de plugins.</p></article><article><span>02</span><h3>Star, Nova y Nexus</h3><p>Servicios, túneles, Docker y una capa de operación que busca ser más clara, segura y sostenible.</p></article><article><span>03</span><h3>Herramientas internas</h3><p>Automatizaciones, paneles, calendarios y flujos diseñados para reducir trabajo manual.</p></article><article><span>04</span><h3>DrakesCraft</h3><p>Un laboratorio real donde producto, comunidad, backend y experiencia de juego se encuentran.</p></article></div></section>
+
+        <section class="portal-section portfolio-band"><div><p class="portal-kicker">Proyectos en movimiento</p><h2>El ecosistema no termina cuando se apaga el servidor.</h2></div><ul><li><strong>Star</strong><span>Servicios Docker, publicación y operación.</span></li><li><strong>IA Hub</strong><span>Contexto operativo, decisiones y continuidad entre herramientas.</span></li><li><strong>Odysseia</strong><span>Plugin propio para la capa mítica de DrakesCraft.</span></li><li><strong>Automatización</strong><span>Scripts y herramientas que convierten tareas repetidas en sistemas.</span></li></ul></section>
+
+        <section class="portal-section jack-closing"><p>La intención no es acumular tecnología. Es hacer que cada sistema tenga una razón, un dueño y una forma clara de mantenerse.</p><a class="portal-button portal-button--gold" href="index.html">Volver a DrakesCraft</a></section>
     </main>
-    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Jack · DrakesCraft</strong><p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Dirección y mantenimiento.</p></div><div class="site-footer__links"><a href="server.html">Servidor</a><a href="odysseia.html">Odysseia</a><a href="community.html">Comunidad</a></div></div></footer>
-    <script src="three.min.js?v=20260710-webgl"></script><script src="scripts/background.js?v=20260710-webgl"></script><script src="scripts/site.js?v=20260710-fix"></script>
+    <footer class="portal-footer"><div><strong>Jack</strong><span>Infraestructura, software y mundos que siguen creciendo.</span></div><div><a href="https://github.com/JackStar6677-1" target="_blank" rel="noopener">GitHub</a><a href="odysseia.html">Odysseia</a><a href="index.html">DrakesCraft</a></div></footer>
+    <script src="scripts/site.js?v=20260710-vision"></script>
 </body>
 </html>

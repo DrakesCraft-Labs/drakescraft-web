@@ -3,135 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrakesCraft | Portal Oficial</title>
-    <meta name="description" content="Portal oficial de DrakesCraft.">
+    <title>DrakesCraft | Mundo, sistemas y comunidad</title>
+    <meta name="description" content="DrakesCraft: survival crossplay, Slimefun, Odysseia y un ecosistema técnico construido a largo plazo.">
     <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/base.css?v=20260710-scroll3d">
-    <link rel="stylesheet" href="styles/index.css?v=20260710-rebuild">
+    <link rel="stylesheet" href="styles/portal.css?v=20260710-vision">
 </head>
-<body class="page-shell" data-page="index">
-    <canvas id="particles-canvas" aria-hidden="true"></canvas>
-    <div class="scroll-progress" id="scroll-progress"></div>
-    <nav class="site-nav" aria-label="Principal">
-        <div class="container site-nav__bar">
-            <a class="brand" href="index.html">
-                <img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft">
-                <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
-            </a>
-            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
-            <ul class="site-nav__links" id="nav-menu">
-                <li><a class="active" href="index.html">Inicio</a></li>
-                <li><a href="server.html">Servidor</a></li>
-                <li><a href="jack.html">Jack</a></li>
-                <li><a href="odysseia.html">Odysseia</a></li>
-                <li><a href="slimefun.html">Slimefun</a></li>
-                <li><a href="community.html">Comunidad</a></li>
-                <li><a href="bosses.html">Bosses</a></li>
-                <li><a href="store.html">Tienda</a></li>
-                <li><a href="rules.html">Reglas</a></li>
-                <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
-            </ul>
-        </div>
+<body class="page-shell portal-page">
+    <nav class="portal-nav" aria-label="Principal">
+        <a class="portal-brand" href="index.html"><img src="assets/logo-drakescraft.png" alt="DrakesCraft"><span><strong>DrakesCraft</strong><small>Chile · Java + Bedrock</small></span></a>
+        <div class="portal-nav__links"><a class="is-active" href="index.html">Inicio</a><a href="server.html">Servidor</a><a href="odysseia.html">Sistemas</a><a href="bosses.html">Bosses</a><a href="community.html">Comunidad</a></div>
+        <a class="portal-nav__cta" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
     </nav>
 
-    <header class="hero">
-        <div class="container hero__grid">
-            <div>
-                <p class="eyebrow" id="hero-eyebrow"></p>
-                <h1 id="hero-title"></h1>
-                <p class="hero__tagline" id="hero-tagline"></p>
-                <p class="hero__intro" id="hero-intro"></p>
-                <div class="hero__actions">
-                    <button class="btn btn-primary" type="button" data-copy="mc.drakescraft.cl">Copiar IP Java</button>
-                    <button class="btn btn-secondary" type="button" data-copy="mc.drakescraft.cl:25565">Copiar Bedrock</button>
-                    <a class="btn btn-secondary" href="server.html">Entrar al servidor</a>
-                </div>
-                <div class="metrics" id="manifest-metrics"></div>
-            </div>
-            <div class="hero-stage">
-                <div class="hero-stage__core">
-                    <div class="orbital-logo">
-                        <div class="orbital-logo__ring"></div>
-                        <div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div>
-                    </div>
-                </div>
-                <aside class="stage-card stage-card--a tilt-card"><strong>Servidor</strong><p>Survival, progreso y tono general de DrakesCraft.</p></aside>
-                <aside class="stage-card stage-card--b tilt-card"><strong>Jack</strong><p>Página propia del dueño actual y de lo que mantiene.</p></aside>
-                <aside class="stage-card stage-card--c tilt-card"><strong>Odysseia</strong><p>Bosses, tienda, auras VIP y sistemas custom con casa propia.</p></aside>
-            </div>
-        </div>
-    </header>
-
     <main>
-        <section class="section">
-            <div class="container">
-                <div class="section__head">
-                    <h2>Inicio</h2>
-                    <p>Entrada directa al servidor, sus sistemas y sus páginas principales.</p>
-                </div>
-                <div class="panel-grid" id="manifest-pillars"></div>
+        <section class="world-hero">
+            <div class="world-hero__art" aria-hidden="true"></div>
+            <div class="world-hero__shade" aria-hidden="true"></div>
+            <div class="world-hero__content">
+                <p class="portal-kicker">Survival técnico · Crossplay · Chile</p>
+                <h1>Un mundo para jugar.<br><em>Un sistema para quedarse.</em></h1>
+                <p class="world-hero__lead">DrakesCraft une supervivencia, Slimefun y mitología en un servidor que se construye con sistemas propios, no con una lista de plugins.</p>
+                <div class="portal-actions"><button class="portal-button portal-button--gold" data-copy="mc.drakescraft.cl">Copiar IP Java</button><a class="portal-button portal-button--ghost" href="server.html">Conocer el servidor</a></div>
+                <dl class="hero-facts"><div><dt>Modo</dt><dd>Survival</dd></div><div><dt>Crossplay</dt><dd>Java + Bedrock</dd></div><div><dt>Economía</dt><dd>Dragmas</dd></div></dl>
+            </div>
+            <p class="world-hero__caption">Odysseia · Slimefun · Endgame mítico</p>
+        </section>
+
+        <section class="portal-section portal-section--entry">
+            <div class="section-intro"><p class="portal-kicker">Lo que importa al entrar</p><h2>No hay una sola forma de vivir el mundo.</h2><p>Explora, automatiza, levanta una base o prepara una pelea. Las rutas comparten un mismo servidor, pero no obligan a jugar igual.</p></div>
+            <div class="entry-grid">
+                <a class="entry-card entry-card--survival" href="server.html"><span>01</span><h3>Supervivencia con peso</h3><p>Progresión, economía, claims y un mundo pensado para durar.</p><b>Ver servidor</b></a>
+                <a class="entry-card entry-card--slimefun" href="slimefun.html"><span>02</span><h3>Tecnología que abre juego</h3><p>Máquinas, logística y líneas largas de investigación con Slimefun.</p><b>Entrar a Slimefun</b></a>
+                <a class="entry-card entry-card--odysseia" href="odysseia.html"><span>03</span><h3>Odysseia</h3><p>El núcleo propio: bosses, auras, tienda, rangos y mecánicas hechas para DrakesCraft.</p><b>Conocer sistemas</b></a>
             </div>
         </section>
 
-        <section class="section">
-            <div class="container">
-                <div class="section__head">
-                    <h2>Recorrido</h2>
-                    <p>Primero el servidor, después sus sistemas, y al final bosses, tienda y reglas.</p>
-                </div>
-                <div class="journey-grid" id="manifest-journey"></div>
-            </div>
+        <section class="portal-section portal-section--split">
+            <div class="atlas-copy"><p class="portal-kicker">El final no es un menú</p><h2>El panteón se gana.</h2><p>Los bosses no aparecen como decoración. Cada invocador abre una pelea distinta y cada drop cambia las posibilidades del jugador que llegó hasta ahí.</p><a class="text-link" href="bosses.html">Abrir el códice de bosses <span>↗</span></a></div>
+            <div class="boss-index"><div><span>12+</span><small>jefes documentados</small></div><div><span>3</span><small>rutas principales de progreso</small></div><div><span>∞</span><small>formas de construir una base</small></div></div>
         </section>
 
-        <section class="section">
-            <div class="container">
-                <div class="section__head">
-                    <h2>Telemetría del portal</h2>
-                    <p>Datos vivos del portal y del servidor.</p>
-                </div>
-                <div class="live-grid" id="overview-live"></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <div class="facts-grid" id="manifest-facts"></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <div class="cta-banner" id="manifest-cta"></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <div class="sequence-nav" id="page-sequence"></div>
-            </div>
+        <section class="portal-section ecosystem-callout">
+            <div><p class="portal-kicker">Detrás de DrakesCraft</p><h2>Este servidor no vive aislado.</h2><p>Jack mantiene el código, la infraestructura y las herramientas que hacen posible que el mundo siga creciendo. DrakesCraft es una parte visible de un ecosistema que también abarca Slimefun, automatización, servicios Docker y proyectos propios.</p></div>
+            <a class="portrait-link" href="jack.html"><span>Conocer el ecosistema</span><strong>Jack &amp; la plataforma <i>↗</i></strong></a>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="container site-footer__grid">
-            <div>
-                <strong>DrakesCraft</strong>
-                <p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Portal oficial.</p>
-            </div>
-            <div class="site-footer__links">
-                <a href="server.html">Servidor</a>
-                <a href="jack.html">Jack</a>
-                <a href="store.html">Tienda</a>
-                <a href="rules.html">Reglas</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="three.min.js?v=20260710-webgl"></script>
-    <script src="scripts/background.js?v=20260710-webgl"></script>
-    <script src="scripts/site.js?v=20260710-fix"></script>
+    <footer class="portal-footer"><div><strong>DrakesCraft</strong><span>Un proyecto vivo, hecho para jugar a largo plazo.</span></div><div><a href="rules.html">Reglas</a><a href="store.html">Tienda</a><a href="jack.html">Jack</a></div></footer>
+    <script src="scripts/site.js?v=20260710-vision"></script>
 </body>
 </html>

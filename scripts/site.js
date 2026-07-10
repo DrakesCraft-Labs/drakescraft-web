@@ -39,6 +39,20 @@ function setupNav() {
     });
 }
 
+function simplifyLegacyNavigation() {
+    const menu = document.getElementById("nav-menu");
+    if (!menu || menu.dataset.simplified === "true") return;
+
+    const primaryRoutes = new Set(["index.html", "server.html", "odysseia.html", "bosses.html", "store.html"]);
+    menu.querySelectorAll("li").forEach((item) => {
+        const link = item.querySelector("a");
+        if (!link) return;
+        const href = link.getAttribute("href") || "";
+        if (!primaryRoutes.has(href) && !link.classList.contains("nav-discord")) item.remove();
+    });
+    menu.dataset.simplified = "true";
+}
+
 function setupProgress() {
     const bar = document.getElementById("scroll-progress");
     if (!bar) return;
@@ -87,18 +101,6 @@ function renderPanelGrid(targetId, items) {
     if (!target || !items?.length) return;
     target.innerHTML = items.map((item) => `
         <article class="panel-card tilt-card">
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.text)}</p>
-        </article>
-    `).join("");
-}
-
-function renderJourney(items) {
-    const target = document.getElementById("manifest-journey");
-    if (!target || !items?.length) return;
-    target.innerHTML = items.map((item) => `
-        <article class="journey-card tilt-card">
-            <span class="journey-card__step">${escapeHtml(item.step)}</span>
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.text)}</p>
         </article>
@@ -186,7 +188,6 @@ async function loadManifest() {
 
     renderMetrics(manifest.metrics);
     renderPanelGrid("manifest-pillars", manifest.pillars);
-    renderJourney(manifest.journey);
     renderFacts(manifest.facts);
     renderRules(manifest.rules);
     renderCta(manifest.cta);
@@ -258,6 +259,7 @@ function setupCopyButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    simplifyLegacyNavigation();
     setupNav();
     setupProgress();
     setupCopyButtons();
