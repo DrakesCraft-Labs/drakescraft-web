@@ -766,3 +766,64 @@ textarea {
         max-width: 100%;
     }
 }
+
+/* Information pages are reading-first. The launch-scene composition belongs
+   only to the portal front, not to every detail page. */
+body:not(.portal-page) .hero {
+    padding: 6.6rem 0 1.4rem;
+}
+
+body:not(.portal-page) .hero__grid {
+    grid-template-columns: minmax(0, 780px);
+    justify-content: start;
+}
+
+body:not(.portal-page) .hero h1 {
+    max-width: 15ch;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 1.05;
+}
+
+body:not(.portal-page) .hero__intro {
+    max-width: 66ch;
+}
+
+body:not(.portal-page) .hero-stage {
+    display: none;
+}
+
+body:not(.portal-page) .metrics {
+    max-width: 780px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 1.6rem;
+}
+
+body:not(.portal-page) .metric-card {
+    padding: .9rem;
+    border-radius: 14px;
+    box-shadow: none;
+}
+
+body:not(.portal-page) .section {
+    padding: 1.35rem 0;
+}
+
+body:not(.portal-page) .section__head {
+    margin-bottom: 1rem;
+}
+
+body:not(.portal-page) .panel-card,
+body:not(.portal-page) .fact-card,
+body:not(.portal-page) .live-card,
+body:not(.portal-page) .rule-card,
+body:not(.portal-page) .store-card,
+body:not(.portal-page) .boss-card {
+    border-radius: 16px;
+    box-shadow: none;
+}
+
+@media (max-width: 760px) {
+    body:not(.portal-page) .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

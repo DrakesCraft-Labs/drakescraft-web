@@ -1,10 +1,7 @@
-function storeEscapeHtml(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
+function storeEscape(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[character]));
 }
 
 function storeMoney(value, product) {
@@ -12,101 +9,75 @@ function storeMoney(value, product) {
     return Number.isFinite(value) ? `$${value.toLocaleString("es-CL")} CLP` : "Cotización";
 }
 
-function storeToast(message) {
-    if (window.showToast) {
-        window.showToast(message);
-        return;
-    }
-    console.log(message);
+function deliveryType(product) {
+    if (product.category === "economy-kits") return "in-game";
+    return product.tebexEnabled ? "tebex" : "manual";
 }
+
+const deliveryLabel = {
+    tebex: "Checkout Tebex",
+    manual: "Revisión manual",
+    "in-game": "Se compra dentro del juego"
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("store-grid");
     const tabs = document.getElementById("store-tabs");
-    const quoteItems = document.getElementById("quote-items");
-    const quoteTotal = document.getElementById("quote-total");
-    const quoteForm = document.getElementById("quote-form");
-    if (!grid || !tabs || !quoteItems || !quoteTotal || !quoteForm) return;
+    const form = document.getElementById("quote-form");
+    if (!grid || !tabs || !form) return;
 
-    const modal = document.getElementById("store-modal");
-    const modalBody = document.getElementById("store-modal-body");
-    const modalClose = document.getElementById("store-modal-close");
-
-    const state = {
-        catalog: null,
-        category: "monthly",
-        selected: new Set()
-    };
-
+    const state = { catalog: null, category: "monthly", selected: new Set() };
     const productById = (id) => state.catalog.products.find((product) => product.id === id);
+    const selectedProducts = () => [...state.selected].map(productById).filter(Boolean);
+    const selectedMode = () => selectedProducts()[0] ? deliveryType(selectedProducts()[0]) : null;
 
-    const renderTabs = () => {
-        tabs.innerHTML = state.catalog.categories.map((category) => `
-            <button class="btn ${state.category === category.id ? "btn-primary" : "btn-secondary"}" type="button" data-category="${category.id}">
-                ${storeEscapeHtml(category.label)}
-            </button>
-        `).join("");
-    };
+    function renderTabs() {
+        tabs.innerHTML = state.catalog.categories.map((category) => `<button class="store-tab ${category.id === state.category ? "is-active" : ""}" type="button" data-category="${storeEscape(category.id)}">${storeEscape(category.label)}</button>`).join("");
+    }
 
-    const renderProducts = () => {
+    function renderProducts() {
         const products = state.catalog.products.filter((product) => product.category === state.category);
+        const currentMode = selectedMode();
         grid.innerHTML = products.map((product) => {
+            const mode = deliveryType(product);
             const selected = state.selected.has(product.id);
-            const disabled = product.category === "economy-kits";
-            return `
-                <article class="store-card tilt-card">
-                    <h3>${storeEscapeHtml(product.name)}</h3>
-                    <p>${storeEscapeHtml(product.summary)}</p>
-                    <p style="margin-top:0.8rem;color:var(--page-accent);font-weight:700;">${storeMoney(product.clp, product)}${Number.isFinite(product.usd) ? ` · USD ${product.usd}` : ""}</p>
-                    <div class="hero__actions" style="margin-top:1rem;">
-                        <button type="button" class="btn btn-secondary" data-detail="${product.id}">Ver detalle</button>
-                        <button type="button" class="btn ${selected ? "btn-primary" : "btn-secondary"}" data-add="${product.id}" ${disabled ? "disabled" : ""}>
-                            ${disabled ? "In-game" : (selected ? "Seleccionado" : "Agregar")}
-                        </button>
-                    </div>
-                </article>
-            `;
+            const incompatible = currentMode && currentMode !== mode;
+            const purchasable = mode !== "in-game";
+            return `<article class="store-product">
+                <div class="store-product__top"><div><span class="store-product__tag">${storeEscape(product.badge || deliveryLabel[mode])}</span><h3>${storeEscape(product.name)}</h3></div><strong class="store-product__price">${storeMoney(product.clp, product)}</strong></div>
+                <p>${storeEscape(product.summary)}</p>
+                <div class="store-product__delivery"><span>${deliveryLabel[mode]}</span><span>${mode === "tebex" && Number.isFinite(product.usd) ? `USD ${product.usd}` : ""}</span></div>
+                <div class="store-product__actions"><button class="btn btn-secondary" type="button" data-detail="${storeEscape(product.id)}">Detalle</button><button class="btn ${selected ? "btn-primary" : "btn-secondary"}" type="button" data-select="${storeEscape(product.id)}" ${!purchasable || incompatible ? "disabled" : ""}>${!purchasable ? "In-game" : selected ? "Seleccionado" : incompatible ? "Otro flujo" : "Agregar"}</button></div>
+            </article>`;
         }).join("");
-    };
+    }
 
-    const renderQuote = () => {
-        const selected = Array.from(state.selected).map(productById).filter(Boolean);
-        if (!selected.length) {
-            quoteItems.innerHTML = "<p>No hay productos seleccionados todavía.</p>";
-            quoteTotal.textContent = "$0 CLP";
+    function renderSelection() {
+        const target = document.getElementById("quote-items");
+        const note = document.getElementById("store-selection-note");
+        const total = document.getElementById("quote-total");
+        const products = selectedProducts();
+        if (!products.length) {
+            target.innerHTML = "";
+            note.textContent = "Agrega un producto para ver su método de entrega.";
+            total.textContent = "$0 CLP";
             return;
         }
-        const total = selected.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0);
-        quoteItems.innerHTML = selected.map((product) => `
-            <div style="display:flex;justify-content:space-between;gap:0.75rem;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-                <div>
-                    <strong>${storeEscapeHtml(product.name)}</strong>
-                    <p style="margin-top:0.3rem;">${storeMoney(product.clp, product)}</p>
-                </div>
-                <button class="btn btn-secondary" type="button" data-remove="${product.id}">Quitar</button>
-            </div>
-        `).join("");
-        quoteTotal.textContent = storeMoney(total);
-    };
+        const mode = selectedMode();
+        note.textContent = mode === "tebex" ? "Estos productos abren un checkout seguro de Tebex." : "Estos productos generan una solicitud para coordinar con el staff.";
+        target.innerHTML = products.map((product) => `<div class="store-selection-item"><div><strong>${storeEscape(product.name)}</strong><p>${storeMoney(product.clp, product)} · ${deliveryLabel[deliveryType(product)]}</p></div><button type="button" data-remove="${storeEscape(product.id)}">Quitar</button></div>`).join("");
+        total.textContent = storeMoney(products.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0));
+    }
 
-    const openModal = (product) => {
-        if (!modal || !modalBody) return;
-        modalBody.innerHTML = `
-            <h3 style="margin-top:0;">${storeEscapeHtml(product.name)}</h3>
-            <p>${storeEscapeHtml(product.summary)}</p>
-            <ul style="margin-top:1rem;padding-left:1rem;">
-                ${(product.includes || []).map((item) => `<li>${storeEscapeHtml(item)}</li>`).join("")}
-            </ul>
-        `;
+    function renderAll() { renderTabs(); renderProducts(); renderSelection(); if (window.setupTilt) window.setupTilt(); }
+
+    function openDetail(product) {
+        const modal = document.getElementById("store-modal");
+        const body = document.getElementById("store-modal-body");
+        if (!modal || !body || !product) return;
+        body.innerHTML = `<p class="eyebrow">${deliveryLabel[deliveryType(product)]}</p><h2>${storeEscape(product.name)}</h2><p>${storeEscape(product.summary)}</p><ul>${(product.includes || []).map((item) => `<li>${storeEscape(item)}</li>`).join("")}</ul>`;
         modal.classList.remove("hidden");
-    };
-
-    const renderAll = () => {
-        renderTabs();
-        renderProducts();
-        renderQuote();
-        if (window.setupTilt) window.setupTilt();
-    };
+    }
 
     tabs.addEventListener("click", (event) => {
         const button = event.target.closest("[data-category]");
@@ -116,106 +87,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     grid.addEventListener("click", (event) => {
-        const detailButton = event.target.closest("[data-detail]");
-        if (detailButton) {
-            openModal(productById(detailButton.dataset.detail));
-            return;
-        }
-        const addButton = event.target.closest("[data-add]");
-        if (!addButton) return;
-        const id = addButton.dataset.add;
-        if (state.selected.has(id)) state.selected.delete(id);
-        else state.selected.add(id);
+        const detail = event.target.closest("[data-detail]");
+        if (detail) return openDetail(productById(detail.dataset.detail));
+        const select = event.target.closest("[data-select]");
+        if (!select || select.disabled) return;
+        const id = select.dataset.select;
+        state.selected.has(id) ? state.selected.delete(id) : state.selected.add(id);
         renderAll();
     });
 
-    quoteItems.addEventListener("click", (event) => {
-        const removeButton = event.target.closest("[data-remove]");
-        if (!removeButton) return;
-        state.selected.delete(removeButton.dataset.remove);
+    document.getElementById("quote-items").addEventListener("click", (event) => {
+        const remove = event.target.closest("[data-remove]");
+        if (!remove) return;
+        state.selected.delete(remove.dataset.remove);
         renderAll();
     });
 
-    if (modalClose && modal) {
-        modalClose.addEventListener("click", () => modal.classList.add("hidden"));
-        modal.addEventListener("click", (event) => {
-            if (event.target === modal) modal.classList.add("hidden");
-        });
-    }
+    const modal = document.getElementById("store-modal");
+    document.getElementById("store-modal-close")?.addEventListener("click", () => modal?.classList.add("hidden"));
+    modal?.addEventListener("click", (event) => { if (event.target === modal) modal.classList.add("hidden"); });
 
-    quoteForm.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        if (!state.selected.size) {
-            storeToast("Selecciona al menos un producto.");
-            return;
-        }
-
-        const formData = new FormData(quoteForm);
-        const payload = {
-            nick: formData.get("nick"),
-            contact: formData.get("contact"),
-            notes: formData.get("notes"),
-            website: formData.get("website"),
-            items: Array.from(state.selected)
-        };
-
-        const selectedProducts = state.catalog.products.filter((product) => payload.items.includes(product.id));
-        const allTebex = selectedProducts.length > 0 && selectedProducts.every((product) => product.tebexEnabled);
+        const products = selectedProducts();
+        if (!products.length) return window.showToast?.("Selecciona un producto antes de continuar.");
+        const fields = new FormData(form);
+        const payload = { nick: fields.get("nick"), contact: fields.get("contact"), notes: fields.get("notes"), website: fields.get("website"), items: products.map((product) => product.id) };
+        const endpoint = selectedMode() === "tebex" ? "/api/store/tebex/checkout" : "/api/store/quote";
         const result = document.getElementById("quote-result");
-
         try {
-            if (allTebex) {
-                const response = await fetch("/api/store/tebex/checkout", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error || "tebex failed");
-                result.innerHTML = `
-                    <strong>Checkout listo: ${storeEscapeHtml(data.quoteId)}</strong>
-                    <p style="margin-top:0.6rem;">Tu compra está lista para pagar en Tebex.</p>
-                    <a class="btn btn-primary" href="${storeEscapeHtml(data.init_point)}" target="_blank" rel="noopener" style="margin-top:0.9rem;">Ir al checkout</a>
-                `;
-                result.classList.remove("hidden");
-                storeToast("Checkout Tebex generado.");
-                return;
-            }
-
-            const response = await fetch("/api/store/quote", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+            const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || "quote failed");
-            result.innerHTML = `
-                <strong>Solicitud generada: ${storeEscapeHtml(data.quoteId)}</strong>
-                <p style="margin-top:0.6rem;">Si hace falta respaldo manual, usa este texto en Discord.</p>
-                <textarea rows="7" readonly style="width:100%;margin-top:0.9rem;background:#0a1020;color:#f4f6fb;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:0.8rem;">${storeEscapeHtml(data.ticketMessage)}</textarea>
-            `;
+            if (!response.ok) throw new Error(data.error || "No se pudo preparar la compra.");
+            result.innerHTML = endpoint.includes("tebex") ? `<strong>Checkout listo.</strong><p>Serás dirigido a Tebex para completar el pago.</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" target="_blank" rel="noopener">Abrir checkout</a>` : `<strong>Solicitud registrada.</strong><p>La coordinación seguirá por Discord.</p><textarea rows="6" readonly>${storeEscape(data.ticketMessage)}</textarea>`;
             result.classList.remove("hidden");
-            storeToast("Solicitud manual generada.");
+            if (endpoint.includes("tebex")) window.open(data.init_point, "_blank", "noopener");
         } catch (error) {
-            result.innerHTML = "<strong>No se pudo generar el checkout.</strong><p style='margin-top:0.6rem;'>Prueba de nuevo o abre ticket en Discord.</p>";
+            result.innerHTML = `<strong>No se pudo continuar.</strong><p>${storeEscape(error.message)}</p>`;
             result.classList.remove("hidden");
-            storeToast(error.message || "Error generando compra.");
         }
     });
 
-    fetch("/api/store")
-        .then((response) => response.json())
-        .then((catalog) => {
-            state.catalog = catalog;
-            document.getElementById("store-health").textContent = "Catálogo sincronizado";
-            document.getElementById("store-product-count").textContent = String(catalog.summary.products);
-            document.getElementById("store-min-price").textContent = storeMoney(catalog.summary.minPrice);
-            document.getElementById("store-max-price").textContent = storeMoney(catalog.summary.maxPrice);
-            document.getElementById("store-updated").textContent = `Actualizado ${catalog.updatedAt}`;
-            renderAll();
-        })
-        .catch(() => {
-            grid.innerHTML = "<article class='store-card'><h3>Catálogo no disponible</h3><p>El backend de tienda no respondió.</p></article>";
-            document.getElementById("store-health").textContent = "Sin conexión";
-        });
+    fetch("/api/store").then((response) => response.ok ? response.json() : Promise.reject()).then((catalog) => {
+        state.catalog = catalog;
+        document.getElementById("store-health").textContent = "Catálogo conectado";
+        document.getElementById("store-product-count").textContent = `${catalog.summary.products} productos`;
+        document.getElementById("store-updated").textContent = `Actualizado ${catalog.updatedAt}`;
+        renderAll();
+    }).catch(() => { grid.innerHTML = "<article class='store-product'><h3>Catálogo no disponible</h3><p>El backend no respondió. Intenta más tarde.</p></article>"; });
 });

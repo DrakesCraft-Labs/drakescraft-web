@@ -1,104 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrakesCraft | Tienda</title>
-    <meta name="description" content="Tienda oficial de DrakesCraft.">
-    <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/base.css?v=20260710-scroll3d">
-    <link rel="stylesheet" href="styles/store.css?v=20260710-rebuild">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrakesCraft | Tienda</title><meta name="description" content="Rangos, roles, utilidades y encargos de DrakesCraft con entrega clara.">
+    <link rel="icon" type="image/png" href="assets/logo-drakescraft.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css?v=20260710-architecture"><link rel="stylesheet" href="styles/store.css?v=20260710-clarity">
 </head>
 <body class="page-shell" data-page="store">
-    <canvas id="particles-canvas" aria-hidden="true"></canvas>
-    <div class="scroll-progress" id="scroll-progress"></div>
-    <nav class="site-nav" aria-label="Principal">
-        <div class="container site-nav__bar">
-            <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Tienda oficial</span></span></a>
-            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
-            <ul class="site-nav__links" id="nav-menu">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="server.html">Servidor</a></li>
-                <li><a href="jack.html">Jack</a></li>
-                <li><a href="odysseia.html">Odysseia</a></li>
-                <li><a href="slimefun.html">Slimefun</a></li>
-                <li><a href="community.html">Comunidad</a></li>
-                <li><a href="bosses.html">Bosses</a></li>
-                <li><a class="active" href="store.html">Tienda</a></li>
-                <li><a href="rules.html">Reglas</a></li>
-                <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
-            </ul>
-        </div>
-    </nav>
-    <header class="hero">
-        <div class="container hero__grid">
-            <div>
-                <p class="eyebrow" id="hero-eyebrow"></p>
-                <h1 id="hero-title"></h1>
-                <p class="hero__tagline" id="hero-tagline"></p>
-                <p class="hero__intro" id="hero-intro"></p>
-                <div class="hero__actions"><a class="btn btn-primary" href="#store-grid">Ver catálogo</a><a class="btn btn-secondary" href="bosses.html">Volver a bosses</a></div>
-                <div class="metrics" id="manifest-metrics"></div>
-            </div>
-            <div class="hero-stage">
-                <div class="hero-stage__core"><div class="orbital-logo"><div class="orbital-logo__ring"></div><div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div></div></div>
-                <aside class="stage-card stage-card--a tilt-card"><strong>Rangos</strong><p>Rangos, perks y auras según la configuración actual del servidor.</p></aside>
-                <aside class="stage-card stage-card--b tilt-card"><strong>Checkout</strong><p>Compra con Tebex y respaldo manual cuando haga falta.</p></aside>
-                <aside class="stage-card stage-card--c tilt-card"><strong>Especiales</strong><p>Roles, kits, dragmas y SFMaster en categorías separadas.</p></aside>
-            </div>
-        </div>
-    </header>
+    <canvas id="particles-canvas" aria-hidden="true"></canvas><div class="scroll-progress" id="scroll-progress"></div>
+    <nav class="site-nav" aria-label="Principal"><div class="container site-nav__bar"><a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Tienda</span></span></a><button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button><ul class="site-nav__links" id="nav-menu"><li><a href="index.html">Inicio</a></li><li><a href="server.html">Servidor</a></li><li><a href="odysseia.html">Sistemas</a></li><li><a href="bosses.html">Bosses</a></li><li><a class="active" href="store.html">Tienda</a></li><li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li></ul></div></nav>
+    <header class="hero"><div class="container hero__grid"><div><p class="eyebrow">Tienda oficial</p><h1>Compra con claridad.</h1><p class="hero__tagline">Rangos, roles y mejoras con una entrega definida antes de llegar al checkout.</p><p class="hero__intro">El catálogo distingue lo que se paga por Tebex, lo que requiere coordinación y lo que existe solo dentro del juego. No hay paquetes ambiguos ni precios escondidos.</p><div class="metrics store-metrics"><article class="metric-card"><span>Entrega</span><strong>Definida</strong></article><article class="metric-card"><span>Checkout</span><strong>Tebex</strong></article><article class="metric-card"><span>Soporte</span><strong>Discord</strong></article></div></div></div></header>
     <main>
-        <section class="section"><div class="container"><div class="section__head"><h2>Tienda</h2><p>Catálogo, checkout y soporte en una sola página.</p></div><div class="panel-grid" id="manifest-pillars"></div></div></section>
-        <section class="section">
-            <div class="container" style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,0.8fr);gap:1rem;align-items:start;">
-                <div>
-                    <div class="section__head"><h2>Catálogo</h2><p>Explora rangos, roles, kits y especiales por categoría.</p></div>
-                    <div class="metrics" style="margin-bottom:1rem;">
-                        <article class="metric-card"><span>Estado</span><strong id="store-health">Cargando</strong></article>
-                        <article class="metric-card"><span>Productos</span><strong id="store-product-count">--</strong></article>
-                        <article class="metric-card"><span>Desde</span><strong id="store-min-price">--</strong></article>
-                        <article class="metric-card"><span>Hasta</span><strong id="store-max-price">--</strong></article>
-                    </div>
-                    <p id="store-updated" style="color:var(--muted);margin:0 0 1rem;"></p>
-                    <div class="hero__actions" id="store-tabs" style="margin-top:0;"></div>
-                    <div class="panel-grid" id="store-grid" style="margin-top:1rem;"></div>
-                </div>
-                <aside class="quote-panel">
-                    <p class="eyebrow" style="margin-bottom:0.8rem;">Checkout</p>
-                    <h2 style="margin-top:0;">Preparar compra</h2>
-                    <p>Selecciona productos y genera checkout automático o solicitud manual según la compatibilidad del paquete.</p>
-                    <div id="quote-items" style="margin-top:1rem;"></div>
-                    <p style="margin-top:1rem;"><strong>Total:</strong> <span id="quote-total">$0 CLP</span></p>
-                    <form id="quote-form" style="display:grid;gap:0.85rem;margin-top:1rem;">
-                        <input name="nick" maxlength="40" placeholder="Nick de Minecraft exacto" required style="padding:0.9rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:#0a1020;color:#f4f6fb;">
-                        <input name="contact" maxlength="80" placeholder="Discord o correo" required style="padding:0.9rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:#0a1020;color:#f4f6fb;">
-                        <input class="hidden" name="website" tabindex="-1" autocomplete="off">
-                        <textarea name="notes" rows="4" maxlength="500" placeholder="Notas opcionales" style="padding:0.9rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:#0a1020;color:#f4f6fb;"></textarea>
-                        <button class="btn btn-primary" type="submit">Generar checkout</button>
-                    </form>
-                    <div id="quote-result" class="hidden" style="margin-top:1rem;"></div>
-                </aside>
-            </div>
-        </section>
-        <section class="section"><div class="container"><div class="facts-grid" id="manifest-facts"></div></div></section>
-        <section class="section"><div class="container"><div class="cta-banner" id="manifest-cta"></div></div></section>
-        <section class="section"><div class="container"><div class="sequence-nav" id="page-sequence"></div></div></section>
+        <section class="section"><div class="container"><div class="store-guides"><article><span>01</span><h2>Elige una línea</h2><p>Rangos, roles, kits, territorio, economía o encargos. Cada grupo responde a una necesidad distinta.</p></article><article><span>02</span><h2>Revisa la entrega</h2><p>El detalle indica si el producto abre checkout Tebex, genera una solicitud manual o se compra dentro del servidor.</p></article><article><span>03</span><h2>Compra sin mezclar flujos</h2><p>Un checkout no combina entrega automática con cotizaciones. Así cada compra tiene un camino claro.</p></article></div></div></section>
+        <section class="section store-catalog"><div class="container store-layout"><div><div class="section__head"><p class="eyebrow">Catálogo</p><h2 id="store-category-title">Cargando catálogo</h2><p id="store-category-description">Estamos consultando los productos disponibles.</p></div><div class="store-status"><span id="store-health">Conectando</span><span id="store-product-count">-- productos</span><span id="store-updated">--</span></div><div class="store-tabs" id="store-tabs" aria-label="Categorías"></div><div class="store-grid" id="store-grid"></div></div><aside class="store-checkout"><p class="eyebrow">Selección</p><h2>Tu compra</h2><p id="store-selection-note">Agrega un producto para ver su método de entrega.</p><div id="quote-items"></div><p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p><form id="quote-form"><label>Nick de Minecraft<input name="nick" maxlength="40" placeholder="Exactamente como aparece en el juego" required></label><label>Contacto<input name="contact" maxlength="80" placeholder="Discord o correo" required></label><input class="hidden" name="website" tabindex="-1" autocomplete="off"><label>Nota opcional<textarea name="notes" rows="3" maxlength="500" placeholder="Solo si la compra necesita una aclaración"></textarea></label><button class="btn btn-primary" type="submit">Continuar</button></form><div id="quote-result" class="hidden"></div></aside></div></section>
+        <section class="section"><div class="container store-footnote"><p>Los ítems marcados como <strong>In-game</strong> se adquieren con Dragmas dentro del servidor. Los encargos no se cobran automáticamente: primero se revisan por Discord.</p><a href="rules.html">Reglas y soporte <span>↗</span></a></div></section>
     </main>
-    <div id="store-modal" class="hidden" style="position:fixed;inset:0;background:rgba(3,5,10,0.8);backdrop-filter:blur(10px);z-index:140;padding:1rem;">
-        <div style="width:min(680px,100%);margin:6vh auto 0;background:#090f1d;border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:1.4rem;box-shadow:var(--shadow);">
-            <div style="display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;">
-                <strong style="font-family:var(--font-heading);">Detalle del producto</strong>
-                <button id="store-modal-close" class="btn btn-secondary" type="button">Cerrar</button>
-            </div>
-            <div id="store-modal-body" style="margin-top:1rem;"></div>
-        </div>
-    </div>
-    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Tienda de DrakesCraft</strong><p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Catálogo oficial.</p></div><div class="site-footer__links"><a href="bosses.html">Bosses</a><a href="rules.html">Reglas</a><a href="community.html">Comunidad</a></div></div></footer>
-    <script src="three.min.js?v=20260710-webgl"></script><script src="scripts/background.js?v=20260710-webgl"></script><script src="scripts/site.js?v=20260710-vision"></script>
-    <script src="scripts/store.js?v=20260710-rebuild"></script>
+    <div id="store-modal" class="hidden"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
+    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Catálogo y entrega conectados al servidor.</p></div><div class="site-footer__links"><a href="odysseia.html">Sistemas</a><a href="community.html">Comunidad</a><a href="rules.html">Reglas</a></div></div></footer>
+    <script src="three.min.js?v=20260710-webgl"></script><script src="scripts/background.js?v=20260710-webgl"></script><script src="scripts/site.js?v=20260710-vision"></script><script src="scripts/store.js?v=20260710-clarity"></script>
 </body>
 </html>
