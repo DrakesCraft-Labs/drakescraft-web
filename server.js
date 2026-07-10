@@ -50,6 +50,8 @@ const tebexPackageIds = {
   'sfmaster-1h': 7545828,
   'sfmaster-24h': 7545831
 };
+// Prevent a checkout while the displayed protection area and the active PS alias diverge.
+const unavailableTebexProductIds = new Set(['protection-481', 'protection-1801']);
 
 const storeCatalog = {
   updatedAt: '2026-07-10',
@@ -298,7 +300,7 @@ const bossesCatalog = {
 };
 
 function isTebexEnabledProduct(product) {
-  return Boolean(product && tebexPackageIds[product.id]);
+  return Boolean(product && tebexPackageIds[product.id] && !unavailableTebexProductIds.has(product.id));
 }
 
 function getStoreCatalogView() {
@@ -307,7 +309,8 @@ function getStoreCatalogView() {
     products: storeCatalog.products.map((product) => ({
       ...product,
       tebexPackageId: tebexPackageIds[product.id] || null,
-      tebexEnabled: isTebexEnabledProduct(product)
+      tebexEnabled: isTebexEnabledProduct(product),
+      purchaseAvailable: !unavailableTebexProductIds.has(product.id)
     }))
   };
 }

@@ -10,6 +10,7 @@ function storeMoney(value, product) {
 }
 
 function deliveryType(product) {
+    if (product.purchaseAvailable === false) return "unavailable";
     if (product.category === "economy-kits") return "in-game";
     return product.tebexEnabled ? "tebex" : "manual";
 }
@@ -17,7 +18,8 @@ function deliveryType(product) {
 const deliveryLabel = {
     tebex: "Checkout Tebex",
     manual: "Revisión manual",
-    "in-game": "Se compra dentro del juego"
+    "in-game": "Se compra dentro del juego",
+    unavailable: "Temporalmente no disponible"
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -42,12 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const mode = deliveryType(product);
             const selected = state.selected.has(product.id);
             const incompatible = currentMode && currentMode !== mode;
-            const purchasable = mode !== "in-game";
+            const purchasable = mode !== "in-game" && mode !== "unavailable";
             return `<article class="store-product">
                 <div class="store-product__top"><div><span class="store-product__tag">${storeEscape(product.badge || deliveryLabel[mode])}</span><h3>${storeEscape(product.name)}</h3></div><strong class="store-product__price">${storeMoney(product.clp, product)}</strong></div>
                 <p>${storeEscape(product.summary)}</p>
                 <div class="store-product__delivery"><span>${deliveryLabel[mode]}</span><span>${mode === "tebex" && Number.isFinite(product.usd) ? `USD ${product.usd}` : ""}</span></div>
-                <div class="store-product__actions"><button class="btn btn-secondary" type="button" data-detail="${storeEscape(product.id)}">Detalle</button><button class="btn ${selected ? "btn-primary" : "btn-secondary"}" type="button" data-select="${storeEscape(product.id)}" ${!purchasable || incompatible ? "disabled" : ""}>${!purchasable ? "In-game" : selected ? "Seleccionado" : incompatible ? "Otro flujo" : "Agregar"}</button></div>
+                <div class="store-product__actions"><button class="btn btn-secondary" type="button" data-detail="${storeEscape(product.id)}">Detalle</button><button class="btn ${selected ? "btn-primary" : "btn-secondary"}" type="button" data-select="${storeEscape(product.id)}" ${!purchasable || incompatible ? "disabled" : ""}>${mode === "unavailable" ? "No disponible" : !purchasable ? "In-game" : selected ? "Seleccionado" : incompatible ? "Otro flujo" : "Agregar"}</button></div>
             </article>`;
         }).join("");
     }
