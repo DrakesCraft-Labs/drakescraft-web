@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("quote-form");
     if (!grid || !tabs || !form) return;
 
+    form.elements.nick?.insertAdjacentHTML("afterend", '<p class="store-bedrock-notice"><strong>¿Juegas desde Bedrock?</strong> Escribe tu nick exacto incluyendo el punto inicial. Ejemplo: <code>.JackStar</code>.</p>');
+
     const state = { catalog: null, category: "monthly", selected: new Set() };
     const productById = (id) => state.catalog.products.find((product) => product.id === id);
     const selectedProducts = () => [...state.selected].map(productById).filter(Boolean);
@@ -121,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || "No se pudo preparar la compra.");
-            result.innerHTML = endpoint.includes("tebex") ? `<strong>Checkout listo.</strong><p>Serás dirigido a Tebex para completar el pago.</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" target="_blank" rel="noopener">Abrir checkout</a>` : `<strong>Solicitud registrada.</strong><p>La coordinación seguirá por Discord.</p><textarea rows="6" readonly>${storeEscape(data.ticketMessage)}</textarea>`;
+            result.innerHTML = endpoint.includes("tebex") ? `<strong>Checkout listo.</strong><p>Serás dirigido a Tebex para completar el pago.</p><p class="store-bedrock-notice"><strong>Bedrock:</strong> confirma que tu nick incluye el punto inicial, por ejemplo <code>.JackStar</code>.</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" target="_blank" rel="noopener">Abrir checkout</a>` : `<strong>Solicitud registrada.</strong><p>La coordinación seguirá por Discord.</p><textarea rows="6" readonly>${storeEscape(data.ticketMessage)}</textarea>`;
             result.classList.remove("hidden");
             if (endpoint.includes("tebex")) window.open(data.init_point, "_blank", "noopener");
         } catch (error) {
