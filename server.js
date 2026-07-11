@@ -586,7 +586,7 @@ app.get('/api/store', async () => {
   };
 });
 
-app.get('/api/bosses', async () => {
+const getBossesCatalog = async () => {
   return {
     ...bossesCatalog,
     summary: {
@@ -595,7 +595,11 @@ app.get('/api/bosses', async () => {
       topDifficulty: 'Extrema'
     }
   };
-});
+};
+
+app.get('/api/bosses', getBossesCatalog);
+// Keeps the retired browser bundle functional while cached clients refresh.
+app.get('/api/pantheon', getBossesCatalog);
 
 app.post('/api/store/quote', async (request, reply) => {
   const body = request.body || {};
