@@ -10,6 +10,7 @@ services:
     environment:
       LT_LOAD_ONLY: es,en,pt,de
       LT_DISABLE_WEB_UI: "true"
+      LT_THREADS: "2"
     volumes:
       - ./libretranslate-data:/home/libretranslate/.local/share
     mem_limit: 2g
