@@ -1,0 +1,54 @@
+# Configuración preparada antes del primer inicio de WorldwideChat en DrakesCraft.
+# La clave se reemplaza sólo en el servidor; este archivo versionado no contiene secretos.
+General:
+  prefixName: Traductor
+  enablebStats: false
+  pluginLang: es-MX
+  updateCheckerDelay: 86400
+  syncUserDataDelay: 7200
+  fatalAsyncTaskTimeout: 10
+  objectTranslationConcurrencyLimit: 4
+  translationCapacityLimit: 0
+  enableDebugMode: false
+  syncUserLocalization: true
+  enableSounds: true
+  inputMethod: auto
+Storage:
+  useSQL: false
+  useMongoDB: false
+  usePostgreSQL: false
+Chat:
+  sendTranslationChat: true
+  sendPluginUpdateChat: false
+  sendIncomingHoverTextChat: true
+  sendOutgoingHoverTextChat: true
+  enableBlacklist: false
+  useVault: true
+  sendActionBar: true
+  chatListenerPriority: HIGHEST
+  separateChatChannel:
+    icon: globe
+    format: "{prefix}{username}{suffix}:"
+    hoverFormat: "&o{local:wwcOrigHover}:"
+    force: false
+Translator:
+  useAmazonTranslate: false
+  useAzureTranslate: false
+  useChatGPT: false
+  useOpenAICompatible: false
+  useDeepLTranslate: false
+  useGoogleTranslate: false
+  useLibreTranslate: true
+  libreAPIKey: __TRANSLATE_API_KEY_ON_STAR__
+  libreURL: https://web.drakescraft.cl/api/translate
+  useOllama: false
+  translatorCacheSize: 1000
+  enablePersistentCache: true
+  rateLimit: 0
+  messageCharLimit: 320
+  errorLimit: 5
+  errorsToIgnore:
+    - "confidence"
+    - "same as target"
+    - "detect the source language"
+    - "Unable to find model for specified languages"

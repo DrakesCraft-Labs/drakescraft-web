@@ -21,6 +21,8 @@ const tebexPrivateKey = process.env.TEBEX_PRIVATE_KEY || '';
 const adminToken = process.env.ADMIN_TOKEN || '';
 const discordSalesWebhook = process.env.DISCORD_SALES_WEBHOOK || '';
 const tebexWebhookSecret = process.env.TEBEX_WEBHOOK_SECRET || '';
+const translateApiKey = process.env.TRANSLATE_API_KEY || '';
+const translateUpstream = process.env.TRANSLATE_UPSTREAM || 'http://libretranslate:5000';
 const CUSTOM_KIT_PACKAGE_ID = 7516648;
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
@@ -526,6 +528,14 @@ app.addHook('onSend', async (request, reply) => {
 
 // Captura raw body antes del parseo para verificación HMAC (Tebex webhooks)
 import { Readable } from 'node:stream';
+app.addContentTypeParser('application/x-www-form-urlencoded', { parseAs: 'string' }, (_request, body, done) => {
+  try {
+    done(null, Object.fromEntries(new URLSearchParams(body)));
+  } catch (error) {
+    done(error);
+  }
+});
+
 app.addHook('preParsing', async (request, _reply, payload) => {
   const chunks = [];
   for await (const chunk of payload) chunks.push(chunk);
@@ -539,6 +549,65 @@ app.get('/api/health', async () => ({
   service: 'drakescraft-web',
   uptimeSeconds: Math.round(process.uptime())
 }));
+
+const translatorLanguages = [
+  { code: 'es', name: 'Spanish' },
+  { code: 'en', name: 'English' },
+  { code: 'pt', name: 'Portuguese' },
+  { code: 'de', name: 'German' }
+];
+const translatorLanguageCodes = new Set(translatorLanguages.map(({ code }) => code));
+
+function translatorAuthorized(request) {
+  return Boolean(translateApiKey) && safeEqualText(request.body?.api_key, translateApiKey);
+}
+
+async function forwardTranslation(request, reply, path) {
+  if (!translatorAuthorized(request)) {
+    return reply.code(401).send({ error: 'Unauthorized translation client.' });
+  }
+
+  const message = String(request.body?.q || '');
+  const source = String(request.body?.source || '');
+  const target = String(request.body?.target || '');
+  if (!message || message.length > 512) {
+    return reply.code(400).send({ error: 'Translation message is invalid.' });
+  }
+  if (path === '/translate' && (!translatorLanguageCodes.has(source) || !translatorLanguageCodes.has(target))) {
+    return reply.code(400).send({ error: 'Translation language is not supported.' });
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  try {
+    const payload = new URLSearchParams({
+      q: message,
+      ...(path === '/translate' ? { source, target, format: 'text' } : {})
+    });
+    const response = await fetch(`${translateUpstream}${path}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: payload,
+      signal: controller.signal
+    });
+    const responseBody = await response.json().catch(() => null);
+    if (!response.ok || !responseBody) {
+      request.log.warn({ statusCode: response.status, path }, 'Translation upstream rejected a request');
+      return reply.code(503).send({ error: 'Translation service is temporarily unavailable.' });
+    }
+    return responseBody;
+  } catch (error) {
+    request.log.warn({ err: error, path }, 'Translation upstream is unavailable');
+    return reply.code(503).send({ error: 'Translation service is temporarily unavailable.' });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+// WorldwideChat consumes this discovery endpoint before authenticating its requests.
+app.get('/api/translate/languages', async () => translatorLanguages);
+app.post('/api/translate/detect', async (request, reply) => forwardTranslation(request, reply, '/detect'));
+app.post('/api/translate/translate', async (request, reply) => forwardTranslation(request, reply, '/translate'));
 
 app.get('/api/overview', async (request, reply) => {
   const seen = request.headers.cookie?.includes('drakes_seen=1');
