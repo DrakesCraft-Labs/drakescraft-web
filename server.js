@@ -23,6 +23,14 @@ const discordSalesWebhook = process.env.DISCORD_SALES_WEBHOOK || '';
 const tebexWebhookSecret = process.env.TEBEX_WEBHOOK_SECRET || '';
 const translateApiKey = process.env.TRANSLATE_API_KEY || '';
 const translateUpstream = process.env.TRANSLATE_UPSTREAM || 'http://libretranslate:5000';
+// The Minecraft server only writes signed, non-sensitive operational telemetry.
+// Star Monitor reads it through a separate internal token.
+const odysseiaIngestSecret = process.env.ODYSSEIA_INGEST_SECRET || '';
+const starMonitorToken = process.env.STAR_MONITOR_TOKEN || '';
+const odysseiaStateFile = path.join(dataDir, 'odysseia-status.json');
+const odysseiaEventsFile = path.join(dataDir, 'odysseia-events.json');
+const ODYSSEIA_MAX_EVENT_AGE_MS = 5 * 60 * 1000;
+const ODYSSEIA_MAX_EVENTS = 500;
 const CUSTOM_KIT_PACKAGE_ID = 7516648;
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
@@ -483,6 +491,49 @@ async function saveVisits() {
   }
 }
 
+async function readJsonFile(file, fallback) {
+  try {
+    return JSON.parse(await fs.readFile(file, 'utf8'));
+  } catch (error) {
+    if (error.code !== 'ENOENT') app.log.warn({ err: error, file }, 'No se pudo leer estado persistente');
+    return fallback;
+  }
+}
+
+async function writeJsonAtomic(file, value) {
+  await fs.mkdir(dataDir, { recursive: true });
+  const temporaryFile = `${file}.tmp`;
+  await fs.writeFile(temporaryFile, JSON.stringify(value, null, 2), 'utf8');
+  await fs.rename(temporaryFile, file);
+}
+
+function validOdysseiaEvent(body) {
+  if (!body || typeof body !== 'object') return false;
+  return typeof body.eventId === 'string' && /^[A-Za-z0-9._:-]{8,128}$/.test(body.eventId)
+    && typeof body.type === 'string' && /^[A-Z_]{3,64}$/.test(body.type)
+    && typeof body.instanceId === 'string' && /^[A-Za-z0-9._:-]{1,128}$/.test(body.instanceId)
+    && typeof body.purchaseEngineReady === 'boolean'
+    && Number.isInteger(body.catalogProducts) && body.catalogProducts >= 0 && body.catalogProducts <= 1000;
+}
+
+function validOdysseiaSignature(request) {
+  if (!odysseiaIngestSecret) return { valid: false, status: 503 };
+  const timestamp = Number(request.headers['x-odysseia-timestamp']);
+  const signature = String(request.headers['x-odysseia-signature'] || '');
+  if (!Number.isFinite(timestamp) || Math.abs(Date.now() - timestamp) > ODYSSEIA_MAX_EVENT_AGE_MS || !signature) {
+    return { valid: false, status: 401 };
+  }
+  const expected = createHmac('sha256', odysseiaIngestSecret)
+    .update(`${timestamp}.${request.rawBody || ''}`)
+    .digest('hex');
+  return { valid: safeEqualText(signature, expected), status: 401 };
+}
+
+function isStarMonitorRequest(request) {
+  return Boolean(starMonitorToken)
+    && safeEqualText(String(request.headers['x-star-monitor-token'] || ''), starMonitorToken);
+}
+
 async function getDiscord() {
   if (discordCache.value && discordCache.expiresAt > Date.now()) return discordCache.value;
   const response = await fetch(discordUrl, {
@@ -608,6 +659,53 @@ async function forwardTranslation(request, reply, path) {
 app.get('/api/translate/languages', async () => translatorLanguages);
 app.post('/api/translate/detect', async (request, reply) => forwardTranslation(request, reply, '/detect'));
 app.post('/api/translate/translate', async (request, reply) => forwardTranslation(request, reply, '/translate'));
+
+// Odysseia is hosted outside Star, so it reaches this existing HTTPS endpoint
+// with an HMAC. The accepted payload deliberately excludes players, UUIDs and
+// Tebex transaction identifiers.
+app.post('/api/odysseia/events', async (request, reply) => {
+  const signature = validOdysseiaSignature(request);
+  if (!signature.valid) {
+    if (signature.status === 503) return reply.code(503).send({ error: 'Ingesta Odysseia no configurada' });
+    return reply.code(401).send({ error: 'Firma Odysseia inválida o vencida' });
+  }
+
+  const event = request.body || {};
+  if (!validOdysseiaEvent(event)) return reply.code(400).send({ error: 'Evento Odysseia inválido' });
+
+  const receivedAt = Date.now();
+  const normalized = {
+    eventId: event.eventId,
+    type: event.type,
+    instanceId: event.instanceId,
+    purchaseEngineReady: event.purchaseEngineReady,
+    catalogProducts: event.catalogProducts,
+    purchaseState: typeof event.purchaseState === 'string' ? event.purchaseState.slice(0, 64) : null,
+    productId: typeof event.productId === 'string' ? event.productId.slice(0, 128) : null,
+    sentAt: Number.isFinite(event.sentAt) ? event.sentAt : null,
+    receivedAt
+  };
+  const events = await readJsonFile(odysseiaEventsFile, []);
+  const known = Array.isArray(events) ? events : [];
+  if (!known.some((item) => item?.eventId === normalized.eventId)) {
+    known.unshift(normalized);
+    await writeJsonAtomic(odysseiaEventsFile, known.slice(0, ODYSSEIA_MAX_EVENTS));
+  }
+  await writeJsonAtomic(odysseiaStateFile, normalized);
+  return reply.code(202).send({ accepted: true });
+});
+
+// This endpoint is only useful from Star's loopback origin. It is still
+// token-gated so Cloudflare cannot expose operational details accidentally.
+app.get('/api/internal/odysseia/status', async (request, reply) => {
+  if (!isStarMonitorRequest(request)) return reply.code(404).send({ error: 'Ruta no encontrada' });
+  const latest = await readJsonFile(odysseiaStateFile, null);
+  const events = await readJsonFile(odysseiaEventsFile, []);
+  return {
+    latest,
+    events: Array.isArray(events) ? events.slice(0, ODYSSEIA_MAX_EVENTS) : []
+  };
+});
 
 app.get('/api/overview', async (request, reply) => {
   const seen = request.headers.cookie?.includes('drakes_seen=1');
