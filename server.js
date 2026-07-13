@@ -50,14 +50,10 @@ const tebexPackageIds = {
   'sfmaster-1h': 7545828,
   'sfmaster-24h': 7545831
 };
-// Fail closed while the deployed Purchase Engine catalog and Tebex commands are reconciled.
-// The public storefront is the only checkout path, so this prevents incomplete deliveries.
+// Solo permanece bloqueado el producto cuyo tamaño ofrecido aún no coincide con ProtectionStones.
+// El resto del catálogo fue conciliado con el Purchase Engine y Tebex.
 const unavailableTebexProductIds = new Set([
-  'hercules', 'hestia', 'hermes', 'hefesto', 'artemisa', 'afrodita', 'zeus',
-  'minero', 'cazador', 'constructor', 'lenador', 'alquimista', 'nomada',
-  'kit-hermes', 'kit-zeus', 'protection-177', 'protection-481',
-  'utility-economy', 'dragmas-saco', 'dragmas-cofre', 'dragmas-anfora',
-  'sfmaster-1h', 'sfmaster-24h'
+  'protection-481'
 ]);
 
 const storeCatalog = {
