@@ -29,6 +29,10 @@
       "text": "Vanilla, economía, progreso técnico y endgame conviven sin quedar aislados."
     },
     {
+      "title": "Mercado de jugadores",
+      "text": "QuickShop permite crear tiendas propias: 10 para jugadores base y más capacidad con cada rango VIP."
+    },
+    {
       "title": "Fuera del juego",
       "text": "Discord, tienda y web acompañan la experiencia sin sentirse separados del servidor."
     },
@@ -60,7 +64,8 @@
       "items": [
         "Vanilla base",
         "Slimefun",
-        "Bosses míticos"
+        "Bosses míticos",
+        "Tiendas QuickShop"
       ]
     },
     {
