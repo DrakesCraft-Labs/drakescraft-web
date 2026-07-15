@@ -49,3 +49,7 @@ npm start
 ```text
 GitHub -> star -> Fastify -> Cloudflare Tunnel -> web.drakescraft.cl
 ```
+
+## Operacion
+
+- [Migracion de la estacion operativa a Windows (2026-07-15)](docs/operations/windows-migration-2026-07-15.md)
