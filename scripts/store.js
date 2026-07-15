@@ -6,18 +6,17 @@ function storeEscape(value) {
 
 function storeMoney(value, product) {
     if (product?.coins) return `${product.coins.toLocaleString("es-CL")} ₯`;
-    return Number.isFinite(value) ? `$${value.toLocaleString("es-CL")} CLP` : "Cotización";
+    return Number.isFinite(value) ? `$${value.toLocaleString("es-CL")} CLP` : "No disponible";
 }
 
 function deliveryType(product) {
     if (product.purchaseAvailable === false) return "unavailable";
     if (product.category === "economy-kits") return "in-game";
-    return product.tebexEnabled ? "tebex" : "manual";
+    return product.tebexEnabled ? "tebex" : "unavailable";
 }
 
 const deliveryLabel = {
     tebex: "Checkout Tebex",
-    manual: "Revisión manual",
     "in-game": "Se compra dentro del juego",
     unavailable: "Temporalmente no disponible"
 };
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         const mode = selectedMode();
-        note.textContent = mode === "tebex" ? "Estos productos abren un checkout seguro de Tebex." : "Estos productos generan una solicitud para coordinar con el staff.";
+        note.textContent = "Estos productos abren un checkout seguro de Tebex.";
         target.innerHTML = products.map((product) => `<div class="store-selection-item"><div><strong>${storeEscape(product.name)}</strong><p>${storeMoney(product.clp, product)} · ${deliveryLabel[deliveryType(product)]}</p></div><button type="button" data-remove="${storeEscape(product.id)}">Quitar</button></div>`).join("");
         total.textContent = storeMoney(products.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0));
     }
@@ -117,15 +116,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!products.length) return window.showToast?.("Selecciona un producto antes de continuar.");
         const fields = new FormData(form);
         const payload = { nick: fields.get("nick"), contact: fields.get("contact"), notes: fields.get("notes"), website: fields.get("website"), items: products.map((product) => product.id) };
-        const endpoint = selectedMode() === "tebex" ? "/api/store/tebex/checkout" : "/api/store/quote";
+        const endpoint = "/api/store/tebex/checkout";
         const result = document.getElementById("quote-result");
         try {
             const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || "No se pudo preparar la compra.");
-            result.innerHTML = endpoint.includes("tebex") ? `<strong>Checkout listo.</strong><p>Serás dirigido a Tebex para completar el pago.</p><p class="store-bedrock-notice"><strong>Bedrock:</strong> confirma que tu nick incluye el punto inicial, por ejemplo <code>.JackStar</code>.</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" target="_blank" rel="noopener">Abrir checkout</a>` : `<strong>Solicitud registrada.</strong><p>La coordinación seguirá por Discord.</p><textarea rows="6" readonly>${storeEscape(data.ticketMessage)}</textarea>`;
+            result.innerHTML = `<strong>Checkout listo.</strong><p>Serás dirigido a Tebex para completar el pago.</p><p class="store-bedrock-notice"><strong>Bedrock:</strong> confirma que tu nick incluye el punto inicial, por ejemplo <code>.JackStar</code>.</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" target="_blank" rel="noopener">Abrir checkout</a>`;
             result.classList.remove("hidden");
-            if (endpoint.includes("tebex")) window.open(data.init_point, "_blank", "noopener");
+            window.open(data.init_point, "_blank", "noopener");
         } catch (error) {
             result.innerHTML = `<strong>No se pudo continuar.</strong><p>${storeEscape(error.message)}</p>`;
             result.classList.remove("hidden");

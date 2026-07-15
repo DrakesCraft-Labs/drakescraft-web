@@ -12,7 +12,7 @@ Esta migracion no mueve el hosting web a Windows. `star` sigue siendo el host Li
 
 - `https://web.drakescraft.cl/` responde HTTP 200.
 - `https://web.drakescraft.cl/api/health` responde HTTP 200 con estado del servicio.
-- `https://web.drakescraft.cl/api/store/pending` responde HTTP 401 sin `X-API-Key`; el endpoint de entregas no quedó expuesto.
+- La entrega de compras queda exclusivamente en Tebex y Odysseia; el portal no expone una cola de entregas propia.
 - `star` es accesible por SSH y mantiene el contenedor `drakescraft-web` en estado `healthy`.
 - El Cloudflare Tunnel de `star` está activo.
 

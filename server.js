@@ -4,10 +4,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
-import { MercadoPagoConfig, Preference, Payment } from 'mercadopago';
 
 
-const app = Fastify({ logger: true, trustProxy: true });
+const app = Fastify({ logger: true, trustProxy: true, bodyLimit: 128 * 1024 });
 const root = path.dirname(fileURLToPath(import.meta.url));
 // Editorial manifests ship with the application; the mounted data directory is
 // reserved for mutable checkout, visitor, and payment records.
@@ -34,6 +33,58 @@ const ODYSSEIA_MAX_EVENTS = 500;
 const CUSTOM_KIT_PACKAGE_ID = 7516648;
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
+const legacyPaymentPaths = new Set([
+  '/api/store/checkout',
+  '/api/mp/webhook',
+  '/api/store/paypal/checkout',
+  '/api/store/paypal/capture',
+  '/api/store/paypal/capture-subscription',
+  '/api/paypal/webhook',
+  '/api/store/quote'
+]);
+const checkoutBuckets = new Map();
+const CHECKOUT_WINDOW_MS = 10 * 60 * 1000;
+const CHECKOUT_MAX_REQUESTS = 5;
+
+function safeEqualText(left, right) {
+  const leftBuffer = Buffer.from(String(left || ''), 'utf8');
+  const rightBuffer = Buffer.from(String(right || ''), 'utf8');
+  return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function clientAddress(request) {
+  const cloudflareAddress = request.headers['cf-connecting-ip'];
+  return typeof cloudflareAddress === 'string' && cloudflareAddress.length <= 64
+    ? cloudflareAddress
+    : request.ip;
+}
+
+function checkoutAllowed(request) {
+  const now = Date.now();
+  const address = clientAddress(request);
+  const bucket = checkoutBuckets.get(address);
+  if (!bucket || now - bucket.startedAt >= CHECKOUT_WINDOW_MS) {
+    checkoutBuckets.set(address, { startedAt: now, count: 1 });
+    return true;
+  }
+
+  bucket.count += 1;
+  if (bucket.count <= CHECKOUT_MAX_REQUESTS) return true;
+  return false;
+}
+
+app.addHook('onRequest', async (request, reply) => {
+  const pathname = request.url.split('?', 1)[0];
+  if (legacyPaymentPaths.has(pathname)) {
+    return reply.code(410).send({ error: 'Esta pasarela fue retirada. Usa Tebex.' });
+  }
+
+  if (pathname === '/api/store/tebex/checkout' && !checkoutAllowed(request)) {
+    return reply.code(429).header('Retry-After', String(CHECKOUT_WINDOW_MS / 1000)).send({
+      error: 'Demasiados intentos de checkout. Espera unos minutos antes de volver a intentar.'
+    });
+  }
+});
 
 const tebexPackageIds = {
   hercules: 7510343,
@@ -564,12 +615,14 @@ await loadVisits();
 app.addHook('onSend', async (request, reply) => {
   reply.header('X-Content-Type-Options', 'nosniff');
   reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
-  reply.header('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  reply.header('X-Frame-Options', 'SAMEORIGIN');
+  reply.header('Permissions-Policy', 'camera=(), geolocation=(), microphone=(), payment=(), usb=()');
+  reply.header('X-Frame-Options', 'DENY');
+  reply.header('Cross-Origin-Opener-Policy', 'same-origin');
+  reply.header('Cross-Origin-Resource-Policy', 'same-origin');
   reply.header('X-XSS-Protection', '1; mode=block');
   reply.header(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://discord.com https://static.cloudflareinsights.com;"
+    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src * data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://discord.com https://static.cloudflareinsights.com;"
   );
   const requestPath = request.raw.url?.split('?', 1)[0] || '';
   if (requestPath === '/' || requestPath.endsWith('.html')) {
@@ -765,61 +818,6 @@ app.get('/api/bosses', getBossesCatalog);
 // Keeps the retired browser bundle functional while cached clients refresh.
 app.get('/api/pantheon', getBossesCatalog);
 
-app.post('/api/store/quote', async (request, reply) => {
-  const body = request.body || {};
-  const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
-  const validIds = new Set(storeCatalog.products.map((product) => product.id));
-  const items = selectedIds.filter((id) => validIds.has(id));
-  const nick = String(body.nick || '').trim().slice(0, 40);
-  const contact = String(body.contact || '').trim().slice(0, 80);
-  const notes = String(body.notes || '').trim().slice(0, 500);
-
-  if (!items.length) return reply.code(400).send({ error: 'Selecciona al menos un producto.' });
-  if (body.website) return reply.code(204).send();
-
-  const quote = {
-    id: `dq-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`,
-    createdAt: new Date().toISOString(),
-    ipCountry: request.headers['cf-ipcountry'] || null,
-    nick,
-    contact,
-    items,
-    notes
-  };
-
-  await fs.mkdir(dataDir, { recursive: true });
-  await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
-
-  const selected = storeCatalog.products.filter((product) => items.includes(product.id));
-  const total = selected.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0);
-
-  // Notificar cotización manual por Discord webhook
-  await notifyQuoteDiscord({
-    type: 'Nueva Solicitud (Ticket Manual)',
-    quoteId: quote.id,
-    items: selected,
-    nick,
-    contact,
-    notes,
-    total,
-    currency: 'CLP'
-  });
-
-  return {
-    ok: true,
-    quoteId: quote.id,
-    discordUrl: storeCatalog.payment.discord,
-    total,
-    ticketMessage: [
-      `Solicitud tienda DrakesCraft ${quote.id}`,
-      nick ? `Nick: ${nick}` : null,
-      contact ? `Contacto: ${contact}` : null,
-      `Items: ${selected.map((product) => product.name).join(', ')}`,
-      notes ? `Notas: ${notes}` : null
-    ].filter(Boolean).join('\n')
-  };
-});
-
 app.post('/api/store/tebex/checkout', async (request, reply) => {
   const body = request.body || {};
   const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
@@ -929,13 +927,7 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
   let color = 10181046; // Violeta para cotización manual
   let description = `Se ha generado una solicitud para adquirir: **${names}**`;
   
-  if (type.includes('Mercado Pago')) {
-    color = 40675; // Celeste Mercado Pago
-    emoji = '🔵';
-  } else if (type.includes('PayPal')) {
-    color = 12423; // Azul PayPal
-    emoji = '🟡';
-  } else if (type.includes('Tebex')) {
+  if (type.includes('Tebex')) {
     color = 15844367; // Dorado Tebex
     emoji = '🟠';
     description = `Se generó un checkout de Tebex para: **${names}**`;
@@ -975,933 +967,6 @@ async function notifyQuoteDiscord({ type, quoteId, items, nick, contact, notes, 
 
 
 
-// ─── MercadoPago Configuration ───────────────────────────────────────────────
-const mpAccessToken = process.env.MP_ACCESS_TOKEN;
-let mp = null;
-if (mpAccessToken) {
-  mp = new MercadoPagoConfig({ accessToken: mpAccessToken });
-}
-
-// ─── PayPal Configuration ───────────────────────────────────────────────────
-const paypalClientId = process.env.PAYPAL_CLIENT_ID;
-const paypalClientSecret = process.env.PAYPAL_CLIENT_SECRET;
-const paypalWebhookId = process.env.PAYPAL_WEBHOOK_ID;
-const paypalMode = process.env.PAYPAL_MODE || 'live'; // por defecto live
-const paypalBaseUrl = paypalMode === 'live' ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
-const mpWebhookSecret = process.env.MP_WEBHOOK_SECRET;
-
-async function getPaypalAccessToken() {
-  if (!paypalClientId || !paypalClientSecret) {
-    throw new Error('PayPal Client ID o Secret no configurados');
-  }
-  const auth = Buffer.from(`${paypalClientId}:${paypalClientSecret}`).toString('base64');
-  const response = await fetch(`${paypalBaseUrl}/v1/oauth2/token`, {
-    method: 'POST',
-    body: 'grant_type=client_credentials',
-    headers: {
-      Authorization: `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
-
-  if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(`Error al obtener access token de PayPal: ${errText}`);
-  }
-  const data = await response.json();
-  return data.access_token;
-}
-
-function safeEqualText(left, right) {
-  const leftBuffer = Buffer.from(String(left || ''), 'utf8');
-  const rightBuffer = Buffer.from(String(right || ''), 'utf8');
-  return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
-}
-
-// Rebuilds Mercado Pago's signed manifest without trusting the webhook payload.
-function verifyMercadoPagoSignature(request) {
-  if (!mpWebhookSecret) return false;
-
-  const signatureParts = Object.fromEntries(
-    String(request.headers['x-signature'] || '')
-      .split(',')
-      .map(part => part.trim().split('=', 2))
-      .filter(([key, value]) => key && value)
-  );
-  const requestId = String(request.headers['x-request-id'] || '');
-  const dataId = String(request.query?.['data.id'] || request.body?.data?.id || '').toLowerCase();
-  const timestamp = signatureParts.ts || '';
-  const receivedSignature = signatureParts.v1 || '';
-
-  if (!requestId || !dataId || !timestamp || !receivedSignature) return false;
-
-  const manifest = `id:${dataId};request-id:${requestId};ts:${timestamp};`;
-  const expectedSignature = createHmac('sha256', mpWebhookSecret).update(manifest).digest('hex');
-  return safeEqualText(receivedSignature, expectedSignature);
-}
-
-// Uses PayPal's verification endpoint and the webhook ID bound to this application.
-async function verifyPaypalWebhook(request) {
-  if (!paypalWebhookId) return false;
-
-  const accessToken = await getPaypalAccessToken();
-  const response = await fetch(`${paypalBaseUrl}/v1/notifications/verify-webhook-signature`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      transmission_id: request.headers['paypal-transmission-id'],
-      transmission_time: request.headers['paypal-transmission-time'],
-      cert_url: request.headers['paypal-cert-url'],
-      auth_algo: request.headers['paypal-auth-algo'],
-      transmission_sig: request.headers['paypal-transmission-sig'],
-      webhook_id: paypalWebhookId,
-      webhook_event: request.body
-    })
-  });
-
-  if (!response.ok) {
-    app.log.warn({ status: response.status }, 'PayPal webhook verification failed');
-    return false;
-  }
-
-  const verification = await response.json();
-  return verification.verification_status === 'SUCCESS';
-}
-
-const subscriptionsFile = path.join(dataDir, 'subscriptions.json');
-const paypalPlansFile = path.join(dataDir, 'paypal-plans.json');
-
-async function loadSubscriptions() {
-  try {
-    const data = await fs.readFile(subscriptionsFile, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code !== 'ENOENT') app.log.warn(error, 'No se pudo leer las suscripciones');
-    return [];
-  }
-}
-
-async function saveSubscriptions(list) {
-  try {
-    await fs.mkdir(dataDir, { recursive: true });
-    const temporaryFile = `${subscriptionsFile}.tmp`;
-    await fs.writeFile(temporaryFile, JSON.stringify(list, null, 2), 'utf8');
-    await fs.rename(temporaryFile, subscriptionsFile);
-  } catch (error) {
-    app.log.error(error, 'No se pudo guardar las suscripciones');
-  }
-}
-
-async function loadPaypalPlans() {
-  try {
-    const data = await fs.readFile(paypalPlansFile, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code !== 'ENOENT') app.log.warn(error, 'No se pudo leer los planes de PayPal');
-    return {};
-  }
-}
-
-async function savePaypalPlans(plans) {
-  try {
-    await fs.mkdir(dataDir, { recursive: true });
-    const temporaryFile = `${paypalPlansFile}.tmp`;
-    await fs.writeFile(temporaryFile, JSON.stringify(plans, null, 2), 'utf8');
-    await fs.rename(temporaryFile, paypalPlansFile);
-  } catch (error) {
-    app.log.error(error, 'No se pudo guardar los planes de PayPal');
-  }
-}
-
-async function getOrCreatePaypalPlan(productId, productName, usdPrice) {
-  const plans = await loadPaypalPlans();
-  if (plans[productId]) {
-    return plans[productId];
-  }
-
-  const accessToken = await getPaypalAccessToken();
-
-  // 1. Ensure we have a Product ID stored
-  let paypalProductId = plans._productId;
-  if (!paypalProductId) {
-    const pResponse = await fetch(`${paypalBaseUrl}/v1/catalogs/products`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: "DrakesCraft Suscripciones",
-        description: "Suscripción a rangos y roles mensuales en DrakesCraft",
-        type: "DIGITAL",
-        category: "SOFTWARE"
-      })
-    });
-    if (!pResponse.ok) {
-      const errText = await pResponse.text();
-      throw new Error(`Error al crear producto en PayPal: ${errText}`);
-    }
-    const productData = await pResponse.json();
-    paypalProductId = productData.id;
-    plans._productId = paypalProductId;
-  }
-
-  // 2. Create the Billing Plan
-  const planResponse = await fetch(`${paypalBaseUrl}/v1/billing/plans`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
-    },
-    body: JSON.stringify({
-      product_id: paypalProductId,
-      name: `Suscripción ${productName}`,
-      description: `Débito mensual automático para ${productName}`,
-      status: "ACTIVE",
-      billing_cycles: [
-        {
-          frequency: {
-            interval_unit: "MONTH",
-            interval_count: 1
-          },
-          tenure_type: "REGULAR",
-          sequence: 1,
-          total_cycles: 0,
-          pricing_scheme: {
-            fixed_price: {
-              value: usdPrice.toFixed(2),
-              currency_code: "USD"
-            }
-          }
-        }
-      ],
-      payment_preferences: {
-        auto_bill_outstanding: true,
-        setup_fee_failure_action: "CANCEL",
-        payment_failure_threshold: 1
-      }
-    })
-  });
-
-  if (!planResponse.ok) {
-    const errText = await planResponse.text();
-    throw new Error(`Error al crear plan de facturación en PayPal para ${productId}: ${errText}`);
-  }
-
-  const planData = await planResponse.json();
-  plans[productId] = planData.id;
-  await savePaypalPlans(plans);
-  return planData.id;
-}
-
-async function notifyPaymentDiscord({ platform, paymentId, status, items, nick, contact, amount, currency }) {
-  const webhook = process.env.DISCORD_PAYMENTS_WEBHOOK;
-  if (!webhook) return;
-
-  const names = items.map(p => p.name).join(', ');
-  const isApproved = status === 'approved' || status === 'COMPLETED';
-  const emoji = isApproved ? '🟢' : '🔴';
-  const statusLabel = isApproved ? 'Aprobado / Completado' : `Pendiente/Rechazado (${status})`;
-  const color = isApproved ? 3066993 : 15158332; // Verde esmeralda (#2ecc71) o Rojo/naranja (#e74c3c)
-  const formattedAmount = currency === 'CLP' 
-    ? `$${amount.toLocaleString('es-CL')} CLP` 
-    : `$${amount.toFixed(2)} USD`;
-
-  try {
-    const res = await fetch(webhook, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: 'DrakesCraft · Pagos',
-        avatar_url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png',
-        embeds: [{
-          title: `${emoji} Pago Recibido — ${platform}`,
-          description: `¡Se ha completado una transacción con éxito para: **${names}**!`,
-          color,
-          thumbnail: { url: 'https://web.drakescraft.cl/assets/logo-drakescraft.png' },
-          fields: [
-            { name: '🎮 Nick del Jugador', value: `\`${nick || '—'}\``, inline: true },
-            { name: '💬 Contacto', value: `\`${contact || '—'}\``, inline: true },
-            { name: '💰 Monto Pagado', value: `**${formattedAmount}**`, inline: true },
-            { name: '🏦 Pasarela', value: `\`${platform}\``, inline: true },
-            { name: '📊 Estado del Pago', value: `\`${statusLabel}\``, inline: true },
-            { name: '🔑 ID de Transacción', value: `\`${paymentId}\``, inline: false },
-          ],
-          footer: { text: `DrakesCraft · Portal de Pagos · ${new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })}` }
-        }]
-      })
-    });
-    if (!res.ok) {
-      const text = await res.text();
-      app.log.warn({ status: res.status, text }, 'Discord payments webhook returned non-2xx response');
-    }
-  } catch (err) {
-    app.log.error(err, 'Error sending payment to Discord webhook');
-  }
-}
-
-// POST /api/store/checkout — crea preferencia de pago en MP y devuelve init_point
-app.post('/api/store/checkout', async (request, reply) => {
-  const body = request.body || {};
-  const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
-  const validIds = new Set(storeCatalog.products.map(p => p.id));
-  const items = storeCatalog.products.filter(p => selectedIds.includes(p.id) && validIds.has(p.id) && Number.isFinite(p.clp));
-  const nick = String(body.nick || '').trim().slice(0, 40);
-  const contact = String(body.contact || '').trim().slice(0, 80);
-  const notes = String(body.notes || '').trim().slice(0, 500);
-  const autoRenew = !!body.autoRenew;
-
-  if (body.website) return reply.code(204).send();
-  if (!items.length) return reply.code(400).send({ error: 'Selecciona al menos un producto con precio.' });
-  if (!mp) return reply.code(503).send({ error: 'Pagos locales con Mercado Pago no configurados.' });
-
-  const quoteId = `dq-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
-
-  if (autoRenew) {
-    if (items.length !== 1) {
-      return reply.code(400).send({ error: 'Para activar la renovación automática, debes seleccionar exactamente un Rango VIP o Rol a la vez.' });
-    }
-    const targetItem = items[0];
-    if (targetItem.category !== 'monthly' && targetItem.category !== 'roles') {
-      return reply.code(400).send({ error: 'La renovación automática solo está disponible para Rangos VIP y Roles de Juego.' });
-    }
-    if (!contact || !contact.includes('@')) {
-      return reply.code(400).send({ error: 'Para activar la renovación automática, debes ingresar un correo electrónico válido en el campo de contacto para registrar tu suscripción.' });
-    }
-
-    try {
-      const response = await fetch('https://api.mercadopago.com/v1/preapproval', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${mpAccessToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          payer_email: contact.trim(),
-          back_url: 'https://web.drakescraft.cl/store.html?payment=mp-sub-success',
-          reason: `Suscripción Mensual — ${targetItem.name}`,
-          external_reference: quoteId,
-          auto_recurring: {
-            frequency: 1,
-            frequency_type: 'months',
-            transaction_amount: targetItem.clp,
-            currency_id: 'CLP'
-          },
-          notification_url: 'https://web.drakescraft.cl/api/mp/webhook',
-          status: 'pending'
-        })
-      });
-
-      if (!response.ok) {
-        const errText = await response.text();
-        app.log.warn({ errText }, 'Error al crear preaprobación de Mercado Pago');
-        return reply.code(500).send({ error: 'Error al generar la suscripción en la pasarela de Mercado Pago.' });
-      }
-
-      const preapproval = await response.json();
-      const initPoint = preapproval.init_point;
-
-      // Registrar suscripción localmente
-      const subscriptions = await loadSubscriptions();
-      subscriptions.push({
-        id: preapproval.id,
-        platform: 'Mercado Pago',
-        nick,
-        contact,
-        productId: targetItem.id,
-        productName: targetItem.name,
-        createdAt: new Date().toISOString()
-      });
-      await saveSubscriptions(subscriptions);
-
-      const quote = { id: quoteId, createdAt: new Date().toISOString(), nick, contact, items: [targetItem.id], notes, mpPreapprovalId: preapproval.id };
-      await fs.mkdir(dataDir, { recursive: true });
-      await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
-
-      // Notificar a Discord la intención de suscripción
-      await notifyQuoteDiscord({
-        type: 'Nueva Intención de Suscripción (Mercado Pago)',
-        quoteId,
-        items,
-        nick,
-        contact,
-        notes,
-        total: targetItem.clp,
-        currency: 'CLP'
-      });
-
-      return { ok: true, quoteId, init_point: initPoint, preapprovalId: preapproval.id };
-    } catch (err) {
-      app.log.error(err, 'mp preapproval creation error');
-      return reply.code(500).send({ error: 'Error interno de Mercado Pago al procesar suscripción.' });
-    }
-  }
-  
-  try {
-    const pref = new Preference(mp);
-    const prefData = await pref.create({ body: {
-      external_reference: quoteId,
-      items: items.map(p => ({
-        id: p.id,
-        title: `DrakesCraft — ${p.name}`,
-        quantity: 1,
-        unit_price: p.clp,
-        currency_id: 'CLP'
-      })),
-      payer: { name: nick || undefined, email: contact?.includes('@') ? contact : undefined },
-      back_urls: {
-        success: 'https://web.drakescraft.cl/store.html?payment=success',
-        failure: 'https://web.drakescraft.cl/store.html?payment=failure',
-        pending: 'https://web.drakescraft.cl/store.html?payment=pending'
-      },
-      auto_return: 'approved',
-      notification_url: 'https://web.drakescraft.cl/api/mp/webhook',
-      metadata: { nick, contact, notes, quoteId }
-    }});
-
-    const quote = { id: quoteId, createdAt: new Date().toISOString(), nick, contact, items: items.map(p => p.id), notes, mpPrefId: prefData.id };
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
-
-    // Notificar a Discord la intención de pago
-    const totalClp = items.reduce((sum, p) => sum + p.clp, 0);
-    await notifyQuoteDiscord({
-      type: 'Nueva Intención de Pago (Mercado Pago)',
-      quoteId,
-      items,
-      nick,
-      contact,
-      notes,
-      total: totalClp,
-      currency: 'CLP'
-    });
-
-    return { ok: true, quoteId, init_point: prefData.init_point };
-  } catch (err) {
-    app.log.error(err, 'mp preference creation error');
-    return reply.code(500).send({ error: 'Error al generar preferencia de Mercado Pago.' });
-  }
-});
-
-// POST /api/mp/webhook — recibe notificaciones de pago de MercadoPago
-app.post('/api/mp/webhook', async (request, reply) => {
-  const body = request.body || {};
-  if (!verifyMercadoPagoSignature(request)) {
-    return reply.code(401).send({ error: 'Firma de Mercado Pago inválida.' });
-  }
-  if ((body.type !== 'payment' && body.topic !== 'payment') || !body.data?.id || !mp) {
-    return reply.code(200).send('ignored');
-  }
-
-  try {
-    const paymentApi = new Payment(mp);
-    const payment = await paymentApi.get({ id: String(body.data.id) });
-    const logFile = path.join(dataDir, 'mp-payments.jsonl');
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.appendFile(logFile, `${JSON.stringify({ ts: new Date().toISOString(), ...payment })}\n`, 'utf8');
-
-    if (payment.status === 'approved' || payment.status === 'in_process') {
-      const meta = payment.metadata || {};
-      let nick = meta.nick || payment.external_reference || '';
-      let contact = meta.contact || '';
-      
-      // Mapeo si viene de una suscripción/preaprobación
-      let itemIds = [];
-      const preapprovalId = payment.preapproval_id;
-      let isSubscription = false;
-
-      if (preapprovalId) {
-        const subscriptions = await loadSubscriptions();
-        const subRecord = subscriptions.find(s => s.id === preapprovalId);
-        if (subRecord) {
-          nick = subRecord.nick;
-          contact = subRecord.contact;
-          itemIds = [subRecord.productId];
-          isSubscription = true;
-        }
-      }
-
-      if (itemIds.length === 0) {
-        itemIds = Array.isArray(payment.additional_info?.items)
-          ? payment.additional_info.items.map(i => i.id)
-          : [];
-      }
-
-      const items = storeCatalog.products.filter(p => itemIds.includes(p.id));
-
-      await notifyPaymentDiscord({
-        platform: isSubscription ? 'Mercado Pago (Suscripción)' : 'Mercado Pago',
-        paymentId: payment.id,
-        status: payment.status,
-        items,
-        nick,
-        contact,
-        amount: payment.transaction_amount,
-        currency: 'CLP'
-      });
-
-      // Agregar a la cola de entregas automáticas
-      if (payment.status === 'approved') {
-        const pending = await loadPendingPurchases();
-        for (const item of items) {
-          const txnId = isSubscription ? `mp_sub_payment_${payment.id}_${item.id}` : `mp_${payment.id}_${item.id}`;
-          if (!pending.some(p => p.id === txnId)) {
-            pending.push({
-              id: txnId,
-              nick,
-              productId: item.id,
-              productName: item.name,
-              timestamp: new Date().toISOString()
-            });
-          }
-        }
-        await savePendingPurchases(pending);
-      }
-    }
-    return reply.code(200).send('ok');
-  } catch (err) {
-    app.log.warn(err, 'mp webhook error');
-    return reply.code(500).send({ error: 'No se pudo procesar la notificación.' });
-  }
-});
-
-// POST /api/store/paypal/checkout — crea preferencia de pago en PayPal y devuelve init_point
-app.post('/api/store/paypal/checkout', async (request, reply) => {
-  const body = request.body || {};
-  const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
-  const validIds = new Set(storeCatalog.products.map(p => p.id));
-  const items = storeCatalog.products.filter(p => selectedIds.includes(p.id) && validIds.has(p.id) && Number.isFinite(p.usd));
-  const nick = String(body.nick || '').trim().slice(0, 40);
-  const contact = String(body.contact || '').trim().slice(0, 80);
-  const notes = String(body.notes || '').trim().slice(0, 500);
-  const autoRenew = !!body.autoRenew;
-
-  if (body.website) return reply.code(204).send();
-  if (!items.length) return reply.code(400).send({ error: 'Selecciona al menos un producto con precio en USD.' });
-  if (!paypalClientId || !paypalClientSecret) {
-    return reply.code(503).send({ error: 'Pagos internacionales con PayPal no configurados.' });
-  }
-
-  const quoteId = `dq-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
-
-  if (autoRenew) {
-    if (items.length !== 1) {
-      return reply.code(400).send({ error: 'Para activar la renovación automática, debes seleccionar exactamente un Rango VIP o Rol a la vez.' });
-    }
-    const targetItem = items[0];
-    if (targetItem.category !== 'monthly' && targetItem.category !== 'roles') {
-      return reply.code(400).send({ error: 'La renovación automática solo está disponible para Rangos VIP y Roles de Juego.' });
-    }
-
-    try {
-      const planId = await getOrCreatePaypalPlan(targetItem.id, targetItem.name, targetItem.usd);
-      const accessToken = await getPaypalAccessToken();
-
-      const subResponse = await fetch(`${paypalBaseUrl}/v1/billing/subscriptions`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          plan_id: planId,
-          custom_id: JSON.stringify({ nick, contact, notes, quoteId }),
-          application_context: {
-            brand_name: "DrakesCraft",
-            locale: "es-ES",
-            user_action: "SUBSCRIBE_NOW",
-            return_url: "https://web.drakescraft.cl/store.html?payment=paypal-sub-success",
-            cancel_url: "https://web.drakescraft.cl/store.html?payment=paypal-sub-cancel"
-          }
-        })
-      });
-
-      if (!subResponse.ok) {
-        const errText = await subResponse.text();
-        app.log.warn({ errText }, 'Error al crear suscripción de PayPal');
-        return reply.code(500).send({ error: 'Error al generar la suscripción en la pasarela de PayPal.' });
-      }
-
-      const subscription = await subResponse.json();
-      const approveLink = subscription.links.find(l => l.rel === 'approve')?.href;
-
-      // Registrar suscripción localmente
-      const subscriptions = await loadSubscriptions();
-      subscriptions.push({
-        id: subscription.id,
-        platform: 'PayPal',
-        nick,
-        contact,
-        productId: targetItem.id,
-        productName: targetItem.name,
-        createdAt: new Date().toISOString()
-      });
-      await saveSubscriptions(subscriptions);
-
-      const quote = { id: quoteId, createdAt: new Date().toISOString(), nick, contact, items: [targetItem.id], notes, paypalSubscriptionId: subscription.id };
-      await fs.mkdir(dataDir, { recursive: true });
-      await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
-
-      // Notificar a Discord la intención de suscripción
-      await notifyQuoteDiscord({
-        type: 'Nueva Intención de Suscripción (PayPal)',
-        quoteId,
-        items,
-        nick,
-        contact,
-        notes,
-        total: targetItem.usd,
-        currency: 'USD'
-      });
-
-      return { ok: true, quoteId, init_point: approveLink, subscriptionId: subscription.id };
-    } catch (err) {
-      app.log.error(err, 'paypal subscription creation error');
-      return reply.code(500).send({ error: err.message || 'Error interno de PayPal al procesar suscripción.' });
-    }
-  }
-
-  const totalUsd = items.reduce((sum, p) => sum + p.usd, 0);
-
-  try {
-    const accessToken = await getPaypalAccessToken();
-    const response = await fetch(`${paypalBaseUrl}/v2/checkout/orders`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        intent: 'CAPTURE',
-        purchase_units: [{
-          reference_id: quoteId,
-          amount: {
-            currency_code: 'USD',
-            value: totalUsd.toFixed(2)
-          },
-          description: `DrakesCraft — ${items.map(p => p.name).join(', ')}`,
-          custom_id: JSON.stringify({ nick, contact, notes, quoteId })
-        }],
-        application_context: {
-          brand_name: 'DrakesCraft',
-          locale: 'es-ES',
-          landing_page: 'NO_PREFERENCE',
-          user_action: 'PAY_NOW',
-          return_url: 'https://web.drakescraft.cl/store.html?payment=paypal-success',
-          cancel_url: 'https://web.drakescraft.cl/store.html?payment=paypal-cancel'
-        }
-      })
-    });
-
-    if (!response.ok) {
-      const errText = await response.text();
-      app.log.warn({ errText }, 'Error al crear orden de PayPal');
-      return reply.code(500).send({ error: 'Error al crear orden en la pasarela de PayPal.' });
-    }
-
-    const order = await response.json();
-    const approveLink = order.links.find(l => l.rel === 'approve')?.href;
-
-    const quote = { id: quoteId, createdAt: new Date().toISOString(), nick, contact, items: items.map(p => p.id), notes, paypalOrderId: order.id };
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.appendFile(quoteFile, `${JSON.stringify(quote)}\n`, 'utf8');
-
-    // Notificar a Discord la intención de pago
-    await notifyQuoteDiscord({
-      type: 'Nueva Intención de Pago (PayPal)',
-      quoteId,
-      items,
-      nick,
-      contact,
-      notes,
-      total: totalUsd,
-      currency: 'USD'
-    });
-
-    return { ok: true, quoteId, init_point: approveLink, orderId: order.id, total_usd: totalUsd };
-  } catch (err) {
-    app.log.error(err, 'paypal checkout creation error');
-    return reply.code(500).send({ error: 'Error interno de PayPal.' });
-  }
-});
-
-// POST /api/store/paypal/capture — captura el pago de PayPal una vez aprobado
-app.post('/api/store/paypal/capture', async (request, reply) => {
-  const body = request.body || {};
-  const orderId = body.orderId;
-  if (!orderId) return reply.code(400).send({ error: 'Falta orderId' });
-
-  try {
-    const accessToken = await getPaypalAccessToken();
-    const response = await fetch(`${paypalBaseUrl}/v2/checkout/orders/${orderId}/capture`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      const errText = await response.text();
-      app.log.warn({ errText }, 'Error al capturar orden de PayPal');
-      return reply.code(500).send({ error: 'No se pudo capturar el pago en la pasarela de PayPal.' });
-    }
-
-    const order = await response.json();
-    const logFile = path.join(dataDir, 'paypal-payments.jsonl');
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.appendFile(logFile, `${JSON.stringify({ ts: new Date().toISOString(), ...order })}\n`, 'utf8');
-
-    if (order.status === 'COMPLETED') {
-      const purchaseUnit = order.purchase_units?.[0] || {};
-      const customId = purchaseUnit.custom_id;
-      let nick = '';
-      let contact = '';
-      let notes = '';
-      let quoteId = '';
-
-      try {
-        if (customId) {
-          const meta = JSON.parse(customId);
-          nick = meta.nick || '';
-          contact = meta.contact || '';
-          notes = meta.notes || '';
-          quoteId = meta.quoteId || '';
-        }
-      } catch (_) {}
-
-      const captureDetails = purchaseUnit.payments?.captures?.[0] || {};
-      const total = parseFloat(captureDetails.amount?.value || 0);
-
-      // Cargar items de la cotización si es posible
-      let items = [];
-      try {
-        const quotesContent = await fs.readFile(quoteFile, 'utf8');
-        for (const line of quotesContent.split('\n')) {
-          if (!line.trim()) continue;
-          const q = JSON.parse(line);
-          if (q.id === quoteId || q.paypalOrderId === orderId) {
-            items = storeCatalog.products.filter(p => q.items.includes(p.id));
-            break;
-          }
-        }
-      } catch (_) {}
-
-      // Si no los pudimos mapear, usar descripcion o nombres genericos
-      if (!items.length) {
-        items = [{ name: `Pedido PayPal (${orderId})` }];
-      }
-
-      await notifyPaymentDiscord({
-        platform: 'PayPal',
-        paymentId: order.id,
-        status: order.status,
-        items,
-        nick,
-        contact,
-        amount: total,
-        currency: 'USD'
-      });
-
-      // Agregar a la cola de entregas automáticas
-      const pending = await loadPendingPurchases();
-      for (const item of items) {
-        if (!item.id) continue;
-        const txnId = `pp_${order.id}_${item.id}`;
-        if (!pending.some(p => p.id === txnId)) {
-          pending.push({
-            id: txnId,
-            nick,
-            productId: item.id,
-            productName: item.name,
-            timestamp: new Date().toISOString()
-          });
-        }
-      }
-      await savePendingPurchases(pending);
-
-      return { ok: true, status: 'COMPLETED', orderId: order.id };
-    }
-
-    return { ok: false, status: order.status };
-  } catch (err) {
-    app.log.error(err, 'paypal capture error');
-    return reply.code(500).send({ error: 'Error interno al capturar pago de PayPal.' });
-  }
-});
-
-// POST /api/store/paypal/capture-subscription — valida la aprobación; la entrega espera el cobro confirmado
-app.post('/api/store/paypal/capture-subscription', async (request, reply) => {
-  const body = request.body || {};
-  const subscriptionId = body.subscriptionId;
-  if (!subscriptionId) return reply.code(400).send({ error: 'Falta subscriptionId' });
-
-  try {
-    const accessToken = await getPaypalAccessToken();
-    const response = await fetch(`${paypalBaseUrl}/v1/billing/subscriptions/${subscriptionId}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      const errText = await response.text();
-      app.log.warn({ errText }, 'Error al consultar suscripción de PayPal');
-      return reply.code(500).send({ error: 'No se pudo consultar el estado de la suscripción en PayPal.' });
-    }
-
-    const subscription = await response.json();
-    const status = subscription.status;
-
-    if (status === 'ACTIVE' || status === 'APPROVED') {
-      const subscriptions = await loadSubscriptions();
-      const subRecord = subscriptions.find(s => s.id === subscriptionId);
-      if (!subRecord) {
-        return reply.code(400).send({ error: 'No se pudo asociar la suscripción con un producto válido.' });
-      }
-
-      return { ok: true, status, subscriptionId, paymentPending: true };
-    }
-
-    return { ok: false, status };
-  } catch (err) {
-    app.log.error(err, 'paypal subscription capture error');
-    return reply.code(500).send({ error: 'Error interno al verificar la suscripción de PayPal.' });
-  }
-});
-
-// POST /api/paypal/webhook — recibe notificaciones de PayPal (suscripciones recurrentes)
-app.post('/api/paypal/webhook', async (request, reply) => {
-  try {
-    if (!await verifyPaypalWebhook(request)) {
-      return reply.code(401).send({ error: 'Firma de PayPal inválida.' });
-    }
-  } catch (err) {
-    app.log.error(err, 'Error verificando webhook de PayPal');
-    return reply.code(503).send({ error: 'No se pudo verificar la notificación.' });
-  }
-
-  const body = request.body || {};
-  const eventType = body.event_type;
-
-  if (eventType !== 'PAYMENT.SALE.COMPLETED') {
-    return reply.code(200).send('ignored');
-  }
-
-  const resource = body.resource || {};
-  const billingAgreementId = resource.billing_agreement_id;
-
-  if (!billingAgreementId) {
-    return reply.code(200).send('ignored');
-  }
-
-  try {
-    const subscriptions = await loadSubscriptions();
-    const subRecord = subscriptions.find(s => s.id === billingAgreementId);
-
-    if (!subRecord) {
-      app.log.warn({ billingAgreementId }, 'Webhook de pago recibido para suscripción no registrada localmente.');
-      return reply.code(200).send('ignored');
-    }
-
-    const nick = subRecord.nick;
-    const contact = subRecord.contact;
-    const productId = subRecord.productId;
-    const productName = subRecord.productName;
-    const saleId = resource.id;
-    const amount = parseFloat(resource.amount?.total || 0);
-
-    const pending = await loadPendingPurchases();
-    const txnId = `pp_sale_${saleId}`;
-
-    if (!pending.some(p => p.id === txnId)) {
-      pending.push({
-        id: txnId,
-        nick,
-        productId,
-        productName,
-        timestamp: new Date().toISOString()
-      });
-      await savePendingPurchases(pending);
-
-      await notifyPaymentDiscord({
-        platform: 'PayPal (Renovación Automática)',
-        paymentId: saleId,
-        status: 'COMPLETED',
-        items: [{ id: productId, name: productName }],
-        nick,
-        contact,
-        amount,
-        currency: 'USD'
-      });
-
-      app.log.info({ saleId, billingAgreementId, nick }, 'Renovación automática de PayPal procesada y encolada.');
-    }
-    return reply.code(200).send('ok');
-  } catch (err) {
-    app.log.error(err, 'Error procesando webhook de pago de PayPal');
-    return reply.code(500).send({ error: 'No se pudo procesar la notificación.' });
-  }
-});
-
-const storeApiKey = process.env.STORE_API_KEY;
-const pendingPurchasesFile = path.join(dataDir, 'pending-purchases.json');
-
-async function loadPendingPurchases() {
-  try {
-    const data = await fs.readFile(pendingPurchasesFile, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code !== 'ENOENT') app.log.warn(error, 'No se pudo leer las compras pendientes');
-    return [];
-  }
-}
-
-async function savePendingPurchases(list) {
-  try {
-    await fs.mkdir(dataDir, { recursive: true });
-    const temporaryFile = `${pendingPurchasesFile}.tmp`;
-    await fs.writeFile(temporaryFile, JSON.stringify(list, null, 2), 'utf8');
-    await fs.rename(temporaryFile, pendingPurchasesFile);
-  } catch (error) {
-    app.log.error(error, 'No se pudo guardar las compras pendientes');
-  }
-}
-
-// GET /api/store/pending
-app.get('/api/store/pending', async (request, reply) => {
-  const key = request.headers['x-api-key'];
-  if (!storeApiKey) return reply.code(503).send({ error: 'API de entregas no configurada.' });
-  if (!key || !safeEqualText(key, storeApiKey)) {
-    return reply.code(401).send({ error: 'No autorizado' });
-  }
-  const pending = await loadPendingPurchases();
-  return pending;
-});
-
-// POST /api/store/confirm
-app.post('/api/store/confirm', async (request, reply) => {
-  const key = request.headers['x-api-key'];
-  if (!storeApiKey) return reply.code(503).send({ error: 'API de entregas no configurada.' });
-  if (!key || !safeEqualText(key, storeApiKey)) {
-    return reply.code(401).send({ error: 'No autorizado' });
-  }
-  const body = request.body || {};
-  const id = body.id;
-  if (!id) {
-    return reply.code(400).send({ error: 'Falta id de transaccion' });
-  }
-  const pending = await loadPendingPurchases();
-  const filtered = pending.filter(p => p.id !== id);
-  await savePendingPurchases(filtered);
-  return { ok: true };
-});
-
 await app.register(fastifyStatic, {
   root: contentDir,
   prefix: '/content/',
@@ -1936,6 +1001,7 @@ await app.register(fastifyStatic, {
       'logodrakescraft.png',
       'previewdiscord1.png',
       'previewdiscord2.png',
+      'favicon.ico',
       'three.min.js'
     ]);
     const normalized = pathname.replace(/^[/\\]+/, '').replaceAll('\\', '/');

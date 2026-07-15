@@ -34,7 +34,7 @@ La lógica común de navegación/render vive en `scripts/site.js`, mientras que 
 - `/api/discord`
 - `/api/store`
 - `/api/bosses`
-- endpoints de checkout y delivery para la tienda
+- checkout Tebex y notificaciones de venta firmadas
 
 ## Desarrollo
 
@@ -53,3 +53,4 @@ GitHub -> star -> Fastify -> Cloudflare Tunnel -> web.drakescraft.cl
 ## Operacion
 
 - [Migracion de la estacion operativa a Windows (2026-07-15)](docs/operations/windows-migration-2026-07-15.md)
+- [Proteccion Cloudflare y checkout Tebex](docs/operations/cloudflare-security.md)
