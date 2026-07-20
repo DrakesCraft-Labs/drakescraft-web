@@ -38,7 +38,7 @@
     },
     {
       "title": "SFMaster controlado",
-      "text": "Pases temporales de pago real para Slimefun Cheat, entregados por Tebex y vigilados por Odysseia."
+      "text": "Pases temporales de pago real para la guía SF Cheat, entregados por Tebex y vigilados por Odysseia: máximo 12 reclamaciones por ventana de 60 minutos."
     }
   ],
   "journey": [
@@ -81,13 +81,18 @@
       "items": [
         "Pase SFMaster de 1 hora",
         "Pase SFMaster de 24 horas",
-        "Ítems marcados y no comerciables"
+        "12 reclamaciones por cada ventana de 60 minutos",
+        "Guía SF Cheat personal; el comando libre /sf cheat permanece bloqueado",
+        "Ítems marcados a su dueño: sin intercambio, subasta, venta ni traspaso",
+        "Sin Supreme, InfinityExpansion, armas, herramientas, armaduras, arcos, tridentes ni elytras",
+        "Sin diamantes, esmeraldas, netherite ni ancient debris",
+        "Al vencer, se retira el rango y la guía deja de funcionar"
       ]
     }
   ],
   "cta": {
     "title": "Tecnología con límites claros.",
-    "text": "SFMaster da acceso temporal y controlado a Slimefun Cheat; las categorías sensibles, el intercambio y el abuso siguen bloqueados.",
+    "text": "SFMaster entrega una guía personal, no poder ilimitado: 12 reclamaciones por hora, ítems rastreables y categorías sensibles bloqueadas. Revisa el detalle completo antes de comprar.",
     "primary": {
       "href": "community.html",
       "label": "Ver comunidad"
