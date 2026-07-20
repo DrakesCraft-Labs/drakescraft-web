@@ -10,6 +10,7 @@ La web ya no se organiza como una landing única revuelta. Ahora el recorrido pr
 - `server.html`
 - `jack.html`
 - `odysseia.html`
+- `dioses.html` (códice público de DiosesDrakes)
 - `slimefun.html`
 - `community.html`
 - `bosses.html`
@@ -19,6 +20,11 @@ La web ya no se organiza como una landing única revuelta. Ahora el recorrido pr
 Los estilos compartidos están en [styles/base.css](/home/jack/Proyectos/drakescraft-web/styles/base.css) y cada página suma su hoja dedicada dentro de `styles/`.
 
 Los textos y bloques estructurales de cada página viven en `data/*.json`.
+
+`dioses.html` mantiene además un catálogo versionado en `scripts/dioses.js`: cada
+patrón expone su pasiva, activa y postura inicial, junto con el sistema de costes,
+recargas, protecciones y mantenimiento. Debe actualizarse junto a `SkillCatalog`
+cuando se implemente una rama nueva.
 
 La lógica común de navegación/render vive en `scripts/site.js`, mientras que las páginas con backend operativo usan:
 
