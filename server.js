@@ -986,6 +986,7 @@ await app.register(fastifyStatic, {
       'server.html',
       'jack.html',
       'odysseia.html',
+      'dioses.html',
       'slimefun.html',
       'community.html',
       'rules.html',
