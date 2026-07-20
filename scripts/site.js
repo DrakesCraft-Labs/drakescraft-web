@@ -39,18 +39,19 @@ function setupNav() {
     });
 }
 
-function simplifyLegacyNavigation() {
+function normalizeNavigation() {
     const menu = document.getElementById("nav-menu");
-    if (!menu || menu.dataset.simplified === "true") return;
+    if (!menu || menu.dataset.normalized === "true") return;
 
-    const primaryRoutes = new Set(["index.html", "server.html", "odysseia.html", "bosses.html", "store.html"]);
-    menu.querySelectorAll("li").forEach((item) => {
-        const link = item.querySelector("a");
-        if (!link) return;
-        const href = link.getAttribute("href") || "";
-        if (!primaryRoutes.has(href) && !link.classList.contains("nav-discord")) item.remove();
-    });
-    menu.dataset.simplified = "true";
+    const current = location.pathname.split("/").pop() || "index.html";
+    const routes = [
+        ["index.html", "Inicio"], ["server.html", "Servidor"], ["odysseia.html", "Odysseia"],
+        ["dioses.html", "Dioses"], ["slimefun.html", "Slimefun"], ["bosses.html", "Bosses"],
+        ["store.html", "Tienda"], ["community.html", "Comunidad"]
+    ];
+    menu.innerHTML = routes.map(([href, label]) => `<li><a${href === current ? ' class="active"' : ""} href="${href}">${label}</a></li>`).join("")
+        + '<li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>';
+    menu.dataset.normalized = "true";
 }
 
 function setupProgress() {
@@ -163,7 +164,9 @@ function renderSequence(prev, next) {
 }
 
 function renderEditorialExperience(page, manifest) {
-    if (!new Set(["server", "odysseia", "slimefun", "community", "rules"]).has(page)) return false;
+    // These pages provide their own composition. The manifest fills their content
+    // but must never flatten their distinct hero and navigation hierarchy.
+    if (!new Set([]).has(page)) return false;
 
     const hero = document.querySelector(".hero");
     const main = document.querySelector("main");
@@ -313,7 +316,7 @@ function setupCopyButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    simplifyLegacyNavigation();
+    normalizeNavigation();
     setupNav();
     setupProgress();
     setupCopyButtons();
