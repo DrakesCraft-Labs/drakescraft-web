@@ -564,7 +564,10 @@ function validOdysseiaEvent(body) {
     && typeof body.type === 'string' && /^[A-Z_]{3,64}$/.test(body.type)
     && typeof body.instanceId === 'string' && /^[A-Za-z0-9._:-]{1,128}$/.test(body.instanceId)
     && typeof body.purchaseEngineReady === 'boolean'
-    && Number.isInteger(body.catalogProducts) && body.catalogProducts >= 0 && body.catalogProducts <= 1000;
+    && Number.isInteger(body.catalogProducts) && body.catalogProducts >= 0 && body.catalogProducts <= 1000
+    && (body.bossId === undefined || (typeof body.bossId === 'string' && /^[a-z0-9_-]{2,64}$/.test(body.bossId)))
+    && (body.bossParticipants === undefined || (Number.isInteger(body.bossParticipants)
+      && body.bossParticipants >= 0 && body.bossParticipants <= 500));
 }
 
 function validOdysseiaSignature(request) {
@@ -735,6 +738,8 @@ app.post('/api/odysseia/events', async (request, reply) => {
     catalogProducts: event.catalogProducts,
     purchaseState: typeof event.purchaseState === 'string' ? event.purchaseState.slice(0, 64) : null,
     productId: typeof event.productId === 'string' ? event.productId.slice(0, 128) : null,
+    bossId: typeof event.bossId === 'string' ? event.bossId : null,
+    bossParticipants: Number.isInteger(event.bossParticipants) ? event.bossParticipants : null,
     sentAt: Number.isFinite(event.sentAt) ? event.sentAt : null,
     receivedAt
   };
