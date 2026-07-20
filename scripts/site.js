@@ -90,7 +90,7 @@ function renderMetrics(items) {
     const target = document.getElementById("manifest-metrics");
     if (!target || !items?.length) return;
     target.innerHTML = items.map((item) => `
-        <article class="metric-card tilt-card${String(item.value || '').length > 14 ? ' metric-card--compact' : ''}">
+        <article class="metric-card tilt-card${String(item.value || '').length > 10 ? ' metric-card--compact' : ''}">
             <span>${escapeHtml(item.label)}</span>
             <strong>${escapeHtml(item.value)}</strong>
         </article>

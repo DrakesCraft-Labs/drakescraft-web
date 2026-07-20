@@ -815,7 +815,7 @@ body:not(.portal-page) .metric-card {
     min-height: 112px;
 }
 
-body:not(.portal-page) .metric-card--compact strong { font-size: clamp(1.18rem, 2vw, 1.55rem); }
+body:not(.portal-page) .metric-card--compact strong { font-size: clamp(1.08rem, 1.6vw, 1.32rem); overflow-wrap: normal; }
 
 body:not(.portal-page) .section {
     padding: 1.35rem 0;
