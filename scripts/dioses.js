@@ -36,11 +36,29 @@ const PANTHEON = [
   ['Tetis','titan','Manantial y recuperación','Fuente nutricia|Respiración y recuperación en agua.','Manantial|Hambre y calor propios.','Cauce|Movilidad acuática y resistencia.']
 ];
 
+const ASCENSION = [
+  'Legado de ascensión|Pasiva mayor que intensifica la afinidad del patron.',
+  'Descarga divina|Rayo de efecto contra criaturas hostiles; sin fuego, bloques ni jugadores.',
+  'Ascenso divino|Vuelo temporal, impulso y caída segura fuera de combate.',
+  'Dominio personal|Una postura local: clima personal, crecimiento, agua, luz o refugio según la senda.',
+  'Veredicto|Un golpe PvE de 100 de daño contra una criatura hostil, con gran recarga.',
+  'Avatar|Forma colosal temporal con resistencia, fuerza y presencia visible.',
+  'Corona final|Pasiva de rango máximo para la especialidad elegida.'
+];
+
+const SKILL_TYPES = [
+  'Pasiva equipada', 'Activa con recarga', 'Postura temporal', 'Pasiva mayor',
+  'Activa ofensiva PvE', 'Activa de movilidad', 'Postura de dominio',
+  'Activa de veredicto PvE', 'Postura de avatar', 'Pasiva final'
+];
+
 function renderPantheon(filter = 'all') {
   const grid = document.getElementById('divine-grid');
   if (!grid) return;
-  grid.innerHTML = PANTHEON.filter(([, type]) => filter === 'all' || type === filter).map(([name, type, domain, ...skills]) => `
-    <article class="divine-card"><div class="divine-card__top"><h3>${name}</h3><small>${type === 'titan' ? 'Titán' : 'Dios'}</small></div><p>${domain}</p><ol>${skills.map((skill, index) => { const [title, text] = skill.split('|'); const kind = ['Pasiva equipada', 'Activa con recarga', 'Postura temporal'][index]; return `<li><strong>${title}</strong><span>${kind}</span><br>${text}</li>`; }).join('')}</ol><p class="divine-card__meta">Niveles 1 / 2 / 3 · 1.200 / 2.800 / 4.500 Dragmas</p></article>`).join('');
+  grid.innerHTML = PANTHEON.filter(([, type]) => filter === 'all' || type === filter).map(([name, type, domain, ...skills]) => {
+    const fullPath = [...skills, ...ASCENSION];
+    return `<article class="divine-card"><div class="divine-card__top"><h3>${name}</h3><small>${type === 'titan' ? 'Titán' : 'Dios'}</small></div><p>${domain}</p><ol>${fullPath.map((skill, index) => { const [title, text] = skill.split('|'); return `<li><strong>${title}</strong><span>${SKILL_TYPES[index]}</span><br>${text}</li>`; }).join('')}</ol><p class="divine-card__meta">Niveles 1 a 10 · 1.200 a 42.000 Dragmas</p></article>`;
+  }).join('');
 }
 
 document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('[data-filter]').forEach((entry) => entry.classList.remove('is-active')); button.classList.add('is-active'); renderPantheon(button.dataset.filter); }));
