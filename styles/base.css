@@ -479,6 +479,8 @@ body[data-page="rules"] { --page-accent: var(--gold); --page-accent-soft: rgba(2
     font-family: var(--font-heading);
     font-size: clamp(1.4rem, 3vw, 2rem);
     color: var(--page-accent);
+    line-height: 1.16;
+    overflow-wrap: anywhere;
 }
 
 .section {
@@ -800,8 +802,8 @@ body:not(.portal-page) .hero-stage {
 }
 
 body:not(.portal-page) .metrics {
-    max-width: 780px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 980px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     margin-top: 1.6rem;
 }
 
@@ -809,7 +811,11 @@ body:not(.portal-page) .metric-card {
     padding: .9rem;
     border-radius: 14px;
     box-shadow: none;
+    min-width: 0;
+    min-height: 112px;
 }
+
+body:not(.portal-page) .metric-card--compact strong { font-size: clamp(1.18rem, 2vw, 1.55rem); }
 
 body:not(.portal-page) .section {
     padding: 1.35rem 0;

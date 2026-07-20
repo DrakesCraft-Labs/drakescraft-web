@@ -90,7 +90,7 @@ function renderMetrics(items) {
     const target = document.getElementById("manifest-metrics");
     if (!target || !items?.length) return;
     target.innerHTML = items.map((item) => `
-        <article class="metric-card tilt-card">
+        <article class="metric-card tilt-card${String(item.value || '').length > 14 ? ' metric-card--compact' : ''}">
             <span>${escapeHtml(item.label)}</span>
             <strong>${escapeHtml(item.value)}</strong>
         </article>
@@ -287,20 +287,20 @@ async function loadDiscord() {
         const response = await fetch("/api/discord");
         if (!response.ok) throw new Error("discord unavailable");
         const data = await response.json();
-        const members = (data.members || []).slice(0, 6).map((member) => `<li>${escapeHtml(member.username)}</li>`).join("");
-        const channels = (data.channels || []).slice(0, 6).map((channel) => `<li>${escapeHtml(channel.name)}</li>`).join("");
+        const online = Number.isFinite(data.presence_count) ? data.presence_count : null;
+        const channels = Array.isArray(data.channels) ? data.channels.length : 0;
         target.innerHTML = `
             <article class="live-card tilt-card">
-                <h3>Miembros visibles</h3>
-                <p>${escapeHtml(String(data.instant_invite ? data.presence_count ?? "--" : "--"))}</p>
+                <h3>Actividad del Discord</h3>
+                <p>${online === null ? "Widget disponible" : `${escapeHtml(String(online))} personas visibles ahora`}</p>
             </article>
             <article class="live-card tilt-card">
-                <h3>Canales</h3>
-                <ul>${channels || "<li>Sin datos visibles</li>"}</ul>
+                <h3>Canales públicos</h3>
+                <p>${channels > 0 ? `${escapeHtml(String(channels))} espacios visibles para conversación y soporte.` : "Información visible desde el servidor de Discord."}</p>
             </article>
             <article class="live-card tilt-card">
-                <h3>Tripulación</h3>
-                <ul>${members || "<li>Sin presencias listadas</li>"}</ul>
+                <h3>Entrar al servidor</h3>
+                <p><a class="text-link" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Abrir Discord <span>↗</span></a></p>
             </article>
         `;
         setupTilt();

@@ -87,8 +87,8 @@
     }
   ],
   "cta": {
-    "title": "Sigue con Jack.",
-    "text": "Después del servidor, toca ver quién lo dirige.",
+    "title": "Detrás de DrakesCraft.",
+    "text": "Código, operación y herramientas propias sostienen el servidor.",
     "primary": {
       "href": "jack.html",
       "label": "Abrir página de Jack"

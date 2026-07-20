@@ -85,8 +85,8 @@
     }
   ],
   "cta": {
-    "title": "Sigue con la tienda.",
-    "text": "Después del panteón, toca pasar por rangos, kits y especiales.",
+    "title": "Apoya el servidor.",
+    "text": "La tienda explica cada rango y beneficio antes de comprar.",
     "primary": {
       "href": "store.html",
       "label": "Abrir tienda"

@@ -20,7 +20,7 @@
     },
     {
       "label": "Sinergia",
-      "value": "Roles + tienda"
+      "value": "SFMaster"
     }
   ],
   "pillars": [
@@ -35,6 +35,10 @@
     {
       "title": "Bases",
       "text": "Las ciudades y granjas ganan escala cuando la infraestructura importa."
+    },
+    {
+      "title": "SFMaster controlado",
+      "text": "Pases temporales de pago real para Slimefun Cheat, entregados por Tebex y vigilados por Odysseia."
     }
   ],
   "journey": [
@@ -73,17 +77,17 @@
       ]
     },
     {
-      "title": "Qué sigue",
+      "title": "Acceso especial",
       "items": [
-        "Comunidad",
-        "Bosses",
-        "Tienda"
+        "Pase SFMaster de 1 hora",
+        "Pase SFMaster de 24 horas",
+        "Ítems marcados y no comerciables"
       ]
     }
   ],
   "cta": {
-    "title": "Sigue con la comunidad.",
-    "text": "Discord y soporte conectan lo que pasa dentro y fuera del juego.",
+    "title": "Tecnología con límites claros.",
+    "text": "SFMaster da acceso temporal y controlado a Slimefun Cheat; las categorías sensibles, el intercambio y el abuso siguen bloqueados.",
     "primary": {
       "href": "community.html",
       "label": "Ver comunidad"

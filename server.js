@@ -971,7 +971,8 @@ await app.register(fastifyStatic, {
   root: contentDir,
   prefix: '/content/',
   wildcard: false,
-  decorateReply: false
+  decorateReply: false,
+  setHeaders: (response) => response.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate')
 });
 
 await app.register(fastifyStatic, {
@@ -980,6 +981,11 @@ await app.register(fastifyStatic, {
   index: ['index.html'],
   maxAge: '1h',
   immutable: false,
+  setHeaders: (response, filePath) => {
+    if (filePath.endsWith('.html')) {
+      response.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+    }
+  },
   allowedPath: (pathname) => {
     const publicFiles = new Set([
       'index.html',

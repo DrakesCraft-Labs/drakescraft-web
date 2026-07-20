@@ -82,8 +82,8 @@
     }
   ],
   "cta": {
-    "title": "Sigue con los bosses.",
-    "text": "Después de la comunidad, toca entrar al panteón.",
+    "title": "Bosses y reliquias.",
+    "text": "El panteón reúne los combates y drops que sostienen el endgame.",
     "primary": {
       "href": "bosses.html",
       "label": "Abrir bosses"

@@ -82,8 +82,8 @@
     }
   ],
   "cta": {
-    "title": "Sigue con Odysseia.",
-    "text": "Ahí vive buena parte de la lógica propia del servidor.",
+    "title": "Odysseia, el núcleo propio.",
+    "text": "Aquí vive buena parte de la lógica propia del servidor.",
     "primary": {
       "href": "odysseia.html",
       "label": "Entrar a Odysseia"
