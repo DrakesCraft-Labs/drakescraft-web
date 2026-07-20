@@ -869,3 +869,8 @@ body::before, .page-shell::before, .page-shell::after { display: none; }
 .brief-hero { min-height: 480px; padding: 9rem 0 4rem; border-top: 0; border-bottom: 18px double rgba(215,180,94,.7); background-color: #080a12; background-image: url("../assets/drakes-olympus-v1.png"); background-repeat: no-repeat; background-position: center right; background-size: cover; }
 .brief-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(5,7,14,.64); }
 .brief-hero__inner { position: relative; }
+.canvas-bg, #particles-canvas { display: none !important; }
+
+@media (max-width: 760px) {
+    .site-nav__links { border-radius: 6px; }
+}
