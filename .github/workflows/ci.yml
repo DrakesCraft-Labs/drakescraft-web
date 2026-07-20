@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Validar JavaScript
+        run: npm run check
+
+      - name: Probar servidor y rutas publicas
+        shell: bash
+        run: |
+          set -euo pipefail
+          DATA_DIR="${RUNNER_TEMP}/drakescraft-web-data" PORT=18080 npm start >"${RUNNER_TEMP}/drakescraft-web.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true; cat "${RUNNER_TEMP}/drakescraft-web.log"' EXIT
+
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:18080/api/health >/dev/null; then
+              break
+            fi
+            sleep 0.5
+          done
+
+          curl --fail --silent http://127.0.0.1:18080/ >/dev/null
+          curl --fail --silent http://127.0.0.1:18080/api/store >/dev/null
+          curl --fail --silent http://127.0.0.1:18080/dioses.html >/dev/null
+          curl --fail --silent http://127.0.0.1:18080/slimefun.html >/dev/null
