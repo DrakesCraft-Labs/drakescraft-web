@@ -36,6 +36,26 @@ const PANTHEON = [
   ['Tetis','titan','Manantial y recuperación','Fuente nutricia|Respiración y recuperación en agua.','Manantial|Hambre y calor propios.','Cauce|Movilidad acuática y resistencia.']
 ];
 
+PANTHEON.push(
+  ['Thor','nordico','Martillo, tormenta y forja','Marca tonante|Resistencia y velocidad de tormenta.','Rito del martillo|Descarga visual PvE controlada.','Voto de tempestad|Postura para bosses y anclas.'],
+  ['Odín','nordico','Runas, juicio y conocimiento','Marca rúnica|Defensa y lectura táctica.','Rito del cuervo|Revela rutas y amenazas PvE.','Voto del padre|Postura de consejo.'],
+  ['Loki','nordico','Astucia, sombra y engaño','Marca del embaucador|Sigilo controlado.','Rito cambiante|Desorienta criaturas cercanas.','Voto de bruma|Postura de evasión.'],
+  ['Heimdall','nordico','Vigilia, viento y guardia','Marca del vigía|Visión y movimiento.','Rito del Bifröst|Ascenso breve y seguro.','Voto del puente|Postura de guardia.'],
+  ['Freyja','nordico','Seiðr, fortuna y naturaleza','Marca de seiðr|Fortuna moderada.','Rito del halcón|Impulso de exploración.','Voto de Fólkvangr|Postura de apoyo.'],
+  ['Tyr','nordico','Juramento, sacrificio y guerra','Marca del juramento|Resistencia.','Rito de la espada|Impacto PvE.','Voto de justicia|Postura de combate.'],
+  ['Ra','egipcio','Sol, fuego y avance diurno','Marca solar|Visión y resistencia al fuego.','Rito del disco|Destello contra criaturas.','Voto del mediodía|Postura luminosa.'],
+  ['Anubis','egipcio','Juicio, tumbas y submundo','Marca del chacal|Protección funeraria.','Rito de la balanza|Golpe PvE de juicio.','Voto del Duat|Postura de supervivencia.'],
+  ['Isis','egipcio','Protección, magia y retorno','Marca de Isis|Defensa y recuperación.','Rito del nudo|Apoyo personal limitado.','Voto del trono|Postura protectora.'],
+  ['Set','egipcio','Desierto, caos y tormenta','Marca del desierto|Resistencia al fuego.','Rito de la tormenta|Descarga visual PvE.','Voto del vendaval|Postura de movilidad.'],
+  ['Bastet','egipcio','Caza, agilidad y fortuna','Marca felina|Velocidad controlada.','Rito de la garra|Técnica contra criaturas.','Voto del hogar|Postura de calma.'],
+  ['Horus','egipcio','Cielo, vigilancia y vuelo','Marca del halcón|Visión elevada.','Rito del ojo|Rastreo de criaturas.','Voto del firmamento|Ascenso temporal.'],
+  ['Morrigan','celta','Bruma, guerra y metamorfosis','Marca del cuervo|Rastro de criaturas.','Rito del velo|Sigilo breve.','Voto de batalla|Postura de caza.'],
+  ['Lugh','celta','Luz, lanza y maestría','Marca de la lanza|Fortuna y precisión.','Rito de la honda|Impacto PvE.','Voto del artesano|Postura versátil.'],
+  ['Brigid','celta','Forja, llama y crecimiento','Marca de la fragua|Regeneración.','Rito de la llama|Brillo y defensa.','Voto del pozo|Postura de apoyo.'],
+  ['Cernunnos','celta','Bosque, bestias y raíces','Marca del astado|Recuperación.','Rito de la raíz|Control PvE.','Voto del bosque|Postura natural.'],
+  ['Dagda','celta','Abundancia, tierra y refugio','Marca del caldero|Saturación limitada.','Rito del garrote|Impacto PvE.','Voto de la tierra|Postura de resistencia.']
+);
+
 const ASCENSION = [
   'Legado de ascensión|Pasiva mayor que intensifica la afinidad del patron.',
   'Descarga divina|Rayo de efecto contra criaturas hostiles; sin fuego, bloques ni jugadores.',
@@ -46,18 +66,28 @@ const ASCENSION = [
   'Corona final|Pasiva de rango máximo para la especialidad elegida.'
 ];
 
+const COMBAT = [
+  'Puños divinos|Técnica de mano vacía contra criaturas.',
+  'Arma divina|Técnica para espada, hacha, maza o lanza.',
+  'Carrera divina|Embestida breve con caída segura.',
+  'Guardia divina|Postura reactiva contra criaturas.',
+  'Maestría final|Pasiva de soporte para la build equipada.'
+];
+
 const SKILL_TYPES = [
   'Pasiva equipada', 'Activa con recarga', 'Postura temporal', 'Pasiva mayor',
   'Activa ofensiva PvE', 'Activa de movilidad', 'Postura de dominio',
-  'Activa de veredicto PvE', 'Postura de avatar', 'Pasiva final'
+  'Activa de veredicto PvE', 'Postura de avatar', 'Pasiva final',
+  'Activa de puños', 'Activa de arma', 'Activa de carrera', 'Postura de guardia', 'Pasiva de maestría'
 ];
 
 function renderPantheon(filter = 'all') {
   const grid = document.getElementById('divine-grid');
   if (!grid) return;
   grid.innerHTML = PANTHEON.filter(([, type]) => filter === 'all' || type === filter).map(([name, type, domain, ...skills]) => {
-    const fullPath = [...skills, ...ASCENSION];
-    return `<article class="divine-card"><div class="divine-card__top"><h3>${name}</h3><small>${type === 'titan' ? 'Titán' : 'Dios'}</small></div><p>${domain}</p><ol>${fullPath.map((skill, index) => { const [title, text] = skill.split('|'); return `<li><strong>${title}</strong><span>${SKILL_TYPES[index]}</span><br>${text}</li>`; }).join('')}</ol><p class="divine-card__meta">Niveles 1 a 10 · 1.200 a 42.000 Dragmas</p></article>`;
+    const fullPath = [...skills, ...ASCENSION, ...COMBAT];
+    const label = { dios: 'Dios', titan: 'Titán', nordico: 'Asgard', egipcio: 'Duat', celta: 'Tuatha' }[type] || type;
+    return `<article class="divine-card"><div class="divine-card__top"><h3>${name}</h3><small>${label}</small></div><p>${domain}</p><ol>${fullPath.map((skill, index) => { const [title, text] = skill.split('|'); return `<li><strong>${title}</strong><span>${SKILL_TYPES[index]}</span><br>${text}</li>`; }).join('')}</ol><p class="divine-card__meta">15 nodos · coste de 10.000 a 100.000.000 Dragmas</p></article>`;
   }).join('');
 }
 
