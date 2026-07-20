@@ -874,3 +874,8 @@ body::before, .page-shell::before, .page-shell::after { display: none; }
 @media (max-width: 760px) {
     .site-nav__links { border-radius: 6px; }
 }
+
+@media (max-width: 520px) {
+    body:not(.portal-page) .metrics { grid-template-columns: 1fr; }
+    body:not(.portal-page) .metric-card { min-height: 0; overflow-wrap: anywhere; }
+}
