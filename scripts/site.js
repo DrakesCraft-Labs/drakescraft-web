@@ -324,23 +324,30 @@ function setupCopyButtons() {
 }
 
 function setupCrestStage() {
-    const stage = document.getElementById("heroCrestStage");
-    const container = document.querySelector(".hero-visual");
-    if (!stage || !container) return;
-
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    container.addEventListener("mousemove", (e) => {
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        const rotateX = (-y / rect.height) * 28;
-        const rotateY = (x / rect.width) * 28;
-        stage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-    });
+    const stages = [
+        { stageId: "heroCrestStage", containerSelector: ".hero-visual" },
+        { stageId: "storeCrestStage", containerSelector: ".store-visual" }
+    ];
 
-    container.addEventListener("mouseleave", () => {
-        stage.style.transform = "rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+    stages.forEach(({ stageId, containerSelector }) => {
+        const stage = document.getElementById(stageId);
+        const container = document.querySelector(containerSelector);
+        if (!stage || !container) return;
+
+        container.addEventListener("mousemove", (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            const rotateX = (-y / rect.height) * 28;
+            const rotateY = (x / rect.width) * 28;
+            stage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        container.addEventListener("mouseleave", () => {
+            stage.style.transform = "rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+        });
     });
 }
 
