@@ -27,9 +27,9 @@
 .crest-stage { position: relative; width: 340px; height: 340px; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1); cursor: pointer; margin: 0 auto; }
 .crest-glow { position: absolute; inset: -10%; border-radius: 50%; background: radial-gradient(circle, rgba(215, 180, 94, 0.35) 0%, rgba(168, 85, 247, 0.22) 45%, transparent 75%); filter: blur(28px); animation: glowPulse 4.5s ease-in-out infinite alternate; pointer-events: none; }
 .crest-orbit { position: absolute !important; inset: 0 !important; border-radius: 50% !important; pointer-events: none !important; margin: auto !important; }
-.crest-orbit--one { width: 310px !important; height: 310px !important; border: 2px dashed rgba(215, 180, 94, 0.8) !important; box-shadow: 0 0 25px rgba(215, 180, 94, 0.4), inset 0 0 15px rgba(215, 180, 94, 0.2) !important; transform: rotateX(65deg) rotateZ(20deg) !important; animation: orbitOne 14s linear infinite !important; }
-.crest-orbit--two { width: 320px !important; height: 320px !important; border: 2px solid rgba(168, 85, 247, 0.75) !important; box-shadow: 0 0 24px rgba(168, 85, 247, 0.45) !important; transform: rotateY(65deg) !important; animation: orbitTwo 18s linear infinite !important; }
-.crest-orbit--three { width: 300px !important; height: 300px !important; border: 1.5px dotted rgba(56, 189, 248, 0.7) !important; transform: rotateX(40deg) rotateY(40deg) !important; animation: orbitThree 22s linear infinite !important; }
+.crest-orbit--one { width: 310px !important; height: 310px !important; border: 2px dashed rgba(215, 180, 94, 0.8) !important; box-shadow: 0 0 25px rgba(215, 180, 94, 0.4), inset 0 0 15px rgba(215, 180, 94, 0.2) !important; animation: orbitOne 14s linear infinite !important; }
+.crest-orbit--two { width: 320px !important; height: 320px !important; border: 2px solid rgba(168, 85, 247, 0.75) !important; box-shadow: 0 0 24px rgba(168, 85, 247, 0.45) !important; animation: orbitTwo 18s linear infinite !important; }
+.crest-orbit--three { width: 300px !important; height: 300px !important; border: 1.5px dotted rgba(56, 189, 248, 0.7) !important; animation: orbitThree 22s linear infinite !important; }
 
 .crest-card { position: relative; z-index: 3; width: 200px !important; height: 200px !important; display: flex; align-items: center; justify-content: center; background: rgba(14, 18, 30, 0.82) !important; border: 2px solid rgba(215, 180, 94, 0.6) !important; border-radius: 32px !important; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.65), 0 0 35px rgba(215, 180, 94, 0.3) !important; transform: translateZ(45px); transition: box-shadow 0.35s ease, border-color 0.35s ease; overflow: hidden; }
 .crest-card img { width: 155px !important; height: 155px !important; max-width: 155px !important; max-height: 155px !important; object-fit: contain !important; filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7)) !important; transition: transform 0.35s ease; display: block !important; }
@@ -42,8 +42,9 @@
 .crest-chip--bottom { left: -5px; bottom: 12px; transform: translateZ(60px); }
 .crest-chip--left { left: -15px; top: 25px; transform: translateZ(50px); color: #38bdf8 !important; border-color: rgba(56, 189, 248, 0.55) !important; }
 
-@keyframes orbitOne { to { transform: rotateX(65deg) rotateZ(380deg); } }
-@keyframes orbitTwo { to { transform: rotateY(65deg) rotateZ(-360deg); } }
+@keyframes orbitOne { 0% { transform: rotateX(65deg) rotateZ(0deg); } 100% { transform: rotateX(65deg) rotateZ(360deg); } }
+@keyframes orbitTwo { 0% { transform: rotateY(65deg) rotateZ(0deg); } 100% { transform: rotateY(65deg) rotateZ(-360deg); } }
+@keyframes orbitThree { 0% { transform: rotateX(40deg) rotateY(40deg) rotateZ(0deg); } 100% { transform: rotateX(40deg) rotateY(40deg) rotateZ(360deg); } }
 @keyframes orbitThree { to { transform: rotateX(40deg) rotateY(40deg) rotateZ(360deg); } }
 @keyframes glowPulse { from { opacity: 0.6; transform: scale(0.95); } to { opacity: 1; transform: scale(1.1); } }
 .portal-section { max-width: 1240px; margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) clamp(1.25rem, 4vw, 3.5rem); }.section-intro { max-width: 690px; }.section-intro h2, .atlas-copy h2, .ecosystem-callout h2, .portfolio-band h2 { margin: 0; font: clamp(2rem, 4vw, 3.7rem)/1.1 var(--font-heading); letter-spacing: -.04em; }.section-intro > p:last-child, .atlas-copy p, .ecosystem-callout p { color: #aeb9ca; line-height: 1.7; font-size: 1.05rem; }
