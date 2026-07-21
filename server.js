@@ -666,7 +666,8 @@ const translatorLanguages = [
 const translatorLanguageCodes = new Set(translatorLanguages.map(({ code }) => code));
 
 function translatorAuthorized(request) {
-  return Boolean(translateApiKey) && safeEqualText(request.body?.api_key, translateApiKey);
+  const key = request.body?.api_key || request.body?.secret || request.query?.api_key || request.headers['x-api-key'] || request.headers['api-key'];
+  return Boolean(translateApiKey) && safeEqualText(key, translateApiKey);
 }
 
 async function forwardTranslation(request, reply, path) {
