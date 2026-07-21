@@ -310,8 +310,37 @@ async function loadDiscord() {
 }
 
 function setupCopyButtons() {
+        `;
+        setupTilt();
+    } catch (_error) {
+        target.innerHTML = '<article class="live-card"><h3>Discord</h3><p>No se pudo sincronizar el widget ahora mismo.</p></article>';
+    }
+}
+
+function setupCopyButtons() {
     document.querySelectorAll("[data-copy]").forEach((button) => {
         button.addEventListener("click", () => copyText(button.dataset.copy));
+    });
+}
+
+function setupCrestStage() {
+    const stage = document.getElementById("heroCrestStage");
+    const container = document.querySelector(".hero-visual");
+    if (!stage || !container) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    container.addEventListener("mousemove", (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const rotateX = (-y / rect.height) * 28;
+        const rotateY = (x / rect.width) * 28;
+        stage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+    });
+
+    container.addEventListener("mouseleave", () => {
+        stage.style.transform = "rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
     });
 }
 
@@ -320,6 +349,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupNav();
     setupProgress();
     setupCopyButtons();
+    setupCrestStage();
     document.querySelectorAll("[data-year]").forEach((node) => {
         node.textContent = String(new Date().getFullYear());
     });
