@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrakesCraft | El Servidor</title>
+    <meta name="description" content="Mapa del servidor DrakesCraft.">
+    <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css?v=20260720-greek3">
+    <link rel="stylesheet" href="styles/server.css?v=20260720-greek1">
+</head>
+<body class="page-shell" data-page="server">
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <nav class="site-nav" aria-label="Principal">
+        <div class="container site-nav__bar">
+            <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Mapa del servidor</span></span></a>
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+            <ul class="site-nav__links" id="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a class="active" href="server.html">Servidor</a></li>
+                <li><a href="jack.html">Jack</a></li>
+                <li><a href="odysseia.html">Odysseia</a></li>
+                <li><a href="slimefun.html">Slimefun</a></li>
+                <li><a href="community.html">Comunidad</a></li>
+                <li><a href="bosses.html">Bosses</a></li>
+                <li><a href="store.html">Tienda</a></li>
+                <li><a href="rules.html">Reglas</a></li>
+                <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header class="hero">
+        <div class="container hero__grid">
+            <div>
+                <p class="eyebrow" id="hero-eyebrow"></p>
+                <h1 id="hero-title"></h1>
+                <p class="hero__tagline" id="hero-tagline"></p>
+                <p class="hero__intro" id="hero-intro"></p>
+                <div class="hero__actions">
+                    <button class="btn btn-primary" type="button" data-copy="mc.drakescraft.cl">Copiar IP Java</button>
+                    <button class="btn btn-secondary" type="button" data-copy="mc.drakescraft.cl:25565">Copiar Bedrock</button>
+                </div>
+                <div class="metrics" id="manifest-metrics"></div>
+            </div>
+            <div class="hero-stage">
+                <div class="hero-stage__core"><div class="orbital-logo"><div class="orbital-logo__ring"></div><div class="orbital-logo__seal"><img src="assets/logo-drakescraft.png" alt="Sello DrakesCraft"></div></div></div>
+                <aside class="stage-card stage-card--a tilt-card"><strong>Crossplay</strong><p>Un solo ecosistema entre Java y Bedrock.</p></aside>
+                <aside class="stage-card stage-card--b tilt-card"><strong>Economía</strong><p>Claims, Dragmas, rangos y progresión viva.</p></aside>
+                <aside class="stage-card stage-card--c tilt-card"><strong>Endgame</strong><p>Slimefun, bosses y perks custom de largo plazo.</p></aside>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="section"><div class="container"><div class="section__head"><h2>Qué se juega aquí</h2><p>Esta página pone al servidor primero y baja todo el ruido de secciones mezcladas.</p></div><div class="panel-grid" id="manifest-pillars"></div></div></section>
+        <section class="section"><div class="container"><div class="facts-grid" id="manifest-facts"></div></div></section>
+        <section class="section"><div class="container"><div class="cta-banner" id="manifest-cta"></div></div></section>
+        <section class="section"><div class="container"><div class="sequence-nav" id="page-sequence"></div></div></section>
+    </main>
+    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p style="color:var(--muted);margin:0.35rem 0 0;">© <span data-year></span> Servidor y arquitectura.</p></div><div class="site-footer__links"><a href="jack.html">Jack</a><a href="odysseia.html">Odysseia</a><a href="community.html">Comunidad</a></div></div></footer>
+    <script src="three.min.js?v=20260720-greek1"></script><script src="scripts/background.js?v=20260720-greek1"></script><script src="scripts/site.js?v=20260720-greek2"></script>
+</body>
+</html>
