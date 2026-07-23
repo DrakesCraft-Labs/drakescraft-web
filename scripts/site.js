@@ -351,8 +351,32 @@ function setupCrestStage() {
     });
 }
 
+function ensureChatWidget() {
+    let container = document.getElementById("live-chat-container");
+    if (!container) {
+        const parent = document.querySelector(".hero-facts") || document.querySelector(".main-layout") || document.querySelector(".hero-content") || document.querySelector("main") || document.body;
+        if (!parent) return null;
+        container = document.createElement("section");
+        container.id = "live-chat-container";
+        container.className = "live-chat-container";
+        container.innerHTML = `
+            <div class="live-chat-header">
+                <div class="live-chat-title">
+                    <span class="live-indicator"></span> 💬 Chat en Vivo del Servidor
+                </div>
+                <span style="font-size: 0.8rem; color: #94A3B8;">web.drakescraft.cl</span>
+            </div>
+            <div id="live-chat-feed" class="live-chat-feed">
+                <div class="chat-empty-state">💬 Servidor silencioso por ahora. ¡Entra y di hola!</div>
+            </div>
+        `;
+        parent.after ? parent.after(container) : parent.appendChild(container);
+    }
+    return document.getElementById("live-chat-feed");
+}
+
 async function loadLiveChat() {
-    const target = document.getElementById("live-chat-feed");
+    const target = ensureChatWidget();
     if (!target) return;
 
     try {
