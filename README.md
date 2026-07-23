@@ -50,7 +50,7 @@ npm run check
 npm start
 ```
 
-## Despliegue
+## Deployment
 
 ```text
 GitHub -> star -> Fastify -> Cloudflare Tunnel -> web.drakescraft.cl
