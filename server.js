@@ -28,8 +28,10 @@ const odysseiaIngestSecret = process.env.ODYSSEIA_INGEST_SECRET || '';
 const starMonitorToken = process.env.STAR_MONITOR_TOKEN || '';
 const odysseiaStateFile = path.join(dataDir, 'odysseia-status.json');
 const odysseiaEventsFile = path.join(dataDir, 'odysseia-events.json');
+const chatHistoryFile = path.join(dataDir, 'chat-history.json');
 const ODYSSEIA_MAX_EVENT_AGE_MS = 5 * 60 * 1000;
 const ODYSSEIA_MAX_EVENTS = 500;
+const CHAT_MAX_MESSAGES = 100;
 const CUSTOM_KIT_PACKAGE_ID = 7516648;
 let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
@@ -763,6 +765,49 @@ app.get('/api/internal/odysseia/status', async (request, reply) => {
   return {
     latest,
     events: Array.isArray(events) ? events.slice(0, ODYSSEIA_MAX_EVENTS) : []
+  };
+});
+
+// Live In-Game Chat Feed Endpoints
+app.post('/api/chat/ingest', async (request, reply) => {
+  const signature = validOdysseiaSignature(request);
+  if (!signature.valid) {
+    if (signature.status === 503) return reply.code(503).send({ error: 'Ingesta Chat no configurada' });
+    return reply.code(401).send({ error: 'Firma Chat inválida' });
+  }
+
+  const payload = request.body || {};
+  const player = String(payload.player || 'Jugador').slice(0, 32);
+  const message = String(payload.message || '').trim().slice(0, 256);
+  const rank = String(payload.rank || 'JUGADOR').slice(0, 32);
+  const world = String(payload.world || 'Olimpo').slice(0, 32);
+
+  if (!message) return reply.code(400).send({ error: 'Mensaje vacío' });
+
+  const chatEntry = {
+    id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+    player,
+    rank,
+    message,
+    world,
+    timestamp: Date.now()
+  };
+
+  const history = await readJsonFile(chatHistoryFile, []);
+  const known = Array.isArray(history) ? history : [];
+  known.unshift(chatEntry);
+  await writeJsonAtomic(chatHistoryFile, known.slice(0, CHAT_MAX_MESSAGES));
+
+  return reply.code(202).send({ accepted: true, id: chatEntry.id });
+});
+
+app.get('/api/chat/live', async () => {
+  const history = await readJsonFile(chatHistoryFile, []);
+  const messages = Array.isArray(history) ? history.slice(0, 50) : [];
+  return {
+    online: true,
+    count: messages.length,
+    messages
   };
 });
 

@@ -351,12 +351,63 @@ function setupCrestStage() {
     });
 }
 
+async function loadLiveChat() {
+    const target = document.getElementById("live-chat-feed");
+    if (!target) return;
+
+    try {
+        const response = await fetch("/api/chat/live");
+        if (!response.ok) return;
+        const data = await response.json();
+        const messages = data?.messages || [];
+
+        if (!messages.length) {
+            target.innerHTML = '<div class="chat-empty-state">💬 Servidor silencioso por ahora. ¡Entra y di hola!</div>';
+            return;
+        }
+
+        target.innerHTML = messages.slice(0, 30).map((msg) => {
+            const player = escapeHtml(msg.player || "Jugador");
+            const rank = escapeHtml(msg.rank || "JUGADOR").toUpperCase();
+            const text = escapeHtml(msg.message || "");
+            const world = escapeHtml(msg.world || "Olimpo");
+            const timeAgo = Math.max(1, Math.floor((Date.now() - (msg.timestamp || Date.now())) / 1000));
+            const timeStr = timeAgo < 60 ? `hace ${timeAgo}s` : `hace ${Math.floor(timeAgo / 60)}m`;
+
+            let badgeClass = "badge-user";
+            if (rank.includes("CEO") || rank.includes("ADMIN") || rank.includes("OWNER")) badgeClass = "badge-admin";
+            else if (rank.includes("VIP") || rank.includes("HERMES") || rank.includes("ZEUS")) badgeClass = "badge-vip";
+
+            return `
+                <div class="chat-msg-row">
+                    <img class="chat-avatar" src="https://mc-heads.net/avatar/${encodeURIComponent(player)}/32" alt="${player}" loading="lazy" />
+                    <div class="chat-msg-body">
+                        <div class="chat-msg-header">
+                            <span class="chat-player-name">${player}</span>
+                            <span class="chat-rank-badge ${badgeClass}">${rank}</span>
+                            <span class="chat-world-tag">📍 ${world}</span>
+                            <span class="chat-time">${timeStr}</span>
+                        </div>
+                        <div class="chat-msg-text">${text}</div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    } catch (_e) {}
+}
+
+function setupLiveChat() {
+    loadLiveChat();
+    setInterval(loadLiveChat, 3000);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     normalizeNavigation();
     setupNav();
     setupProgress();
     setupCopyButtons();
     setupCrestStage();
+    setupLiveChat();
     document.querySelectorAll("[data-year]").forEach((node) => {
         node.textContent = String(new Date().getFullYear());
     });
