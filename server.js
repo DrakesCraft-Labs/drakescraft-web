@@ -770,10 +770,14 @@ app.get('/api/internal/odysseia/status', async (request, reply) => {
 
 // Live In-Game Chat Feed Endpoints
 app.post('/api/chat/ingest', async (request, reply) => {
+  // Accept either HMAC signature (preferred) OR translator API key (Odysseia fallback)
   const signature = validOdysseiaSignature(request);
-  if (!signature.valid) {
-    if (signature.status === 503) return reply.code(503).send({ error: 'Ingesta Chat no configurada' });
-    return reply.code(401).send({ error: 'Firma Chat inválida' });
+  const apiKeyAuth = translatorAuthorized(request);
+  if (!signature.valid && !apiKeyAuth) {
+    if (signature.status === 503 && !translateApiKey) {
+      return reply.code(503).send({ error: 'Ingesta Chat no configurada' });
+    }
+    return reply.code(401).send({ error: 'Firma Chat inválida o API key incorrecta' });
   }
 
   const payload = request.body || {};
