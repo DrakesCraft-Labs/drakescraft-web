@@ -17,7 +17,7 @@ La web ya no se organiza como una landing única revuelta. Ahora el recorrido pr
 - `store.html`
 - `rules.html`
 
-Los estilos compartidos están en [styles/base.css](/home/jack/Proyectos/drakescraft-web/styles/base.css) y cada página suma su hoja dedicada dentro de `styles/`.
+Los estilos compartidos están en [styles/base.css](/home/jack/Projects/drakescraft-web/styles/base.css) y cada página suma su hoja dedicada dentro de `styles/`.
 
 Los textos y bloques estructurales de cada página viven en `data/*.json`.
 
