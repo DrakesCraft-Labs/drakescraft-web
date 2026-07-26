@@ -7,6 +7,9 @@ services:
     image: libretranslate/libretranslate:v1.9.6
     container_name: drakescraft-libretranslate
     restart: unless-stopped
+    ports:
+      # Only cloudflared on Star reaches this; never expose the translator publicly.
+      - "127.0.0.1:5001:5000"
     environment:
       LT_LOAD_ONLY: es,en,pt,de
       LT_DISABLE_WEB_UI: "true"
