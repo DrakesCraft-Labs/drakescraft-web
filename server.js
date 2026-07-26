@@ -1032,7 +1032,7 @@ await app.register(fastifyStatic, {
 
 await app.register(fastifyStatic, {
   // Minecraft requests a dedicated, item-only Slimefun resource pack.
-  root: path.join(root, 'resourcepack'),
+  root: '/packs',
   prefix: '/resourcepack/',
   wildcard: false,
   decorateReply: false,
