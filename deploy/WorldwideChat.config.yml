@@ -40,7 +40,8 @@ Translator:
   useGoogleTranslate: false
   useLibreTranslate: true
   libreAPIKey: __TRANSLATE_API_KEY_ON_STAR__
-  libreURL: https://web.drakescraft.cl/api/translate
+  # El traductor vive como servicio independiente en Star, nunca en la web publica.
+  libreURL: __TRANSLATE_URL_ON_STAR__
   useOllama: false
   translatorCacheSize: 1000
   enablePersistentCache: true
