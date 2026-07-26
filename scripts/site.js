@@ -310,14 +310,6 @@ async function loadDiscord() {
 }
 
 function setupCopyButtons() {
-        `;
-        setupTilt();
-    } catch (_error) {
-        target.innerHTML = '<article class="live-card"><h3>Discord</h3><p>No se pudo sincronizar el widget ahora mismo.</p></article>';
-    }
-}
-
-function setupCopyButtons() {
     document.querySelectorAll("[data-copy]").forEach((button) => {
         button.addEventListener("click", () => copyText(button.dataset.copy));
     });
