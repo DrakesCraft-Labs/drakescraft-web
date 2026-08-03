@@ -858,7 +858,7 @@ for (const legacyPath of [
   '/slimefun.html', '/bosses.html', '/community.html', '/jack.html',
   '/rules.html', '/admin-quote.html'
 ]) {
-  app.get(legacyPath, async (_request, reply) => reply.redirect(301, '/'));
+  app.get(legacyPath, async (_request, reply) => reply.code(301).redirect('/'));
 }
 
 await app.register(fastifyStatic, {
