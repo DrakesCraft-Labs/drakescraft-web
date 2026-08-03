@@ -1,68 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tienda oficial de DrakesCraft. Rangos, pases, protecciones y utilidades entregadas de forma segura por Tebex.">
   <title>DrakesCraft | Tienda oficial</title>
-  <meta name="description" content="La tienda oficial de DrakesCraft: rangos, pases, utilidades y beneficios entregados por Tebex y Odysseia.">
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260803-storefront-v2">
-  <link rel="stylesheet" href="styles/store.css?v=20260803-storefront-v2">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css?v=20260803-storefront-v3">
+  <link rel="stylesheet" href="styles/store.css?v=20260803-storefront-v3">
 </head>
 <body class="page-shell" data-page="store">
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
-  <div class="scroll-progress" id="scroll-progress"></div>
-  <nav class="site-nav" aria-label="Principal">
+  <nav class="site-nav" aria-label="Navegación principal">
     <div class="container site-nav__bar">
-      <a class="brand" href="/"><img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft"><span class="brand__meta"><strong>DrakesCraft</strong><span>Tienda oficial</span></span></a>
+      <a class="brand" href="/" aria-label="Ir a la tienda DrakesCraft">
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Tienda oficial</span></span>
+      </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
-        <li><a class="active" href="/">Tienda</a></li>
+        <li><a class="active" href="#catalogo">Catálogo</a></li>
+        <li><a href="#comprar">Cómo comprar</a></li>
         <li><a href="support.html">Soporte</a></li>
-        <li><a href="terms.html">Términos</a></li>
-        <li><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
       </ul>
     </div>
   </nav>
-  <header class="store-hero">
-    <div class="container store-hero__grid">
-      <div>
-        <p class="eyebrow">Tienda oficial</p>
-        <h1>Apoya tu forma de jugar.</h1>
-        <p>Rangos, pases y utilidades para DrakesCraft. El pago se completa con Tebex y Odysseia registra cada entrega dentro del servidor.</p>
-        <div class="store-hero__actions"><a class="btn btn-primary" href="#catalogo">Ver catálogo</a><a class="btn btn-secondary" href="support.html">Ayuda de compra</a></div>
-      </div>
-      <div class="store-hero__visual-container">
-        <div class="store-visual" aria-label="Insignia de la tienda DrakesCraft">
-          <div class="store-stage" id="storeCrestStage"><div class="store-glow"></div><div class="store-orbit store-orbit--gold"></div><div class="store-orbit store-orbit--purple"></div><div class="store-orbit store-orbit--cyan"></div><div class="store-card"><img src="assets/logo-drakescraft.png" alt="Escudo DrakesCraft"></div><span class="store-chip store-chip--top">PAGO SEGURO</span><span class="store-chip store-chip--right">TEBEX</span><span class="store-chip store-chip--bottom">ENTREGA EN JUEGO</span></div>
-        </div>
-      </div>
-    </div>
-  </header>
+
   <main>
-    <section class="section store-delivery-section" aria-label="Cómo funciona">
-      <div class="container store-delivery"><article><span>01</span><strong>Elige</strong><p>Revisa beneficios, duración y restricciones antes de agregar un producto.</p></article><article><span>02</span><strong>Paga</strong><p>Tebex abre un checkout protegido; no guardamos datos de pago.</p></article><article><span>03</span><strong>Recibe</strong><p>Odysseia procesa la entrega. Conserva el ID de Tebex hasta verla confirmada.</p></article></div>
-    </section>
-    <section class="section store-catalog" id="catalogo">
-      <div class="container store-layout">
-        <div>
-          <div class="store-heading"><p class="eyebrow">Catálogo</p><h2 id="store-category-title">Cargando productos</h2><p id="store-category-description">Consultando el catálogo disponible.</p></div>
-          <div class="store-status"><span id="store-health">Conectando</span><span id="store-product-count">-- productos</span><span id="store-updated">--</span></div>
-          <div class="store-tabs" id="store-tabs" aria-label="Categorías"></div>
-          <div class="store-grid" id="store-grid"></div>
+    <header class="store-hero">
+      <div class="store-hero__backdrop" aria-hidden="true"></div>
+      <div class="container store-hero__grid">
+        <div class="store-hero__copy">
+          <p class="eyebrow">La tienda de DrakesCraft</p>
+          <h1>Tu aventura.<br><em>Con estilo propio.</em></h1>
+          <p class="store-hero__lead">Rangos, pases y utilidades para jugar a tu ritmo. Elige lo que mejora tu experiencia; Tebex procesa el pago y el servidor entrega dentro del juego.</p>
+          <div class="store-hero__actions">
+            <a class="btn btn-primary" href="#catalogo">Explorar la tienda</a>
+            <a class="btn btn-ghost" href="support.html">Ayuda con una compra</a>
+          </div>
+          <dl class="store-hero__facts" aria-label="Características de la tienda">
+            <div><dt>Manual</dt><dd>Los pases no se renuevan solos.</dd></div>
+            <div><dt>Directo</dt><dd>Entrega ligada a tu nick.</dd></div>
+            <div><dt>Seguro</dt><dd>Checkout protegido por Tebex.</dd></div>
+          </dl>
         </div>
-        <aside class="store-checkout"><p class="eyebrow">Carrito</p><h2>Tu selección</h2><p id="store-selection-note">Agrega un producto para ver su entrega.</p><div id="quote-items"></div><p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p><form id="quote-form"><label>Nick de Minecraft<input name="nick" maxlength="40" placeholder="Tal como aparece en el juego" required></label><label>Contacto<input name="contact" maxlength="80" placeholder="Discord o correo" required></label><input class="hidden" name="website" tabindex="-1" autocomplete="off"><label>Nota opcional<textarea name="notes" rows="3" maxlength="500" placeholder="Solo si necesitas aclarar algo"></textarea></label><button class="btn btn-primary" type="submit">Continuar con Tebex</button></form><div id="quote-result" class="hidden"></div></aside>
+        <div class="store-hero__art" aria-hidden="true">
+          <div class="store-hero__crest"><img src="assets/logo-drakescraft.png" alt=""></div>
+          <img class="store-hero__pillars" src="assets/store/greek-ivy-pillars.png" alt="">
+          <span class="hero-label hero-label--one">RANGOS</span>
+          <span class="hero-label hero-label--two">PASES</span>
+          <span class="hero-label hero-label--three">UTILIDADES</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="store-path" id="comprar" aria-label="Flujo de compra">
+      <div class="container store-path__inner">
+        <p><strong>Compra sin enredos.</strong> El producto, sus límites y duración se muestran antes de añadirlo al carrito.</p>
+        <ol><li><span>1</span> Elige</li><li><span>2</span> Paga en Tebex</li><li><span>3</span> Juega</li></ol>
       </div>
     </section>
-    <section class="section store-faq"><div class="container"><p class="eyebrow">Compra clara</p><h2>Antes de continuar.</h2><article class="store-bedrock-notice"><strong>Bedrock: escribe tu nick exactamente como aparece en el chat</strong><p>Si tu identidad empieza con punto, inclúyelo. Ejemplo: <code>.JackStar</code>.</p></article><article class="store-bedrock-notice"><strong>Los pases de 30 días no se renuevan automáticamente</strong><p>Son compras manuales. La renovación solo ocurre si tú vuelves a comprar el pase.</p></article><article class="store-bedrock-notice"><strong>¿Necesitas ayuda con una entrega?</strong><p>Usa Discord con tu nick, producto e identificador de transacción. No compartas comprobantes con datos sensibles.</p></article></div></section>
-    <section class="section store-team" aria-labelledby="team-title"><div class="container"><div class="store-heading"><p class="eyebrow">Equipo</p><h2 id="team-title">Hecho y mantenido por DrakesCraft.</h2></div><div class="store-team__grid"><article class="store-team__member"><span>Dirección y desarrollo</span><strong>JackStar6677</strong><p>Dueño, desarrollador, mantenedor, configurador y diseñador.</p></article><article class="store-team__member"><span>Marketing</span><strong>KikaStar704</strong><p>Marketing, sostenimiento del proyecto y rostro público de DrakesCraft.</p></article><article class="store-team__member"><span>Desarrollo y QA</span><strong>Chagui68 · Nixcobt</strong><p>Desarrollo, texturas, criterio técnico, QA y configuración operativa.</p></article><article class="store-team__member"><span>Moderación y soporte</span><strong>JessielPR · Derem8503</strong><p>Seguimiento de reportes, comunidad y atención de jugadores.</p></article></div></div></section>
+
+    <section class="store-catalog" id="catalogo">
+      <div class="container">
+        <div class="store-heading">
+          <div><p class="eyebrow">Catálogo oficial</p><h2 id="store-category-title">Encuentra tu siguiente mejora.</h2></div>
+          <p id="store-category-description">Rangos, utilidades y pases configurados para DrakesCraft.</p>
+        </div>
+        <div class="store-status" aria-live="polite"><span id="store-health">Conectando catálogo</span><span id="store-product-count">-- productos</span><span id="store-updated">--</span></div>
+        <div class="store-tabs" id="store-tabs" aria-label="Categorías de productos"></div>
+        <div class="store-layout">
+          <div class="store-grid" id="store-grid"></div>
+          <aside class="store-checkout" aria-label="Carrito de compra">
+            <div class="store-checkout__head"><p class="eyebrow">Tu pedido</p><h2>Carrito</h2></div>
+            <p id="store-selection-note">Agrega un producto para continuar a Tebex.</p>
+            <div id="quote-items"></div>
+            <p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p>
+            <form id="quote-form">
+              <label>Nick de Minecraft<input name="nick" maxlength="40" autocomplete="username" placeholder="Tal como aparece en el juego" required></label>
+              <label>Contacto<input name="contact" maxlength="80" autocomplete="email" placeholder="Discord o correo" required></label>
+              <input class="hidden" name="website" tabindex="-1" autocomplete="off">
+              <label>Nota opcional<textarea name="notes" rows="3" maxlength="500" placeholder="Algún detalle útil para soporte"></textarea></label>
+              <button class="btn btn-primary" type="submit">Continuar con Tebex</button>
+            </form>
+            <div id="quote-result" class="hidden" aria-live="polite"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="store-notes" aria-labelledby="notes-title">
+      <div class="container store-notes__grid">
+        <div><p class="eyebrow">Antes de comprar</p><h2 id="notes-title">Todo claro desde el principio.</h2></div>
+        <div class="store-notes__items">
+          <article><strong>Bedrock</strong><p>Escribe tu nick exacto, incluido el punto inicial cuando corresponda.</p></article>
+          <article><strong>Pases de 30 días</strong><p>Son manuales: nadie te cobrará otra vez sin que vuelvas a comprar.</p></article>
+          <article><strong>Ayuda real</strong><p>Guarda el identificador Tebex. Con él, soporte puede revisar una entrega.</p></article>
+        </div>
+      </div>
+    </section>
   </main>
-  <div id="store-modal" class="hidden"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
-  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Tienda oficial y entregas auditables.</p></div><div class="site-footer__links"><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/background.js?v=20260803-storefront-v2"></script><script src="scripts/site.js?v=20260803-storefront-v2"></script><script src="scripts/store.js?v=20260803-storefront-v2"></script>
+
+  <div id="store-modal" class="hidden" role="dialog" aria-modal="true" aria-label="Detalle de producto"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
+  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una tienda hecha para mejorar tu forma de jugar.</p></div><div class="site-footer__links"><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
+  <script src="scripts/site.js?v=20260803-storefront-v3"></script>
+  <script src="scripts/store.js?v=20260803-storefront-v3"></script>
 </body>
 </html>

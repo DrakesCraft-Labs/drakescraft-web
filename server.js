@@ -591,21 +591,6 @@ app.get('/api/store', async () => {
   };
 });
 
-const getBossesCatalog = async () => {
-  return {
-    ...bossesCatalog,
-    summary: {
-      bosses: bossesCatalog.bosses.length,
-      naturalSpawnEnabled: bossesCatalog.invocation.naturalSpawnEnabled,
-      topDifficulty: 'Extrema'
-    }
-  };
-};
-
-app.get('/api/bosses', getBossesCatalog);
-// Keeps the retired browser bundle functional while cached clients refresh.
-app.get('/api/pantheon', getBossesCatalog);
-
 app.post('/api/store/tebex/checkout', async (request, reply) => {
   const body = request.body || {};
   const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
@@ -773,10 +758,6 @@ await app.register(fastifyStatic, {
       'store.html',
       'support.html',
       'terms.html',
-      'styles-3-2.css',
-      'script-3-2.js',
-      'styles-3-3.css',
-      'script-3-3.js',
       'bannerdrakes.jpg',
       'dragon_fly.png',
       'logodrakescraft.png',

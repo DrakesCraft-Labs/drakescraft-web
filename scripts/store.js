@@ -37,6 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderTabs() {
         tabs.innerHTML = state.catalog.categories.map((category) => `<button class="store-tab ${category.id === state.category ? "is-active" : ""}" type="button" data-category="${storeEscape(category.id)}">${storeEscape(category.label)}</button>`).join("");
+        const category = state.catalog.categories.find((entry) => entry.id === state.category);
+        document.getElementById("store-category-title").textContent = category?.label || "Catálogo DrakesCraft";
+        document.getElementById("store-category-description").textContent = category?.tagline || "Revisa cada beneficio antes de añadirlo al carrito.";
     }
 
     function renderProducts() {
@@ -47,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const selected = state.selected.has(product.id);
             const incompatible = currentMode && currentMode !== mode;
             const purchasable = mode !== "in-game" && mode !== "unavailable";
-            return `<article class="store-product">
+            return `<article class="store-product" data-accent="${storeEscape(product.accent || "emerald")}">
                 <div class="store-product__top"><div><span class="store-product__tag">${storeEscape(product.badge || deliveryLabel[mode])}</span><h3>${storeEscape(product.name)}</h3></div><strong class="store-product__price">${storeMoney(product.clp, product)}</strong></div>
                 <p>${storeEscape(product.summary)}</p>
                 <div class="store-product__delivery"><span>${deliveryLabel[mode]}</span><span>${mode === "tebex" && Number.isFinite(product.usd) ? `USD ${product.usd}` : ""}</span></div>
