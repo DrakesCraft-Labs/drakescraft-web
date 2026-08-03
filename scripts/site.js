@@ -50,6 +50,7 @@ function normalizeNavigation() {
         ["store.html", "Tienda"], ["community.html", "Comunidad"]
     ];
     menu.innerHTML = routes.map(([href, label]) => `<li><a${href === current ? ' class="active"' : ""} href="${href}">${label}</a></li>`).join("")
+        + '<li><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a></li>'
         + '<li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>';
     menu.dataset.normalized = "true";
 }

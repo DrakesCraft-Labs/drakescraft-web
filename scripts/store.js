@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.elements.nick?.insertAdjacentHTML("afterend", '<p class="store-bedrock-notice"><strong>¿Juegas desde Bedrock?</strong> Escribe tu nick exacto incluyendo el punto inicial. Ejemplo: <code>.JackStar</code>.</p>');
 
-    const state = { catalog: null, category: "monthly", selected: new Set() };
+    const requestedCategory = new URLSearchParams(window.location.search).get("categoria");
+    const state = { catalog: null, category: requestedCategory || "monthly", selected: new Set() };
     const productById = (id) => state.catalog.products.find((product) => product.id === id);
     const selectedProducts = () => [...state.selected].map(productById).filter(Boolean);
     const selectedMode = () => selectedProducts()[0] ? deliveryType(selectedProducts()[0]) : null;
@@ -133,6 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch("/api/store").then((response) => response.ok ? response.json() : Promise.reject()).then((catalog) => {
         state.catalog = catalog;
+        if (!catalog.categories.some((category) => category.id === state.category)) {
+            state.category = catalog.categories[0]?.id || "monthly";
+        }
         document.getElementById("store-health").textContent = "Catálogo conectado";
         document.getElementById("store-product-count").textContent = `${catalog.summary.products} productos`;
         document.getElementById("store-updated").textContent = `Actualizado ${catalog.updatedAt}`;
