@@ -843,7 +843,9 @@ app.get('/', async (_request, reply) => reply.sendFile('store.html'));
 await app.register(fastifyStatic, {
   root,
   wildcard: false,
-  index: ['index.html'],
+  // `/` is the explicit storefront route above. Do not let the static plugin
+  // register a competing index/HEAD handler for it.
+  index: false,
   maxAge: '1h',
   immutable: false,
   setHeaders: (response, filePath) => {
