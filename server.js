@@ -836,8 +836,19 @@ await app.register(fastifyStatic, {
   setHeaders: (response) => response.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate')
 });
 
+// Temporary compatibility alias. Minecraft still points here until the
+// pack.drakescraft.cl DNS record is moved to the active Star tunnel.
+await app.register(fastifyStatic, {
+  root: '/packs',
+  prefix: '/resourcepack/',
+  wildcard: false,
+  decorateReply: false,
+  maxAge: '1h',
+  immutable: false
+});
+
 // The public site begins at the storefront. Minecraft resources are hosted
-// separately at pack.drakescraft.cl and are intentionally not served here.
+// separately at pack.drakescraft.cl once its DNS cutover is complete.
 app.get('/', async (_request, reply) => reply.sendFile('store.html'));
 
 await app.register(fastifyStatic, {
