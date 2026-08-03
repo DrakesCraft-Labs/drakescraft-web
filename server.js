@@ -851,6 +851,16 @@ await app.register(fastifyStatic, {
 // separately at pack.drakescraft.cl once its DNS cutover is complete.
 app.get('/', async (_request, reply) => reply.sendFile('store.html'));
 
+// The former portal is no longer part of the public surface. Keep old links
+// useful without exposing pages that describe stale systems or dead widgets.
+for (const legacyPath of [
+  '/index.html', '/server.html', '/odysseia.html', '/dioses.html',
+  '/slimefun.html', '/bosses.html', '/community.html', '/jack.html',
+  '/rules.html', '/admin-quote.html'
+]) {
+  app.get(legacyPath, async (_request, reply) => reply.redirect(301, '/'));
+}
+
 await app.register(fastifyStatic, {
   root,
   wildcard: false,
