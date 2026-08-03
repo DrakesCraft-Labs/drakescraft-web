@@ -15,26 +15,20 @@ const contentDir = path.join(root, 'data');
 const dataDir = process.env.DATA_DIR || path.join(root, 'data');
 const counterFile = path.join(dataDir, 'visits.json');
 const quoteFile = path.join(dataDir, 'store-quotes.jsonl');
-const discordUrl = 'https://discord.com/api/guilds/699391897369575476/widget.json';
 const tebexPublicToken = process.env.TEBEX_PUBLIC_TOKEN || '';
 const tebexPrivateKey = process.env.TEBEX_PRIVATE_KEY || '';
 const adminToken = process.env.ADMIN_TOKEN || '';
 const discordSalesWebhook = process.env.DISCORD_SALES_WEBHOOK || '';
 const tebexWebhookSecret = process.env.TEBEX_WEBHOOK_SECRET || '';
-const translateApiKey = process.env.TRANSLATE_API_KEY || '';
-const translateUpstream = process.env.TRANSLATE_UPSTREAM || 'http://libretranslate:5000';
 // The Minecraft server only writes signed, non-sensitive operational telemetry.
 // Star Monitor reads it through a separate internal token.
 const odysseiaIngestSecret = process.env.ODYSSEIA_INGEST_SECRET || '';
 const starMonitorToken = process.env.STAR_MONITOR_TOKEN || '';
 const odysseiaStateFile = path.join(dataDir, 'odysseia-status.json');
 const odysseiaEventsFile = path.join(dataDir, 'odysseia-events.json');
-const chatHistoryFile = path.join(dataDir, 'chat-history.json');
 const ODYSSEIA_MAX_EVENT_AGE_MS = 5 * 60 * 1000;
 const ODYSSEIA_MAX_EVENTS = 500;
-const CHAT_MAX_MESSAGES = 100;
 const CUSTOM_KIT_PACKAGE_ID = 7516648;
-let discordCache = { expiresAt: 0, value: null };
 let visits = 0;
 const legacyPaymentPaths = new Set([
   '/api/store/checkout',
@@ -544,31 +538,6 @@ function isStarMonitorRequest(request) {
     && safeEqualText(String(request.headers['x-star-monitor-token'] || ''), starMonitorToken);
 }
 
-async function getDiscord() {
-  if (discordCache.value && discordCache.expiresAt > Date.now()) return discordCache.value;
-  const response = await fetch(discordUrl, {
-    headers: { 'User-Agent': 'DrakesCraft-Web/2.0' },
-    signal: AbortSignal.timeout(7000)
-  });
-  if (!response.ok) throw new Error(`Discord respondio ${response.status}`);
-  const source = await response.json();
-  const value = {
-    name: source.name,
-    invite: source.instant_invite,
-    online: source.presence_count || 0,
-    listed: Array.isArray(source.members) ? source.members.length : 0,
-    channels: (source.channels || []).slice(0, 12).map(({ id, name }) => ({ id, name })),
-    members: (source.members || []).slice(0, 16).map(({ username, status, avatar_url, game }) => ({
-      username,
-      status,
-      avatarUrl: avatar_url,
-      activity: game?.name || null
-    }))
-  };
-  discordCache = { value, expiresAt: Date.now() + 45_000 };
-  return value;
-}
-
 await loadVisits();
 
 app.addHook('onSend', async (request, reply) => {
@@ -612,66 +581,6 @@ app.get('/api/health', async () => ({
   service: 'drakescraft-web',
   uptimeSeconds: Math.round(process.uptime())
 }));
-
-const translatorLanguages = [
-  { code: 'es', name: 'Spanish' },
-  { code: 'en', name: 'English' },
-  { code: 'pt', name: 'Portuguese' },
-  { code: 'de', name: 'German' }
-];
-const translatorLanguageCodes = new Set(translatorLanguages.map(({ code }) => code));
-
-function translatorAuthorized(request) {
-  const key = request.body?.api_key || request.body?.secret || request.query?.api_key || request.headers['x-api-key'] || request.headers['api-key'];
-  return Boolean(translateApiKey) && safeEqualText(key, translateApiKey);
-}
-
-async function forwardTranslation(request, reply, path) {
-  if (!translatorAuthorized(request)) {
-    return reply.code(401).send({ error: 'Unauthorized translation client.' });
-  }
-
-  const message = String(request.body?.q || '');
-  const source = String(request.body?.source || '');
-  const target = String(request.body?.target || '');
-  if (!message || message.length > 512) {
-    return reply.code(400).send({ error: 'Translation message is invalid.' });
-  }
-  if (path === '/translate' && (!translatorLanguageCodes.has(source) || !translatorLanguageCodes.has(target))) {
-    return reply.code(400).send({ error: 'Translation language is not supported.' });
-  }
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 8000);
-  try {
-    const payload = new URLSearchParams({
-      q: message,
-      ...(path === '/translate' ? { source, target, format: 'text' } : {})
-    });
-    const response = await fetch(`${translateUpstream}${path}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      body: payload,
-      signal: controller.signal
-    });
-    const responseBody = await response.json().catch(() => null);
-    if (!response.ok || !responseBody) {
-      request.log.warn({ statusCode: response.status, path }, 'Translation upstream rejected a request');
-      return reply.code(503).send({ error: 'Translation service is temporarily unavailable.' });
-    }
-    return responseBody;
-  } catch (error) {
-    request.log.warn({ err: error, path }, 'Translation upstream is unavailable');
-    return reply.code(503).send({ error: 'Translation service is temporarily unavailable.' });
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-// WorldwideChat consumes this discovery endpoint before authenticating its requests.
-app.get('/api/translate/languages', async () => translatorLanguages);
-app.post('/api/translate/detect', async (request, reply) => forwardTranslation(request, reply, '/detect'));
-app.post('/api/translate/translate', async (request, reply) => forwardTranslation(request, reply, '/translate'));
 
 // Odysseia is hosted outside Star, so it reaches this existing HTTPS endpoint
 // with an HMAC. The accepted payload deliberately excludes players, UUIDs and
@@ -722,53 +631,6 @@ app.get('/api/internal/odysseia/status', async (request, reply) => {
   };
 });
 
-// Live In-Game Chat Feed Endpoints
-app.post('/api/chat/ingest', async (request, reply) => {
-  // Accept either HMAC signature (preferred) OR translator API key (Odysseia fallback)
-  const signature = validOdysseiaSignature(request);
-  const apiKeyAuth = translatorAuthorized(request);
-  if (!signature.valid && !apiKeyAuth) {
-    if (signature.status === 503 && !translateApiKey) {
-      return reply.code(503).send({ error: 'Ingesta Chat no configurada' });
-    }
-    return reply.code(401).send({ error: 'Firma Chat inválida o API key incorrecta' });
-  }
-
-  const payload = request.body || {};
-  const player = String(payload.player || 'Jugador').slice(0, 32);
-  const message = String(payload.message || '').trim().slice(0, 256);
-  const rank = String(payload.rank || 'JUGADOR').slice(0, 32);
-  const world = String(payload.world || 'Olimpo').slice(0, 32);
-
-  if (!message) return reply.code(400).send({ error: 'Mensaje vacío' });
-
-  const chatEntry = {
-    id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-    player,
-    rank,
-    message,
-    world,
-    timestamp: Date.now()
-  };
-
-  const history = await readJsonFile(chatHistoryFile, []);
-  const known = Array.isArray(history) ? history : [];
-  known.unshift(chatEntry);
-  await writeJsonAtomic(chatHistoryFile, known.slice(0, CHAT_MAX_MESSAGES));
-
-  return reply.code(202).send({ accepted: true, id: chatEntry.id });
-});
-
-app.get('/api/chat/live', async () => {
-  const history = await readJsonFile(chatHistoryFile, []);
-  const messages = Array.isArray(history) ? history.slice(0, 50) : [];
-  return {
-    online: true,
-    count: messages.length,
-    messages
-  };
-});
-
 app.get('/api/overview', async (request, reply) => {
   const seen = request.headers.cookie?.includes('drakes_seen=1');
   if (!seen) {
@@ -783,16 +645,6 @@ app.get('/api/overview', async (request, reply) => {
     deployment: 'star',
     transport: 'Cloudflare Tunnel'
   };
-});
-
-app.get('/api/discord', async (_request, reply) => {
-  try {
-    return await getDiscord();
-  } catch (error) {
-    app.log.warn(error, 'Discord no disponible');
-    reply.code(503);
-    return { error: 'Discord no disponible temporalmente' };
-  }
 });
 
 app.get('/api/store', async () => {
@@ -984,18 +836,8 @@ await app.register(fastifyStatic, {
   setHeaders: (response) => response.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate')
 });
 
-await app.register(fastifyStatic, {
-  // Minecraft requests a dedicated, item-only Slimefun resource pack.
-  root: '/packs',
-  prefix: '/resourcepack/',
-  wildcard: false,
-  decorateReply: false,
-  maxAge: '1h',
-  immutable: false
-});
-
-// The public site begins at the storefront. Operational endpoints and the
-// dedicated resource-pack route remain outside this navigation boundary.
+// The public site begins at the storefront. Minecraft resources are hosted
+// separately at pack.drakescraft.cl and are intentionally not served here.
 app.get('/', async (_request, reply) => reply.sendFile('store.html'));
 
 await app.register(fastifyStatic, {
