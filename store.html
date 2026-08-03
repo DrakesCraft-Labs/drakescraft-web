@@ -8,9 +8,11 @@
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/store/hero-olympus-night.png" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/store/greek-ivy-pillars.png" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260803-storefront-v3">
-  <link rel="stylesheet" href="styles/store.css?v=20260803-storefront-v3">
+  <link rel="stylesheet" href="styles/base.css?v=20260803-storefront-v4">
+  <link rel="stylesheet" href="styles/store.css?v=20260803-storefront-v4">
 </head>
 <body class="page-shell" data-page="store">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -34,9 +36,9 @@
       <div class="store-hero__backdrop" aria-hidden="true"></div>
       <div class="container store-hero__grid">
         <div class="store-hero__copy">
-          <p class="eyebrow">La tienda de DrakesCraft</p>
-          <h1>Tu aventura.<br><em>Con estilo propio.</em></h1>
-          <p class="store-hero__lead">Rangos, pases y utilidades para jugar a tu ritmo. Elige lo que mejora tu experiencia; Tebex procesa el pago y el servidor entrega dentro del juego.</p>
+          <p class="eyebrow">Survival, tecnología y magia</p>
+          <h1>Tu forma de jugar.<br><em>Tu legado.</em></h1>
+          <p class="store-hero__lead">Haz una granja tranquila, construye una red industrial o disputa el poder de los dioses. Aquí encuentras rangos, pases y utilidades con entrega automática dentro de DrakesCraft.</p>
           <div class="store-hero__actions">
             <a class="btn btn-primary" href="#catalogo">Explorar la tienda</a>
             <a class="btn btn-ghost" href="support.html">Ayuda con una compra</a>
@@ -48,6 +50,7 @@
           </dl>
         </div>
         <div class="store-hero__art" aria-hidden="true">
+          <span class="store-hero__glow"></span>
           <div class="store-hero__crest"><img src="assets/logo-drakescraft.png" alt=""></div>
           <img class="store-hero__pillars" src="assets/store/greek-ivy-pillars.png" alt="">
           <span class="hero-label hero-label--one">RANGOS</span>
@@ -55,6 +58,7 @@
           <span class="hero-label hero-label--three">UTILIDADES</span>
         </div>
       </div>
+      <img class="store-hero__garland" src="assets/store/greek-ivy-garland-v2.png" alt="" aria-hidden="true">
     </header>
 
     <section class="store-path" id="comprar" aria-label="Flujo de compra">
@@ -74,8 +78,8 @@
         <div class="store-tabs" id="store-tabs" aria-label="Categorías de productos"></div>
         <div class="store-layout">
           <div class="store-grid" id="store-grid"></div>
-          <aside class="store-checkout" aria-label="Carrito de compra">
-            <div class="store-checkout__head"><p class="eyebrow">Tu pedido</p><h2>Carrito</h2></div>
+          <aside class="store-checkout" id="carrito" aria-label="Carrito de compra">
+            <div class="store-checkout__head"><div><p class="eyebrow">Tu pedido</p><h2>Carrito</h2></div><span class="store-cart-count" id="store-cart-count">0</span></div>
             <p id="store-selection-note">Agrega un producto para continuar a Tebex.</p>
             <div id="quote-items"></div>
             <p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p>
@@ -108,9 +112,11 @@
     </section>
   </main>
 
+  <a class="store-cart-jump hidden" id="store-cart-jump" href="#carrito" aria-label="Abrir carrito"><span>Ver carrito</span><strong id="store-cart-jump-count">0</strong></a>
+
   <div id="store-modal" class="hidden" role="dialog" aria-modal="true" aria-label="Detalle de producto"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una tienda hecha para mejorar tu forma de jugar.</p></div><div class="site-footer__links"><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260803-storefront-v3"></script>
-  <script src="scripts/store.js?v=20260803-storefront-v3"></script>
+  <script src="scripts/site.js?v=20260803-storefront-v4"></script>
+  <script src="scripts/store.js?v=20260803-storefront-v4"></script>
 </body>
 </html>
