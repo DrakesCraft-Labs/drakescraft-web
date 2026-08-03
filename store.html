@@ -81,10 +81,14 @@
             <p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p>
             <form id="quote-form">
               <label>Nick de Minecraft<input name="nick" maxlength="40" autocomplete="username" placeholder="Tal como aparece en el juego" required></label>
-              <label>Contacto<input name="contact" maxlength="80" autocomplete="email" placeholder="Discord o correo" required></label>
+              <p class="store-checkout__hint">Solo el nick es obligatorio. En Bedrock escribe el punto inicial si tu cuenta lo usa.</p>
+              <details class="store-checkout__optional">
+                <summary>Agregar contacto para soporte (opcional)</summary>
+                <label>Discord o correo<input name="contact" maxlength="80" autocomplete="email" placeholder="Para que podamos ayudarte si hace falta"></label>
+                <label>Nota opcional<textarea name="notes" rows="3" maxlength="500" placeholder="Algún detalle útil para soporte"></textarea></label>
+              </details>
               <input class="hidden" name="website" tabindex="-1" autocomplete="off">
-              <label>Nota opcional<textarea name="notes" rows="3" maxlength="500" placeholder="Algún detalle útil para soporte"></textarea></label>
-              <button class="btn btn-primary" type="submit">Continuar con Tebex</button>
+              <button class="btn btn-primary" type="submit">Ir al pago seguro</button>
             </form>
             <div id="quote-result" class="hidden" aria-live="polite"></div>
           </aside>

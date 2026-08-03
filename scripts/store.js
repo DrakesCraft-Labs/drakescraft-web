@@ -122,16 +122,27 @@ document.addEventListener("DOMContentLoaded", () => {
         const payload = { nick: fields.get("nick"), contact: fields.get("contact"), notes: fields.get("notes"), website: fields.get("website"), items: products.map((product) => product.id) };
         const endpoint = "/api/store/tebex/checkout";
         const result = document.getElementById("quote-result");
+        const submit = form.querySelector('button[type="submit"]');
+        const originalLabel = submit?.textContent;
         try {
+            if (submit) {
+                submit.disabled = true;
+                submit.textContent = "Preparando pago seguro...";
+            }
             const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || "No se pudo preparar la compra.");
-            result.innerHTML = `<strong>Checkout listo.</strong><p>Serás dirigido a Tebex para completar el pago.</p><p class="store-bedrock-notice"><strong>Bedrock:</strong> confirma que tu nick incluye el punto inicial, por ejemplo <code>.JackStar</code>.</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" target="_blank" rel="noopener">Abrir checkout</a>`;
+            if (!data.init_point) throw new Error("Tebex no devolvió una URL de pago.");
+            result.innerHTML = `<strong>Checkout listo.</strong><p>Redirigiendo a Tebex...</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}">Continuar al pago</a>`;
             result.classList.remove("hidden");
-            window.open(data.init_point, "_blank", "noopener");
+            window.location.assign(data.init_point);
         } catch (error) {
             result.innerHTML = `<strong>No se pudo continuar.</strong><p>${storeEscape(error.message)}</p>`;
             result.classList.remove("hidden");
+            if (submit) {
+                submit.disabled = false;
+                submit.textContent = originalLabel;
+            }
         }
     });
 
