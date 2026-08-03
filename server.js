@@ -42,6 +42,7 @@ const legacyPaymentPaths = new Set([
 const checkoutBuckets = new Map();
 const CHECKOUT_WINDOW_MS = 10 * 60 * 1000;
 const CHECKOUT_MAX_REQUESTS = 5;
+const MINECRAFT_USERNAME_PATTERN = /^\.?[A-Za-z0-9_]{3,16}$/;
 
 function safeEqualText(left, right) {
   const leftBuffer = Buffer.from(String(left || ''), 'utf8');
@@ -596,12 +597,17 @@ app.post('/api/store/tebex/checkout', async (request, reply) => {
   const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
   const validIds = new Set(storeCatalog.products.map((product) => product.id));
   const items = storeCatalog.products.filter((product) => selectedIds.includes(product.id) && validIds.has(product.id));
-  const nick = String(body.nick || '').trim().slice(0, 40);
+  const nick = String(body.nick || '').trim().slice(0, 17);
   const contact = String(body.contact || '').trim().slice(0, 80);
   const notes = String(body.notes || '').trim().slice(0, 500);
 
   if (body.website) return reply.code(204).send();
   if (!items.length) return reply.code(400).send({ error: 'Selecciona al menos un producto.' });
+  if (!MINECRAFT_USERNAME_PATTERN.test(nick)) {
+    return reply.code(400).send({
+      error: 'Escribe un nick válido: 3 a 16 letras, números o guiones bajos; Bedrock puede comenzar con punto.'
+    });
+  }
 
   const nonTebexItems = items.filter((product) => !isTebexEnabledProduct(product));
   if (nonTebexItems.length) {

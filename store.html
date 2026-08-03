@@ -84,7 +84,7 @@
             <div id="quote-items"></div>
             <p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p>
             <form id="quote-form">
-              <label>Nick de Minecraft<input name="nick" maxlength="40" autocomplete="username" placeholder="Tal como aparece en el juego" required></label>
+              <label>Nick de Minecraft<input name="nick" minlength="3" maxlength="17" pattern="\.?[A-Za-z0-9_]{3,16}" title="Usa de 3 a 16 letras, números o guiones bajos. En Bedrock puedes incluir el punto inicial." autocomplete="username" placeholder="Tal como aparece en el juego" required></label>
               <p class="store-checkout__hint">Solo el nick es obligatorio. En Bedrock escribe el punto inicial si tu cuenta lo usa.</p>
               <details class="store-checkout__optional">
                 <summary>Agregar contacto para soporte (opcional)</summary>
