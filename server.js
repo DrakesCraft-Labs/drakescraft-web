@@ -330,22 +330,6 @@ function getTebexAuthHeader() {
   return `Basic ${Buffer.from(`${tebexPublicToken}:${tebexPrivateKey}`).toString('base64')}`;
 }
 
-function isAdminTokenValid(request) {
-  if (!adminToken) {
-    app.log.warn('[WARN] ADMIN_TOKEN no configurado; /api/quote-checkout queda sin validacion extra');
-    return true;
-  }
-
-  const provided = request.headers['x-admin-token'];
-  if (typeof provided !== 'string' || !provided.length) return false;
-
-  const expectedBuffer = Buffer.from(adminToken, 'utf8');
-  const providedBuffer = Buffer.from(provided, 'utf8');
-  if (expectedBuffer.length !== providedBuffer.length) return false;
-
-  return timingSafeEqual(expectedBuffer, providedBuffer);
-}
-
 async function tebexRequest(endpoint, { method = 'GET', body } = {}) {
   const response = await fetch(`https://headless.tebex.io${endpoint}`, {
     method,
@@ -415,63 +399,6 @@ async function createTebexBasket({ nick, contact, notes, items }) {
     currency: latest?.data?.currency || 'USD',
     totalPrice: latest?.data?.total_price || 0
   };
-}
-
-// Paquetes de crédito de denominación fija — descomposición greedy para precio exacto
-const CREDIT_DENOMINATIONS = [
-  { cents: 5000, id: 7516695 }, // $50
-  { cents: 2000, id: 7516694 }, // $20
-  { cents: 1000, id: 7516692 }, // $10
-  { cents:  500, id: 7516691 }, // $5
-  { cents:  200, id: 7516690 }, // $2
-  { cents:  100, id: 7516688 }, // $1
-];
-
-function decomposeToCents(totalCents) {
-  const packages = [];
-  let remaining = totalCents;
-  for (const { cents, id } of CREDIT_DENOMINATIONS) {
-    if (remaining <= 0) break;
-    const qty = Math.floor(remaining / cents);
-    if (qty > 0) {
-      packages.push({ id, quantity: qty });
-      remaining -= qty * cents;
-    }
-  }
-  if (remaining > 0) throw new Error(`No se puede componer exactamente $${(totalCents/100).toFixed(2)} con las denominaciones disponibles.`);
-  return packages;
-}
-
-async function createTebexQuoteBasket({ nick, contact, notes, priceUsd }) {
-  const totalCents = Math.round(priceUsd * 100);
-  const packages = decomposeToCents(totalCents);
-
-  const basket = await tebexRequest(`/api/accounts/${tebexPublicToken}/baskets`, {
-    method: 'POST',
-    body: {
-      username: nick || 'JugadorDrakes',
-      complete_url: 'https://web.drakescraft.cl/store.html?payment=tebex-success',
-      cancel_url: 'https://web.drakescraft.cl/store.html?payment=tebex-cancel',
-      complete_auto_redirect: false,
-      custom: { source: 'web.drakescraft.cl', contact: contact || '', notes: notes || '', quote_type: 'custom-kit' }
-    }
-  });
-
-  const ident = basket?.data?.ident;
-  if (!ident) throw new Error('Tebex no devolvió ident para el basket de cotizacion');
-
-  let latest;
-  for (const pkg of packages) {
-    latest = await tebexRequest(`/api/baskets/${ident}/packages`, {
-      method: 'POST',
-      body: { package_id: pkg.id, quantity: pkg.quantity }
-    });
-  }
-
-  const checkoutUrl = latest?.data?.links?.checkout;
-  if (!checkoutUrl) throw new Error('Tebex no devolvió checkout URL');
-
-  return { basketIdent: ident, checkoutUrl, totalPrice: priceUsd };
 }
 
 async function loadVisits() {
@@ -739,39 +666,6 @@ app.post('/api/store/tebex/checkout', async (request, reply) => {
   } catch (error) {
     app.log.error(error, 'tebex checkout error');
     return reply.code(502).send({ error: 'No se pudo crear el checkout de Tebex.' });
-  }
-});
-
-app.post('/api/quote-checkout', async (request, reply) => {
-  const body = request.body || {};
-  const nick = String(body.nick || '').trim().slice(0, 40);
-  const contact = String(body.contact || '').trim().slice(0, 120);
-  const notes = String(body.notes || '').trim().slice(0, 500);
-  const parsedPrice = Number(body.price_usd);
-
-  if (!isAdminTokenValid(request)) {
-    return reply.code(401).send({ error: 'No autorizado.' });
-  }
-
-  if (!nick) {
-    return reply.code(400).send({ error: 'nick es obligatorio.' });
-  }
-
-  if (!Number.isFinite(parsedPrice) || parsedPrice < 1 || parsedPrice > 500) {
-    return reply.code(400).send({ error: 'price_usd debe ser un numero entre 1 y 500.' });
-  }
-
-  try {
-    const basket = await createTebexQuoteBasket({ nick, contact, notes, priceUsd: parsedPrice });
-
-    return {
-      checkoutUrl: basket.checkoutUrl,
-      price_usd: Number(parsedPrice.toFixed(2)),
-      nick
-    };
-  } catch (error) {
-    app.log.error(error, 'quote checkout error');
-    return reply.code(502).send({ error: 'No se pudo crear el checkout de cotizacion.' });
   }
 });
 

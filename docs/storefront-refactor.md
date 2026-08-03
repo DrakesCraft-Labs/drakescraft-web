@@ -10,8 +10,9 @@ páginas auxiliares son `support.html` y `terms.html`.
 
 - `GET /api/store` sigue entregando el catálogo a la interfaz.
 - `POST /api/store/tebex/checkout` mantiene el checkout Headless de Tebex.
-- `POST /api/tebex/webhook` conserva validación HMAC y notificaciones; la
-  entrega en juego se conectará cuando Odysseia tenga su registro idempotente.
+- `POST /api/tebex/webhook` conserva validación HMAC y notificaciones de venta.
+  La entrega en juego la ejecuta Tebex directamente contra
+  `odysseiapurchase deliver`, que registra cada transacción de forma idempotente.
 - `/resourcepack/` permanece aislado para clientes de Minecraft.
 - Las rutas de traducción, estado e ingesta Odysseia siguen operativas y no se
   exponen desde la navegación pública.
@@ -27,7 +28,7 @@ Los IDs de producto son contratos: no se renombran sin migrar Tebex y Odysseia.
 1. Conciliar cada producto del catálogo con el paquete real de Tebex.
 2. Añadir una campaña explícita por producto, con fecha, precio anterior y
    descuento, antes de mostrar una oferta.
-3. Hacer que Odysseia registre y aplique la entrega por transacción una sola
-   vez; recién entonces el webhook de Star podrá iniciar la entrega.
+3. Mantener cada comando de Tebex en el motor de compras de Odysseia; no usar
+   comandos directos de LuckPerms, Essentials ni ProtectionStones.
 4. Desplegar primero en staging y comprobar móvil, checkout y endpoints del
    pack antes de reemplazar el contenedor de producción.
