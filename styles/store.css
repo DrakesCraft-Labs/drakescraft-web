@@ -90,3 +90,20 @@ body[data-page="store"]::after,
 @media (max-width: 920px) { .store-hero h1 { font-size: 4rem; } }
 @media (max-width: 700px) { .store-hero h1 { font-size: 3rem; }.store-hero__art { height: 190px; }.store-hero__glow { top: 2%; right: -8%; width: 190px; }.store-hero__garland { bottom: -46px; width: 118%; height: 110px; }.store-path__inner { padding-top: 1.25rem; }.store-heading h2 { font-size: 2.35rem; }.store-cart-jump:not(.hidden) { display: flex; } }
 @media (prefers-reduced-motion: reduce) { .store-hero__backdrop, .store-hero__crest, .store-hero__pillars, .store-hero__glow { animation: none; }.store-product { opacity: 1; transform: none; transition: none; } }
+
+/* Aviso destacado dentro de una pagina clara (soporte, terminos). */
+.prose-page__warning { margin-top: 1.5rem; padding: 1.1rem 1.25rem; border: 1px solid #e0c98a; border-left: 4px solid #c79a21; border-radius: 6px; background: #fdf7e6; }
+.prose-page__warning strong { display: block; color: #7a5c07; font: 800 1rem var(--font-heading); }
+.prose-page__warning p { margin: .5rem 0 0; color: #6a5c3c; font-size: .87rem; line-height: 1.55; }
+
+/* Equipo del servidor, en la portada. */
+.store-team { padding: 4.5rem 0; background: #16382a; color: #f7f5e9; }
+.store-team .eyebrow { color: #b8f7c9; }
+.store-team h2 { margin: .5rem 0 .4rem; font: 800 clamp(2rem, 3vw, 2.8rem)/1.05 var(--font-heading); }
+.store-team > .container > p { max-width: 62ch; color: #cae2d1; line-height: 1.55; }
+.store-team__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.store-team__card { display: flex; align-items: center; gap: .9rem; padding: 1rem; border: 1px solid rgba(211, 239, 219, .22); border-radius: 7px; background: #1e4735; }
+.store-team__card img { width: 56px; height: 56px; border-radius: 6px; border: 2px solid var(--team-accent, #7fe9a6); image-rendering: pixelated; background: #12241c; }
+.store-team__role { color: var(--team-accent, #7fe9a6); font: 700 .66rem "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.store-team__card h3 { margin: .15rem 0 .1rem; color: #fffdf2; font: 800 1.08rem var(--font-heading); }
+.store-team__card p { margin: 0; color: #b9d2c1; font-size: .78rem; line-height: 1.4; }

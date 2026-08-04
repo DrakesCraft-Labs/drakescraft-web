@@ -106,6 +106,9 @@ const tebexPackageIds = {
   'dragmas-saco': 7510373,
   'dragmas-cofre': 7510374,
   'dragmas-anfora': 7510375,
+  'protection-nether-colossus': 7596916,
+  'protection-end-colossus': 7596920,
+  'protection-atlas': 7596924,
   'sfmaster-1h': 7545828,
   'sfmaster-24h': 7545831
 };
