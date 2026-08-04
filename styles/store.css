@@ -107,3 +107,10 @@ body[data-page="store"]::after,
 .store-team__role { color: var(--team-accent, #7fe9a6); font: 700 .66rem "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .store-team__card h3 { margin: .15rem 0 .1rem; color: #fffdf2; font: 800 1.08rem var(--font-heading); }
 .store-team__card p { margin: 0; color: #b9d2c1; font-size: .78rem; line-height: 1.4; }
+
+/* Mencion especial al fundador original, aparte del staff activo. */
+.store-legacy { display: flex; align-items: center; gap: 1.1rem; margin-top: 1.8rem; padding: 1.15rem 1.3rem; border: 1px solid rgba(255, 226, 137, .38); border-left: 4px solid #ffe289; border-radius: 7px; background: rgba(255, 226, 137, .07); }
+.store-legacy img { width: 64px; height: 64px; flex-shrink: 0; border-radius: 6px; border: 2px solid #ffe289; image-rendering: pixelated; background: #12241c; }
+.store-legacy__role { color: #ffe289; font: 700 .66rem "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.store-legacy h3 { margin: .15rem 0 .35rem; color: #fffdf2; font: 800 1.25rem var(--font-heading); }
+.store-legacy p { margin: 0; max-width: 68ch; color: #cfe4d5; font-size: .85rem; line-height: 1.55; }
