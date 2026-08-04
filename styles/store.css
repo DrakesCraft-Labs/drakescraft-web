@@ -114,3 +114,42 @@ body[data-page="store"]::after,
 .store-legacy__role { color: #ffe289; font: 700 .66rem "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .store-legacy h3 { margin: .15rem 0 .35rem; color: #fffdf2; font: 800 1.25rem var(--font-heading); }
 .store-legacy p { margin: 0; max-width: 68ch; color: #cfe4d5; font-size: .85rem; line-height: 1.55; }
+
+/* ---- Instagram junto al call to action principal ---- */
+.btn-ig { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,255,255,.28); color: #fff; background: linear-gradient(115deg, #f9a03f, #e1306c 46%, #a02bc0); box-shadow: 0 10px 24px rgba(190, 45, 128, .28); }
+.btn-ig:hover { filter: brightness(1.08); border-color: rgba(255,255,255,.5); }
+
+/* ---- Tema oscuro: va al final para ganar por orden sin reescribir cada valor ---- */
+.store-catalog, .store-subpage, #proximamente, #modalidades { background: #101a16 !important; color: #e8f1ea; border-top-color: #24382e !important; }
+.store-heading h2, .store-heading h1, .prose-page h1 { color: #f3f7f2; }
+.store-heading p, .store-subpage p, .prose-page > p, .prose-page li { color: #b3c7ba; }
+.store-tab { color: #cfe0d4; border-color: #2f4a3c; background: #16261f; }
+.store-tab:hover { border-color: #4fbf7f; }
+.store-tab.is-active { color: #08120d; border-color: #6fe3a2; background: #6fe3a2; }
+.store-product { border-color: #2b4437; background: #172a22; box-shadow: 0 12px 28px rgba(0,0,0,.32); }
+.store-product h3 { color: #f2f8f3; }
+.store-product > p { color: #adc3b4; }
+.store-product__price { color: #8ff0b6; }
+.store-product__delivery { border-top-color: #2b4437; color: #93ab9c; }
+.store-product__actions .btn-secondary { color: #d8ecdd; border-color: #375645; background: #1e3529; }
+.store-product.is-visible:hover { box-shadow: 0 20px 40px rgba(0,0,0,.45); }
+.prose-page article { border-color: #2b4437; background: #172a22; }
+.prose-page article h2 { color: #7fe9a6; }
+.prose-page__warning { border-color: #5c4a1e; border-left-color: #d8a834; background: #241f10; }
+.prose-page__warning strong { color: #ffd97a; }
+.prose-page__warning p { color: #cbbd94; }
+.store-notes { background: #0e1f18; }
+
+/* ---- Celular ---- */
+@media (max-width: 760px) {
+  .store-layout { grid-template-columns: minmax(0, 1fr); }
+  .store-grid { grid-template-columns: minmax(0, 1fr); gap: .85rem; }
+  .store-checkout { position: static; }
+  .store-notes__grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .store-notes__items { grid-template-columns: minmax(0, 1fr); }
+  .store-notes h2 { max-width: none; }
+  .store-team__grid { grid-template-columns: minmax(0, 1fr); }
+  .store-legacy { flex-direction: column; align-items: flex-start; text-align: left; }
+  .store-product { min-height: 0; }
+  .btn-ig { width: 100%; justify-content: center; }
+}
