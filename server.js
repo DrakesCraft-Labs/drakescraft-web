@@ -322,7 +322,9 @@ function getStoreCatalogView() {
       ...product,
       tebexPackageId: tebexPackageIds[product.id] || null,
       tebexEnabled: isTebexEnabledProduct(product),
-      purchaseAvailable: !unavailableTebexProductIds.has(product.id)
+      // Un producto puede estar no disponible por decision del catalogo (aun no existe el
+      // paquete en Tebex) o por estar bloqueado aqui.
+      purchaseAvailable: product.purchaseAvailable !== false && !unavailableTebexProductIds.has(product.id)
     }))
   };
 }
