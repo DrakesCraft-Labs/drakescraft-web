@@ -11,8 +11,8 @@
   <link rel="preload" href="assets/store/hero-olympus-night.png" as="image" fetchpriority="high">
   <link rel="preload" href="assets/store/greek-ivy-pillars.png" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260804-skinjack-v2">
-  <link rel="stylesheet" href="styles/store.css?v=20260804-skinjack-v2">
+  <link rel="stylesheet" href="styles/base.css?v=20260804-staff-v3">
+  <link rel="stylesheet" href="styles/store.css?v=20260804-staff-v3">
 </head>
 <body class="page-shell" data-page="store">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -157,7 +157,7 @@
             </div>
           </article>
           <article class="store-team__card" style="--team-accent: #ffc98a;">
-            <img src="https://mc-heads.net/avatar/Chagui68/64" alt="Skin de Chagui68" width="56" height="56" loading="lazy">
+            <img src="assets/staff/Chagui68.png" alt="Skin de Chagui68" width="56" height="56" loading="lazy">
             <div>
               <span class="store-team__role">Administrador / Dev</span>
               <h3>Chagui68</h3>
@@ -165,15 +165,39 @@
             </div>
           </article>
           <article class="store-team__card" style="--team-accent: #a5d8ff;">
-            <img src="https://mc-heads.net/avatar/Lautix16/64" alt="Skin de Lautix16" width="56" height="56" loading="lazy">
+            <img src="assets/staff/Lautix16.png" alt="Skin de Lautix16" width="56" height="56" loading="lazy">
             <div>
-              <span class="store-team__role">Jefe-Dev</span>
+              <span class="store-team__role">Jefe de desarrollo</span>
               <h3>Lautix16</h3>
               <p>Desarrollo y sistemas</p>
             </div>
           </article>
+          <article class="store-team__card" style="--team-accent: #c9b3ff;">
+            <img src="assets/staff/JessielPR.png" alt="Skin de JessielPR" width="56" height="56" loading="lazy">
+            <div>
+              <span class="store-team__role">Admin</span>
+              <h3>JessielPR</h3>
+              <p>Jefe de moderadores y helpers</p>
+            </div>
+          </article>
           <article class="store-team__card" style="--team-accent: #9ef0c4;">
-            <img src="https://mc-heads.net/avatar/Derem8503/64" alt="Skin de Derem8503" width="56" height="56" loading="lazy">
+            <img src="assets/staff/Nixcobt.png" alt="Skin de Nixcobt" width="56" height="56" loading="lazy">
+            <div>
+              <span class="store-team__role">QA</span>
+              <h3>Nixcobt</h3>
+              <p>Control de calidad y pruebas</p>
+            </div>
+          </article>
+          <article class="store-team__card" style="--team-accent: #ffe08a;">
+            <img src="https://mc-heads.net/avatar/elpepinoraro18/64" alt="Skin de elpepinoraro18" width="56" height="56" loading="lazy">
+            <div>
+              <span class="store-team__role">Consultor Slimefun</span>
+              <h3>elpepinoraro18</h3>
+              <p>Slimefun, desarrollo y construccion</p>
+            </div>
+          </article>
+          <article class="store-team__card" style="--team-accent: #8ad8ff;">
+            <img src="assets/staff/Derem8503.png" alt="Skin de Derem8503" width="56" height="56" loading="lazy">
             <div>
               <span class="store-team__role">Helper / Soporte</span>
               <h3>Derem8503</h3>
@@ -183,27 +207,13 @@
         </div>
       </div>
     </section>
-
-    <section class="store-notes" aria-labelledby="notes-title">
-      <div class="container store-notes__grid">
-        <div><p class="eyebrow">Antes de comprar</p><h2 id="notes-title">Todo claro desde el principio.</h2></div>
-        <div class="store-notes__items">
-          <article>
-            <strong>Bedrock (Geyser/Floodgate)</strong>
-            <p>La plataforma coloca un punto <code>.</code> al inicio de los nombres en Bedrock (ej: <code>.JackStar</code>) para diferenciar los perfiles de Java y Bedrock y evitar colisiones. Escribe tu nick con el punto incluido si juegas desde Bedrock.</p>
-          </article>
-          <article><strong>Pases de 30 días</strong><p>Son manuales: nadie te cobrará otra vez sin que vuelvas a comprar.</p></article>
-          <article><strong>Ayuda real</strong><p>Guarda el identificador Tebex. Con él, soporte puede revisar una entrega.</p></article>
-        </div>
-      </div>
-    </section>
   </main>
 
   <a class="store-cart-jump hidden" id="store-cart-jump" href="#carrito" aria-label="Abrir carrito"><span>Ver carrito</span><strong id="store-cart-jump-count">0</strong></a>
 
   <div id="store-modal" class="hidden" role="dialog" aria-modal="true" aria-label="Detalle de producto"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una tienda hecha para mejorar tu forma de jugar.</p></div><div class="site-footer__links"><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260804-skinjack-v2"></script>
-  <script src="scripts/store.js?v=20260804-skinjack-v2"></script>
+  <script src="scripts/site.js?v=20260804-staff-v3"></script>
+  <script src="scripts/store.js?v=20260804-staff-v3"></script>
 </body>
 </html>
