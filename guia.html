@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Guía completa de DrakesCraft: todos los comandos del servidor y cómo funcionan las tres modalidades, Survival, SkyBlock y OneBlock.">
-  <title>DrakesCraft | Guía de comandos y modalidades</title>
+  <title>Guia · DrakesCraft</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260805-addons-v1">
-  <link rel="stylesheet" href="styles/guia.css?v=20260805-addons-v1">
+  <link rel="stylesheet" href="styles/base.css?v=20260805-split-v1">
+  <link rel="stylesheet" href="styles/guia.css?v=20260805-split-v1">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -41,7 +41,12 @@
       </div>
     </header>
 
-    <section class="container" id="comandos">
+          <nav class="guide-tabs" aria-label="Secciones de la guia">
+        <a href="guia.html" class="is-active">Comandos y servidor</a>
+        <a href="guia-rangos.html">Rangos</a>
+        <a href="guia-slimefun.html">Slimefun</a>
+      </nav>
+<section class="container" id="comandos">
       <div class="guide-search">
         <label class="sr-only" for="guide-q">Buscar un comando</label>
         <input type="search" id="guide-q" placeholder="Escribe un comando o lo que quieres hacer: casa, vender, isla, proteger…" autocomplete="off">
@@ -189,7 +194,8 @@
       </section>
     </section>
 
-    <section class="container guide-section" id="modalidades">
+    
+<section class="container guide-section" id="modalidades">
       <h2>Cómo funcionan las modalidades</h2>
       <p class="guide-section__note">Las tres corren en el mismo servidor. No cambias de IP ni pierdes tu progreso: cambias de mundo con <code>/modalidades</code>.</p>
 
@@ -252,81 +258,8 @@
       <p class="guide-section__note" style="margin-top:1.5rem;">No se pueden pasar objetos de una modalidad a otra. Es a propósito: cada una tiene que valer por sí misma.</p>
     </section>
 
-    <section class="container guide-section" id="rangos">
-      <h2>Rangos y qué desbloquea cada uno</h2>
-      <p class="guide-section__note">Los rangos son <strong>pases de 30 días</strong> y no se renuevan solos. Cada uno hereda todo lo del anterior, así que lo que ves en una fila se suma a las de arriba. Tu rango funciona igual en las tres modalidades.</p>
-
-      <div class="rank-scroll">
-        <table class="rank-table">
-          <caption class="sr-only">Comparación de rangos: hogares, bóvedas, protecciones, warps de jugador, tiendas e isla</caption>
-          <thead>
-            <tr><th scope="col">Rango</th><th scope="col">Hogares</th><th scope="col">Bóvedas</th><th scope="col">Protección</th><th scope="col">Protecciones a la vez</th><th scope="col">Warps</th><th scope="col">Tiendas</th><th scope="col">Isla</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row" data-rank="polis">Polis</th><td>1</td><td>—</td><td>31×31</td><td>1</td><td>—</td><td>—</td><td>128×128</td></tr>
-            <tr><th scope="row" data-rank="oldschool">OldSchool</th><td>—</td><td>—</td><td>113×113</td><td>5</td><td>5</td><td>15</td><td>—</td></tr>
-            <tr><th scope="row" data-rank="hercules">Hércules</th><td>3</td><td>3</td><td>49×49</td><td>3</td><td>5</td><td>15</td><td>144×144</td></tr>
-            <tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>3</td><td>81×81</td><td>4</td><td>3</td><td>20</td><td>160×160</td></tr>
-            <tr><th scope="row" data-rank="hermes">Hermes</th><td>6</td><td>5</td><td>113×113</td><td>5</td><td>8</td><td>30</td><td>176×176</td></tr>
-            <tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>5</td><td>177×177</td><td>6</td><td>5</td><td>40</td><td>192×192</td></tr>
-            <tr><th scope="row" data-rank="artemisa">Artemisa</th><td>10</td><td>5</td><td>241×241</td><td>8</td><td>12</td><td>50</td><td>208×208</td></tr>
-            <tr><th scope="row" data-rank="afrodita">Afrodita</th><td>12</td><td>7</td><td>353×353</td><td>10</td><td>15</td><td>65</td><td>224×224</td></tr>
-            <tr><th scope="row" data-rank="zeus">Zeus</th><td>20</td><td>10</td><td>481×481</td><td>15</td><td>25</td><td>80</td><td>250×250</td></tr>
-            <tr><th scope="row" data-rank="thor">Thor</th><td>25</td><td>12</td><td>601×601</td><td>18</td><td>25</td><td>100</td><td>280×280</td></tr>
-            <tr><th scope="row" data-rank="anubis">Anubis</th><td>30</td><td>14</td><td>721×721</td><td>20</td><td>25</td><td>120</td><td>310×310</td></tr>
-            <tr><th scope="row" data-rank="poseidon">Poseidón</th><td>35</td><td>16</td><td>841×841</td><td>22</td><td>25</td><td>150</td><td>340×340</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Japeto</th><td>40</td><td>18</td><td>1001×1001</td><td>25</td><td>25</td><td>200</td><td>400×400</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Oceanus</th><td>45</td><td>20</td><td>1301×1301</td><td>30</td><td>25</td><td>250</td><td>450×450</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Hiperión</th><td>50</td><td>22</td><td>1601×1601</td><td>35</td><td>25</td><td>300</td><td>500×500</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Cronos</th><td>60</td><td>25</td><td>2001×2001</td><td>40</td><td>25</td><td>400</td><td>550×550</td></tr>
-            <tr><th scope="row" data-rank="caos">Titán Caos</th><td>100</td><td>30</td><td>2501×2501</td><td>50</td><td>25</td><td>500</td><td>600×600</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="guide-section__note">«Protección» es el tamaño de la piedra que incluye el rango. «Protecciones a la vez» es cuántas puedes tener colocadas. «Tiendas» es el límite de tiendas de ChestShop.</p>
-
-      <h3 class="rank-subhead">Comandos que suma cada rango</h3>
-      <div class="guide-table">
-        <div class="guide-row"><code>OldSchool</code><p><code>/ec</code> · <code>/feed</code> · <code>/hat</code> · <code>/near</code> · <code>/ptime</code> · <code>/pweather</code> · <code>/workbench</code> · <code>/condense</code><span class="guide-row__alias">Rango histórico, no está a la venta.</span></p></div>
-        <div class="guide-row"><code>Hércules</code><p>Color en el chat · <code>/clearinventory</code> · <code>/recipe</code><span class="guide-row__alias">Cosmético: aura Llama y rastro Chispas</span></p></div>
-        <div class="guide-row"><code>Hestia</code><p><code>/nick</code> · <code>/ext</code> · <code>/ptime</code> · <code>/pweather</code><span class="guide-row__alias">Cosmético: efecto de muerte Tótem</span></p></div>
-        <div class="guide-row"><code>Hermes</code><p><code>/fly</code> · <code>/speed</code> · <code>/back</code> · <code>/compass</code> · <code>/workbench</code> · <code>/ec</code> · RTP sin espera de movimiento<span class="guide-row__alias">Cosmético: rastro Aliento de dragón</span></p></div>
-        <div class="guide-row"><code>Hefesto</code><p>Estaciones virtuales: <code>/anvil</code> · <code>/grindstone</code> · <code>/loom</code> · <code>/smithingtable</code> · <code>/stonecutter</code> · más <code>/condense</code> · <code>/depth</code> · <code>/dispose</code> · <code>/feed</code> · <code>/top</code> y RTP sin espera<span class="guide-row__alias">Cosmético: efecto de muerte Rayo</span></p></div>
-        <div class="guide-row"><code>Artemisa</code><p><code>/jump</code> · conservas la experiencia al morir<span class="guide-row__alias">Cosmético: rastro Portal</span></p></div>
-        <div class="guide-row"><code>Afrodita</code><p><code>/repair</code> · <code>/sell</code> · tus tiendas no pagan comisión<span class="guide-row__alias">Cosmético: rastro Corazones</span></p></div>
-        <div class="guide-row"><code>Zeus</code><p><code>/heal</code> · <code>/repair all</code> · <strong>conservas el inventario al morir</strong> · sin impuesto al comprar<span class="guide-row__alias">Cosmético: efecto de muerte Explosión</span></p></div>
-        <div class="guide-row"><code>Thor</code><p>Todo lo anterior, con más hogares, bóvedas, protecciones y tiendas.<span class="guide-row__alias">Cosmético: aura Tormenta</span></p></div>
-        <div class="guide-row"><code>Anubis</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosmético: aura Ánima</span></p></div>
-        <div class="guide-row"><code>Poseidón</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosmético: aura Marea</span></p></div>
-        <div class="guide-row"><code>Titán Japeto</code><p>Forja primordial. Primer Titán: entra el <strong>multiplicador ×5 de favor divino</strong>. Protección <strong>1001×1001</strong> · isla <strong>400×400</strong>.<span class="guide-row__alias">Cosmético: aura Titán</span></p></div>
-        <div class="guide-row"><code>Titán Oceanus</code><p><strong>Vórtice Abisal</strong>: atrae a las hordas cercanas al centro. Protección <strong>1301×1301</strong> · isla <strong>450×450</strong>.<span class="guide-row__alias">Cosmético: aura Titán</span></p></div>
-        <div class="guide-row"><code>Titán Hiperión</code><p><strong>Rayo solar</strong> y regeneración bajo el sol. Protección <strong>1601×1601</strong> · isla <strong>500×500</strong>.<span class="guide-row__alias">Cosmético: aura Solar</span></p></div>
-        <div class="guide-row"><code>Titán Cronos</code><p><strong>Parada del Tiempo</strong>: inmoviliza a los enemigos cercanos. Protección <strong>2001×2001</strong> · isla <strong>550×550</strong>.<span class="guide-row__alias">Cosmético: aura Titán</span></p></div>
-        <div class="guide-row"><code>Titán Caos</code><p>La cima absoluta. <strong>Espada Voladora Autónoma</strong> que persigue y ataca sola. Protección <strong>2501×2501</strong> · isla <strong>600×600</strong>.<span class="guide-row__alias">Cosmético: aura Caos</span></p></div>
-      </div>
-
-      <div class="guide-split" style="margin-top:1.5rem;">
-        <div class="guide-split__card">
-          <h3>Roles de aventura</h3>
-          <p style="margin:0 0 .6rem;font-size:.93rem;opacity:.85;">Pases de 30 días solo para identificarte en el chat. <strong>No incluyen kit, objetos ni Slimefun.</strong></p>
-          <ul>
-            <li>Minero · Cazador · Constructor</li>
-            <li>Leñador · Alquimista · Nómada</li>
-          </ul>
-        </div>
-        <div class="guide-split__card">
-          <h3>Cómo se entrega</h3>
-          <ul>
-            <li>Usa tu <strong>nick exacto</strong> al pagar</li>
-            <li>La entrega es automática al conectarte</li>
-            <li>Si estás desconectado, llega cuando entres</li>
-            <li>Los pases <strong>no se renuevan solos</strong></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="container guide-section" id="sistemas">
+    
+<section class="container guide-section" id="sistemas">
       <h2>Magia, dioses y jefes</h2>
       <p class="guide-section__note">Tres sistemas escritos para este servidor. Se cruzan entre sí: el favor que ganas con un dios alimenta lo que puedes hacer contra los jefes.</p>
 
@@ -375,326 +308,8 @@
       </div>
     </section>
 
-    <section class="container guide-section" id="cultivation">
-      <h2>Cruces de Cultivation</h2>
-      <p style="margin:0 0 1rem;opacity:.85;">Las 82 combinaciones que existen de verdad en el servidor, leidas directamente del codigo. Planta las dos semillas <strong>en diagonal</strong> y espera a que maduren: cada intento tiene entre 5% y 10% de exito, asi que hay que insistir.</p>
-      <p style="margin:0 0 1rem;opacity:.85;">Tres pares dan <strong>dos resultados al azar</strong>: <code>Cow + Sheep</code> da Pig o Bee, <code>Coal + Earth</code> da Raw Iron o Raw Copper, y <code>Cobblestone + Earth</code> da Gravel o Deepslate. Si esperabas uno y sale el otro, no esta roto.</p>
-      <div class="guide-rows">
-        <div class="guide-row"><code>Air + Light</code><p>Chicken</p></div>
-        <div class="guide-row"><code>Amethyst + Emerald</code><p>Echo</p></div>
-        <div class="guide-row"><code>Blaze + Magma Cube</code><p>Ghast</p></div>
-        <div class="guide-row"><code>Chicken + Earth</code><p>Rabbit</p></div>
-        <div class="guide-row"><code>Chicken + Water</code><p>Turtle</p></div>
-        <div class="guide-row"><code>Coal + Earth</code><p>Raw Copper</p></div>
-        <div class="guide-row"><code>Coal + Earth</code><p>Raw Iron</p></div>
-        <div class="guide-row"><code>Cobblestone + Earth</code><p>Deepslate</p></div>
-        <div class="guide-row"><code>Cobblestone + Earth</code><p>Gravel</p></div>
-        <div class="guide-row"><code>Cobblestone + Enderman</code><p>End Stone</p></div>
-        <div class="guide-row"><code>Cobblestone + Fire</code><p>Igneous</p></div>
-        <div class="guide-row"><code>Cow + Chicken</code><p>Sheep</p></div>
-        <div class="guide-row"><code>Cow + Sheep</code><p>Bee</p></div>
-        <div class="guide-row"><code>Cow + Sheep</code><p>Pig</p></div>
-        <div class="guide-row"><code>Creeper + Phantom</code><p>Blaze</p></div>
-        <div class="guide-row"><code>Darkness + Air</code><p>Skeleton</p></div>
-        <div class="guide-row"><code>Darkness + Darkness</code><p>Spider</p></div>
-        <div class="guide-row"><code>Darkness + Earth</code><p>Zombie</p></div>
-        <div class="guide-row"><code>Darkness + Fire</code><p>Creeper</p></div>
-        <div class="guide-row"><code>Darkness + Light</code><p>Spectrum</p></div>
-        <div class="guide-row"><code>Deepslate + Scrappy</code><p>Reinforced</p></div>
-        <div class="guide-row"><code>Dirt + Darkness</code><p>Mud</p></div>
-        <div class="guide-row"><code>Dirt + Earth</code><p>Sand</p></div>
-        <div class="guide-row"><code>Dirt + Fire</code><p>Netherrack</p></div>
-        <div class="guide-row"><code>Dirt + Flower</code><p>Vine</p></div>
-        <div class="guide-row"><code>Dirt + Light</code><p>Sapling</p></div>
-        <div class="guide-row"><code>Dirt + Water</code><p>Grass</p></div>
-        <div class="guide-row"><code>Drowned + Turtle</code><p>Guardian</p></div>
-        <div class="guide-row"><code>Dusty + Water</code><p>Concrete</p></div>
-        <div class="guide-row"><code>Earth + Spectrum</code><p>Amethyst</p></div>
-        <div class="guide-row"><code>Earth + Water</code><p>Dirt</p></div>
-        <div class="guide-row"><code>End Stone + Shulker</code><p>Purpur</p></div>
-        <div class="guide-row"><code>Enderman + Power</code><p>Ender Dragon</p></div>
-        <div class="guide-row"><code>Enderman + Turtle</code><p>Shulker</p></div>
-        <div class="guide-row"><code>Fire + Earth</code><p>Coal</p></div>
-        <div class="guide-row"><code>Fire + Water</code><p>Cobblestone</p></div>
-        <div class="guide-row"><code>Fish + Cow</code><p>Squid</p></div>
-        <div class="guide-row"><code>Flower + Slime</code><p>Mushroom</p></div>
-        <div class="guide-row"><code>Flower + Wither</code><p>Wither Rose</p></div>
-        <div class="guide-row"><code>Frog + Light</code><p>Dim Lit</p></div>
-        <div class="guide-row"><code>Glass + Rainbow</code><p>Stained</p></div>
-        <div class="guide-row"><code>Grass + Cobblestone</code><p>Moss</p></div>
-        <div class="guide-row"><code>Grass + Light</code><p>Cow</p></div>
-        <div class="guide-row"><code>Grass + Water</code><p>Flower</p></div>
-        <div class="guide-row"><code>Gravel + Water</code><p>Clay</p></div>
-        <div class="guide-row"><code>Guardian + Power</code><p>Elder Guardian</p></div>
-        <div class="guide-row"><code>Igneous + Fire</code><p>Blackstone</p></div>
-        <div class="guide-row"><code>Lapis + Darkness</code><p>Nether Quartz</p></div>
-        <div class="guide-row"><code>Lapis + Wealth</code><p>Diamond</p></div>
-        <div class="guide-row"><code>Magma Cube + Netherrack</code><p>Magma</p></div>
-        <div class="guide-row"><code>Nether Quartz + Power</code><p>Scrappy</p></div>
-        <div class="guide-row"><code>Netherrack + Cobblestone</code><p>Basalt</p></div>
-        <div class="guide-row"><code>Netherrack + Grass</code><p>Dark Grass</p></div>
-        <div class="guide-row"><code>Phantom + Darkness</code><p>Enderman</p></div>
-        <div class="guide-row"><code>Pig + Squid</code><p>Slime</p></div>
-        <div class="guide-row"><code>Rainbow + Bee</code><p>Waxy</p></div>
-        <div class="guide-row"><code>Rainbow + Earth</code><p>Terra</p></div>
-        <div class="guide-row"><code>Rainbow + Sheep</code><p>Woolly</p></div>
-        <div class="guide-row"><code>Raw Gold + Flower</code><p>Redstone</p></div>
-        <div class="guide-row"><code>Raw Iron + Raw Copper</code><p>Raw Gold</p></div>
-        <div class="guide-row"><code>Redstone + Raw Gold</code><p>Lapis</p></div>
-        <div class="guide-row"><code>Sand + Earth</code><p>Red Sand</p></div>
-        <div class="guide-row"><code>Sand + Fire</code><p>Glass</p></div>
-        <div class="guide-row"><code>Sand + Netherrack</code><p>Soul</p></div>
-        <div class="guide-row"><code>Sheep + Power</code><p>Goat</p></div>
-        <div class="guide-row"><code>Skeleton + Power</code><p>Wither Skeleton</p></div>
-        <div class="guide-row"><code>Slime + Fire</code><p>Magma Cube</p></div>
-        <div class="guide-row"><code>Spectrum + Spectrum</code><p>Rainbow</p></div>
-        <div class="guide-row"><code>Spider + Chicken</code><p>Phantom</p></div>
-        <div class="guide-row"><code>Squid + Bee</code><p>Frog</p></div>
-        <div class="guide-row"><code>Squid + Light</code><p>Glow Squid</p></div>
-        <div class="guide-row"><code>Terra + Fire</code><p>Glazed</p></div>
-        <div class="guide-row"><code>Terra + Sand</code><p>Dusty</p></div>
-        <div class="guide-row"><code>Villager + Fire</code><p>Witch</p></div>
-        <div class="guide-row"><code>Villager + Villager</code><p>Darkness</p></div>
-        <div class="guide-row"><code>Villager + Wealth</code><p>Emerald</p></div>
-        <div class="guide-row"><code>Vine + Light</code><p>Glowing Vine</p></div>
-        <div class="guide-row"><code>Vine + Netherrack</code><p>Dark Flora</p></div>
-        <div class="guide-row"><code>Water + Light</code><p>Fish</p></div>
-        <div class="guide-row"><code>Wither Skeleton + Power</code><p>Wither</p></div>
-        <div class="guide-row"><code>Zombie + Light</code><p>Villager</p></div>
-        <div class="guide-row"><code>Zombie + Water</code><p>Drowned</p></div>
-      </div>
-    </section>
-
-    <section class="container guide-section" id="pollos">
-      <h2>Pollos de Genetic Chickengineering</h2>
-      <p style="margin:0 0 1rem;opacity:.85;">Aqui <strong>no hay tabla de recetas</strong>: es genetica de verdad. Cada pollo tiene <strong>6 genes</strong>, y su numero es exactamente ese patron en binario. Al cruzar dos pollos, cada padre aporta un gameto por gen y la cria hereda la mezcla.</p>
-      <p style="margin:0 0 1rem;opacity:.85;">Por eso <strong>no existe "A + B = C" fijo</strong>. Lo que se hace es acercarse: si te falta activar un gen, cruza con un pollo que lo tenga. En este servidor la mutacion esta al <strong>30%</strong>, con maximo <strong>2 genes</strong> mutados por cria, asi que tambien se puede llegar por azar.</p>
-      <p style="margin:0 0 1rem;opacity:.85;">Cuantos mas genes activos, mas raro el recurso. Empieza con los de arriba y ve bajando.</p>
-      <div class="guide-rows">
-        <div class="guide-row"><code>63 · 111111</code><p>Feather <span class="guide-row__alias">6 genes activos</span></p></div>
-        <div class="guide-row"><code>31 · 011111</code><p>Bone <span class="guide-row__alias">5 genes activos</span></p></div>
-        <div class="guide-row"><code>47 · 101111</code><p>Cobblestone <span class="guide-row__alias">5 genes activos</span></p></div>
-        <div class="guide-row"><code>55 · 110111</code><p>Dirt <span class="guide-row__alias">5 genes activos</span></p></div>
-        <div class="guide-row"><code>59 · 111011</code><p>Flint <span class="guide-row__alias">5 genes activos</span></p></div>
-        <div class="guide-row"><code>61 · 111101</code><p>Sand <span class="guide-row__alias">5 genes activos</span></p></div>
-        <div class="guide-row"><code>62 · 111110</code><p>Water <span class="guide-row__alias">5 genes activos</span></p></div>
-        <div class="guide-row"><code>15 · 001111</code><p>Coal <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>23 · 010111</code><p>String <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>27 · 011011</code><p>Leather <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>29 · 011101</code><p>Sugar <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>30 · 011110</code><p>Sponge <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>39 · 100111</code><p>Diorite <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>43 · 101011</code><p>Andesite <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>45 · 101101</code><p>Gravel <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>46 · 101110</code><p>Ice <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>51 · 110011</code><p>Granite <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>53 · 110101</code><p>Clay <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>54 · 110110</code><p>Oak Log <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>57 · 111001</code><p>Gunpowder <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>58 · 111010</code><p>Kelp <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code>60 · 111100</code><p>Slime Ball <span class="guide-row__alias">4 genes activos</span></p></div>
-        <div class="guide-row"><code> 7 · 000111</code><p>Gold <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>11 · 001011</code><p>Netherrack <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>13 · 001101</code><p>Glass <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>14 · 001110</code><p>Lapis <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>19 · 010011</code><p>Iron <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>21 · 010101</code><p>Iron Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>22 · 010110</code><p>Gold Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>25 · 011001</code><p>Silver Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>26 · 011010</code><p>Zinc Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>28 · 011100</code><p>Cake <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>35 · 100011</code><p>Obsidian <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>37 · 100101</code><p>Copper Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>38 · 100110</code><p>Magnesium Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>41 · 101001</code><p>Lava <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>42 · 101010</code><p>Tin Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>44 · 101100</code><p>Snowball <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>49 · 110001</code><p>Redstone <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>50 · 110010</code><p>Cactus <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>52 · 110100</code><p>Aluminum Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code>56 · 111000</code><p>Lead Dust <span class="guide-row__alias">3 genes activos</span></p></div>
-        <div class="guide-row"><code> 3 · 000011</code><p>Blackstone <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code> 5 · 000101</code><p>Soul Soil <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code> 9 · 001001</code><p>Blaze Rod <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>17 · 010001</code><p>Ghast Tear <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>33 · 100001</code><p>Sulfate <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code> 6 · 000110</code><p>Shroomlight <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>10 · 001010</code><p>Quartz <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>18 · 010010</code><p>Basalt <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>34 · 100010</code><p>Crying Obsidian <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>12 · 001100</code><p>Soul Sand <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>20 · 010100</code><p>Ender Pearl <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>36 · 100100</code><p>Nether Wart <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>24 · 011000</code><p>Phantom Membrane <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>40 · 101000</code><p>Magma Cream <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code>48 · 110000</code><p>Glowstone Dust <span class="guide-row__alias">2 genes activos</span></p></div>
-        <div class="guide-row"><code> 1 · 000001</code><p>Diamond <span class="guide-row__alias">1 genes activos</span></p></div>
-        <div class="guide-row"><code> 2 · 000010</code><p>End Stone <span class="guide-row__alias">1 genes activos</span></p></div>
-        <div class="guide-row"><code> 4 · 000100</code><p>Prismarine Crystals <span class="guide-row__alias">1 genes activos</span></p></div>
-        <div class="guide-row"><code> 8 · 001000</code><p>Prismarine Shard <span class="guide-row__alias">1 genes activos</span></p></div>
-        <div class="guide-row"><code>16 · 010000</code><p>Experience <span class="guide-row__alias">1 genes activos</span></p></div>
-        <div class="guide-row"><code>32 · 100000</code><p>Emerald <span class="guide-row__alias">1 genes activos</span></p></div>
-        <div class="guide-row"><code> 0 · 000000</code><p>Netherite <span class="guide-row__alias">0 genes activos</span></p></div>
-      </div>
-    </section>
-
-    <section class="container guide-section" id="tinker">
-      <h2>Materiales de SlimeTinker</h2>
-      <p style="margin:0 0 1rem;opacity:.85;">Cada herramienta se arma con partes, y <strong>cada material da un rasgo distinto segun donde lo pongas</strong>. El mismo metal en la cabeza y en la vara no hace lo mismo. Aqui estan los 96 materiales con lo que aporta cada uno.</p>
-      <p style="margin:0 0 1rem;opacity:.85;">La etiqueta de la derecha indica de que addon viene: los <code>Core</code> son de Slimefun base, el resto necesita el addon correspondiente instalado.</p>
-      <div class="guide-rows">
-        <div class="guide-row"><code>Adamantite</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Advanced Alloy</code><p><strong>Cabeza:</strong> Lite Head · <strong>Vara:</strong> Lite Rod · <strong>Placas:</strong> Lite Plates · <strong>Eslabones:</strong> Lite Links<span class="guide-row__alias">LiteXpansion</span></p></div>
-        <div class="guide-row"><code>Aluminum</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Aluminum Brass</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Aluminum Bronze</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Aluminum Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Anniversarium</code><p><strong>Placas:</strong> Plates<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Billon</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Boomerite</code><p><strong>Cabeza:</strong> Head · <strong>Placas:</strong> Plates<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Brass</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Bronze</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Cobalt</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Copper</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Copper Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Corinthian Bronze</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Cringleium</code><p><strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Damascus Steel</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Daxi Absorption</code><p><strong>Placas:</strong> Tns Daxi Absorption<span class="guide-row__alias">TranscEndence</span></p></div>
-        <div class="guide-row"><code>Daxi Fortitude</code><p><strong>Placas:</strong> Tns Daxi Fortitude<span class="guide-row__alias">TranscEndence</span></p></div>
-        <div class="guide-row"><code>Daxi Regeneration</code><p><strong>Placas:</strong> Tns Daxi Regeneration<span class="guide-row__alias">TranscEndence</span></p></div>
-        <div class="guide-row"><code>Daxi Saturation</code><p><strong>Placas:</strong> Tns Daxi Saturation<span class="guide-row__alias">TranscEndence</span></p></div>
-        <div class="guide-row"><code>Daxi Strength</code><p><strong>Cabeza:</strong> Tns Daxi Strength<span class="guide-row__alias">TranscEndence</span></p></div>
-        <div class="guide-row"><code>Duralumin</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Earth Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Ferrosilicon</code><p><strong>Cabeza:</strong> Head · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Fortune Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Gold</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Gold Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Hardened Metal</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Infinity</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Infinity Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Iridium</code><p><strong>Cabeza:</strong> Lite Head · <strong>Vara:</strong> Lite Rod · <strong>Placas:</strong> Lite Plates · <strong>Eslabones:</strong> Lite Links<span class="guide-row__alias">LiteXpansion</span></p></div>
-        <div class="guide-row"><code>Iron</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Iron Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Lead</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Lead Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Liquid Love</code><p><strong>Eslabones:</strong> Love Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Mag Thor</code><p><strong>Cabeza:</strong> Lite Head · <strong>Vara:</strong> Lite Rod · <strong>Placas:</strong> Lite Plates · <strong>Eslabones:</strong> Lite Links<span class="guide-row__alias">LiteXpansion</span></p></div>
-        <div class="guide-row"><code>Magic Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Magnesium</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Magnesium Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Magnonium</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Magsteel</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Metal Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Mixed Metal</code><p><strong>Cabeza:</strong> Lite Head · <strong>Vara:</strong> Lite Rod · <strong>Placas:</strong> Lite Plates · <strong>Eslabones:</strong> Lite Links<span class="guide-row__alias">LiteXpansion</span></p></div>
-        <div class="guide-row"><code>Mythril</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Niceinium</code><p><strong>Cabeza:</strong> Head<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Nickel</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Osmium</code><p><strong>Cabeza:</strong> Sfw Head · <strong>Vara:</strong> Sfw Rod · <strong>Placas:</strong> Sfw Plates · <strong>Eslabones:</strong> Sfw Links<span class="guide-row__alias">SlimefunWarfare</span></p></div>
-        <div class="guide-row"><code>Osmium Superalloy</code><p><strong>Cabeza:</strong> Sfw Head · <strong>Vara:</strong> Sfw Rod · <strong>Placas:</strong> Sfw Plates · <strong>Eslabones:</strong> Sfw Links<span class="guide-row__alias">SlimefunWarfare</span></p></div>
-        <div class="guide-row"><code>Redstone Alloy</code><p><strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Refined Iron</code><p><strong>Cabeza:</strong> Lite Head · <strong>Vara:</strong> Lite Rod · <strong>Placas:</strong> Lite Plates · <strong>Eslabones:</strong> Lite Links<span class="guide-row__alias">LiteXpansion</span></p></div>
-        <div class="guide-row"><code>Reinforced Alloy</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Reinforced Draconium</code><p><strong>Cabeza:</strong> Infinity Head<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Reinforced Slimesteel</code><p><strong>Cabeza:</strong> Sfw Head · <strong>Vara:</strong> Sfw Rod · <strong>Placas:</strong> Sfw Plates · <strong>Eslabones:</strong> Sfw Links<span class="guide-row__alias">SlimefunWarfare</span></p></div>
-        <div class="guide-row"><code>Scrap</code><p><strong>Cabeza:</strong> Lite Head · <strong>Vara:</strong> Lite Rod · <strong>Placas:</strong> Lite Plates · <strong>Eslabones:</strong> Lite Links<span class="guide-row__alias">LiteXpansion</span></p></div>
-        <div class="guide-row"><code>Sefirite</code><p><strong>Placas:</strong> Plates<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Segganesson</code><p><strong>Cabeza:</strong> Sfw Head · <strong>Vara:</strong> Sfw Rod · <strong>Placas:</strong> Sfw Plates · <strong>Eslabones:</strong> Sfw Links<span class="guide-row__alias">SlimefunWarfare</span></p></div>
-        <div class="guide-row"><code>Silver</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Silver Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Smithium</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Solder</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Stainless Steel</code><p><strong>Cabeza:</strong> Dyn Head · <strong>Vara:</strong> Dyn Rod · <strong>Placas:</strong> Dyn Plates · <strong>Eslabones:</strong> Dyn Links<span class="guide-row__alias">Dynatech</span></p></div>
-        <div class="guide-row"><code>Steel</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Tin</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Tin Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Titanium</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Ultimaninium</code><p><strong>Eslabones:</strong> Ntw Utlimaninium<span class="guide-row__alias">Networks</span></p></div>
-        <div class="guide-row"><code>Unpatentablium</code><p><strong>Cabeza:</strong> Sfw Head · <strong>Vara:</strong> Sfw Rod · <strong>Placas:</strong> Sfw Plates · <strong>Eslabones:</strong> Sfw Links<span class="guide-row__alias">SlimefunWarfare</span></p></div>
-        <div class="guide-row"><code>Void</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-        <div class="guide-row"><code>Zinc</code><p><strong>Cabeza:</strong> Head · <strong>Vara:</strong> Rod · <strong>Placas:</strong> Plates · <strong>Eslabones:</strong> Links<span class="guide-row__alias">Core</span></p></div>
-        <div class="guide-row"><code>Zinc Singularity</code><p><strong>Cabeza:</strong> Infinity Head · <strong>Vara:</strong> Infinity Rod · <strong>Placas:</strong> Infinity Plates · <strong>Eslabones:</strong> Infinity Links<span class="guide-row__alias">Infinity</span></p></div>
-      </div>
-    </section>
-
-    <section class="container guide-section" id="crystamae">
-      <h2>Hechizos de Crystamae Historia</h2>
-      <p style="margin:0 0 1rem;opacity:.85;">Los 69 hechizos que existen en el servidor. Se obtienen contando historias a los bloques y combinando los cristales resultantes en la mesa de realizacion: la combinacion de cristales define que hechizo sale.</p>
-      <div class="guide-rows">
-        <div class="guide-row"><code>Abstract Void</code></div>
-        <div class="guide-row"><code>Air Nova</code></div>
-        <div class="guide-row"><code>Air Sprite</code></div>
-        <div class="guide-row"><code>Ancient Defence</code></div>
-        <div class="guide-row"><code>Animaniacs</code></div>
-        <div class="guide-row"><code>Anti Prism</code></div>
-        <div class="guide-row"><code>Battering Ram</code></div>
-        <div class="guide-row"><code>Blood Magics</code></div>
-        <div class="guide-row"><code>Bobulate</code></div>
-        <div class="guide-row"><code>Break</code></div>
-        <div class="guide-row"><code>Bright</code></div>
-        <div class="guide-row"><code>Call Lightning</code></div>
-        <div class="guide-row"><code>Cascada</code></div>
-        <div class="guide-row"><code>Chaos</code></div>
-        <div class="guide-row"><code>Chill Wind</code></div>
-        <div class="guide-row"><code>Compass</code></div>
-        <div class="guide-row"><code>Curification Ritual</code></div>
-        <div class="guide-row"><code>Deity</code></div>
-        <div class="guide-row"><code>Earth Nova</code></div>
-        <div class="guide-row"><code>Easter Egg</code></div>
-        <div class="guide-row"><code>Endermans Veil</code></div>
-        <div class="guide-row"><code>Escape Rope</code></div>
-        <div class="guide-row"><code>Ethereal Flow</code></div>
-        <div class="guide-row"><code>Fan Of Arrows</code></div>
-        <div class="guide-row"><code>Fireball</code></div>
-        <div class="guide-row"><code>Fire Nova</code></div>
-        <div class="guide-row"><code>Flame Sprite</code></div>
-        <div class="guide-row"><code>Frost Nova</code></div>
-        <div class="guide-row"><code>Gravity</code></div>
-        <div class="guide-row"><code>Grow Up</code></div>
-        <div class="guide-row"><code>Heal</code></div>
-        <div class="guide-row"><code>Healing Mist</code></div>
-        <div class="guide-row"><code>Hearthstone</code></div>
-        <div class="guide-row"><code>Hellscape</code></div>
-        <div class="guide-row"><code>Holy Cow</code></div>
-        <div class="guide-row"><code>Imbue Void</code></div>
-        <div class="guide-row"><code>Gyroscopic</code></div>
-        <div class="guide-row"><code>Harmonys Sonata</code></div>
-        <div class="guide-row"><code>Harvest Moon</code></div>
-        <div class="guide-row"><code>Knowledge Share</code></div>
-        <div class="guide-row"><code>Launch</code></div>
-        <div class="guide-row"><code>Lava Lake</code></div>
-        <div class="guide-row"><code>Leech Bomb</code></div>
-        <div class="guide-row"><code>Love Potion</code></div>
-        <div class="guide-row"><code>Oviparous</code></div>
-        <div class="guide-row"><code>Phantoms Flight</code></div>
-        <div class="guide-row"><code>Philosophers Stone</code></div>
-        <div class="guide-row"><code>Plutos Descent</code></div>
-        <div class="guide-row"><code>Poison Nova</code></div>
-        <div class="guide-row"><code>Prism</code></div>
-        <div class="guide-row"><code>Protectorate</code></div>
-        <div class="guide-row"><code>Push</code></div>
-        <div class="guide-row"><code>Quake</code></div>
-        <div class="guide-row"><code>Rain Of Fire</code></div>
-        <div class="guide-row"><code>Ravage</code></div>
-        <div class="guide-row"><code>Remnant Of War</code></div>
-        <div class="guide-row"><code>Shroud</code></div>
-        <div class="guide-row"><code>Spawn Fiends</code></div>
-        <div class="guide-row"><code>Squall</code></div>
-        <div class="guide-row"><code>Star Fall</code></div>
-        <div class="guide-row"><code>Strip Mine</code></div>
-        <div class="guide-row"><code>Summon Golem</code></div>
-        <div class="guide-row"><code>Teleport</code></div>
-        <div class="guide-row"><code>Tempest</code></div>
-        <div class="guide-row"><code>Time Compression</code></div>
-        <div class="guide-row"><code>Time Dilation</code></div>
-        <div class="guide-row"><code>Tracer</code></div>
-        <div class="guide-row"><code>Vacuum</code></div>
-        <div class="guide-row"><code>Wither Weather</code></div>
-      </div>
-    </section>
-
-    <section class="container guide-section" id="servidor">
+    
+<section class="container guide-section" id="servidor">
       <h2>Qué es DrakesCraft</h2>
       <p class="guide-section__note">Un servidor de Minecraft <strong>1.21.11</strong> con tres modalidades corriendo en una sola instancia, sin proxy ni servidores separados. Survival con tecnología, magia y jefes como base.</p>
 
@@ -779,7 +394,7 @@
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260805-addons-v1"></script>
-  <script src="scripts/guia.js?v=20260805-addons-v1"></script>
+  <script src="scripts/site.js?v=20260805-split-v1"></script>
+  <script src="scripts/guia.js?v=20260805-split-v1"></script>
 </body>
 </html>
