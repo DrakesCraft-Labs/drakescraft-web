@@ -741,6 +741,12 @@ await app.register(fastifyStatic, {
 // separately at pack.drakescraft.cl once its DNS cutover is complete.
 app.get('/', async (_request, reply) => reply.sendFile('store.html'));
 
+// Rutas limpias de la guia. Se anuncian in-game como /guia y /comandos, asi que ambas tienen
+// que resolver sin que el jugador escriba la extension.
+for (const alias of ['/guia', '/comandos', '/commands']) {
+  app.get(alias, async (_request, reply) => reply.sendFile('guia.html'));
+}
+
 // The former portal is no longer part of the public surface. Keep old links
 // useful without exposing pages that describe stale systems or dead widgets.
 for (const legacyPath of [
@@ -767,6 +773,7 @@ await app.register(fastifyStatic, {
   allowedPath: (pathname) => {
     const publicFiles = new Set([
       'store.html',
+      'guia.html',
       'support.html',
       'terms.html',
       'bannerdrakes.jpg',
