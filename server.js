@@ -892,7 +892,9 @@ app.setNotFoundHandler((request, reply) => {
   if (request.raw.url?.startsWith('/api/')) return reply.code(404).send({ error: 'Ruta no encontrada' });
   const requestedPath = request.raw.url?.split('?')[0] || '';
   if (path.extname(requestedPath)) return reply.code(404).send('Not found');
-  return reply.redirect(302, '/');
+  // Fastify v5 espera (url, code). Con el orden viejo tomaba 302 como destino y '/' como
+  // codigo, asi que toda ruta sin extension moria con FST_ERR_BAD_STATUS_CODE y devolvia 500.
+  return reply.redirect('/', 302);
 });
 
 try {
