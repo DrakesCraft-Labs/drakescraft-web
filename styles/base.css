@@ -885,3 +885,18 @@ body::before, .page-shell::before, .page-shell::after { display: none; }
     body:not(.portal-page) .metrics { grid-template-columns: 1fr; }
     body:not(.portal-page) .metric-card { min-height: 0; overflow-wrap: anywhere; }
 }
+
+/* Tema DrakesCraft. Definidos una sola vez para que la tienda y la guia no deriven:
+   estaban usando dorados y verdes casi iguales pero distintos, que se nota como
+   descuido sin que se sepa por que. */
+:root {
+    --dk-fondo: #101a16;
+    --dk-panel: #172a22;
+    --dk-panel-alto: #1e3529;
+    --dk-linea: #2b4437;
+    --dk-texto: #f2f8f3;
+    --dk-suave: #adc3b4;
+    --dk-oro: #ffe289;
+    --dk-verde: #7fe9a6;
+    --dk-verde-fuerte: #6fe3a2;
+}

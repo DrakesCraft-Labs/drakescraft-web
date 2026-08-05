@@ -86,7 +86,7 @@
   font-family: 'DM Mono', ui-monospace, monospace;
   font-size: .98rem;
   font-weight: 500;
-  color: #ffd479;
+  color: var(--dk-oro);
   word-break: break-word;
 }
 
@@ -105,7 +105,7 @@
   border-radius: 1rem;
 }
 
-.guide-tag--vip { color: #ffd479; background: rgba(255, 176, 60, .16); }
+.guide-tag--vip { color: var(--dk-oro); background: rgba(255, 176, 60, .16); }
 .guide-tag--staff { color: #8ad8ff; background: rgba(90, 190, 255, .16); }
 .guide-tag--survival { color: #9ce6a4; background: rgba(90, 220, 120, .14); }
 
@@ -168,7 +168,7 @@
   font-weight: 700;
   letter-spacing: .05em;
   text-transform: uppercase;
-  background: #171326;
+  background: var(--dk-fondo);
   border-bottom: 1px solid rgba(255, 255, 255, .18);
 }
 
@@ -212,7 +212,7 @@
 
 /* Pestañas entre las tres páginas de la guía. */
 .guide-tabs { display: flex; flex-wrap: wrap; gap: .5rem; max-width: 1100px; margin: 1.5rem auto 0; padding: 0 1.2rem; }
-.guide-tabs a { padding: .55rem .9rem; border: 1px solid #2f4a3c; border-radius: 6px; color: #cfe0d4; background: #16261f; font: 700 .85rem var(--font-body, sans-serif); text-decoration: none; }
+.guide-tabs a { padding: .55rem .9rem; border: 1px solid var(--dk-linea); border-radius: 6px; color: var(--dk-suave); background: var(--dk-panel); font: 700 .85rem var(--font-body, sans-serif); text-decoration: none; }
 .guide-tabs a:hover { border-color: #4fbf7f; color: #eafff2; }
-.guide-tabs a.is-active { color: #08120d; border-color: #6fe3a2; background: #6fe3a2; }
+.guide-tabs a.is-active { color: #08120d; border-color: var(--dk-verde); background: var(--dk-verde); }
 @media (max-width: 640px) { .guide-tabs a { flex: 1 1 100%; text-align: center; } }
