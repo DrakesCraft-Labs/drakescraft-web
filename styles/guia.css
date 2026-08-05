@@ -17,7 +17,7 @@
 
 .guide-hero__grid { position: relative; max-width: 46rem; }
 .guide-hero h1 { margin: .4rem 0 1rem; font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.05; }
-.guide-hero h1 em { font-style: normal; color: var(--accent, #b9a4ff); }
+.guide-hero h1 em { font-style: normal; color: var(--accent, var(--dk-verde)); }
 .guide-hero__lead { font-size: clamp(1rem, 2.4vw, 1.15rem); line-height: 1.65; opacity: .88; }
 
 /* --- Buscador --- */
@@ -118,7 +118,7 @@
   padding: 1.4rem;
   background: rgba(255, 255, 255, .04);
   border: 1px solid rgba(255, 255, 255, .1);
-  border-left: 3px solid var(--mode-accent, #b9a4ff);
+  border-left: 3px solid var(--mode-accent, var(--dk-verde));
   border-radius: .8rem;
 }
 
@@ -216,3 +216,21 @@
 .guide-tabs a:hover { border-color: #4fbf7f; color: #eafff2; }
 .guide-tabs a.is-active { color: #08120d; border-color: var(--dk-verde); background: var(--dk-verde); }
 @media (max-width: 640px) { .guide-tabs a { flex: 1 1 100%; text-align: center; } }
+
+/* Alineacion con la tienda: la guia usaba sans-serif y acento violeta, la tienda serif
+   Cinzel y oro/verde. Dos identidades distintas para el mismo servidor se leen como
+   descuido. Los titulares y los acentos pasan a los de la marca. */
+.guide-hero h1,
+.guide-section h2,
+.guide-section h3,
+.guide-hero .eyebrow {
+    font-family: var(--font-heading);
+    letter-spacing: .01em;
+}
+.guide-hero h1 { text-transform: none; }
+.guide-hero h1 em,
+.guide-hero h1 span,
+.guide-hero h1 b { color: var(--dk-verde); font-style: normal; }
+.guide-tabs a.is-active { background: var(--dk-verde); border-color: var(--dk-verde); color: #08120d; }
+.guide-chip.is-active,
+.guide-filter.is-active { background: var(--dk-oro) !important; border-color: var(--dk-oro) !important; color: #1a1408 !important; }
