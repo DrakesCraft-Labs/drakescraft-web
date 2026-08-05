@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260805-guia-v2">
-  <link rel="stylesheet" href="styles/guia.css?v=20260805-guia-v2">
+  <link rel="stylesheet" href="styles/base.css?v=20260805-guia-v3">
+  <link rel="stylesheet" href="styles/guia.css?v=20260805-guia-v3">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -24,7 +24,7 @@
         <li><a class="active" href="#comandos">Comandos</a></li>
         <li><a href="#rangos">Rangos</a></li>
         <li><a href="#modalidades">Modalidades</a></li>
-        <li><a href="#servidor">El servidor</a></li>
+        <li><a href="#sistemas">Magia y jefes</a></li><li><a href="#servidor">El servidor</a></li>
         <li><a href="store.html">Tienda</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
       </ul>
@@ -55,6 +55,7 @@
         <button type="button" data-filter="proteccion" aria-pressed="false">Protecciones</button>
         <button type="button" data-filter="economia" aria-pressed="false">Economía</button>
         <button type="button" data-filter="slimefun" aria-pressed="false">Slimefun</button>
+        <button type="button" data-filter="drakes" aria-pressed="false">Magia y jefes</button>
         <button type="button" data-filter="social" aria-pressed="false">Social</button>
         <button type="button" data-filter="extra" aria-pressed="false">Extras</button>
       </div>
@@ -154,6 +155,19 @@
           <div class="guide-row"><code>/mail</code><p>Correo interno del servidor.<span class="guide-row__alias">Enviar: /mail send &lt;jugador&gt; &lt;texto&gt;</span></p></div>
           <div class="guide-row"><code>/discord</code><p>Enlace a nuestro Discord y vinculación de tu cuenta.</p></div>
           <div class="guide-row"><code>/rules</code><p>Las reglas del servidor dentro del juego.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="drakes">
+        <h2>Sistemas propios de DrakesCraft</h2>
+        <p class="guide-section__note">Magia, dioses y jefes están programados para este servidor. No existen en ningún otro.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/arcana</code><p>Abre el <strong>Códice de Arcana</strong>: tu magia elemental, las habilidades que has despertado y tu progreso.<span class="guide-row__alias">También: /arc, /magia</span></p></div>
+          <div class="guide-row"><code>/dioses</code><p>Abre el <strong>Panteón</strong>. Ahí eliges a qué dios seguir y ves tu favor divino.<span class="guide-row__alias">También: /dios, /panteon</span></p></div>
+          <div class="guide-row"><code>/bosswarp</code><p>Te lleva a una <strong>arena aislada</strong> para pelear contra un jefe. Se paga entrada.</p></div>
+          <div class="guide-row"><code>/tienda</code><p>Hub de comercio con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades, encantamientos y kits VIP.</p></div>
+          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Survival, SkyBlock y OneBlock.</p></div>
+          <div class="guide-row"><code>/cosmeticos</code><p>Menú de auras, rastros y efectos de muerte que vienen con tu rango.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
         </div>
       </section>
 
@@ -309,6 +323,55 @@
       </div>
     </section>
 
+    <section class="container guide-section" id="sistemas">
+      <h2>Magia, dioses y jefes</h2>
+      <p class="guide-section__note">Tres sistemas escritos para este servidor. Se cruzan entre sí: el favor que ganas con un dios alimenta lo que puedes hacer contra los jefes.</p>
+
+      <div class="guide-modes">
+        <article class="guide-mode" style="--mode-accent:#b9a4ff;">
+          <h3>Arcana · magia elemental</h3>
+          <p>Un sistema de magia con progresión propia, dominios visuales y habilidades que se despiertan jugando.</p>
+          <ul>
+            <li>Abres el códice con <code>/arcana</code></li>
+            <li>Ahí ves qué has despertado y qué falta</li>
+            <li>Las habilidades se activan en el juego, no con comandos</li>
+            <li>Avanza con el survival: no se compra</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#ffd479;">
+          <h3>Dioses · el panteón</h3>
+          <p>Eliges a qué dios seguir y acumulas <strong>favor divino</strong>. Cada uno da beneficios distintos.</p>
+          <ul>
+            <li>Abres el panteón con <code>/dioses</code></li>
+            <li>El favor sube jugando y con eventos</li>
+            <li>Los rangos Titán multiplican tu favor <strong>×5</strong></li>
+            <li>Se conecta con el sistema de jefes</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#ff6b6b;">
+          <h3>Jefes · arenas aisladas</h3>
+          <p>Peleas contra jefes en arenas propias, para que nadie interfiera y nada se rompa fuera.</p>
+          <ul>
+            <li>Entras con <code>/bosswarp</code>, pagando la entrada</li>
+            <li>Cada jefe tiene patrones y fases propias</li>
+            <li>Botín exclusivo que no sale de ninguna otra forma</li>
+            <li>Avisos antes de cada ataque fuerte</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 class="rank-subhead">Los menús del servidor</h3>
+      <p class="guide-section__note">Casi todo se hace desde menús con clic, no escribiendo comandos largos.</p>
+      <div class="guide-table">
+        <div class="guide-row"><code>/tienda</code><p>El hub de comercio. Nueve accesos: <strong>protecciones</strong>, <strong>subastas</strong>, <strong>Slimefun</strong>, <strong>warps</strong>, <strong>materiales</strong>, <strong>trabajos</strong>, <strong>habilidades</strong>, <strong>encantamientos</strong> y <strong>kits VIP</strong>.</p></div>
+        <div class="guide-row"><code>/modalidades</code><p>Menú visual de las tres modalidades. Te dice qué se conserva al cambiar antes de moverte.</p></div>
+        <div class="guide-row"><code>/kit</code><p>Lista tus kits, cuáles puedes reclamar y cuánto falta para el siguiente.</p></div>
+        <div class="guide-row"><code>/cosmeticos</code><p>Marca en verde lo que tienes y en gris lo que desbloquea cada rango.</p></div>
+        <div class="guide-row"><code>/arcana</code> · <code>/dioses</code><p>Códice de magia y panteón divino, con tu progreso a la vista.</p></div>
+        <div class="guide-row"><code>/sf guide</code><p>La guía de Slimefun: todas las recetas del servidor, buscables.</p></div>
+      </div>
+    </section>
+
     <section class="container guide-section" id="servidor">
       <h2>Qué es DrakesCraft</h2>
       <p class="guide-section__note">Un servidor de Minecraft <strong>1.21.11</strong> con tres modalidades corriendo en una sola instancia, sin proxy ni servidores separados. Survival con tecnología, magia y jefes como base.</p>
@@ -394,7 +457,7 @@
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260805-guia-v2"></script>
-  <script src="scripts/guia.js?v=20260805-guia-v2"></script>
+  <script src="scripts/site.js?v=20260805-guia-v3"></script>
+  <script src="scripts/guia.js?v=20260805-guia-v3"></script>
 </body>
 </html>

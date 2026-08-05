@@ -118,6 +118,8 @@ body[data-page="store"]::after,
 /* ---- Instagram junto al call to action principal ---- */
 .btn-ig { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,255,255,.28); color: #fff; background: linear-gradient(115deg, #f9a03f, #e1306c 46%, #a02bc0); box-shadow: 0 10px 24px rgba(190, 45, 128, .28); }
 .btn-ig:hover { filter: brightness(1.08); border-color: rgba(255,255,255,.5); }
+.btn-gh { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,255,255,.28); color: #fff; background: linear-gradient(115deg, #3a3a48, #24292f 55%, #16181d); box-shadow: 0 10px 24px rgba(20, 22, 28, .34); }
+.btn-gh:hover { filter: brightness(1.18); border-color: rgba(255,255,255,.5); }
 
 /* ---- Tema oscuro: va al final para ganar por orden sin reescribir cada valor ---- */
 .store-catalog, .store-subpage, #proximamente, #modalidades { background: #101a16 !important; color: #e8f1ea; border-top-color: #24382e !important; }
@@ -151,5 +153,5 @@ body[data-page="store"]::after,
   .store-team__grid { grid-template-columns: minmax(0, 1fr); }
   .store-legacy { flex-direction: column; align-items: flex-start; text-align: left; }
   .store-product { min-height: 0; }
-  .btn-ig { width: 100%; justify-content: center; }
+  .btn-ig, .btn-gh { width: 100%; justify-content: center; }
 }
