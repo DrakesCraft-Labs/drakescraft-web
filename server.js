@@ -746,6 +746,12 @@ app.get('/', async (_request, reply) => reply.sendFile('store.html'));
 for (const alias of ['/guia', '/comandos', '/commands']) {
   app.get(alias, async (_request, reply) => reply.sendFile('guia.html'));
 }
+for (const [alias, file] of [
+  ['/rangos', 'guia-rangos.html'], ['/ranks', 'guia-rangos.html'],
+  ['/slimefun', 'guia-slimefun.html'], ['/sf', 'guia-slimefun.html']
+]) {
+  app.get(alias, async (_request, reply) => reply.sendFile(file));
+}
 
 // The former portal is no longer part of the public surface. Keep old links
 // useful without exposing pages that describe stale systems or dead widgets.
@@ -774,6 +780,8 @@ await app.register(fastifyStatic, {
     const publicFiles = new Set([
       'store.html',
       'guia.html',
+      'guia-rangos.html',
+      'guia-slimefun.html',
       'support.html',
       'terms.html',
       'bannerdrakes.jpg',
