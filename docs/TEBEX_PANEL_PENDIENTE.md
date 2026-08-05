@@ -8,7 +8,7 @@ de Tebex** (`drakescraft-v2.tebex.io`). Todo lo que sí vivía en código ya est
 
 ---
 
-## 1. Landing — reemplazar (prioridad alta)
+## 1. Landing — vaciarla, no rehacerla (prioridad alta)
 
 La portada de la tienda arrastra contenido de otro servidor. Lo que anuncia hoy y **no existe**:
 
@@ -19,13 +19,21 @@ La portada de la tienda arrastra contenido de otro servidor. Lo que anuncia hoy 
   Regions, MarriageMaster, SpiritsUnchained, AxiomPaper.
 - Pestañas "Rangos Permanentes" y "Dinero del Juego" que no corresponden a las categorías reales.
 
-**Reemplazo listo:** [`tebex-landing.html`](tebex-landing.html) en esta misma carpeta.
+**Decisión: no se mantiene una landing en Tebex.** Cualquier página que describa el servidor
+allí es una segunda fuente de verdad que se desactualiza sola — es exactamente cómo se llegó
+al estado actual. Tebex queda reducido a pasarela de pago.
 
-Aplicar en: **Tebex → Appearance → Pages → Home**, pegando el HTML completo.
+Qué hacer en **Tebex → Appearance → Pages → Home**: borrar todo el contenido y dejar solo
+un enlace a `https://web.drakescraft.cl/store.html`. Nada de descripciones del servidor,
+listas de plugins, versiones ni precios.
 
-El criterio del reemplazo es que Tebex sea solo la pasarela: el catálogo y el detalle de
-cada paquete viven en `web.drakescraft.cl`, que se mantiene junto al servidor. Así la
-landing deja de ser una segunda fuente de verdad que se desactualiza sola.
+Dentro del juego el camino ya está cerrado: `buy-command.enabled: false` en
+`plugins/Tebex/config.yml` (aplicado el 2026-08-04, respaldo en
+`Backups Codex Automatico\DrakesCraft\2026-08-04_tebex_buy_command`), y Odysseia registra
+`/buy` con un enlace directo a la tienda oficial.
+
+> El GUI de `/buy` de Tebex tampoco era inocuo: anunciaba **"Duración: 30 días"** en todos
+> los paquetes por igual, incluidos los Dragmas y las protecciones, que son permanentes.
 
 ---
 
