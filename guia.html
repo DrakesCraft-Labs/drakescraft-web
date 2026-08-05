@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía completa de DrakesCraft: todos los comandos del servidor y cómo funcionan las tres modalidades, Survival, SkyBlock y OneBlock.">
+  <title>DrakesCraft | Guía de comandos y modalidades</title>
+  <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css?v=20260805-guia-v1">
+  <link rel="stylesheet" href="styles/guia.css?v=20260805-guia-v1">
+</head>
+<body class="page-shell" data-page="guia">
+  <nav class="site-nav" aria-label="Navegación principal">
+    <div class="container site-nav__bar">
+      <a class="brand" href="/" aria-label="Ir al inicio de DrakesCraft">
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Guía del servidor</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <ul class="site-nav__links" id="nav-menu">
+        <li><a class="active" href="#comandos">Comandos</a></li>
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="store.html">Tienda</a></li>
+        <li><a href="support.html">Soporte</a></li>
+        <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="guide-hero">
+      <div class="guide-hero__backdrop" aria-hidden="true"></div>
+      <div class="container guide-hero__grid">
+        <p class="eyebrow">Todo lo que puedes escribir</p>
+        <h1>Guía de <em>comandos</em><br>y modalidades</h1>
+        <p class="guide-hero__lead">Busca cualquier comando, mira para qué sirve y dónde funciona. Si algo no aparece aquí, pregúntanos en Discord y lo agregamos.</p>
+      </div>
+    </header>
+
+    <section class="container" id="comandos">
+      <div class="guide-search">
+        <label class="sr-only" for="guide-q">Buscar un comando</label>
+        <input type="search" id="guide-q" placeholder="Escribe un comando o lo que quieres hacer: casa, vender, isla, proteger…" autocomplete="off">
+        <p class="guide-search__count" id="guide-count"></p>
+      </div>
+
+      <div class="guide-filters" role="group" aria-label="Filtrar por categoría">
+        <button type="button" data-filter="all" aria-pressed="true">Todo</button>
+        <button type="button" data-filter="basico" aria-pressed="false">Básicos</button>
+        <button type="button" data-filter="modalidades" aria-pressed="false">Modalidades</button>
+        <button type="button" data-filter="proteccion" aria-pressed="false">Protecciones</button>
+        <button type="button" data-filter="economia" aria-pressed="false">Economía</button>
+        <button type="button" data-filter="slimefun" aria-pressed="false">Slimefun</button>
+        <button type="button" data-filter="social" aria-pressed="false">Social</button>
+        <button type="button" data-filter="extra" aria-pressed="false">Extras</button>
+      </div>
+
+      <p class="guide-empty is-hidden" id="guide-empty">No encontramos ningún comando con eso. Prueba con otra palabra.</p>
+
+      <section class="guide-section" data-cat="basico">
+        <h2>Básicos</h2>
+        <p class="guide-section__note">Lo primero que vas a necesitar. Funciona en las tres modalidades.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/spawn</code><p>Te lleva al punto de inicio del servidor.</p></div>
+          <div class="guide-row"><code>/sethome &lt;nombre&gt;</code><p>Guarda tu ubicación actual como hogar. La cantidad de hogares sube con tu rango.</p></div>
+          <div class="guide-row"><code>/home &lt;nombre&gt;</code><p>Te teletransporta a un hogar guardado. Sin nombre te lleva al principal.</p></div>
+          <div class="guide-row"><code>/delhome &lt;nombre&gt;</code><p>Borra un hogar guardado.</p></div>
+          <div class="guide-row"><code>/back</code><p>Vuelve al último lugar desde donde te teletransportaste o donde moriste.</p></div>
+          <div class="guide-row"><code>/rtp</code><p>Te lanza a un punto aleatorio del mundo, lejos de todo.<span class="guide-row__alias">También: /wild</span></p></div>
+          <div class="guide-row"><code>/tpa &lt;jugador&gt;</code><p>Pide teletransportarte a otra persona.</p></div>
+          <div class="guide-row"><code>/tpaccept</code><p>Acepta una solicitud de teletransporte.<span class="guide-row__alias">Rechazar: /tpdeny</span></p></div>
+          <div class="guide-row"><code>/warps</code><p>Lista los puntos públicos del servidor.<span class="guide-row__alias">Ir a uno: /warp &lt;nombre&gt;</span></p></div>
+          <div class="guide-row"><code>/ayuda</code><p>Ayuda dentro del juego.<span class="guide-row__alias">También: /comandos, /helpo</span></p></div>
+          <div class="guide-row"><code>/lista</code><p>Muestra quién está conectado.</p></div>
+          <div class="guide-row"><code>/kit</code><p>Reclama tu kit. Cada rango tiene el suyo y se renueva cada 30 días.<span class="guide-row__alias">También: /kits</span></p></div>
+          <div class="guide-row"><code>/daily</code><p>Recompensa diaria. Entra todos los días para subir tu racha.</p></div>
+          <div class="guide-row"><code>/misiones</code><p>Abre el panel de misiones.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="modalidades">
+        <h2>Modalidades</h2>
+        <p class="guide-section__note">Survival, SkyBlock y OneBlock conviven en el mismo servidor. Tu rango, tus kits y tu dinero te siguen entre las tres.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/modalidades</code><p>Menú para saltar entre las tres modalidades.<span class="guide-row__alias">También: /modalidad, /modos, /hub</span></p></div>
+          <div class="guide-row"><code>/survival</code><p>Vuelve a la modalidad principal.<span class="guide-row__alias">También: /principal, /polis</span></p></div>
+          <div class="guide-row"><code>/is</code><p>Tu isla de <strong>SkyBlock</strong>. Sin isla, te crea una.<span class="guide-row__alias">También: /skyblock. Ojo: no es lo mismo que /ob</span></p></div>
+          <div class="guide-row"><code>/ob</code><p>Tu isla de <strong>OneBlock</strong>, el bloque infinito por fases.<span class="guide-row__alias">También: /oneblock</span></p></div>
+          <div class="guide-row"><code>/is level</code><p>Nivel de tu isla. Sube rompiendo y construyendo con bloques valiosos.<span class="guide-row__alias">En OneBlock: /ob level</span></p></div>
+          <div class="guide-row"><code>/is team</code><p>Invita gente a tu isla y gestiona tu equipo.</p></div>
+          <div class="guide-row"><code>/is settings</code><p>Permisos y ajustes de tu isla: quién entra, quién construye.</p></div>
+          <div class="guide-row"><code>/is sethome</code><p>Fija dónde apareces al volver a tu isla.</p></div>
+          <div class="guide-row"><code>/is reset</code><p><strong>Borra tu isla y empiezas de cero.</strong> Pide confirmación, pero no se puede deshacer.</p></div>
+          <div class="guide-row"><code>/pv</code><p>Tus bóvedas personales. <strong>Cada modalidad tiene las suyas</strong>: lo que guardes en tu isla no aparece en Survival.<span class="guide-row__alias">También: /vault</span></p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="proteccion">
+        <h2>Protecciones</h2>
+        <p class="guide-section__note">En Survival tu terreno se protege con piedras de ProtectionStones. Dentro de las islas no hace falta: ahí protege el propio sistema de islas.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/tiendaprot</code><p>Tienda de piedras de protección, se pagan con Dragmas.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/ps get &lt;nombre&gt;</code><p>Compra una piedra concreta del catálogo.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/ps home</code><p>Te lleva al centro de tu protección.</p></div>
+          <div class="guide-row"><code>/ps info</code><p>Datos de la protección donde estás parado.</p></div>
+          <div class="guide-row"><code>/ps add &lt;jugador&gt;</code><p>Da permiso de construir en tu terreno.<span class="guide-row__alias">Quitar: /ps remove &lt;jugador&gt;</span></p></div>
+          <div class="guide-row"><code>/ps flag</code><p>Ajusta reglas de tu terreno: PvP, explosiones, spawn de mobs.</p></div>
+          <div class="guide-row"><code>/ps unclaim</code><p>Elimina tu protección y recuperas la piedra.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="economia">
+        <h2>Economía y comercio</h2>
+        <p class="guide-section__note">La moneda son los <strong>Dragmas</strong> y es la misma en las tres modalidades: lo que ganes en Survival lo puedes gastar en tu isla.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/tienda</code><p>Hub de comercio del servidor: categorías, protecciones y más.</p></div>
+          <div class="guide-row"><code>/buy</code><p>Enlace a la tienda oficial de rangos y kits.<span class="guide-row__alias">También: /comprar, /store, /shop</span></p></div>
+          <div class="guide-row"><code>/balance</code><p>Tu dinero disponible.<span class="guide-row__alias">También: /bal, /money</span></p></div>
+          <div class="guide-row"><code>/baltop</code><p>Ranking de los más ricos del servidor.</p></div>
+          <div class="guide-row"><code>/pay &lt;jugador&gt; &lt;monto&gt;</code><p>Transfiere Dragmas a otra persona.</p></div>
+          <div class="guide-row"><code>/bank</code><p>Tu cuenta bancaria. <strong>El dinero del banco no sirve para comprar</strong>: sácalo antes con <code>/sb withdraw</code>.</p></div>
+          <div class="guide-row"><code>/jobs</code><p>Empleos. Únete a uno y ganas dinero por minar, talar, cultivar o cazar.<span class="guide-row__alias">Unirse: /jobs join &lt;empleo&gt;</span></p></div>
+          <div class="guide-row"><code>/ah</code><p>Casa de subastas entre jugadores.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/sellinv</code><p>Vende de una vez los materiales de tu inventario.</p></div>
+          <div class="guide-row"><code>/sfmercado</code><p>Mercado dinámico de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/pw</code><p>Warps de jugadores: visita las tiendas y bases que otros publicaron.<span class="guide-row__alias">También: /pwarp</span></p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="slimefun">
+        <h2>Slimefun y tecnología</h2>
+        <p class="guide-section__note">Slimefun está mantenido y portado a 1.21.11 por nosotros, con más de 40 expansiones. Es el corazón del servidor.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/sf guide</code><p>Te entrega la guía de Slimefun si la perdiste.</p></div>
+          <div class="guide-row"><code>/sf search &lt;texto&gt;</code><p>Busca una receta o un objeto por nombre.</p></div>
+          <div class="guide-row"><code>/sf stats</code><p>Tu progreso de investigación.</p></div>
+          <div class="guide-row"><code>/sf timings</code><p>Rendimiento de las máquinas de tu zona. Útil si algo va lento.</p></div>
+          <div class="guide-row"><code>/skills</code><p>Tus habilidades de AuraSkills: minería, lucha, agricultura y más.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="social">
+        <h2>Social y chat</h2>
+        <p class="guide-section__note">El servidor es hispanohablante, pero el chat se puede traducir automáticamente.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/msg &lt;jugador&gt; &lt;texto&gt;</code><p>Mensaje privado.<span class="guide-row__alias">Responder: /r &lt;texto&gt;</span></p></div>
+          <div class="guide-row"><code>/wwct &lt;idioma&gt;</code><p><strong>Traductor.</strong> Con <code>/wwct es</code> lees todo en español; con <code>/wwct en</code>, en inglés. Se apaga con <code>/wwct stop</code>.</p></div>
+          <div class="guide-row"><code>/team</code><p>Crea o gestiona tu equipo, con chat propio y cofre compartido.</p></div>
+          <div class="guide-row"><code>/ignore &lt;jugador&gt;</code><p>Deja de ver los mensajes de alguien.</p></div>
+          <div class="guide-row"><code>/mail</code><p>Correo interno del servidor.<span class="guide-row__alias">Enviar: /mail send &lt;jugador&gt; &lt;texto&gt;</span></p></div>
+          <div class="guide-row"><code>/discord</code><p>Enlace a nuestro Discord y vinculación de tu cuenta.</p></div>
+          <div class="guide-row"><code>/rules</code><p>Las reglas del servidor dentro del juego.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="extra">
+        <h2>Extras y cosméticos</h2>
+        <p class="guide-section__note">Detalles que hacen el día a día más cómodo. Algunos vienen con los rangos.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/ec</code><p>Tu cofre de ender. <strong>Es distinto en cada modalidad.</strong><span class="guide-row__alias">También: /enderchest</span></p></div>
+          <div class="guide-row"><code>/sit</code><p>Siéntate donde estés. También funciona en escaleras y bloques.</p></div>
+          <div class="guide-row"><code>/cosmeticos</code><p>Auras, rastros y efectos de muerte.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
+          <div class="guide-row"><code>/fly</code><p>Vuelo.<span class="guide-tag guide-tag--vip">Desde Hermes</span></p></div>
+          <div class="guide-row"><code>/feed</code><p>Rellena tu hambre.<span class="guide-tag guide-tag--vip">Desde Hefesto</span></p></div>
+          <div class="guide-row"><code>/nick &lt;nombre&gt;</code><p>Cambia tu nombre visible.<span class="guide-tag guide-tag--vip">Desde Hestia</span></p></div>
+          <div class="guide-row"><code>/chatgames</code><p>Juegos de chat automáticos. Responde primero y ganas Dragmas.</p></div>
+          <div class="guide-row"><code>/jb</code><p>Reproductor de música con cientos de canciones.<span class="guide-row__alias">También: /jukebox</span></p></div>
+          <div class="guide-row"><code>/afk</code><p>Te marca como ausente.</p></div>
+          <div class="guide-row"><code>/exc</code><p>Tus cofres y llaves de recompensas.</p></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="container guide-section" id="modalidades">
+      <h2>Cómo funcionan las modalidades</h2>
+      <p class="guide-section__note">Las tres corren en el mismo servidor. No cambias de IP ni pierdes tu progreso: cambias de mundo con <code>/modalidades</code>.</p>
+
+      <div class="guide-modes">
+        <article class="guide-mode" style="--mode-accent:#9ce6a4;">
+          <h3>Survival</h3>
+          <p>La modalidad principal y la más completa.</p>
+          <ul>
+            <li>Slimefun con todas sus expansiones</li>
+            <li>Magia, jefes y eventos</li>
+            <li>Protecciones con piedras</li>
+            <li>Subastas, mercados y warps de jugadores</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#8ad8ff;">
+          <h3>SkyBlock</h3>
+          <p>Tu isla flotando en el vacío. Empiezas con lo justo.</p>
+          <ul>
+            <li>Tu isla crece según tu rango</li>
+            <li>Nether y End propios</li>
+            <li>Slimefun funciona igual que en Survival</li>
+            <li>Entras con <code>/is</code></li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#d9a4ff;">
+          <h3>OneBlock</h3>
+          <p>Un solo bloque infinito que va cambiando por fases.</p>
+          <ul>
+            <li>21 fases con sus propias recompensas</li>
+            <li>De las llanuras a las cuevas de azufre</li>
+            <li>Tu isla crece según tu rango</li>
+            <li>Entras con <code>/ob</code></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="guide-split">
+        <div class="guide-split__card">
+          <h3>Lo que te sigue entre las tres</h3>
+          <ul>
+            <li><strong>Tu rango</strong> y todos sus permisos</li>
+            <li><strong>Tus kits</strong>, con el mismo cooldown</li>
+            <li><strong>Tu dinero</strong>: los Dragmas son comunes</li>
+            <li><strong>Tus empleos</strong> y tus habilidades</li>
+            <li><strong>Tu progreso de Slimefun</strong></li>
+          </ul>
+        </div>
+        <div class="guide-split__card">
+          <h3>Lo que va separado</h3>
+          <ul>
+            <li><strong>Tu inventario</strong> y tu experiencia</li>
+            <li><strong>Tu cofre de ender</strong></li>
+            <li><strong>Tus bóvedas</strong> <code>/pv</code></li>
+            <li><strong>Las subastas y mercados</strong>, que son del Survival</li>
+            <li><strong>Las protecciones</strong>: en las islas protege el sistema de islas</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="guide-section__note" style="margin-top:1.5rem;">No se pueden pasar objetos de una modalidad a otra. Es a propósito: cada una tiene que valer por sí misma.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
+  <script src="scripts/site.js?v=20260805-guia-v1"></script>
+  <script src="scripts/guia.js?v=20260805-guia-v1"></script>
+</body>
+</html>
