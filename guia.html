@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260805-guia-v1">
-  <link rel="stylesheet" href="styles/guia.css?v=20260805-guia-v1">
+  <link rel="stylesheet" href="styles/base.css?v=20260805-guia-v2">
+  <link rel="stylesheet" href="styles/guia.css?v=20260805-guia-v2">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -22,9 +22,10 @@
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
         <li><a class="active" href="#comandos">Comandos</a></li>
+        <li><a href="#rangos">Rangos</a></li>
         <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#servidor">El servidor</a></li>
         <li><a href="store.html">Tienda</a></li>
-        <li><a href="support.html">Soporte</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
       </ul>
     </div>
@@ -236,10 +237,164 @@
 
       <p class="guide-section__note" style="margin-top:1.5rem;">No se pueden pasar objetos de una modalidad a otra. Es a propósito: cada una tiene que valer por sí misma.</p>
     </section>
+
+    <section class="container guide-section" id="rangos">
+      <h2>Rangos y qué desbloquea cada uno</h2>
+      <p class="guide-section__note">Los rangos son <strong>pases de 30 días</strong> y no se renuevan solos. Cada uno hereda todo lo del anterior, así que lo que ves en una fila se suma a las de arriba. Tu rango funciona igual en las tres modalidades.</p>
+
+      <div class="rank-scroll">
+        <table class="rank-table">
+          <caption class="sr-only">Comparación de rangos: hogares, bóvedas, protecciones, warps de jugador, tiendas e isla</caption>
+          <thead>
+            <tr><th scope="col">Rango</th><th scope="col">Hogares</th><th scope="col">Bóvedas</th><th scope="col">Protección</th><th scope="col">Protecciones a la vez</th><th scope="col">Warps</th><th scope="col">Tiendas</th><th scope="col">Isla</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" data-rank="polis">Polis</th><td>1</td><td>—</td><td>31×31</td><td>1</td><td>—</td><td>—</td><td>128×128</td></tr>
+            <tr><th scope="row" data-rank="oldschool">OldSchool</th><td>—</td><td>—</td><td>113×113</td><td>5</td><td>5</td><td>15</td><td>—</td></tr>
+            <tr><th scope="row" data-rank="hercules">Hércules</th><td>3</td><td>3</td><td>49×49</td><td>3</td><td>5</td><td>15</td><td>144×144</td></tr>
+            <tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>3</td><td>81×81</td><td>4</td><td>3</td><td>20</td><td>160×160</td></tr>
+            <tr><th scope="row" data-rank="hermes">Hermes</th><td>6</td><td>5</td><td>113×113</td><td>5</td><td>8</td><td>30</td><td>176×176</td></tr>
+            <tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>5</td><td>177×177</td><td>6</td><td>5</td><td>40</td><td>192×192</td></tr>
+            <tr><th scope="row" data-rank="artemisa">Artemisa</th><td>10</td><td>5</td><td>241×241</td><td>8</td><td>12</td><td>50</td><td>208×208</td></tr>
+            <tr><th scope="row" data-rank="afrodita">Afrodita</th><td>12</td><td>7</td><td>353×353</td><td>10</td><td>15</td><td>65</td><td>224×224</td></tr>
+            <tr><th scope="row" data-rank="zeus">Zeus</th><td>20</td><td>10</td><td>481×481</td><td>15</td><td>25</td><td>80</td><td>250×250</td></tr>
+            <tr><th scope="row" data-rank="thor">Thor</th><td>25</td><td>12</td><td>601×601</td><td>18</td><td>25</td><td>100</td><td>280×280</td></tr>
+            <tr><th scope="row" data-rank="anubis">Anubis</th><td>30</td><td>14</td><td>721×721</td><td>20</td><td>25</td><td>120</td><td>310×310</td></tr>
+            <tr><th scope="row" data-rank="poseidon">Poseidón</th><td>35</td><td>16</td><td>841×841</td><td>22</td><td>25</td><td>150</td><td>340×340</td></tr>
+            <tr><th scope="row" data-rank="titan">Titán Japeto</th><td>40</td><td>18</td><td>1001×1001</td><td>25</td><td>25</td><td>200</td><td>400×400</td></tr>
+            <tr><th scope="row" data-rank="titan">Titán Oceanus</th><td>45</td><td>20</td><td>1301×1301</td><td>30</td><td>25</td><td>250</td><td>450×450</td></tr>
+            <tr><th scope="row" data-rank="titan">Titán Hiperión</th><td>50</td><td>22</td><td>1601×1601</td><td>35</td><td>25</td><td>300</td><td>500×500</td></tr>
+            <tr><th scope="row" data-rank="titan">Titán Cronos</th><td>60</td><td>25</td><td>2001×2001</td><td>40</td><td>25</td><td>400</td><td>550×550</td></tr>
+            <tr><th scope="row" data-rank="caos">Titán Caos</th><td>100</td><td>30</td><td>2501×2501</td><td>50</td><td>25</td><td>500</td><td>600×600</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="guide-section__note">«Protección» es el tamaño de la piedra que incluye el rango. «Protecciones a la vez» es cuántas puedes tener colocadas. «Tiendas» es el límite de tiendas de ChestShop.</p>
+
+      <h3 class="rank-subhead">Comandos que suma cada rango</h3>
+      <div class="guide-table">
+        <div class="guide-row"><code>OldSchool</code><p><code>/ec</code> · <code>/feed</code> · <code>/hat</code> · <code>/near</code> · <code>/ptime</code> · <code>/pweather</code> · <code>/workbench</code> · <code>/condense</code><span class="guide-row__alias">Rango histórico, no está a la venta.</span></p></div>
+        <div class="guide-row"><code>Hércules</code><p>Color en el chat · <code>/clearinventory</code> · <code>/recipe</code><span class="guide-row__alias">Cosmético: aura Llama y rastro Chispas</span></p></div>
+        <div class="guide-row"><code>Hestia</code><p><code>/nick</code> · <code>/ext</code> · <code>/ptime</code> · <code>/pweather</code><span class="guide-row__alias">Cosmético: efecto de muerte Tótem</span></p></div>
+        <div class="guide-row"><code>Hermes</code><p><code>/fly</code> · <code>/speed</code> · <code>/back</code> · <code>/compass</code> · <code>/workbench</code> · <code>/ec</code> · RTP sin espera de movimiento<span class="guide-row__alias">Cosmético: rastro Aliento de dragón</span></p></div>
+        <div class="guide-row"><code>Hefesto</code><p>Estaciones virtuales: <code>/anvil</code> · <code>/grindstone</code> · <code>/loom</code> · <code>/smithingtable</code> · <code>/stonecutter</code> · más <code>/condense</code> · <code>/depth</code> · <code>/dispose</code> · <code>/feed</code> · <code>/top</code> y RTP sin espera<span class="guide-row__alias">Cosmético: efecto de muerte Rayo</span></p></div>
+        <div class="guide-row"><code>Artemisa</code><p><code>/jump</code> · conservas la experiencia al morir<span class="guide-row__alias">Cosmético: rastro Portal</span></p></div>
+        <div class="guide-row"><code>Afrodita</code><p><code>/repair</code> · <code>/sell</code> · tus tiendas no pagan comisión<span class="guide-row__alias">Cosmético: rastro Corazones</span></p></div>
+        <div class="guide-row"><code>Zeus</code><p><code>/heal</code> · <code>/repair all</code> · <strong>conservas el inventario al morir</strong> · sin impuesto al comprar<span class="guide-row__alias">Cosmético: efecto de muerte Explosión</span></p></div>
+        <div class="guide-row"><code>Thor</code><p>Todo lo anterior, con más hogares, bóvedas, protecciones y tiendas.<span class="guide-row__alias">Cosmético: aura Tormenta</span></p></div>
+        <div class="guide-row"><code>Anubis</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosmético: aura Ánima</span></p></div>
+        <div class="guide-row"><code>Poseidón</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosmético: aura Marea</span></p></div>
+        <div class="guide-row"><code>Titanes</code><p>Japeto, Oceanus, Hiperión y Cronos suman <strong>multiplicador ×5 de favor divino</strong> y los límites más altos del servidor.<span class="guide-row__alias">Cosmético: aura Titán</span></p></div>
+        <div class="guide-row"><code>Titán Caos</code><p>La cima: 100 hogares, 30 bóvedas, 50 protecciones, 500 tiendas y protección de 2501×2501.<span class="guide-row__alias">Cosmético: aura Caos</span></p></div>
+      </div>
+
+      <div class="guide-split" style="margin-top:1.5rem;">
+        <div class="guide-split__card">
+          <h3>Roles de aventura</h3>
+          <p style="margin:0 0 .6rem;font-size:.93rem;opacity:.85;">Pases de 30 días solo para identificarte en el chat. <strong>No incluyen kit, objetos ni Slimefun.</strong></p>
+          <ul>
+            <li>Minero · Cazador · Constructor</li>
+            <li>Leñador · Alquimista · Nómada</li>
+          </ul>
+        </div>
+        <div class="guide-split__card">
+          <h3>Cómo se entrega</h3>
+          <ul>
+            <li>Usa tu <strong>nick exacto</strong> al pagar</li>
+            <li>La entrega es automática al conectarte</li>
+            <li>Si estás desconectado, llega cuando entres</li>
+            <li>Los pases <strong>no se renuevan solos</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="container guide-section" id="servidor">
+      <h2>Qué es DrakesCraft</h2>
+      <p class="guide-section__note">Un servidor de Minecraft <strong>1.21.11</strong> con tres modalidades corriendo en una sola instancia, sin proxy ni servidores separados. Survival con tecnología, magia y jefes como base.</p>
+
+      <div class="guide-modes">
+        <article class="guide-mode" style="--mode-accent:#ffb03c;">
+          <h3>Slimefun propio</h3>
+          <p>No usamos la versión pública: mantenemos y portamos <strong>nuestro propio Slimefun a 1.21.11</strong>, con más de 40 expansiones, varias portadas a mano porque sus autores las abandonaron.</p>
+          <ul>
+            <li>Networks, InfinityExpansion, DynaTech</li>
+            <li>SlimeTinker, FluffyMachines, FoxyMachines</li>
+            <li>EcoPower, LiteXpansion, ExoticGarden</li>
+            <li>Gastronomicon, Cultivation, Supreme</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#b9a4ff;">
+          <h3>Plugins hechos aquí</h3>
+          <p>Buena parte de lo que juegas está programado para este servidor y no existe en ningún otro.</p>
+          <ul>
+            <li><strong>Odysseia</strong>: tienda, kits, modalidades, cosméticos</li>
+            <li><strong>DrakesBosses</strong> y <strong>DiosesDrakes</strong>: jefes y favor divino</li>
+            <li><strong>ArcanaDrakes</strong>: magia</li>
+            <li><strong>DrakesSlimeMarket</strong>: mercado dinámico</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#8ad8ff;">
+          <h3>Espacio y exploración</h3>
+          <p>Con Galactifun puedes construir cohetes y viajar a otros mundos de verdad, cada uno con sus reglas.</p>
+          <ul>
+            <li>La Luna, Marte, Venus, Ío</li>
+            <li>Titán, Encélado y órbita terrestre</li>
+            <li>Nether y End propios</li>
+            <li>Arenas de jefes y mundos de eventos</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="guide-split">
+        <div class="guide-split__card">
+          <h3>Progresión</h3>
+          <ul>
+            <li><strong>AuraSkills</strong>: subes habilidades jugando</li>
+            <li><strong>Jobs</strong>: cobras por minar, talar, cultivar o cazar</li>
+            <li><strong>Misiones</strong> con <code>/misiones</code></li>
+            <li><strong>Recompensa diaria</strong> con racha, <code>/daily</code></li>
+            <li><strong>Jefes</strong> con botín propio</li>
+          </ul>
+        </div>
+        <div class="guide-split__card">
+          <h3>Economía</h3>
+          <ul>
+            <li>Moneda: <strong>Dragmas</strong>, común a las tres modalidades</li>
+            <li>Tiendas de jugador con QuickShop y ChestShop</li>
+            <li>Casa de subastas, <code>/ah</code></li>
+            <li>Banco con intereses, <code>/bank</code></li>
+            <li>Mercado dinámico de Slimefun</li>
+          </ul>
+        </div>
+        <div class="guide-split__card">
+          <h3>Tu base está a salvo</h3>
+          <ul>
+            <li>Protecciones que crecen con tu rango</li>
+            <li>Reglas por terreno: PvP, explosiones, mobs</li>
+            <li>Invitas a quien quieras con <code>/ps add</code></li>
+            <li><strong>CoreProtect</strong>: todo queda registrado</li>
+            <li>Tumbas al morir: no pierdes tus cosas</li>
+          </ul>
+        </div>
+        <div class="guide-split__card">
+          <h3>Para entrar</h3>
+          <ul>
+            <li>IP: <strong>play.drakescraft.cl</strong></li>
+            <li>Java y <strong>Bedrock</strong> (móvil y consolas)</li>
+            <li>Puerto Bedrock: <strong>25565</strong></li>
+            <li><strong>Semi-premium</strong>: original y no premium</li>
+            <li>Chat traducible a tu idioma</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="guide-section__note" style="margin-top:1.5rem;">Reinicio diario a las <strong>08:00 hora de Chile</strong>. Recibes avisos desde las 07:45 y en el último minuto se cierran cofres y máquinas para proteger tus objetos.</p>
+    </section>
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260805-guia-v1"></script>
-  <script src="scripts/guia.js?v=20260805-guia-v1"></script>
+  <script src="scripts/site.js?v=20260805-guia-v2"></script>
+  <script src="scripts/guia.js?v=20260805-guia-v2"></script>
 </body>
 </html>

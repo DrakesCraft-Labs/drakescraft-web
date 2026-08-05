@@ -144,3 +144,68 @@
 @media (max-width: 640px) {
   .guide-row { grid-template-columns: 1fr; }
 }
+
+/* --- Tabla comparativa de rangos --- */
+.rank-scroll { overflow-x: auto; margin-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+
+.rank-table {
+  width: 100%;
+  min-width: 46rem;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+
+.rank-table th, .rank-table td {
+  padding: .6rem .7rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.rank-table thead th {
+  position: sticky;
+  top: 0;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  background: #171326;
+  border-bottom: 1px solid rgba(255, 255, 255, .18);
+}
+
+.rank-table tbody th {
+  text-align: left;
+  white-space: nowrap;
+  border-left: 3px solid var(--rank, rgba(255, 255, 255, .25));
+  padding-left: .8rem;
+}
+
+.rank-table tbody tr:hover { background: rgba(255, 255, 255, .04); }
+.rank-table td { font-variant-numeric: tabular-nums; opacity: .88; }
+
+/* Un color por familia de rango, para leer la escalera de un vistazo. */
+[data-rank="polis"] { --rank: #d4b483; }
+[data-rank="oldschool"] { --rank: #00ff66; }
+[data-rank="hercules"] { --rank: #cd7f32; }
+[data-rank="hestia"] { --rank: #ff6b6b; }
+[data-rank="hermes"] { --rank: #8ef7ff; }
+[data-rank="hefesto"] { --rank: #ff3700; }
+[data-rank="artemisa"] { --rank: #228b22; }
+[data-rank="afrodita"] { --rank: #ff007f; }
+[data-rank="zeus"] { --rank: #00f2ff; }
+[data-rank="thor"] { --rank: #ffe600; }
+[data-rank="anubis"] { --rank: #d4af37; }
+[data-rank="poseidon"] { --rank: #00ced1; }
+[data-rank="titan"] { --rank: #ff6633; }
+[data-rank="caos"] { --rank: #ff0055; }
+
+.rank-subhead { margin: 2rem 0 1rem; font-size: 1.15rem; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
