@@ -108,6 +108,8 @@
 .guide-tag--vip { color: var(--dk-oro); background: rgba(255, 176, 60, .16); }
 .guide-tag--staff { color: #8ad8ff; background: rgba(90, 190, 255, .16); }
 .guide-tag--survival { color: #9ce6a4; background: rgba(90, 220, 120, .14); }
+/* Límite del cliente de Bedrock, no del servidor: ver el aviso de /tpa. */
+.guide-tag--bedrock { color: #c9b6ff; background: rgba(150, 120, 255, .16); }
 
 .guide-row.is-hidden, .guide-section.is-hidden { display: none; }
 
