@@ -144,7 +144,31 @@
 .guide-empty.is-hidden { display: none; }
 
 @media (max-width: 640px) {
-  .guide-row { grid-template-columns: 1fr; }
+  .guide-hero { padding: 3.25rem 0 2.25rem; }
+  .guide-hero h1 { font-size: clamp(2rem, 10vw, 2.7rem); }
+  .guide-search { margin: 1.4rem 0 .7rem; }
+  .guide-search input { min-height: 3.1rem; font-size: 1rem; }
+
+  .guide-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 1rem -1rem 2rem;
+    padding: 0 1rem .45rem;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .guide-filters button {
+    flex: 0 0 auto;
+    min-height: 2.65rem;
+    scroll-snap-align: start;
+  }
+
+  .guide-section { margin-bottom: 2.25rem; scroll-margin-top: 4.5rem; }
+  .guide-row { grid-template-columns: 1fr; gap: .45rem; padding: .9rem; }
+  .guide-row code { font-size: .92rem; }
+  .guide-row p { font-size: .92rem; }
+  .guide-mode, .guide-split__card { padding: 1rem; }
 }
 
 /* --- Tabla comparativa de rangos --- */
@@ -217,7 +241,26 @@
 .guide-tabs a { padding: .55rem .9rem; border: 1px solid var(--dk-linea); border-radius: 6px; color: var(--dk-suave); background: var(--dk-panel); font: 700 .85rem var(--font-body, sans-serif); text-decoration: none; }
 .guide-tabs a:hover { border-color: #4fbf7f; color: #eafff2; }
 .guide-tabs a.is-active { color: #08120d; border-color: var(--dk-verde); background: var(--dk-verde); }
-@media (max-width: 640px) { .guide-tabs a { flex: 1 1 100%; text-align: center; } }
+@media (max-width: 640px) {
+  .guide-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-top: 1rem;
+    padding-bottom: .35rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .guide-tabs a {
+    flex: 0 0 auto;
+    min-height: 2.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .rank-scroll { margin-right: -1rem; padding-right: 1rem; }
+}
 
 /* Alineacion con la tienda: la guia usaba sans-serif y acento violeta, la tienda serif
    Cinzel y oro/verde. Dos identidades distintas para el mismo servidor se leen como
