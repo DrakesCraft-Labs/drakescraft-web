@@ -110,7 +110,13 @@ const tebexPackageIds = {
   'protection-end-colossus': 7596920,
   'protection-atlas': 7596924,
   'sfmaster-1h': 7545828,
-  'sfmaster-24h': 7545831
+  'sfmaster-24h': 7545831,
+  'titan-japeto': 7609642,
+  'titan-oceanus': 7609645,
+  'titan-hiperion': 7609646,
+  'titan-cronos': 7609648,
+  'titan-caos': 7609649,
+  'slimefun-research-all': 7609650
 };
 // Solo permanece bloqueado el producto cuyo tamaño ofrecido aún no coincide con ProtectionStones.
 // El resto del catálogo fue conciliado con el Purchase Engine y Tebex.
