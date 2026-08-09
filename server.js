@@ -118,11 +118,9 @@ const tebexPackageIds = {
   'titan-caos': 7609649,
   'slimefun-research-all': 7609650
 };
-// Solo permanece bloqueado el producto cuyo tamaño ofrecido aún no coincide con ProtectionStones.
-// El resto del catálogo fue conciliado con el Purchase Engine y Tebex.
-const unavailableTebexProductIds = new Set([
-  'protection-481'
-]);
+// Los bloqueos excepcionales se declaran aquí para impedir que un producto llegue al checkout.
+// protection-481 fue verificada contra el alias vipzeus de ProtectionStones.
+const unavailableTebexProductIds = new Set();
 
 const bossesCatalog = {
   updatedAt: '2026-07-10',
