@@ -155,3 +155,102 @@ body[data-page="store"]::after,
   .store-product { min-height: 0; }
   .btn-ig, .btn-gh { width: 100%; justify-content: center; }
 }
+
+/* --- Tarjeta de conexion al servidor (portada) --- */
+/* La IP no estaba en ningun sitio visible: quien llegaba a la tienda no sabia
+   a que servidor conectarse. El estado en vivo sale de /api/server-status. */
+.server-card {
+  margin: 26px 0 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--dk-linea);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--dk-panel) 82%, transparent);
+  max-width: 460px;
+}
+
+.server-card__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 13px;
+}
+
+.server-card__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--dk-suave);
+  flex: none;
+}
+
+.server-card.is-online .server-card__dot {
+  background: var(--dk-verde);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--dk-verde) 22%, transparent);
+}
+
+.server-card.is-offline .server-card__dot { background: #e88; }
+
+.server-card__state {
+  font-size: .93rem;
+  color: var(--dk-suave);
+  font-weight: 600;
+}
+
+.server-card.is-online .server-card__state { color: var(--dk-texto); }
+
+.server-card__ip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--dk-linea);
+  border-radius: 11px;
+  background: var(--dk-fondo);
+  color: var(--dk-texto);
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 1.04rem;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+
+.server-card__ip:hover { border-color: var(--dk-verde); }
+.server-card__ip:focus-visible { outline: 2px solid var(--dk-oro); outline-offset: 2px; }
+
+.server-card__copy {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--dk-verde);
+  flex: none;
+}
+
+.server-card__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin: 14px 0 0;
+}
+
+.server-card__meta dt {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--dk-oro);
+}
+
+.server-card__meta dd {
+  margin: 2px 0 0;
+  font-size: .87rem;
+  color: var(--dk-suave);
+}
+
+@media (max-width: 520px) {
+  .server-card { padding: 15px 16px; }
+  .server-card__ip { font-size: .95rem; }
+  .server-card__meta { grid-template-columns: 1fr; }
+}

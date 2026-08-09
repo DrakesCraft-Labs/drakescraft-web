@@ -202,3 +202,53 @@ document.addEventListener("DOMContentLoaded", () => {
         renderAll();
     }).catch(() => { grid.innerHTML = "<article class='store-product is-visible'><h3>Catálogo no disponible</h3><p>El backend no respondió. Intenta más tarde.</p></article>"; });
 });
+
+/* --- Estado del servidor en la portada --- */
+/* Pinta cuanta gente hay conectada y deja copiar la IP de un clic. Si la consulta
+   falla no se inventa un numero: se dice que no se pudo comprobar. */
+(function () {
+  var tarjeta = document.getElementById('server-card');
+  if (!tarjeta) return;
+
+  var estado = document.getElementById('server-state');
+  var boton = document.getElementById('server-ip');
+  var copiar = document.getElementById('server-copy');
+  var ip = boton.querySelector('.server-card__ip-text').textContent.trim();
+
+  function pintar(datos) {
+    if (!datos || !datos.enLinea) {
+      tarjeta.classList.remove('is-online');
+      tarjeta.classList.add('is-offline');
+      estado.textContent = 'No se pudo comprobar el estado';
+      return;
+    }
+    tarjeta.classList.remove('is-offline');
+    tarjeta.classList.add('is-online');
+    var n = datos.jugadores;
+    estado.textContent = n === 0
+      ? 'En linea · nadie conectado ahora'
+      : 'En linea · ' + n + (n === 1 ? ' jugador conectado' : ' jugadores conectados');
+  }
+
+  function consultar() {
+    fetch('/api/server-status', { headers: { accept: 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(pintar)
+      .catch(function () { pintar(null); });
+  }
+
+  boton.addEventListener('click', function () {
+    var previo = copiar.textContent;
+    navigator.clipboard.writeText(ip).then(function () {
+      copiar.textContent = 'Copiada';
+      setTimeout(function () { copiar.textContent = previo; }, 1600);
+    }).catch(function () {
+      copiar.textContent = 'Copia a mano';
+      setTimeout(function () { copiar.textContent = previo; }, 2200);
+    });
+  });
+
+  consultar();
+  // El backend cachea 30 s, asi que refrescar cada minuto no genera trafico extra.
+  setInterval(consultar, 60000);
+})();

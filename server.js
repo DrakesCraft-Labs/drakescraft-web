@@ -3,6 +3,12 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Fastify from 'fastify';
+import { estadoServidor } from './lib/mc-status.js';
+
+// Direccion publica del servidor de juego. Configurable por si cambia el dominio,
+// que ya paso una vez y dejo la guia anunciando una IP muerta.
+const MC_HOST = process.env.MC_HOST || 'mc.drakescraft.cl';
+const MC_PUERTO = Number(process.env.MC_PORT || 25565);
 import fastifyStatic from '@fastify/static';
 import { storeCatalog } from './catalog/store-catalog.js';
 
@@ -518,6 +524,15 @@ app.get('/api/health', async () => ({
   service: 'drakescraft-web',
   uptimeSeconds: Math.round(process.uptime())
 }));
+
+// Estado del servidor de Minecraft para la portada. Se consulta con el Server List
+// Ping y se cachea medio minuto dentro del modulo, asi que una visita masiva no se
+// traduce en una conexion por visitante contra el servidor de juego.
+app.get('/api/server-status', async (_request, reply) => {
+  const estado = await estadoServidor(MC_HOST, MC_PUERTO);
+  reply.header('cache-control', 'public, max-age=30');
+  return { host: MC_HOST, puerto: MC_PUERTO, ...estado };
+});
 
 // Odysseia is hosted outside Star, so it reaches this existing HTTPS endpoint
 // with an HMAC. The accepted payload deliberately excludes players, UUIDs and
