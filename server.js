@@ -812,7 +812,7 @@ async function fetchMcStatus() {
 
   const [javaRes, bedrockRes] = await Promise.allSettled([
     fetch('https://api.mcsrvstat.us/3/mc.drakescraft.cl'),
-    fetch('https://api.mcsrvstat.us/bedrock/3/play.drakescraft.cl')
+    fetch('https://api.mcsrvstat.us/bedrock/3/mc.drakescraft.cl')
   ]);
 
   const parseRes = async (r) => {
