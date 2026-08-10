@@ -8,12 +8,22 @@ services:
     container_name: drakescraft-libretranslate
     restart: unless-stopped
     ports:
-      # Only cloudflared on Star reaches this; never expose the translator publicly.
+      # Atarlo a 127.0.0.1 NO lo deja privado: cloudflared publica este mismo puerto en
+      # translate.drakescraft.cl, abierto a Internet. El servidor de MC vive en otra maquina y
+      # entra por ahi, asi que la unica proteccion real es exigir clave (ver abajo).
       - "127.0.0.1:5001:5000"
     environment:
       LT_LOAD_ONLY: es,en,pt,de
       LT_DISABLE_WEB_UI: "true"
       LT_THREADS: "2"
+      # Sin esto cualquiera con la URL traduce gratis a costa de esta CPU: se comprobo que una
+      # peticion sin api_key devolvia 200. Con API_KEYS activo y REQ_LIMIT a 0, el anonimo se
+      # queda en "0 por minuto" y solo pasan las claves dadas de alta con 'ltmanage keys add'.
+      LT_API_KEYS: "true"
+      LT_REQ_LIMIT: "0"
+      # Dentro del volumen a proposito: la ruta por defecto (db/api_keys.db) no esta montada y
+      # las claves se perderian al recrear el contenedor.
+      LT_API_KEYS_DB_PATH: /home/libretranslate/.local/share/api_keys.db
     volumes:
       - ./libretranslate-data:/home/libretranslate/.local/share
     mem_limit: 2g
