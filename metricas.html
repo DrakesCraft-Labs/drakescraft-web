@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cuánta gente juega en DrakesCraft, a qué horas y qué días. Datos reales del servidor, actualizados a diario.">
+  <title>Métricas · DrakesCraft</title>
+  <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css?v=20260810-metricas">
+  <link rel="stylesheet" href="styles/guia.css?v=20260810-metricas">
+  <link rel="stylesheet" href="styles/metricas.css?v=20260810-metricas">
+</head>
+<body class="page-shell" data-page="guia">
+  <nav class="site-nav" aria-label="Navegación principal">
+    <div class="container site-nav__bar">
+      <a class="brand" href="/" aria-label="Ir al inicio de DrakesCraft">
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Métricas del servidor</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <ul class="site-nav__links" id="nav-menu">
+        <li><a href="guia.html">Comandos</a></li>
+        <li><a href="guia-rangos.html">Rangos</a></li>
+        <li><a href="guia-slimefun.html">Slimefun</a></li>
+        <li><a class="active" href="metricas.html">Métricas</a></li>
+        <li><a href="store.html">Tienda</a></li>
+        <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="guide-hero">
+      <div class="guide-hero__backdrop" aria-hidden="true"></div>
+      <div class="container guide-hero__grid">
+        <p class="eyebrow">Datos reales, sin maquillar</p>
+        <h1>Cuánta gente<br><em>juega aquí</em></h1>
+        <p class="guide-hero__lead">Todo lo de esta página sale de los registros del servidor y se recalcula cada madrugada. Contamos cuántas personas coinciden a la vez, no cuántas veces entra alguien.</p>
+      </div>
+    </header>
+
+    <section class="guide-section">
+      <div class="container">
+        <p class="metricas-resumen" id="frase-mes">Cargando las métricas del mes…</p>
+
+        <div class="metricas-tarjetas" id="tarjetas">
+          <div class="metrica"><span class="metrica__valor" id="v-hoy">–</span><span class="metrica__etiqueta">máximo hoy</span></div>
+          <div class="metrica"><span class="metrica__valor" id="v-ayer">–</span><span class="metrica__etiqueta">máximo ayer</span></div>
+          <div class="metrica"><span class="metrica__valor" id="v-semana">–</span><span class="metrica__etiqueta">pico medio, 7 días</span></div>
+          <div class="metrica"><span class="metrica__valor" id="v-mes">–</span><span class="metrica__etiqueta">pico medio, 30 días</span></div>
+          <div class="metrica"><span class="metrica__valor" id="v-max">–</span><span class="metrica__etiqueta">récord del mes</span></div>
+          <div class="metrica"><span class="metrica__valor" id="v-distintos">–</span><span class="metrica__etiqueta">personas distintas</span></div>
+        </div>
+
+        <h2>A qué hora hay gente</h2>
+        <p class="guide-section__note" id="frase-hora">Media de jugadores conectados a la vez en cada hora, en horario de Chile.</p>
+        <div class="metricas-horas" id="horas" role="img" aria-label="Distribución de jugadores por hora del día"></div>
+
+        <h2>Los últimos días</h2>
+        <p class="guide-section__note" id="frase-semana">Máximo de jugadores simultáneos cada día.</p>
+        <div class="metricas-dias" id="dias"></div>
+
+        <p class="guide-section__note" id="pie">—</p>
+      </div>
+    </section>
+
+    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="guia.html">Guía</a><a href="support.html">Soporte</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
+  <script src="scripts/site.js?v=20260810-metricas"></script>
+  <script src="scripts/metricas.js?v=20260810-metricas"></script>
+</body>
+</html>

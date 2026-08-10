@@ -1,0 +1,68 @@
+/* Métricas de ocupación. Reutiliza las variables de base.css para no inventar una paleta nueva. */
+
+.metricas-resumen {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  margin: 0 0 2rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--dk-acento, #ffc400);
+  background: color-mix(in srgb, var(--dk-panel, #16211c) 70%, transparent);
+  border-radius: 0 12px 12px 0;
+}
+
+.metricas-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 3rem;
+}
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 1.1rem 1rem;
+  border: 1px solid var(--dk-linea, #24352c);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--dk-panel, #16211c) 82%, transparent);
+  text-align: center;
+}
+
+.metrica__valor { font-size: 2rem; font-weight: 800; line-height: 1; color: var(--dk-acento, #ffc400); }
+.metrica__etiqueta { font-size: .8rem; opacity: .75; }
+
+/* Gráfico por hora */
+.metricas-horas {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 3px;
+  height: 190px;
+  align-items: end;
+  margin: 1.5rem 0 3rem;
+}
+
+.hora { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 6px; }
+.hora__barra {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  background: color-mix(in srgb, var(--dk-acento, #ffc400) 35%, transparent);
+  transition: background .2s;
+}
+.hora.is-pico .hora__barra { background: var(--dk-acento, #ffc400); }
+.hora:hover .hora__barra { background: var(--dk-acento, #ffc400); }
+.hora__label { font-size: .62rem; opacity: .6; font-variant-numeric: tabular-nums; }
+
+/* Últimos días */
+.metricas-dias { display: flex; flex-direction: column; gap: 7px; margin: 1.5rem 0 2.5rem; }
+.dia { display: grid; grid-template-columns: 52px 1fr 32px; align-items: center; gap: 10px; }
+.dia__fecha { font-size: .8rem; opacity: .7; font-variant-numeric: tabular-nums; }
+.dia__barra { height: 10px; border-radius: 999px; background: color-mix(in srgb, var(--dk-linea, #24352c) 60%, transparent); overflow: hidden; }
+.dia__barra i { display: block; height: 100%; border-radius: 999px; background: var(--dk-acento, #ffc400); }
+.dia__valor { font-size: .85rem; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 640px) {
+  .metricas-horas { height: 140px; gap: 2px; }
+  .hora__label { font-size: .5rem; }
+  /* En móvil solo se etiquetan las horas pares: 24 números no caben legibles. */
+  .hora:nth-child(odd) .hora__label { visibility: hidden; }
+}

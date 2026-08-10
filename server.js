@@ -759,6 +759,9 @@ await app.register(fastifyStatic, {
 // The public site begins at the storefront. Minecraft resources are hosted
 // separately at pack.drakescraft.cl once its DNS cutover is complete.
 app.get('/', async (_request, reply) => reply.sendFile('store.html'));
+for (const alias of ['/metricas', '/stats', '/estadisticas']) {
+  app.get(alias, async (_request, reply) => reply.sendFile('metricas.html'));
+}
 
 // Rutas limpias de la guia. Se anuncian in-game como /guia y /comandos, asi que ambas tienen
 // que resolver sin que el jugador escriba la extension.
@@ -801,6 +804,7 @@ await app.register(fastifyStatic, {
       'guia.html',
       'guia-rangos.html',
       'guia-slimefun.html',
+      'metricas.html',
       'support.html',
       'terms.html',
       'bannerdrakes.jpg',
@@ -863,6 +867,21 @@ async function fetchMcStatus() {
   mcStatusCacheAt = now;
   return mcStatusCache;
 }
+
+// ── /api/metricas — ocupacion del servidor ───────────────────────────────
+// El JSON lo escribe un timer de systemd en Star una vez al dia y lo deja en el volumen de datos
+// que este contenedor ya tiene montado. Por eso publicar metricas nuevas no obliga a reconstruir
+// la imagen: basta con que el archivo cambie.
+app.get('/api/metricas', async (_request, reply) => {
+  try {
+    const bruto = await fs.readFile(path.join(dataDir, 'metricas.json'), 'utf8');
+    reply.header('cache-control', 'public, max-age=1800');
+    return JSON.parse(bruto);
+  } catch {
+    reply.code(503);
+    return { error: 'Las métricas todavía no se han generado' };
+  }
+});
 
 app.get('/api/mcstatus', async (_request, reply) => {
   try {
