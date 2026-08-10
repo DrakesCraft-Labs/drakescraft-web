@@ -50,6 +50,61 @@
     cont.innerHTML = html;
   }
 
+  // Los nicks salen de los logs y ya vienen filtrados por [A-Za-z0-9_.], pero se escapan igual:
+  // el dia que cambie el filtro de origen, esto sigue siendo seguro.
+  function limpio(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function pintarNicks(id, lista, vacio) {
+    var cont = document.getElementById(id);
+    if (!cont) return;
+    if (!lista || !lista.length) {
+      cont.innerHTML = '<p class="nicks__vacio">' + vacio + '</p>';
+      return;
+    }
+    cont.innerHTML = lista.map(function (n) {
+      return '<span class="nick">' + limpio(n) + '</span>';
+    }).join('');
+  }
+
+  function fechaCorta(iso) {
+    var p = String(iso).split('-');
+    return p.length === 3 ? p[2] + '/' + p[1] : iso;
+  }
+
+  function pintarJugadores(lista) {
+    var tabla = document.getElementById('tabla-jugadores');
+    var boton = document.getElementById('jugadores-mas');
+    if (!tabla || !lista) return;
+    var cuerpo = tabla.querySelector('tbody');
+    var TOPE = 25;
+    var todos = false;
+
+    function render() {
+      var visibles = todos ? lista : lista.slice(0, TOPE);
+      cuerpo.innerHTML = visibles.map(function (j) {
+        return '<tr' + (j.nuevo ? ' class="es-nuevo"' : '') + '>'
+             + '<td class="jug__nick">' + limpio(j.nick)
+             + (j.nuevo ? ' <span class="etiqueta-nueva">nuevo</span>' : '') + '</td>'
+             + '<td>' + j.dias + '</td>'
+             + '<td>' + fechaCorta(j.primera) + '</td>'
+             + '<td>' + fechaCorta(j.ultima) + '</td>'
+             + '<td>' + limpio(j.franja) + '</td>'
+             + '</tr>';
+      }).join('');
+      if (lista.length > TOPE) {
+        boton.hidden = false;
+        boton.textContent = todos ? 'Ver solo los 25 más habituales' : 'Ver los ' + lista.length + ' jugadores';
+      }
+    }
+
+    boton.addEventListener('click', function () { todos = !todos; render(); });
+    render();
+  }
+
   fetch('/api/metricas', { headers: { accept: 'application/json' } })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
@@ -71,6 +126,17 @@
 
       if (d.mes) pintarHoras(d.mes.por_hora);
       if (d.historico) pintarDias(d.historico);
+
+      var deHoy = (d.hoy && d.hoy.jugadores) || [];
+      pintarNicks('nicks-hoy', deHoy, 'Todavía no ha entrado nadie hoy.');
+      texto('frase-hoy', deHoy.length
+        ? 'Han pasado ' + deHoy.length + (deHoy.length === 1 ? ' persona' : ' personas') + ' desde las 00:00.'
+        : 'Todavía no ha entrado nadie hoy.');
+
+      pintarNicks('nicks-nuevos', d.nuevos, 'Esta semana no ha llegado nadie nuevo todavía.');
+      if (d.frases && d.frases.nuevos) texto('frase-nuevos', d.frases.nuevos);
+
+      pintarJugadores(d.jugadores);
 
       var cuando = new Date(d.generado);
       texto('pie', 'Calculado el ' + cuando.toLocaleDateString('es-CL') + ' a las '

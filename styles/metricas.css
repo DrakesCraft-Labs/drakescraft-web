@@ -66,3 +66,82 @@
   /* En móvil solo se etiquetan las horas pares: 24 números no caben legibles. */
   .hora:nth-child(odd) .hora__label { visibility: hidden; }
 }
+
+/* --- Nicks y perfil de jugadores --- */
+.nicks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: .35rem 0 1.6rem;
+}
+.nicks__vacio {
+  color: var(--muted, #8b8fa3);
+  font-size: .92rem;
+  margin: 0;
+}
+.nick {
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: .85rem;
+  padding: .3rem .6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .04);
+  white-space: nowrap;
+}
+.nicks--nuevos .nick {
+  border-color: rgba(255, 196, 0, .45);
+  background: rgba(255, 196, 0, .1);
+  color: #ffd873;
+}
+
+.tabla-jugadores__scroll {
+  overflow-x: auto;
+  margin: .35rem 0 .8rem;
+}
+.tabla-jugadores {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+.tabla-jugadores th,
+.tabla-jugadores td {
+  text-align: left;
+  padding: .5rem .7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+}
+.tabla-jugadores th {
+  font-size: .74rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted, #8b8fa3);
+  font-weight: 600;
+}
+.tabla-jugadores tbody tr:hover { background: rgba(255, 255, 255, .03); }
+.tabla-jugadores .jug__nick { font-family: 'DM Mono', ui-monospace, monospace; }
+.tabla-jugadores tr.es-nuevo .jug__nick { color: #ffd873; }
+
+.etiqueta-nueva {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: .62rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: .12rem .38rem;
+  margin-left: .3rem;
+  border-radius: 4px;
+  background: rgba(255, 196, 0, .18);
+  color: #ffd873;
+  vertical-align: middle;
+}
+
+.jugadores-mas {
+  font: inherit;
+  color: #a78bfa;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.jugadores-mas:hover { color: #c4b5fd; }

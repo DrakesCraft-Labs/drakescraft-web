@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260810-metricas">
-  <link rel="stylesheet" href="styles/guia.css?v=20260810-metricas">
-  <link rel="stylesheet" href="styles/metricas.css?v=20260810-metricas">
+  <link rel="stylesheet" href="styles/base.css?v=20260810-nicks">
+  <link rel="stylesheet" href="styles/guia.css?v=20260810-nicks">
+  <link rel="stylesheet" href="styles/metricas.css?v=20260810-nicks">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -63,12 +63,30 @@
         <p class="guide-section__note" id="frase-semana">Máximo de jugadores simultáneos cada día.</p>
         <div class="metricas-dias" id="dias"></div>
 
+        <h2>Quién anduvo hoy</h2>
+        <p class="guide-section__note" id="frase-hoy">Todos los que han pasado por el servidor desde las 00:00.</p>
+        <div class="nicks" id="nicks-hoy"></div>
+
+        <h2>Caras nuevas</h2>
+        <p class="guide-section__note" id="frase-nuevos">Gente que apareció por primera vez esta semana.</p>
+        <div class="nicks nicks--nuevos" id="nicks-nuevos"></div>
+
+        <h2>La gente de aquí</h2>
+        <p class="guide-section__note">Quién juega, desde cuándo y a qué parte del día suele conectarse. Llevamos registro desde el 10 de julio de 2026, así que a quien ya estaba antes no lo podemos marcar como nuevo.</p>
+        <div class="tabla-jugadores__scroll">
+          <table class="tabla-jugadores" id="tabla-jugadores">
+            <thead><tr><th>Jugador</th><th>Días</th><th>Desde</th><th>Última vez</th><th>Suele jugar</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="guide-section__note"><button class="jugadores-mas" id="jugadores-mas" type="button" hidden>Ver todos</button></p>
+
         <p class="guide-section__note" id="pie">—</p>
       </div>
     </section>
 
     <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="guia.html">Guía</a><a href="support.html">Soporte</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260810-metricas"></script>
-  <script src="scripts/metricas.js?v=20260810-metricas"></script>
+  <script src="scripts/site.js?v=20260810-nicks"></script>
+  <script src="scripts/metricas.js?v=20260810-nicks"></script>
 </body>
 </html>
