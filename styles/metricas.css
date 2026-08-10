@@ -145,3 +145,50 @@
   text-underline-offset: 3px;
 }
 .jugadores-mas:hover { color: #c4b5fd; }
+
+/* --- Procedencia --- */
+.paises {
+  display: grid;
+  gap: .3rem;
+  margin: .35rem 0 1rem;
+}
+.pais {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) 1fr 2.2rem;
+  align-items: center;
+  gap: .7rem;
+  font-size: .9rem;
+}
+.pais__nombre {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pais__bandera { font-size: 1.05rem; line-height: 1; }
+.pais__barra {
+  display: block;
+  height: .55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .07);
+  overflow: hidden;
+}
+.pais__barra i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c3aed, #ffc400);
+}
+.pais__valor {
+  text-align: right;
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: .84rem;
+  color: var(--muted, #8b8fa3);
+}
+.tabla-jugadores .jug__pais { white-space: nowrap; }
+
+@media (max-width: 34rem) {
+  .pais { grid-template-columns: minmax(6.5rem, 8rem) 1fr 1.9rem; gap: .5rem; font-size: .84rem; }
+}

@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260810-nicks">
-  <link rel="stylesheet" href="styles/guia.css?v=20260810-nicks">
-  <link rel="stylesheet" href="styles/metricas.css?v=20260810-nicks">
+  <link rel="stylesheet" href="styles/base.css?v=20260810-paises">
+  <link rel="stylesheet" href="styles/guia.css?v=20260810-paises">
+  <link rel="stylesheet" href="styles/metricas.css?v=20260810-paises">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -38,7 +38,7 @@
       <div class="container guide-hero__grid">
         <p class="eyebrow">Datos reales, sin maquillar</p>
         <h1>Cuánta gente<br><em>juega aquí</em></h1>
-        <p class="guide-hero__lead">Todo lo de esta página sale de los registros del servidor y se recalcula cada madrugada. Contamos cuántas personas coinciden a la vez, no cuántas veces entra alguien.</p>
+        <p class="guide-hero__lead">Todo lo de esta página sale de los registros del servidor y se recalcula cada hora. Contamos cuántas personas coinciden a la vez, no cuántas veces entra alguien.</p>
       </div>
     </header>
 
@@ -71,11 +71,16 @@
         <p class="guide-section__note" id="frase-nuevos">Gente que apareció por primera vez esta semana.</p>
         <div class="nicks nicks--nuevos" id="nicks-nuevos"></div>
 
+        <h2>De dónde jugamos</h2>
+        <p class="guide-section__note" id="frase-paises">Procedencia de la gente que juega aquí habitualmente.</p>
+        <div class="paises" id="paises"></div>
+        <p class="guide-section__note" id="frase-visitas"></p>
+
         <h2>La gente de aquí</h2>
         <p class="guide-section__note">Quién juega, desde cuándo y a qué parte del día suele conectarse. Llevamos registro desde el 10 de julio de 2026, así que a quien ya estaba antes no lo podemos marcar como nuevo.</p>
         <div class="tabla-jugadores__scroll">
           <table class="tabla-jugadores" id="tabla-jugadores">
-            <thead><tr><th>Jugador</th><th>Días</th><th>Desde</th><th>Última vez</th><th>Suele jugar</th></tr></thead>
+            <thead><tr><th>Jugador</th><th>País</th><th>Días</th><th>Desde</th><th>Última vez</th><th>Suele jugar</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -86,7 +91,7 @@
     </section>
 
     <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="guia.html">Guía</a><a href="support.html">Soporte</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260810-nicks"></script>
-  <script src="scripts/metricas.js?v=20260810-nicks"></script>
+  <script src="scripts/site.js?v=20260810-paises"></script>
+  <script src="scripts/metricas.js?v=20260810-paises"></script>
 </body>
 </html>
