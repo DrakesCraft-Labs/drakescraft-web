@@ -829,9 +829,14 @@ async function fetchMcStatus() {
   const now = Date.now();
   if (mcStatusCache && now - mcStatusCacheAt < MC_CACHE_TTL) return mcStatusCache;
 
+  // El puerto va explicito en las dos consultas. Sin el, mcsrvstat asume 19132 para Bedrock
+  // --el estandar-- y aqui Geyser escucha en el mismo 25565 que Java, asi que la tarjeta decia
+  // "Bedrock offline" con el servidor perfectamente vivo. Se usan MC_HOST y MC_PUERTO para que
+  // no haya un puerto escrito a mano que se olvide de actualizar.
+  const destino = `${MC_HOST}:${MC_PUERTO}`;
   const [javaRes, bedrockRes] = await Promise.allSettled([
-    fetch('https://api.mcsrvstat.us/3/mc.drakescraft.cl'),
-    fetch('https://api.mcsrvstat.us/bedrock/3/mc.drakescraft.cl')
+    fetch(`https://api.mcsrvstat.us/3/${destino}`),
+    fetch(`https://api.mcsrvstat.us/bedrock/3/${destino}`)
   ]);
 
   const parseRes = async (r) => {
