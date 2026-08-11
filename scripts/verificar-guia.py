@@ -64,6 +64,39 @@ try:
 except ImportError:
     ok.append("Kits: omitido (falta PyYAML)")
 
+# 5 · Comandos y contratos públicos: no publicar permisos administrativos ni omitir
+# los puntos de entrada de los sistemas que están activos en producción.
+guia = (WEB / "guia.html").read_text()
+revisar("/sf timings" not in guia, "Comandos: /sf timings permanece reservado a staff")
+for comando in ("/arcana guide", "/arcana spirit", "/dioses", "/bosswarp precios",
+                "/bosswarp &lt;jefe&gt; solo", "/bosswarp spectate"):
+    revisar(comando in guia, f"Comandos: documentado {comando}")
+
+# 6 · La tabla debe mostrar límites efectivos después de herencia, no sólo los nodos
+# declarados directamente en cada grupo de LuckPerms.
+for fila in (
+        '<tr><th scope="row" data-rank="polis">Polis</th><td>1</td><td>2</td>',
+        '<tr><th scope="row" data-rank="oldschool">OldSchool</th><td>1</td><td>2</td>',
+        '<tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>3</td><td>81×81</td><td>4</td><td>5</td>',
+        '<tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>5</td><td>177×177</td><td>6</td><td>8</td>'):
+    revisar(fila in rangos, f"Rangos: límite efectivo publicado para {fila.split('>')[2].split('<')[0]}")
+
+revisar("12 reclamaciones" in rangos and "InfinityExpansion" in rangos,
+        "SFMaster: límites y familias bloqueadas documentados")
+
+# 7 · Los precios visibles deben cubrir y coincidir con el catálogo de BossArena.
+try:
+    boss_cfg = yaml.safe_load((W / "DrakesBosses/src/main/resources/config.yml").read_text())
+    reales = {k: int(v) for k, v in boss_cfg["boss-arena"]["entry-fees"].items()
+              if k not in {"default", "free-permission"}}
+    publicados = {boss: int(fee) for boss, fee in
+                  re.findall(r'data-boss="([a-z_]+)" data-fee="(\d+)"', guia)}
+    revisar(publicados == reales,
+            f"BossArena: {len(publicados)} precios publicados; diferencias: "
+            f"{sorted(set(publicados.items()) ^ set(reales.items()))}")
+except NameError:
+    ok.append("BossArena: omitido (falta PyYAML)")
+
 print("=== Verificacion guia web contra codigo ===")
 for m in ok:
     print("  OK  ", m)

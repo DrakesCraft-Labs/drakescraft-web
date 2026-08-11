@@ -226,6 +226,27 @@
 
 .rank-subhead { margin: 2rem 0 1rem; font-size: 1.15rem; }
 
+.boss-price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: .55rem;
+  margin-bottom: 1.5rem;
+}
+
+.boss-price-grid span {
+  display: flex;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .75rem .85rem;
+  background: rgba(255, 255, 255, .035);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-left: 2px solid var(--dk-oro);
+  border-radius: .55rem;
+}
+
+.boss-price-grid strong { font-size: .9rem; }
+.boss-price-grid b { color: var(--dk-oro); font: 500 .82rem 'DM Mono', ui-monospace, monospace; white-space: nowrap; }
+
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -260,6 +281,7 @@
   }
 
   .rank-scroll { margin-right: -1rem; padding-right: 1rem; }
+  .boss-price-grid { grid-template-columns: 1fr; }
 }
 
 /* Alineacion con la tienda: la guia usaba sans-serif y acento violeta, la tienda serif

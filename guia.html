@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260811-networks">
-  <link rel="stylesheet" href="styles/guia.css?v=20260811-networks">
+  <link rel="stylesheet" href="styles/base.css?v=20260811-liveguide">
+  <link rel="stylesheet" href="styles/guia.css?v=20260811-liveguide">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -146,7 +146,6 @@
           <div class="guide-row"><code>/sf guide</code><p>Te entrega la guía de Slimefun si la perdiste.</p></div>
           <div class="guide-row"><code>/sf search &lt;texto&gt;</code><p>Busca una receta o un objeto por nombre.</p></div>
           <div class="guide-row"><code>/sf stats</code><p>Tu progreso de investigación.</p></div>
-          <div class="guide-row"><code>/sf timings</code><p>Rendimiento de las máquinas de tu zona. Útil si algo va lento.</p></div>
           <div class="guide-row"><code>/skills</code><p>Tus habilidades de AuraSkills: minería, lucha, agricultura y más.</p></div>
         </div>
       </section>
@@ -172,9 +171,15 @@
         <h2>Sistemas propios de DrakesCraft</h2>
         <p class="guide-section__note">Magia, dioses y jefes están programados para este servidor. No existen en ningún otro.</p>
         <div class="guide-table">
-          <div class="guide-row"><code>/arcana</code><p>Abre el <strong>Códice de Arcana</strong>: tu magia elemental, las habilidades que has despertado y tu progreso.<span class="guide-row__alias">También: /arc, /magia</span></p></div>
-          <div class="guide-row"><code>/dioses</code><p>Abre el <strong>Panteón</strong>. Ahí eliges a qué dios seguir y ves tu favor divino.<span class="guide-row__alias">También: /dios, /panteon</span></p></div>
-          <div class="guide-row"><code>/bosswarp</code><p>Te lleva a una <strong>arena aislada</strong> para pelear contra un jefe. Se paga entrada.</p></div>
+          <div class="guide-row"><code>/arcana</code><p>Abre el <strong>Códice de Arcana</strong>: afinidad elemental, espiritualidad, habilidades, costos y enfriamientos.<span class="guide-row__alias">También: /arc, /magia</span></p></div>
+          <div class="guide-row"><code>/arcana guide</code><p>Guía de uso de tu Catalizador Arcano y de las seis afinidades disponibles.</p></div>
+          <div class="guide-row"><code>/arcana spirit</code><p>Muestra tu espiritualidad, esencia y progreso actual.<span class="guide-row__alias">Recuperar objetos: /arcana book y /arcana catalyst</span></p></div>
+          <div class="guide-row"><code>/arcana meditate</code><p>Inicia la meditación cuando cumples sus condiciones; no dispara poderes ofensivos.</p></div>
+          <div class="guide-row"><code>/dioses</code><p>Abre el <strong>Códice Divino</strong>. Ahí eliges panteón y deidad, equipas habilidades y ves favor, mantenimiento y enfriamientos.<span class="guide-row__alias">También: /dios, /panteon</span></p></div>
+          <div class="guide-row"><code>/bosswarp precios</code><p>Muestra todos los jefes y la entrada por jugador antes de crear una arena.</p></div>
+          <div class="guide-row"><code>/bosswarp &lt;jefe&gt; solo</code><p>Reserva una arena aislada y entra en solitario. El cobro sólo se confirma si la arena pudo prepararse.</p></div>
+          <div class="guide-row"><code>/bosswarp &lt;jefe&gt; grupo &lt;jugadores...&gt;</code><p>Crea una sesión privada con jugadores conectados; cada integrante paga su entrada.</p></div>
+          <div class="guide-row"><code>/bosswarp spectate &lt;jugador&gt;</code><p>Observa la arena activa de otro jugador sin entrar al combate.</p></div>
           <div class="guide-row"><code>/tienda</code><p>Hub de comercio con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades, encantamientos y kits VIP.</p></div>
           <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Survival, SkyBlock y OneBlock.</p></div>
           <div class="guide-row"><code>/cosmeticos</code><p>Menú de auras, rastros y efectos de muerte que vienen con tu rango.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
@@ -271,34 +276,66 @@
       <div class="guide-modes">
         <article class="guide-mode" style="--mode-accent:var(--dk-verde);">
           <h3>Arcana · magia elemental</h3>
-          <p>Un sistema de magia con progresión propia, dominios visuales y habilidades que se despiertan jugando.</p>
+          <p>Magia con progresión propia, dominios visuales y seis afinidades: fuego, tierra, aire, agua, hielo y electro.</p>
           <ul>
             <li>Abres el códice con <code>/arcana</code></li>
-            <li>Ahí ves qué has despertado y qué falta</li>
-            <li>Las habilidades se activan en el juego, no con comandos</li>
-            <li>Avanza con el survival: no se compra</li>
+            <li>La afinidad se asigna al entrar por primera vez</li>
+            <li>El Catalizador activa poderes; los comandos sólo informan</li>
+            <li>Los ataques son PvE, respetan claims y no dañan jugadores</li>
           </ul>
         </article>
         <article class="guide-mode" style="--mode-accent:#ffd479;">
           <h3>Dioses · el panteón</h3>
-          <p>Eliges a qué dios seguir y acumulas <strong>favor divino</strong>. Cada uno da beneficios distintos.</p>
+          <p>Eliges panteón y deidad, acumulas <strong>favor divino</strong> y equipas una selección de habilidades.</p>
           <ul>
             <li>Abres el panteón con <code>/dioses</code></li>
-            <li>El favor sube jugando y con eventos</li>
+            <li>El mantenimiento es semanal y escala con tu progreso</li>
+            <li>Renunciar borra el progreso ligado y aplica 48 horas de espera</li>
+            <li>En Survival los poderes PvP están desactivados</li>
             <li>Los rangos Titán multiplican tu favor <strong>×5</strong></li>
-            <li>Se conecta con el sistema de jefes</li>
           </ul>
         </article>
         <article class="guide-mode" style="--mode-accent:#ff6b6b;">
           <h3>Jefes · arenas aisladas</h3>
-          <p>Peleas contra jefes en arenas propias, para que nadie interfiera y nada se rompa fuera.</p>
+          <p>Peleas contra jefes en <code>drakes_bosses</code>, con sesiones separadas para que nadie interfiera.</p>
           <ul>
-            <li>Entras con <code>/bosswarp</code>, pagando la entrada</li>
+            <li>Consulta primero con <code>/bosswarp precios</code></li>
+            <li>En grupo, cada integrante paga su entrada</li>
+            <li>Si crear o invocar falla, el cobro se revierte una sola vez</li>
+            <li>Los jefes no aparecen libres de forma natural</li>
             <li>Cada jefe tiene patrones y fases propias</li>
-            <li>Botín exclusivo que no sale de ninguna otra forma</li>
-            <li>Avisos antes de cada ataque fuerte</li>
           </ul>
         </article>
+      </div>
+
+      <h3 class="rank-subhead">Entradas de BossArena</h3>
+      <p class="guide-section__note">Precios por jugador. En grupo, cada integrante paga el mismo valor. El comando <code>/bosswarp precios</code> siempre muestra el valor vigente dentro del juego.</p>
+      <div class="boss-price-grid" aria-label="Precio de entrada de todos los jefes">
+        <span data-boss="zeus" data-fee="1250000"><strong>Zeus</strong><b>1.250.000 ₯</b></span>
+        <span data-boss="hades" data-fee="1875000"><strong>Hades</strong><b>1.875.000 ₯</b></span>
+        <span data-boss="circe" data-fee="2500000"><strong>Circe</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="polifemo" data-fee="2500000"><strong>Polifemo</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="dios_corrupto" data-fee="2500000"><strong>Dios Corrupto</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="thor" data-fee="2500000"><strong>Thor</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="ares" data-fee="2500000"><strong>Ares</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="poseidon" data-fee="2500000"><strong>Poseidón</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="loki" data-fee="2500000"><strong>Loki</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="jax" data-fee="2500000"><strong>Jax / Ajax</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="heimdall" data-fee="3750000"><strong>Heimdall</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="hidra" data-fee="3750000"><strong>Hidra</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="cerbero" data-fee="3750000"><strong>Cerbero</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="artemisa" data-fee="3750000"><strong>Artemisa</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="prometeo" data-fee="3750000"><strong>Prometeo</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="coloso_end" data-fee="3750000"><strong>Coloso del End</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="ra" data-fee="3750000"><strong>Ra</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="isis" data-fee="3750000"><strong>Isis</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="anubis" data-fee="3750000"><strong>Anubis</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="set" data-fee="3750000"><strong>Set</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="odin" data-fee="5000000"><strong>Odín</strong><b>5.000.000 ₯</b></span>
+        <span data-boss="kratos" data-fee="5000000"><strong>Kratos</strong><b>5.000.000 ₯</b></span>
+        <span data-boss="tifon" data-fee="7500000"><strong>Tifón</strong><b>7.500.000 ₯</b></span>
+        <span data-boss="dragon" data-fee="12500000"><strong>Dragón Ancestral</strong><b>12.500.000 ₯</b></span>
+        <span data-boss="wither_storm" data-fee="25000000"><strong>Wither Storm</strong><b>25.000.000 ₯</b></span>
       </div>
 
       <h3 class="rank-subhead">Los menús del servidor</h3>
@@ -399,7 +436,7 @@
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260811-networks"></script>
-  <script src="scripts/guia.js?v=20260811-networks"></script>
+  <script src="scripts/site.js?v=20260811-liveguide"></script>
+  <script src="scripts/guia.js?v=20260811-liveguide"></script>
 </body>
 </html>
