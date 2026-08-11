@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260810-paises">
-  <link rel="stylesheet" href="styles/guia.css?v=20260810-paises">
+  <link rel="stylesheet" href="styles/base.css?v=20260811-networks">
+  <link rel="stylesheet" href="styles/guia.css?v=20260811-networks">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -320,6 +320,67 @@
     </section>
 
     
+<section class="container guide-section" id="networks">
+      <h2>Networks: almacenamiento y transporte</h2>
+      <p style="margin:0 0 1rem;opacity:.85;">Networks convierte un montón de cofres en un sistema
+      único: guardas todo en la red y lo consultas desde una sola pantalla, con las máquinas
+      sirviéndose solas. Es lo más parecido a Applied Energistics que hay en Slimefun.</p>
+      <p style="margin:0 0 1rem;opacity:.85;">Se empieza siempre igual: un <code>Network
+      Controller</code>, un <code>Network Grid</code> pegado a él y un <code>Quantum Storage</code>
+      para guardar. A partir de ahí se amplía con puentes y nodos.</p>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;opacity:.9;">El núcleo de la red</h3>
+        <div class="guide-rows">
+        <div class="guide-row"><code>Network Controller</code><p>El cerebro. Toda red necesita uno y solo uno: define el alcance y alimenta al resto. Si lo rompes, la red entera deja de responder.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Network Bridge</code><p>Extiende el alcance de la red sin gastar energía extra. Es la forma barata de llegar lejos.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Network Monitor</code><p>Muestra el estado de la red. Lo primero que hay que mirar cuando algo no fluye.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Network Capacitor I–IV</code><p>Almacenan energía para la red. Cada nivel aguanta más.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Power Outlet I–II</code><p>Sacan energía de la red hacia máquinas normales de Slimefun.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Power Display</code><p>Marcador de energía disponible.<span class="guide-row__alias">Networks</span></p></div>
+        </div>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;opacity:.9;">Guardar cosas</h3>
+        <div class="guide-rows">
+        <div class="guide-row"><code>Quantum Storage I–VIII</code><p>Almacenamiento profundo de <em>un solo tipo</em> de objeto. Del nivel I al VIII la capacidad crece hasta lo absurdo. Es la pieza que sustituye a tener treinta cofres con lo mismo.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Network Cell</code><p>Almacenamiento general, para variedad en vez de cantidad.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Quantum Workbench</code><p>Mesa para fabricar y mejorar las unidades cuánticas.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Greedy Block</code><p>Acapara un tipo de objeto concreto: lo que entre en la red de ese tipo, acaba aquí.<span class="guide-row__alias">Networks</span></p></div>
+        </div>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;opacity:.9;">Ver y sacar</h3>
+        <div class="guide-rows">
+        <div class="guide-row"><code>Network Grid</code><p>La interfaz: ves todo el contenido de la red y sacas lo que quieras desde una sola pantalla.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Crafting Grid</code><p>Como la anterior, pero fabricando directamente con lo que hay en la red.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Auto Crafter</code><p>Fabrica solo, en bucle. La variante <em>Withholding</em> guarda el resultado en vez de soltarlo.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Crafting Blueprint</code><p>Guarda una receta para que el autocrafteador la repita.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Recipe Encoder</code><p>Codifica recetas en planos.<span class="guide-row__alias">Networks</span></p></div>
+        </div>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;opacity:.9;">Mover objetos</h3>
+        <div class="guide-rows">
+        <div class="guide-row"><code>Grabber / Pusher</code><p>Sacan de un contenedor hacia la red, o empujan de la red al contenedor. Son el par básico de todo montaje.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Vanilla Grabber / Vanilla Pusher</code><p>Lo mismo pero con cofres y contenedores normales, sin necesidad de que sean bloques de Slimefun.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Import / Export</code><p>Entrada y salida de la red.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Vacuum</code><p>Recoge del suelo los objetos que caen cerca.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Trash</code><p>Destruye lo que sobra. Con filtro, para no tirar de más.<span class="guide-row__alias">Networks</span></p></div>
+        </div>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;opacity:.9;">Sin cables</h3>
+        <div class="guide-rows">
+        <div class="guide-row"><code>Wireless Transmitter / Receiver</code><p>Enlazan dos secciones de red sin puentes físicos por el medio.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Interdimensional Presence</code><p>Conecta la red entre dimensiones.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Remote / Empowered / Pristine / Ultimate</code><p>Mandos para acceder a la red a distancia. Cada nivel llega más lejos.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Wireless Configurator</code><p>Configura nodos sin ir uno por uno.<span class="guide-row__alias">Networks</span></p></div>
+        </div>
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;opacity:.9;">Herramientas y materiales</h3>
+        <div class="guide-rows">
+        <div class="guide-row"><code>Configurator</code><p>Ajusta un nodo: dirección, filtros y modo.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Crayon</code><p>Colorea nodos para no perderte en un montaje grande.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Probe / Debug Stick</code><p>Diagnóstico. Si la red no hace lo que esperas, empieza por aquí.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>AI Core / Empowered / Pristine</code><p>Materiales de progresión para lo avanzado.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Nanobots / Advanced Nanobots</code><p>Componentes de fabricación.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Optic Cable / Glass / Star</code><p>Materiales ópticos. El <em>Radioactive Optic Star</em> es el escalón de arriba.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Rake I–III</code><p>Herramientas de recolección.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Synthetic Emerald Shard</code><p>Material sintético.<span class="guide-row__alias">Networks</span></p></div>
+        <div class="guide-row"><code>Shrinking Base</code><p>Base de compresión.<span class="guide-row__alias">Networks</span></p></div>
+        </div>
+    </section>
+
 <section class="container guide-section" id="crystamae">
       <h2>Hechizos de Crystamae Historia</h2>
       <p style="margin:0 0 1rem;opacity:.85;">Los 69 hechizos que existen en el servidor. Se obtienen contando historias a los bloques y combinando los cristales resultantes en la mesa de realizacion: la combinacion de cristales define que hechizo sale.</p>
@@ -397,7 +458,7 @@
     </section>
 
     <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div></div></footer>
-  <script src="scripts/site.js?v=20260810-paises"></script>
-  <script src="scripts/guia.js?v=20260810-paises"></script>
+  <script src="scripts/site.js?v=20260811-networks"></script>
+  <script src="scripts/guia.js?v=20260811-networks"></script>
 </body>
 </html>
