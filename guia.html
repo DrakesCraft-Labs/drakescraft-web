@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Guía completa de DrakesCraft: todos los comandos del servidor y cómo funcionan las tres modalidades, Survival, SkyBlock y OneBlock.">
+  <meta name="description" content="Guía completa de DrakesCraft: todos los comandos del servidor y cómo funcionan las cuatro modalidades: Slimefun, Clásico, SkyBlock y OneBlock.">
   <title>Guia · DrakesCraft</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +68,7 @@
 
       <section class="guide-section" data-cat="basico">
         <h2>Básicos</h2>
-        <p class="guide-section__note">Lo primero que vas a necesitar. Funciona en las tres modalidades.</p>
+        <p class="guide-section__note">Lo primero que vas a necesitar. Funciona en las cuatro modalidades.</p>
         <div class="guide-table">
           <div class="guide-row"><code>/spawn</code><p>Te lleva al punto de inicio del servidor.</p></div>
           <div class="guide-row"><code>/sethome &lt;nombre&gt;</code><p>Guarda tu ubicación actual como hogar. La cantidad de hogares sube con tu rango.</p></div>
@@ -92,10 +92,11 @@
 
       <section class="guide-section" data-cat="modalidades">
         <h2>Modalidades</h2>
-        <p class="guide-section__note">Survival, SkyBlock y OneBlock conviven en el mismo servidor. Tu rango, tus kits y tu dinero te siguen entre las tres.</p>
+        <p class="guide-section__note">Slimefun, Clásico, SkyBlock y OneBlock conviven en el mismo servidor. Tu rango, tus jobs, tus skills y tu dinero te siguen entre las cuatro; el inventario no.</p>
         <div class="guide-table">
-          <div class="guide-row"><code>/modalidades</code><p>Menú para saltar entre las tres modalidades.<span class="guide-row__alias">También: /modalidad, /modos, /hub</span></p></div>
-          <div class="guide-row"><code>/survival</code><p>Vuelve a la modalidad principal.<span class="guide-row__alias">También: /principal, /polis</span></p></div>
+          <div class="guide-row"><code>/modalidades</code><p>Menú para saltar entre las cuatro modalidades.<span class="guide-row__alias">También: /modalidad, /modos, /hub</span></p></div>
+          <div class="guide-row"><code>/slimefun</code><p>La modalidad principal: máquinas, magia, jefes y progresión completa. <strong>Antes se llamaba Survival</strong> y el comando de siempre sigue valiendo.<span class="guide-row__alias">También: /survival, /principal, /polis</span></p></div>
+          <div class="guide-row"><code>/clasico</code><p>Minecraft del de siempre: <strong>sin Slimefun, sin máquinas y sin mobs personalizados</strong>. Terreno generado con Terralith, así que hay biomas que no existen en el juego normal. Mundo con borde de 200.000 bloques.<span class="guide-row__alias">Muévete con /rtp</span></p></div>
           <div class="guide-row"><code>/is</code><p>Tu isla de <strong>SkyBlock</strong>. Sin isla, te crea una.<span class="guide-row__alias">También: /skyblock. Ojo: no es lo mismo que /ob</span></p></div>
           <div class="guide-row"><code>/ob</code><p>Tu isla de <strong>OneBlock</strong>, el bloque infinito por fases.<span class="guide-row__alias">También: /oneblock</span></p></div>
           <div class="guide-row"><code>/is level</code><p>Nivel de tu isla. Sube rompiendo y construyendo con bloques valiosos.<span class="guide-row__alias">En OneBlock: /ob level</span></p></div>
@@ -103,16 +104,16 @@
           <div class="guide-row"><code>/is settings</code><p>Permisos y ajustes de tu isla: quién entra, quién construye.</p></div>
           <div class="guide-row"><code>/is sethome</code><p>Fija dónde apareces al volver a tu isla.</p></div>
           <div class="guide-row"><code>/is reset</code><p><strong>Borra tu isla y empiezas de cero.</strong> Pide confirmación, pero no se puede deshacer.</p></div>
-          <div class="guide-row"><code>/pv</code><p>Tus bóvedas personales. <strong>Cada modalidad tiene las suyas</strong>: lo que guardes en tu isla no aparece en Survival.<span class="guide-row__alias">También: /vault</span></p></div>
+          <div class="guide-row"><code>/pv</code><p>Tus bóvedas personales. <strong>Cada modalidad tiene las suyas</strong>: lo que guardes en tu isla no aparece en Slimefun.<span class="guide-row__alias">También: /vault</span></p></div>
         </div>
       </section>
 
       <section class="guide-section" data-cat="proteccion">
         <h2>Protecciones</h2>
-        <p class="guide-section__note">En Survival tu terreno se protege con piedras de ProtectionStones. Dentro de las islas no hace falta: ahí protege el propio sistema de islas.</p>
+        <p class="guide-section__note">En Slimefun y en Clásico tu terreno se protege con piedras de ProtectionStones. Dentro de las islas no hace falta: ahí protege el propio sistema de islas.</p>
         <div class="guide-table">
-          <div class="guide-row"><code>/tiendaprot</code><p>Tienda de piedras de protección, se pagan con Dragmas.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
-          <div class="guide-row"><code>/ps get &lt;nombre&gt;</code><p>Compra una piedra concreta del catálogo.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/tiendaprot</code><p>Tienda de piedras de protección, se pagan con Dragmas.<span class="guide-tag guide-tag--survival">Solo Slimefun</span></p></div>
+          <div class="guide-row"><code>/ps get &lt;nombre&gt;</code><p>Compra una piedra concreta del catálogo.<span class="guide-tag guide-tag--survival">Solo Slimefun</span></p></div>
           <div class="guide-row"><code>/ps home</code><p>Te lleva al centro de tu protección.</p></div>
           <div class="guide-row"><code>/ps info</code><p>Datos de la protección donde estás parado.</p></div>
           <div class="guide-row"><code>/ps add &lt;jugador&gt;</code><p>Da permiso de construir en tu terreno.<span class="guide-row__alias">Quitar: /ps remove &lt;jugador&gt;</span></p></div>
@@ -123,7 +124,7 @@
 
       <section class="guide-section" data-cat="economia">
         <h2>Economía y comercio</h2>
-        <p class="guide-section__note">La moneda son los <strong>Dragmas</strong> y es la misma en las tres modalidades: lo que ganes en Survival lo puedes gastar en tu isla.</p>
+        <p class="guide-section__note">La moneda son los <strong>Dragmas</strong> y es la misma en las cuatro modalidades: lo que ganes en Clásico lo puedes gastar en Slimefun o en tu isla.</p>
         <div class="guide-table">
           <div class="guide-row"><code>/tienda</code><p>Hub de comercio del servidor: categorías, protecciones y más.</p></div>
           <div class="guide-row"><code>/buy</code><p>Enlace a la tienda oficial de rangos y kits.<span class="guide-row__alias">También: /comprar, /store, /shop</span></p></div>
@@ -132,9 +133,9 @@
           <div class="guide-row"><code>/pay &lt;jugador&gt; &lt;monto&gt;</code><p>Transfiere Dragmas a otra persona.</p></div>
           <div class="guide-row"><code>/bank</code><p>Tu cuenta bancaria. <strong>El dinero del banco no sirve para comprar</strong>: sácalo antes con <code>/sb withdraw</code>.</p></div>
           <div class="guide-row"><code>/jobs</code><p>Empleos. Únete a uno y ganas dinero por minar, talar, cultivar o cazar.<span class="guide-row__alias">Unirse: /jobs join &lt;empleo&gt;</span></p></div>
-          <div class="guide-row"><code>/ah</code><p>Casa de subastas entre jugadores.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/ah</code><p>Casa de subastas entre jugadores.<span class="guide-tag guide-tag--survival">Solo Slimefun</span></p></div>
           <div class="guide-row"><code>/sellinv</code><p>Vende de una vez los materiales de tu inventario.</p></div>
-          <div class="guide-row"><code>/sfmercado</code><p>Mercado dinámico de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Solo Survival</span></p></div>
+          <div class="guide-row"><code>/sfmercado</code><p>Mercado dinámico de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Solo Slimefun</span></p></div>
           <div class="guide-row"><code>/pw</code><p>Warps de jugadores: visita las tiendas y bases que otros publicaron.<span class="guide-row__alias">También: /pwarp</span></p></div>
         </div>
       </section>
@@ -181,7 +182,7 @@
           <div class="guide-row"><code>/bosswarp &lt;jefe&gt; grupo &lt;jugadores...&gt;</code><p>Crea una sesión privada con jugadores conectados; cada integrante paga su entrada.</p></div>
           <div class="guide-row"><code>/bosswarp spectate &lt;jugador&gt;</code><p>Observa la arena activa de otro jugador sin entrar al combate.</p></div>
           <div class="guide-row"><code>/tienda</code><p>Hub de comercio con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades, encantamientos y kits VIP.</p></div>
-          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Survival, SkyBlock y OneBlock.</p></div>
+          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Slimefun, Clásico, SkyBlock y OneBlock.</p></div>
           <div class="guide-row"><code>/cosmeticos</code><p>Menú de auras, rastros y efectos de muerte que vienen con tu rango.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
         </div>
       </section>
@@ -207,17 +208,29 @@
     
 <section class="container guide-section" id="modalidades">
       <h2>Cómo funcionan las modalidades</h2>
-      <p class="guide-section__note">Las tres corren en el mismo servidor. No cambias de IP ni pierdes tu progreso: cambias de mundo con <code>/modalidades</code>.</p>
+      <p class="guide-section__note">Las cuatro corren en el mismo servidor. No cambias de IP ni pierdes tu progreso: cambias de mundo con <code>/modalidades</code>.</p>
 
       <div class="guide-modes">
         <article class="guide-mode" style="--mode-accent:#9ce6a4;">
-          <h3>Survival</h3>
-          <p>La modalidad principal y la más completa.</p>
+          <h3>Slimefun</h3>
+          <p>La modalidad principal y la más completa. Antes se llamaba Survival.</p>
           <ul>
             <li>Slimefun con todas sus expansiones</li>
             <li>Magia, jefes y eventos</li>
             <li>Protecciones con piedras</li>
             <li>Subastas, mercados y warps de jugadores</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#7fc98f;">
+          <h3>Clásico</h3>
+          <p>Minecraft del de siempre. Solo el juego, tú y el terreno.</p>
+          <ul>
+            <li><strong>Sin Slimefun</strong>: ni máquinas, ni guía, ni investigaciones</li>
+            <li><strong>Solo mobs vanilla</strong>: sin jefes, sin niveles, sin infernales</li>
+            <li>Terreno con Terralith: biomas que no existen en el juego normal</li>
+            <li>Mundo con borde de 200.000 bloques, con su propio <code>/rtp</code></li>
+            <li>Protecciones con piedras, igual que en Slimefun</li>
+            <li>Entras con <code>/clasico</code></li>
           </ul>
         </article>
         <article class="guide-mode" style="--mode-accent:#8ad8ff;">
@@ -226,7 +239,7 @@
           <ul>
             <li>Tu isla crece según tu rango</li>
             <li>Nether y End propios</li>
-            <li>Slimefun funciona igual que en Survival</li>
+            <li>Slimefun funciona igual que en la modalidad Slimefun</li>
             <li>Entras con <code>/is</code></li>
           </ul>
         </article>
@@ -259,7 +272,7 @@
             <li><strong>Tu inventario</strong> y tu experiencia</li>
             <li><strong>Tu cofre de ender</strong></li>
             <li><strong>Tus bóvedas</strong> <code>/pv</code></li>
-            <li><strong>Las subastas y mercados</strong>, que son del Survival</li>
+            <li><strong>Las subastas y mercados</strong>, que son de Slimefun</li>
             <li><strong>Las protecciones</strong>: en las islas protege el sistema de islas</li>
           </ul>
         </div>
@@ -291,7 +304,7 @@
             <li>Abres el panteón con <code>/dioses</code></li>
             <li>El mantenimiento es semanal y escala con tu progreso</li>
             <li>Renunciar borra el progreso ligado y aplica 48 horas de espera</li>
-            <li>En Survival los poderes PvP están desactivados</li>
+            <li>En Slimefun los poderes PvP están desactivados</li>
             <li>Los rangos Titán multiplican tu favor <strong>×5</strong></li>
           </ul>
         </article>
@@ -342,7 +355,7 @@
       <p class="guide-section__note">Casi todo se hace desde menús con clic, no escribiendo comandos largos.</p>
       <div class="guide-table">
         <div class="guide-row"><code>/tienda</code><p>El hub de comercio. Nueve accesos: <strong>protecciones</strong>, <strong>subastas</strong>, <strong>Slimefun</strong>, <strong>warps</strong>, <strong>materiales</strong>, <strong>trabajos</strong>, <strong>habilidades</strong>, <strong>encantamientos</strong> y <strong>kits VIP</strong>.</p></div>
-        <div class="guide-row"><code>/modalidades</code><p>Menú visual de las tres modalidades. Te dice qué se conserva al cambiar antes de moverte.</p></div>
+        <div class="guide-row"><code>/modalidades</code><p>Menú visual de las cuatro modalidades. Te dice qué se conserva al cambiar antes de moverte.</p></div>
         <div class="guide-row"><code>/kit</code><p>Lista tus kits, cuáles puedes reclamar y cuánto falta para el siguiente.</p></div>
         <div class="guide-row"><code>/cosmeticos</code><p>Marca en verde lo que tienes y en gris lo que desbloquea cada rango.</p></div>
         <div class="guide-row"><code>/arcana</code> · <code>/dioses</code><p>Códice de magia y panteón divino, con tu progreso a la vista.</p></div>
@@ -353,7 +366,7 @@
     
 <section class="container guide-section" id="servidor">
       <h2>Qué es DrakesCraft</h2>
-      <p class="guide-section__note">Un servidor de Minecraft <strong>1.21.11</strong> con tres modalidades corriendo en una sola instancia, sin proxy ni servidores separados. Survival con tecnología, magia y jefes como base.</p>
+      <p class="guide-section__note">Un servidor de Minecraft <strong>1.21.11</strong> con cuatro modalidades corriendo en una sola instancia, sin proxy ni servidores separados. Slimefun, con tecnología, magia y jefes, es la base; Clásico es vanilla puro.</p>
 
       <div class="guide-modes">
         <article class="guide-mode" style="--mode-accent:#ffb03c;">
@@ -402,7 +415,7 @@
         <div class="guide-split__card">
           <h3>Economía</h3>
           <ul>
-            <li>Moneda: <strong>Dragmas</strong>, común a las tres modalidades</li>
+            <li>Moneda: <strong>Dragmas</strong>, común a las cuatro modalidades</li>
             <li>Tiendas de jugador con QuickShop y ChestShop</li>
             <li>Casa de subastas, <code>/ah</code></li>
             <li>Banco con intereses, <code>/bank</code></li>
