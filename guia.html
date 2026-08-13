@@ -149,7 +149,10 @@
           <div class="guide-row"><code>/sf stats</code><p>Tu progreso de investigación.</p></div>
           <div class="guide-row"><code>/skills</code><p>Tus habilidades de AuraSkills: minería, lucha, agricultura y más.</p></div>
         </div>
-      </section>
+
+        <h3>Acelerar cultivos y máquinas</h3>
+        <p class="guide-section__note">Las plantas de <strong>Cultivation</strong> tardan lo suyo en cada cruce, y ese tiempo no se toca desde la configuración. Lo que sí puedes hacer es meterlas en una <strong>Campana de Jardín</strong> (<em>Garden Cloche</em>), que es la máquina pensada justo para eso.</p>
+        <p class="guide-section__note">Para los cultivos normales está el <strong>Acelerador de Crecimiento</strong> de Slimefun. Si te sonaba que iba flojo, tenías razón: arrastraba un fallo por el que la mayoría de los aceleradores colocados <strong>no llegaban a activarse nunca</strong>. Ya está corregido, así que rinden como deberían.</p>
 
       <section class="guide-section" data-cat="social">
         <h2>Social y chat</h2>
@@ -189,12 +192,27 @@
 
       <section class="guide-section" data-cat="extra">
         <h2>El clima</h2>
-        <p class="guide-section__note">Las máquinas contaminan y eso mueve la temperatura del mundo. De vez en cuando pasan cosas: olas de calor, olas de frío, nevadas donde no suele nevar y tormentas.</p>
+        <p class="guide-section__note">Hay dos cosas distintas y conviene no mezclarlas: la <strong>temperatura de fondo</strong>, que sube poco a poco con la contaminación, y los <strong>fenómenos</strong>, que van y vienen.</p>
         <div class="guide-table">
           <div class="guide-row"><code>Termómetro</code><p>Mide la temperatura donde estás. <strong>Clic derecho</strong> para cambiar entre Celsius, Fahrenheit y Kelvin.</p></div>
           <div class="guide-row"><code>Medidor de Calidad del Aire</code><p>Muestra cuánta contaminación acumula el mundo.</p></div>
-          <div class="guide-row"><code>Compresor de Aire</code><p>Limpia contaminación y llena Bombonas de CO₂.</p></div>
+          <div class="guide-row"><code>Compresor de Aire</code><p>Lo único que limpia contaminación de verdad. También llena Bombonas de CO₂.</p></div>
           <div class="guide-row"><code>/gw silenciar</code><p>Deja de recibir los mensajes del clima. Se recuerda entre reinicios.</p></div>
+        </div>
+
+        <h3>¿Por qué la temperatura solo sube?</h3>
+        <p class="guide-section__note">Porque así funciona: la contaminación se <strong>acumula</strong> y casi nada la baja. Cada receta de carbón, uranio o lingotes ardientes suma; sólo la bajan el Compresor de Aire, que crezca un árbol y criar animales, y lo hacen en cantidades minúsculas.</p>
+        <p class="guide-section__note">Para que se vea la escala: el mundo de Slimefun lleva unas <strong>1.370 unidades</strong> acumuladas, que son unos <strong>+2,7 °C</strong> sobre lo normal. Limpiar eso plantando árboles serían más de <strong>270.000 árboles</strong>. No es un fallo: es que el planeta se calienta y volver atrás cuesta muchísimo más que ensuciarlo.</p>
+
+        <h3>¿Y las tormentas dónde están?</h3>
+        <p class="guide-section__note">Cada <strong>10 minutos</strong> se echa a suertes si empieza un fenómeno, con un <strong>35 %</strong> de probabilidad, y dura entre <strong>4 y 10 minutos</strong>. O sea que de media pasa algo cada media hora larga, no todo el rato.</p>
+        <p class="guide-section__note">Cuando empieza uno se <strong>avisa por el chat</strong>, así que si silenciaste los mensajes con <code>/gw silenciar</code> te enterarás sólo por el termómetro y por el cielo. Los fenómenos <strong>sólo ocurren en mundos normales con gente dentro</strong>: en el Nether y el End no hay.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>Ola de calor</code><p>+12 °C y cielo despejado.</p></div>
+          <div class="guide-row"><code>Ola de frío</code><p>−12 °C.</p></div>
+          <div class="guide-row"><code>Nevada</code><p>−8 °C y nieve sobre el suelo natural. No se posa sobre construcciones.</p></div>
+          <div class="guide-row"><code>Tormenta</code><p>−6 °C, lluvia y truenos.</p></div>
+          <div class="guide-row"><code>Bochorno</code><p>+6 °C, calor pegajoso.</p></div>
         </div>
         <p class="guide-section__note" style="margin-top:1rem;"><strong>El clima no te hace daño.</strong> No quema, no ralentiza, no mata, y no hay sed ni temperatura corporal. Solo cambia el mundo: es ambientación, no una barra que administrar.</p>
       </section>
