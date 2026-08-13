@@ -276,7 +276,7 @@ body[data-page="store"]::after,
   white-space: nowrap;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1360px) {
   .store-path__inner {
     grid-template-columns: minmax(260px, .8fr) minmax(320px, 1.2fr);
     gap: 1rem 1.4rem;
