@@ -55,7 +55,7 @@ body[data-page="store"]::after,
 .hero-label--one { top: 21%; right: 20%; }.hero-label--two { top: 55%; left: 7%; }.hero-label--three { right: 9%; bottom: 19%; }
 
 .store-path { position: relative; z-index: 2; border-bottom: 1px solid #c3d4c8; background: #eef7ea; color: #1b2c27; }
-.store-path__inner { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.store-path__inner { min-height: 112px; display: grid; grid-template-columns: minmax(270px, 300px) minmax(280px, 1fr) max-content minmax(250px, auto); align-items: center; gap: 1.5rem; }
 .store-path p { margin: 0; max-width: 38rem; font-size: .94rem; }.store-path p strong { color: #0b7444; }
 .store-path ol { display: flex; gap: 1.5rem; padding: 0; margin: 0; list-style: none; color: #405750; font-size: .82rem; font-weight: 700; }.store-path li { display: flex; align-items: center; gap: .45rem; }.store-path li span { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: #1b7148; color: #fff; font-size: .68rem; }
 
@@ -240,6 +240,52 @@ body[data-page="store"]::after,
   flex: none;
 }
 
+.store-path .server-card--strip {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: .8rem .9rem;
+  border-radius: 8px;
+}
+
+.store-path .server-card--strip .server-card__head {
+  min-width: 0;
+  margin-bottom: .55rem;
+}
+
+.store-path .server-card--strip .server-card__state {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.store-path .server-card--strip .server-card__ip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  gap: .7rem;
+  padding: .7rem .8rem;
+}
+
+.store-path .server-card__ip-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .store-path__inner {
+    grid-template-columns: minmax(260px, .8fr) minmax(320px, 1.2fr);
+    gap: 1rem 1.4rem;
+    padding: 1.1rem 0;
+  }
+  .store-path__support { justify-self: start; }
+  .store-path ol { justify-self: end; }
+}
+
 .server-card__meta {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -265,4 +311,18 @@ body[data-page="store"]::after,
   .server-card { padding: 15px 16px; }
   .server-card__ip { font-size: .95rem; }
   .server-card__meta { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .store-path__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .85rem;
+  }
+  .store-path ol {
+    width: 100%;
+    justify-self: stretch;
+    justify-content: space-between;
+    gap: .5rem;
+  }
 }
