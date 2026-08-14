@@ -765,8 +765,13 @@ for (const alias of ['/metricas', '/stats', '/estadisticas']) {
 
 // Rutas limpias de la guia. Se anuncian in-game como /guia y /comandos, asi que ambas tienen
 // que resolver sin que el jugador escriba la extension.
-for (const alias of ['/guia', '/comandos', '/commands']) {
+for (const alias of ['/guia']) {
   app.get(alias, async (_request, reply) => reply.sendFile('guia.html'));
+}
+// /comandos se anuncia in-game y ahora tiene pagina propia: la de guia.html se quedo
+// corta en cuanto entraron los addons porteados.
+for (const alias of ['/comandos', '/commands', '/cmds']) {
+  app.get(alias, async (_request, reply) => reply.sendFile('guia-comandos.html'));
 }
 for (const [alias, file] of [
   ['/rangos', 'guia-rangos.html'], ['/ranks', 'guia-rangos.html'],
@@ -802,6 +807,7 @@ await app.register(fastifyStatic, {
     const publicFiles = new Set([
       'store.html',
       'guia.html',
+      'guia-comandos.html',
       'guia-rangos.html',
       'guia-slimefun.html',
       'metricas.html',

@@ -21,7 +21,8 @@
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
-        <li><a href="guia.html">Comandos</a></li>
+        <li><a href="guia-comandos.html">Comandos</a></li>
+        <li><a href="guia.html">El servidor</a></li>
         <li><a href="guia-rangos.html">Rangos</a></li>
         <li><a class="active" href="#pociones">Slimefun</a></li>
         <li><a href="metricas.html">Métricas</a></li><li><a href="store.html">Tienda</a></li>
@@ -36,12 +37,13 @@
       <div class="container guide-hero__grid">
         <p class="eyebrow">Máquinas, materiales y addons</p>
         <h1>Guía de <em>Slimefun</em></h1>
-        <p class="guide-hero__lead">Configuraciones reales del servidor, recetas especiales y soluciones para las máquinas que no funcionan como esperabas.</p>
+        <p class="guide-hero__lead">Más de sesenta addons, muchos rescatados de versiones que llevaban años muertas. Configuraciones reales del servidor, recetas especiales y soluciones para las máquinas que no funcionan como esperabas.</p>
       </div>
     </header>
 
           <nav class="guide-tabs" aria-label="Secciones de la guia">
-        <a href="guia.html">Comandos y servidor</a>
+        <a href="guia-comandos.html">Comandos</a>
+        <a href="guia.html">El servidor</a>
         <a href="guia-rangos.html">Rangos</a>
         <a href="guia-slimefun.html" class="is-active">Slimefun</a>
       </nav>
@@ -493,6 +495,109 @@
         <div class="guide-row"><code>Cómo encontrar un objeto</code><p>Abre <code>/sf guide</code> y usa el buscador. El nombre o el lore indican a qué categoría pertenece.</p></div>
         <div class="guide-row"><code>Receta no visible</code><p>Comprueba que hayas desbloqueado la investigación y que estés dentro de una modalidad con Slimefun.</p></div>
         <div class="guide-row"><code>Objeto sin textura</code><p>Acepta el pack oficial para 1.21.11. Si persiste, vuelve a conectarte antes de fabricar otra unidad.</p></div>
+      </div>
+    </section>
+
+    <section class="container guide-section" id="catalogo">
+      <h2>El catálogo de addons, por temas</h2>
+      <p class="guide-section__note">DrakesCraft lleva más de sesenta addons de Slimefun, y buena parte son proyectos que llevaban años sin funcionar en versiones modernas: los hemos portado uno a uno a 1.21.11. Esta es la vista de conjunto. Cada uno mete su propia categoría en <code>/sf guide</code>, así que lo más rápido para explorar es abrir la guía y bajar.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>Energía y máquinas</code><p>InfinityExpansion, LiteXpansion, DynaTech, FastMachines, FluffyMachines, FoxyMachines, GlobiaMachines, EcoPower, SimpleMaterialGenerators, AdvancedTech, Supreme. Es la columna vertebral: generar corriente, transformarla y automatizar producción.</p></div>
+        <div class="guide-row"><code>Almacenamiento y logística</code><p>Networks, ChestTerminal, DankTech2, BetterChests, SoulJars, PrivateStorage, DyedBackpacks, ColoredEnderChests, SensibleToolbox. Desde una mochila hasta una red con terminal.</p></div>
+        <div class="guide-row"><code>Recursos y agricultura</code><p>ExoticGarden, Cultivation, SlimyBees, SlimyTreeTaps, FlowerPower, GeneticChickengineering, SlimefunOreChunks, Netheopoiesis. Todo lo que se planta, se cría o se extrae.</p></div>
+        <div class="guide-row"><code>Equipo y combate</code><p>SlimeTinker, ExtraGear, ExtraTools, Obsidian-Armor, ObsidianExpansion, SlimefunWarfare, Bump, FNAmplifications. Armas, armaduras y cómo mejorarlas.</p></div>
+        <div class="guide-row"><code>Magia y rareza</code><p>TranscEndence, MagicXpansion, ElementManipulation, AlchimiaVitae, RelicsOfCthonia, DemonicExpansion, InfernalExpansion, PotionExpansion, Drugfun.</p></div>
+        <div class="guide-row"><code>Exploración</code><p>Galaxyfun para el espacio, Nexcavate para la arqueología, SFPortalGun para atajos, Hurricane y GlobalWarming para el clima.</p></div>
+        <div class="guide-row"><code>Calidad de vida</code><p>SFCalc, SlimeHUD, SlimefunAdvancements, SlimeFrame, MoreResearches, NotEnoughAddons, RandomExpansion, HeadLimiter, SimpleUtils, MobCapturer, HotbarPets, DyeBench, SlimefunLuckyBlocks.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="empezar-addons">
+      <h2>Por dónde empezar si te abruma</h2>
+      <p class="guide-section__note">Es mucho contenido de golpe. Este es el camino que funciona, en orden.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>1 · La guía es tu libro</code><p><code>/sf guide</code> lo enseña todo, pero solo puedes fabricar lo que hayas investigado. Investigar cuesta experiencia: si un objeto sale con candado, es eso.</p></div>
+        <div class="guide-row"><code>2 · Antes de la corriente</code><p>Empieza por el Multi Tool y la Enhanced Crafting Table. Casi todas las recetas del servidor pasan por esa mesa, no por la de vanilla.</p></div>
+        <div class="guide-row"><code>3 · Tu primera energía</code><p>Un generador de carbón y unos capacitores. La corriente se mide en J/t y no viaja por redstone: hace falta cable.</p></div>
+        <div class="guide-row"><code>4 · Automatiza</code><p>Cuando tengas corriente estable, Networks te ahorra el resto de la partida: un solo cofre lógico en vez de cincuenta.</p></div>
+        <div class="guide-row"><code>5 · Usa la calculadora</code><p><code>/sfcalc</code> te dice todo lo que hace falta para algo, con los pasos intermedios. Te ahorra montar cadenas de producción a ciegas.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="galaxyfun">
+      <h2>Galaxyfun: salir del planeta</h2>
+      <p class="guide-section__note">El addon espacial. Construyes un cohete, lo abasteces y despegas hacia otros cuerpos celestes, cada uno con sus recursos y su atmósfera.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>Antes de despegar</code><p>Necesitas traje presurizado completo y oxígeno. Sin eso, el aterrizaje es corto.</p></div>
+        <div class="guide-row"><code>El cohete</code><p>Se monta como multiestructura y consume combustible por viaje. Revisa la receta completa en <code>/sf guide</code>, que es larga.</p></div>
+        <div class="guide-row"><code>Qué hay arriba</code><p>Cada destino tiene generación propia y materiales que no existen en la superficie. Es contenido de fin de progresión, no de la primera tarde.</p></div>
+        <div class="guide-row"><code>Aviso</code><p>El espacio no es una modalidad aparte: sigues en la modalidad Slimefun y tu inventario es el mismo.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="nexcavate">
+      <h2>Nexcavate: arqueología</h2>
+      <p class="guide-section__note">Excavas, encuentras piezas rotas y las montas para reconstruir objetos antiguos. Tiene su propio árbol de investigación, separado del de Slimefun.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>/nex</code><p>Abre el sistema de investigación de Nexcavate y te enseña qué has desbloqueado.</p></div>
+        <div class="guide-row"><code>Las piezas</code><p>Salen de excavar, no de fabricar. Reúne el juego completo antes de intentar montar nada.</p></div>
+        <div class="guide-row"><code>El montaje</code><p>Se hace en su propia estructura, no en la Enhanced Crafting Table. Si la receta no aparece, es que aún no tienes la investigación.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="warfare">
+      <h2>SlimefunWarfare: armamento</h2>
+      <p class="guide-section__note">Armas de fuego, munición y explosivos con energía de Slimefun. Pega fuerte, y por eso está donde está.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>Dónde funciona</code><p>Solo dentro de la modalidad Slimefun. En Clásico no existe, y dentro de una protección ajena no puedes usarlo contra el dueño.</p></div>
+        <div class="guide-row"><code>Munición</code><p>Cada arma pide su munición y se fabrica aparte. Un arma sin munición no es más que un adorno caro.</p></div>
+        <div class="guide-row"><code>Aviso</code><p>Que puedas dispararle a alguien no significa que debas. Las normas del servidor siguen aplicando.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="equivalencytech">
+      <h2>EquivalencyTech: convertir materia</h2>
+      <p class="guide-section__note">Le pone un valor numérico a cada objeto y te deja transformar unos en otros pagando ese valor. Es el addon más potente del servidor y el que más fácil rompe una economía, así que está vigilado.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>Crafteos arreglados</code><p>Hasta el 14 de agosto sus recetas no funcionaban: estaban declaradas para la mesa normal pero el plugin nunca las llegaba a registrar. Ahora se fabrican en la <strong>Enhanced Crafting Table</strong>.</p></div>
+        <div class="guide-row"><code>Por qué en esa mesa</code><p>Sus recetas usan el objeto anterior de la cadena como ingrediente, y la mesa de vanilla solo mira el material. En la mesa normal podrías meter carbón corriente y saltarte la progresión entera.</p></div>
+        <div class="guide-row"><code>El cálculo</code><p>Al arrancar el servidor calcula el valor de unos quinientos objetos. Eso ocurre de fondo, con el servidor ya encendido, así que los primeros minutos puede que algún valor aún no esté listo.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="supreme">
+      <h2>Supreme: producción a gran escala</h2>
+      <p class="guide-section__note">Máquinas de gama alta, cores y fabricadores multibloque. Es a donde se llega cuando InfinityExpansion se te queda corto.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>Cores eléctricos</code><p>Se fabrican en el Fabricador de Cores Eléctricos metiendo material en la cuadrícula de 3×3. La máquina suma lo que haya en todas las casillas: no importa en cuál lo pongas.</p></div>
+        <div class="guide-row"><code>Precios rebalanceados</code><p>Cada casilla pedía una pila llena, así que el precio lo decidía el tamaño de pila de vanilla y no lo que cuesta el material: un core de netherita salía por 576 lingotes y uno de patata por 96 botellas de miel. Desde el 14 de agosto las nueve casillas piden lo mismo.</p></div>
+        <div class="guide-row"><code>Si dice que falta material</code><p>Te dice el nombre exacto y cuánto falta. Recuerda que cuenta el total repartido por toda la cuadrícula.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="almacenamiento">
+      <h2>Guardar cosas sin morir en el intento</h2>
+      <p class="guide-section__note">Cuatro addons resuelven el mismo problema a escalas distintas. Este es el orden en que conviene adoptarlos.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>DankTech2</code><p>Una sola ranura que guarda miles de un mismo material. Lo primero que deberías conseguir: te arregla la minería.</p></div>
+        <div class="guide-row"><code>SoulJars y DyedBackpacks</code><p>Mochilas. Van en el inventario y viajan contigo.</p></div>
+        <div class="guide-row"><code>BetterChests</code><p>Cofres con capacidades extra: ordenar solos, absorber lo que cae, compactar.</p></div>
+        <div class="guide-row"><code>Networks + ChestTerminal</code><p>El paso final. Una red con un terminal desde el que ves y sacas todo lo que tengas guardado en cualquier cofre conectado.</p></div>
+        <div class="guide-row"><code>PrivateStorage</code><p>Almacenamiento atado al bloque, no a tu inventario. No cruza entre modalidades porque lo que guarda se queda en el bloque, donde lo dejaste.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="qol">
+      <h2>Los que no hacen ruido pero se notan</h2>
+      <p class="guide-section__note">Addons pequeños que cambian el día a día más que muchas máquinas.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>SFCalc</code><p><code>/sfcalc</code>. Le pides un objeto y te desglosa todo lo que hace falta, incluidos los pasos intermedios.</p></div>
+        <div class="guide-row"><code>SlimeHUD</code><p>Te enseña en pantalla el estado de la máquina que miras: energía, progreso y si está parada.</p></div>
+        <div class="guide-row"><code>SlimefunAdvancements</code><p><code>/sfa</code>. Logros propios de Slimefun, con un camino sugerido para no perderte.</p></div>
+        <div class="guide-row"><code>MoreResearches</code><p>Añade investigaciones a objetos que no las tenían, para que la progresión no tenga huecos.</p></div>
+        <div class="guide-row"><code>SFPortalGun</code><p>Atajos entre dos puntos. Estuvo llenando la consola de errores hasta el 13 de agosto; ya está arreglado.</p></div>
+        <div class="guide-row"><code>SlimeFrame</code><p>Marcos que enseñan objetos de Slimefun sin perder su identidad.</p></div>
+      </div>
+    </section>
+    <section class="container guide-section" id="clima-sf">
+      <h2>El clima es interactivo</h2>
+      <p class="guide-section__note">GlobalWarming no es decorado: lo que construyes cambia la temperatura de tu zona, y la temperatura te cambia el juego.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>Qué la sube</code><p>Las máquinas que queman y la producción industrial. Cuanto más automatices, más calienta tu base.</p></div>
+        <div class="guide-row"><code>Cómo bajarla</code><p>El <strong>Sumidero de Carbono</strong> retira contaminación, y el <strong>Climatizador</strong> fija la temperatura dentro de tu protección. Los dos son máquinas de Slimefun y hay que alimentarlos.</p></div>
+        <div class="guide-row"><code>Por qué importa</code><p>La temperatura afecta al crecimiento de los cultivos y a la nieve. Una base muy industrial y sin sumideros se nota.</p></div>
       </div>
     </section>
 
