@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check scripts/site.js && node --check scripts/store.js && node --check scripts/bosses.js && node --check scripts/dioses.js"
+    "check": "node --check server.js && node --check scripts/site.js && node --check scripts/store.js && node --check scripts/bosses.js && node --check scripts/dioses.js && node scripts/verify-store-catalog.mjs"
   },
   "dependencies": {
     "@fastify/static": "^10.1.2",
