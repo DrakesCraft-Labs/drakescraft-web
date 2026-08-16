@@ -25,4 +25,20 @@ assert.deepEqual(
   `Productos publicados sin paquete Tebex: ${missing.join(', ')}`
 );
 
-console.log(`[SUCCESS] ${storeCatalog.products.length} productos auditados contra Tebex.`);
+const invalidMarkup = storeCatalog.products.flatMap((product) =>
+  (product.includes || []).flatMap((item) => {
+    const tags = [...item.matchAll(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi)]
+      .map((match) => match[1].toLowerCase());
+    const opens = item.match(/<code>/g)?.length || 0;
+    const closes = item.match(/<\/code>/g)?.length || 0;
+    return tags.some((tag) => tag !== 'code') || opens !== closes ? [product.id] : [];
+  })
+);
+
+assert.deepEqual(
+  invalidMarkup,
+  [],
+  `Productos con marcado inline inseguro o desbalanceado: ${[...new Set(invalidMarkup)].join(', ')}`
+);
+
+console.log(`[SUCCESS] ${storeCatalog.products.length} productos auditados contra Tebex y marcado inline seguro.`);

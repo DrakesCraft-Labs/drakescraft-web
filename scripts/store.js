@@ -15,6 +15,13 @@ function deliveryType(product) {
     return product.tebexEnabled ? "tebex" : "unavailable";
 }
 
+// Escapa todo el contenido antes de restaurar únicamente el marcado inline permitido.
+function storeInlineMarkup(value) {
+    return storeEscape(value)
+        .replaceAll("&lt;code&gt;", "<code>")
+        .replaceAll("&lt;/code&gt;", "</code>");
+}
+
 const deliveryLabel = {
     tebex: "Checkout Tebex",
     "in-game": "Se compra dentro del juego",
@@ -120,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const body = document.getElementById("store-modal-body");
         if (!modal || !body || !product) return;
         lastFocusedElement = document.activeElement;
-        body.innerHTML = `<p class="eyebrow">${deliveryLabel[deliveryType(product)]}</p><h2>${storeEscape(product.name)}</h2><p>${storeEscape(product.summary)}</p><ul>${(product.includes || []).map((item) => `<li>${storeEscape(item)}</li>`).join("")}</ul>`;
+        body.innerHTML = `<p class="eyebrow">${deliveryLabel[deliveryType(product)]}</p><h2>${storeEscape(product.name)}</h2><p>${storeEscape(product.summary)}</p><ul>${(product.includes || []).map((item) => `<li>${storeInlineMarkup(item)}</li>`).join("")}</ul>`;
         modal.classList.remove("hidden");
         document.getElementById("store-modal-close")?.focus();
     }
