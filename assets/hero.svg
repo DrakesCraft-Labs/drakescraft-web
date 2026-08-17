@@ -79,7 +79,7 @@
     <circle cx="400" cy="240" r="2.5" class="star" style="animation-delay: 0s;"/>
   </g>
 
-  <!-- Portal Aura & Frame -->
+  <!-- Portal Aura &amp; Frame -->
   <g class="portal-core">
     <!-- Outer Glow -->
     <ellipse cx="620" cy="150" rx="75" ry="115" fill="#a855f7" opacity="0.3" filter="url(#glow)"/>
