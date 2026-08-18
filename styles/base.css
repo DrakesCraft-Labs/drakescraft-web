@@ -900,3 +900,21 @@ body::before, .page-shell::before, .page-shell::after { display: none; }
     --dk-verde: #7fe9a6;
     --dk-verde-fuerte: #6fe3a2;
 }
+
+/* Boton de patrocinio de GitHub en el pie. El iframe lo sirve github.com, asi que la CSP
+   necesita frame-src https://github.com; sin esa directiva el navegador lo bloquea en silencio. */
+.site-footer__sponsor {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.site-footer__sponsor span {
+  font-size: .85rem;
+  opacity: .75;
+}
+.site-footer__sponsor iframe {
+  display: block;
+  color-scheme: light;
+}
