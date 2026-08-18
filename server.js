@@ -777,6 +777,7 @@ for (const alias of ['/comandos', '/commands', '/cmds']) {
   app.get(alias, async (_request, reply) => reply.sendFile('guia-comandos.html'));
 }
 for (const [alias, file] of [
+  ['/apoya', 'apoya.html'], ['/apoyar', 'apoya.html'], ['/donar', 'apoya.html'], ['/sponsors', 'apoya.html'],
   ['/rangos', 'guia-rangos.html'], ['/ranks', 'guia-rangos.html'],
   ['/slimefun', 'guia-slimefun.html'], ['/sf', 'guia-slimefun.html']
 ]) {
@@ -810,6 +811,7 @@ await app.register(fastifyStatic, {
     const publicFiles = new Set([
       'store.html',
       'guia.html',
+      'apoya.html',
       'guia-comandos.html',
       'guia-rangos.html',
       'guia-slimefun.html',
