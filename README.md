@@ -44,3 +44,13 @@ Ofrecer a la comunidad de jugadores una interfaz web rápida, elegante y respons
 - **Frontend**: Vanilla HTML5, CSS3 moderno con variables HSL, JavaScript ES6+.
 - **Servidor Web**: Contenedor Dockerizado con Nginx.
 - **Integración**: Tebex Headless API & DiscordSRV.
+
+## ⚖️ Upstream Attribution & License / Licencia y Créditos
+
+- **Original Project / Upstream**: Slimefun4 Community Addon.
+- **Port & Maintenance**: DrakesCraft Labs team (Compatibility for Paper / Purpur 1.21.11).
+- **License**: GPL-3.0 / MIT.
+- **Source Code**: [GitHub Repository](https://github.com/DrakesCraft-Labs/drakescraft-web)
+- **Support & Issues**: [GitHub Issues](https://github.com/DrakesCraft-Labs/drakescraft-web/issues) | [Discord](https://discord.gg/rR7FbfCt9Y)
+
+*This project is an open-source derivative work maintained by DrakesCraft Labs under the terms of its original license. All original assets and concepts belong to their respective creators.*
