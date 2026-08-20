@@ -91,7 +91,6 @@ app.addHook('onRequest', async (request, reply) => {
 });
 
 const tebexPackageIds = {
-  oldschool: 7610530,
   hercules: 7510343,
   hestia: 7510348,
   hermes: 7510349,

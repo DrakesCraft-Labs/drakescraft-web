@@ -3,29 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tienda oficial de DrakesCraft. Rangos, pases, protecciones y utilidades entregadas de forma segura por Tebex.">
-  <title>DrakesCraft | Tienda oficial</title>
+  <meta name="description" content="Tienda oficial y portal de DrakesCraft 1.21.11. Rangos, pases, protecciones, utilidades y guías interactivas entregadas de forma segura por Tebex.">
+  <title>DrakesCraft | Portal & Tienda oficial</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="assets/store/hero-olympus-night.png" as="image" fetchpriority="high">
   <link rel="preload" href="assets/store/greek-ivy-pillars.png" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260813-classic">
-  <link rel="stylesheet" href="styles/store.css?v=20260813-layoutfix">
+  <link rel="stylesheet" href="styles/base.css?v=20260820-portal">
+  <link rel="stylesheet" href="styles/store.css?v=20260820-portal">
 </head>
 <body class="page-shell" data-page="store">
   <nav class="site-nav" aria-label="Navegación principal">
     <div class="container site-nav__bar">
-      <a class="brand" href="/" aria-label="Ir a la tienda DrakesCraft">
+      <a class="brand" href="/" aria-label="Ir al inicio de DrakesCraft">
         <img class="brand__mark" src="assets/logo-drakescraft.png" alt="">
-        <span class="brand__meta"><strong>DrakesCraft</strong><span>Tienda oficial</span></span>
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
         <li><a class="active" href="#catalogo">Catálogo</a></li>
-        <li><a href="#comprar">Cómo comprar</a></li>
-        <li><a href="guia.html">Guía</a></li><li><a href="metricas.html">Métricas</a></li><li><a href="apoya.html">Apoyar</a></li><li><a href="support.html">Soporte</a></li>
+        <li><a href="guia.html">El Servidor</a></li>
+        <li><a href="guia-comandos.html">Comandos</a></li>
+        <li><a href="guia-rangos.html">Rangos</a></li>
+        <li><a href="guia-slimefun.html">Slimefun</a></li>
+        <li><a href="metricas.html">Métricas</a></li>
+        <li><a href="apoya.html">Apoyar</a></li>
+        <li><a href="support.html">Soporte</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
       </ul>
     </div>
@@ -38,7 +43,7 @@
         <div class="store-hero__copy">
           <p class="eyebrow">Cuatro modalidades · una sola comunidad</p>
           <h1>Tu forma de jugar.<br><em>Tu legado.</em></h1>
-          <p class="store-hero__lead">Juega Slimefun, vuelve al Minecraft Clásico o levanta tu isla en SkyBlock y OneBlock. Tu rango y tus Dragmas viajan contigo; cada modalidad conserva su propio progreso.</p>
+          <p class="store-hero__lead">Juega Slimefun con más de 60 expansiones, vuelve al Minecraft Clásico o levanta tu isla en SkyBlock y OneBlock. Tu rango y tus Dragmas viajan contigo; cada modalidad conserva su propio inventario y progreso.</p>
           <nav class="store-hero__modes" aria-label="Modalidades disponibles">
             <a href="#modalidades"><strong>Slimefun</strong><span>Tecnología y magia</span></a>
             <a href="#modalidades"><strong>Clásico</strong><span>Survival sin addons</span></a>
@@ -46,7 +51,9 @@
             <a href="#modalidades"><strong>OneBlock</strong><span>Un bloque por fases</span></a>
           </nav>
           <div class="store-hero__actions">
-            <a class="btn btn-primary" href="#catalogo">Explorar la tienda</a><a class="btn btn-ig" href="https://instagram.com/drakescraft.cl/" target="_blank" rel="noopener" aria-label="Instagram de DrakesCraft"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram</a>
+            <a class="btn btn-primary" href="#catalogo">Explorar la tienda</a>
+            <a class="btn btn-secondary" href="guia-slimefun.html">Guía de Slimefun</a>
+            <a class="btn btn-ig" href="https://instagram.com/drakescraft.cl/" target="_blank" rel="noopener" aria-label="Instagram de DrakesCraft"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram</a>
             <a class="btn btn-gh" href="https://github.com/DrakesCraft-Labs" target="_blank" rel="noopener" aria-label="GitHub de DrakesCraft-Labs"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.24-.02-2.25-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.3 0 .32.21.7.82.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>GitHub</a>
           </div>
         </div>
@@ -66,7 +73,7 @@
       <div class="container store-path__inner">
         <div class="server-card server-card--strip" id="server-card">
           <div class="server-card__head"><span class="server-card__dot" id="server-dot" aria-hidden="true"></span><span class="server-card__state" id="server-state">Comprobando el servidor…</span></div>
-          <button class="server-card__ip" id="server-ip" type="button" title="Copiar la IP"><span class="server-card__ip-text">mc.drakescraft.cl</span><span class="server-card__copy" id="server-copy">Copiar</span></button>
+          <button class="server-card__ip" id="server-ip" type="button" title="Copiar la IP"><span class="server-card__ip-text">play.drakescraft.net</span><span class="server-card__copy" id="server-copy">Copiar IP</span></button>
         </div>
         <p><strong>Compra manual y segura.</strong> Ves los límites antes de pagar; Tebex entrega al nick indicado y ningún pase se renueva solo.</p>
         <a class="store-path__support" href="support.html">Ayuda con una compra</a>
@@ -106,40 +113,40 @@
       </div>
     </section>
 
-    <section class="store-catalog" id="modalidades" style=" padding: 4rem 0;">
+    <section class="store-catalog" id="modalidades" style="padding: 4rem 0;">
       <div class="container">
         <div class="store-heading">
           <div>
             <p class="eyebrow" style="color: #267c7f;">Cuatro modalidades, una sola cuenta</p>
             <h2>Slimefun, Clásico, SkyBlock y OneBlock</h2>
           </div>
-          <p>Tu rango, empleos, habilidades y Dragmas te siguen entre las cuatro. El inventario, la experiencia, el cofre de ender y las bovedas quedan separados; los kits se usan en Slimefun, SkyBlock y OneBlock.</p>
+          <p>Tu rango, empleos, habilidades y Dragmas te siguen entre las cuatro. El inventario, la experiencia, el cofre de ender y las bóvedas quedan separados; los kits se usan en Slimefun, SkyBlock y OneBlock.</p>
         </div>
         <div class="store-grid" style="margin-top: 2rem;">
           <article class="store-product is-visible" data-accent="gold">
             <div class="store-product__top"><div><span class="store-product__tag">Modalidad base</span><h3>Slimefun</h3></div></div>
-            <p>El DrakesCraft de siempre: Slimefun completo con decenas de addons, magia, jefes, arenas y progresion. Antes se llamaba Survival, y <code>/survival</code> sigue funcionando.</p>
-            <div class="store-product__delivery"><span>Comandos: <code>/slimefun</code> o <code>/survival</code></span><span>Territorio: Piedras de Proteccion</span></div>
+            <p>El DrakesCraft de siempre: Slimefun completo con más de 60 expansiones, magia de Arcana, panteón de dioses, jefes y arenas privadas. Antes se llamaba Survival, y <code>/survival</code> sigue funcionando.</p>
+            <div class="store-product__delivery"><span>Comandos: <code>/slimefun</code> o <code>/survival</code></span><span>Territorio: ProtectionStones</span></div>
           </article>
           <article class="store-product is-visible" data-accent="cyan">
-            <div class="store-product__top"><div><span class="store-product__tag">Nueva</span><h3>Clásico</h3></div></div>
-            <p>Minecraft del de siempre: sin Slimefun, sin maquinas y sin mobs personalizados. Terralith, Nether y End propios, hogares, TPA y protecciones de terreno, con borde de 200.000 bloques.</p>
+            <div class="store-product__top"><div><span class="store-product__tag">Vanilla puro</span><h3>Clásico</h3></div></div>
+            <p>Minecraft tradicional: sin Slimefun, sin máquinas y sin mobs personalizados. Terralith con biomas únicos, Nether y End propios, hogares, TPA y protecciones con borde de 200.000 bloques.</p>
             <div class="store-product__delivery"><span>Comando: <code>/clasico</code></span><span><code>/home</code>, <code>/tpa</code> y <code>/ps home</code></span></div>
           </article>
           <article class="store-product is-visible" data-accent="cyan">
-            <div class="store-product__top"><div><span class="store-product__tag">Nueva</span><h3>SkyBlock</h3></div></div>
-            <p>Tu isla en el vacio. Slimefun tambien funciona aqui. El tamano de la isla crece segun tu rango, desde 128x128 hasta 600x600 bloques.</p>
-            <div class="store-product__delivery"><span>Comandos: <code>/skyblock</code> o <code>/is</code></span><span>Inventario propio</span></div>
+            <div class="store-product__top"><div><span class="store-product__tag">Desafío</span><h3>SkyBlock</h3></div></div>
+            <p>Tu isla en el vacío con misiones. Slimefun también funciona aquí. El tamaño de la isla escala según tu rango, desde 128×128 hasta 600×600 bloques.</p>
+            <div class="store-product__delivery"><span>Comandos: <code>/skyblock</code> o <code>/is</code></span><span>Inventario aislado</span></div>
           </article>
           <article class="store-product is-visible" data-accent="violet">
-            <div class="store-product__top"><div><span class="store-product__tag">Nueva</span><h3>OneBlock</h3></div></div>
-            <p>Un solo bloque infinito que avanza por fases. Empiezas con nada y construyes todo. Tambien con Slimefun y con isla que crece segun tu rango.</p>
-            <div class="store-product__delivery"><span>Comandos: <code>/oneblock</code> o <code>/ob</code></span><span>Inventario propio</span></div>
+            <div class="store-product__top"><div><span class="store-product__tag">Progresión</span><h3>OneBlock</h3></div></div>
+            <p>Un solo bloque infinito que evoluciona por 21 fases de biomas. Empiezas con nada y construyes todo. También con Slimefun y con isla que crece según tu rango.</p>
+            <div class="store-product__delivery"><span>Comandos: <code>/oneblock</code> o <code>/ob</code></span><span>Inventario aislado</span></div>
           </article>
           <article class="store-product is-visible" data-accent="ember">
-            <div class="store-product__top"><div><span class="store-product__tag">Importante</span><h3>Que se comparte y que no</h3></div></div>
-            <p><strong>Se comparte:</strong> rango, permisos, Dragmas, empleos y habilidades.<br><strong>Es propio de cada modalidad:</strong> inventario, experiencia, cofre de ender y bovedas <code>/pv</code>. Los kits no se reclaman en Clásico.</p>
-            <div class="store-product__delivery"><span>Menu: <code>/modalidades</code></span><span>Compras validas en las cuatro</span></div>
+            <div class="store-product__top"><div><span class="store-product__tag">Importante</span><h3>Qué se comparte y qué no</h3></div></div>
+            <p><strong>Se comparte:</strong> rango, permisos, Dragmas (₯), empleos y habilidades.<br><strong>Es propio de cada modalidad:</strong> inventario, experiencia, cofre de ender y bóvedas <code>/pv</code>. Los kits no se reclaman en Clásico.</p>
+            <div class="store-product__delivery"><span>Menú: <code>/modalidades</code></span><span>Compras válidas en las cuatro</span></div>
           </article>
         </div>
       </div>
@@ -147,17 +154,15 @@
 
     <section class="store-team" id="equipo">
       <div class="container">
-        <p class="eyebrow">Quienes estamos detras</p>
+        <p class="eyebrow">Quiénes estamos detrás</p>
         <h2>Equipo de DrakesCraft</h2>
-        <p>El equipo que desarrolla, modera y da soporte al servidor. Si una entrega falla, estas son las personas que la revisan.</p>
+        <p>El equipo que desarrolla, modera y da soporte a la comunidad técnica. Si una entrega falla, estas son las personas que la revisan.</p>
         <div class="store-legacy">
           <img src="assets/staff/TheSavior22.png" alt="Skin de TheSavior22" width="64" height="64" loading="lazy">
           <div>
             <span class="store-legacy__role">Fundador original</span>
             <h3>TheSavior22</h3>
-            <p>DrakesCraft nacio de sus manos. Al dejarlo, confio el servidor a JackStar6677, que
-            desde entonces mantiene vivo lo que empezo: el corazon de Slimefun, la Papa de Mar y
-            tantas otras cosas que siguen aqui porque el las puso primero. Gracias por el legado.</p>
+            <p>DrakesCraft nació de sus manos. Al dejarlo, confió el servidor a JackStar6677, que desde entonces mantiene vivo lo que empezó: el corazón de Slimefun, la Papa de Mar y tantas otras cosas que siguen aquí porque él las puso primero. Gracias por el legado.</p>
           </div>
         </div>
         <div class="store-team__grid">
@@ -214,7 +219,7 @@
             <div>
               <span class="store-team__role">Consultor Slimefun</span>
               <h3>elpepinoraro18</h3>
-              <p>Slimefun, desarrollo y construccion</p>
+              <p>Slimefun, desarrollo y construcción</p>
             </div>
           </article>
           <article class="store-team__card" style="--team-accent: #8ad8ff;">
@@ -222,7 +227,7 @@
             <div>
               <span class="store-team__role">Helper / Soporte</span>
               <h3>Derem8503</h3>
-              <p>Atencion y soporte en Discord</p>
+              <p>Atención y soporte en Discord</p>
             </div>
           </article>
         </div>
@@ -233,8 +238,31 @@
   <a class="store-cart-jump hidden" id="store-cart-jump" href="#carrito" aria-label="Abrir carrito"><span>Ver carrito</span><strong id="store-cart-jump-count">0</strong></a>
 
   <div id="store-modal" class="hidden" role="dialog" aria-modal="true" aria-label="Detalle de producto"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
-  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una tienda hecha para mejorar tu forma de jugar.</p></div><div class="site-footer__links"><a href="guia.html">Guía</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
-  <script src="scripts/site.js?v=20260813-classic"></script>
-  <script src="scripts/store.js?v=20260816-inline-markup"></script>
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div>
+        <strong>DrakesCraft</strong>
+        <p>Una tienda y portal diseñados para potenciar tu aventura.</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="guia.html">El Servidor</a>
+        <a href="guia-comandos.html">Comandos</a>
+        <a href="guia-rangos.html">Rangos</a>
+        <a href="guia-slimefun.html">Slimefun</a>
+        <a href="metricas.html">Métricas</a>
+        <a href="support.html">Soporte</a>
+        <a href="terms.html">Términos</a>
+        <a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <div class="site-footer__sponsor">
+        <span>Apoya el proyecto</span>
+        <iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe>
+        <iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe>
+      </div>
+    </div>
+  </footer>
+  <script src="scripts/site.js?v=20260820-portal"></script>
+  <script src="scripts/store.js?v=20260820-portal"></script>
 </body>
 </html>
