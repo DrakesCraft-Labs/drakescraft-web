@@ -624,3 +624,54 @@ body[data-page="store"]::after,
     justify-content: center !important;
   }
 }
+
+
+/* Instant, Modern & Reactive Product Cards */
+@keyframes productEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.store-product {
+  position: relative;
+  min-height: 295px;
+  padding: 1.25rem;
+  overflow: hidden;
+  border: 1px solid #2b4437;
+  border-top: 4px solid var(--product-accent, #4fa96f);
+  border-radius: 9px;
+  background: #172a22;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
+  animation: productEntrance 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: transform .22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .22s cubic-bezier(0.16, 1, 0.3, 1), border-color .22s ease !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.store-product:hover, .store-product.is-visible:hover {
+  transform: translateY(-5px) scale(1.015) !important;
+  border-color: var(--product-accent, #7fe9a6) !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, .45), 0 0 22px color-mix(in srgb, var(--product-accent, #4fa96f) 35%, transparent) !important;
+}
+
+.store-product .btn {
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease !important;
+}
+
+.store-product .btn:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.03);
+}
+
+.store-product__price {
+  transition: transform .2s ease;
+}
+
+.store-product:hover .store-product__price {
+  transform: scale(1.05);
+}

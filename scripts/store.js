@@ -50,21 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function revealProducts() {
         productObserver?.disconnect();
         const cards = [...grid.querySelectorAll(".store-product")];
-        if (!("IntersectionObserver" in window)) {
-            cards.forEach((card) => card.classList.add("is-visible"));
-            return;
-        }
-        productObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add("is-visible");
-                productObserver.unobserve(entry.target);
-            });
-        }, { rootMargin: "0px 0px -8%", threshold: 0.08 });
-        cards.forEach((card, index) => {
-            card.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
-            productObserver.observe(card);
-        });
+        cards.forEach((card) => card.classList.add("is-visible"));
     }
 
     function renderTabs() {
