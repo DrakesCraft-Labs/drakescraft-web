@@ -675,3 +675,84 @@ body[data-page="store"]::after,
 .store-product:hover .store-product__price {
   transform: scale(1.05);
 }
+
+/* Modern Custom GitHub Sponsor Badges */
+.site-footer__sponsor {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: .45rem !important;
+}
+
+.footer-sponsor-label {
+  color: #f7d56b !important;
+  font: 700 .75rem "Cinzel", serif, sans-serif !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+.sponsor-badges {
+  display: flex !important;
+  align-items: center !important;
+  gap: .55rem !important;
+  flex-wrap: wrap !important;
+}
+
+.sponsor-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  border: 1px solid rgba(247, 213, 107, 0.4) !important;
+  border-radius: 6px !important;
+  background: rgba(14, 42, 30, 0.9) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: .75rem !important;
+  overflow: hidden !important;
+  transition: all .2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .25) !important;
+}
+
+.sponsor-btn:hover {
+  border-color: #f7d56b !important;
+  background: rgba(28, 76, 54, 0.98) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .4), 0 0 12px rgba(247, 213, 107, 0.25) !important;
+}
+
+.sponsor-btn__user {
+  padding: .35rem .6rem !important;
+  font-weight: 700 !important;
+  color: #f2f8f3 !important;
+  border-right: 1px solid rgba(247, 213, 107, 0.3) !important;
+  background: rgba(8, 26, 18, 0.75) !important;
+}
+
+.sponsor-btn__heart {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .2rem !important;
+  padding: .35rem .6rem !important;
+  color: #ff85c0 !important;
+  font-weight: 800 !important;
+  transition: all .2s ease !important;
+}
+
+.sponsor-btn:hover .sponsor-btn__heart {
+  background: #ff529a !important;
+  color: #fff !important;
+}
+
+@media (max-width: 760px) {
+  .site-footer__grid {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+  }
+  .site-footer__sponsor {
+    align-items: center !important;
+  }
+  .sponsor-badges {
+    justify-content: center !important;
+  }
+}
