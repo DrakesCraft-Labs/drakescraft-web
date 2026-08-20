@@ -12,7 +12,7 @@
   <link rel="preload" href="assets/store/greek-ivy-pillars.png" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/base.css?v=20260820-centered-v6">
-  <link rel="stylesheet" href="styles/store.css?v=20260820-balanced-hero-v8">
+  <link rel="stylesheet" href="styles/store.css?v=20260820-motd-v9">
 </head>
 <body class="page-shell" data-page="store">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -98,8 +98,15 @@
     <section class="store-path" id="comprar" aria-label="Flujo de compra">
       <div class="container store-path__inner">
         <div class="server-card server-card--strip" id="server-card">
-          <div class="server-card__head"><span class="server-card__dot" id="server-dot" aria-hidden="true"></span><span class="server-card__state" id="server-state">Comprobando el servidor…</span></div>
-          <button class="server-card__ip" id="server-ip" type="button" title="Copiar la IP"><span class="server-card__ip-text">mc.drakescraft.cl</span><span class="server-card__copy" id="server-copy">Copiar IP</span></button>
+          <div class="server-card__head">
+            <span class="server-card__dot" id="server-dot" aria-hidden="true"></span>
+            <span class="server-card__state" id="server-state">Comprobando el servidor…</span>
+          </div>
+          <button class="server-card__ip" id="server-ip" type="button" title="Copiar la IP de DrakesCraft">
+            <span class="server-card__ip-text">mc.drakescraft.cl</span>
+            <span class="server-card__copy" id="server-copy">Copiar IP</span>
+          </button>
+          <div class="server-card__motd" id="server-motd">⚡ DrakesCraft 1.21.11 · Cinco modalidades en una sola red</div>
         </div>
         <p><strong>Compra manual y segura.</strong> Ves los límites antes de pagar; Tebex entrega al nick indicado y ningún pase se renueva solo.</p>
         <a class="store-path__support" href="support.html">Ayuda con una compra</a>
@@ -302,6 +309,6 @@
     </div>
   </footer>
   <script src="scripts/site.js?v=20260820-portal"></script>
-  <script src="scripts/store.js?v=20260820-fast-anim-v7"></script>
+  <script src="scripts/store.js?v=20260820-motd-v9"></script>
 </body>
 </html>

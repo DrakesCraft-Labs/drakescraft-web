@@ -772,3 +772,81 @@ body[data-page="store"]::after,
   height: 48%;
   background: linear-gradient(transparent, rgba(3, 10, 8, 0.95)) !important;
 }
+
+
+/* Server Card Width & MOTD styling */
+.store-path__inner {
+  min-height: 112px !important;
+  display: grid !important;
+  grid-template-columns: minmax(330px, 390px) minmax(240px, 1fr) max-content minmax(220px, auto) !important;
+  align-items: center !important;
+  gap: 1.5rem !important;
+}
+
+.store-path .server-card--strip {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: .85rem 1rem !important;
+  border-radius: 9px !important;
+  background: #172a22 !important;
+  border: 1px solid #2b4437 !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.store-path .server-card__ip {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: .35rem 0 0 !important;
+  gap: .8rem !important;
+  padding: .65rem .85rem !important;
+  background: #0d1e18 !important;
+  border: 1px solid #264a39 !important;
+  border-radius: 7px !important;
+}
+
+.store-path .server-card__ip-text {
+  min-width: max-content !important;
+  font-family: 'DM Mono', monospace !important;
+  font-size: 0.96rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+.server-card__copy {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: .2rem .55rem !important;
+  border-radius: 4px !important;
+  background: rgba(127, 233, 166, 0.14) !important;
+  border: 1px solid rgba(127, 233, 166, 0.3) !important;
+  color: #7fe9a6 !important;
+  font-size: .72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  flex: none !important;
+  transition: all .2s ease !important;
+}
+
+.server-card__ip:hover .server-card__copy {
+  background: #7fe9a6 !important;
+  color: #0b2419 !important;
+}
+
+.server-card__motd {
+  margin-top: .45rem !important;
+  font-size: .74rem !important;
+  color: #a4c9b2 !important;
+  line-height: 1.35 !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+}
