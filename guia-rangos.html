@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Guía completa de DrakesCraft: todos los comandos del servidor y cómo funcionan las cuatro modalidades: Slimefun, Clásico, SkyBlock y OneBlock.">
+  <meta name="description" content="Guía completa de rangos en DrakesCraft 1.21.11: límites de protecciones, hogares, bóvedas, tiendas, permisos efectivos y pase técnico SFMaster.">
   <title>Rangos · DrakesCraft</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260811-liveguide">
-  <link rel="stylesheet" href="styles/guia.css?v=20260811-liveguide">
+  <link rel="stylesheet" href="styles/base.css?v=20260820-accordion">
+  <link rel="stylesheet" href="styles/guia.css?v=20260820-accordion">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -23,9 +23,10 @@
       <ul class="site-nav__links" id="nav-menu">
         <li><a href="guia-comandos.html">Comandos</a></li>
         <li><a href="guia.html">El servidor</a></li>
-        <li><a class="active" href="#rangos">Rangos</a></li>
+        <li><a class="active" href="guia-rangos.html">Rangos</a></li>
         <li><a href="guia-slimefun.html">Slimefun</a></li>
-        <li><a href="metricas.html">Métricas</a></li><li><a href="store.html">Tienda</a></li>
+        <li><a href="metricas.html">Métricas</a></li>
+        <li><a href="store.html">Tienda</a></li>
         <li><a href="apoya.html">Apoyar</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
       </ul>
@@ -42,118 +43,219 @@
       </div>
     </header>
 
-          <nav class="guide-tabs" aria-label="Secciones de la guia">
-        <a href="guia-comandos.html">Comandos</a>
-        <a href="guia.html">El servidor</a>
-        <a href="guia-rangos.html" class="is-active">Rangos</a>
-        <a href="guia-slimefun.html">Slimefun</a>
-      </nav>
-<div class="container">
+    <nav class="guide-tabs" aria-label="Secciones de la guia">
+      <a href="guia-comandos.html">Comandos</a>
+      <a href="guia.html">El servidor</a>
+      <a href="guia-rangos.html" class="is-active">Rangos</a>
+      <a href="guia-slimefun.html">Slimefun & Addons</a>
+    </nav>
+
+    <div class="container">
+      <!-- Buscador -->
       <div class="guide-search">
-        <label class="sr-only" for="guide-q">Buscar</label>
-        <input type="search" id="guide-q" placeholder="Busca un rango: zeus, titan, hermes…" autocomplete="off">
+        <label class="sr-only" for="guide-q">Buscar rangos y beneficios</label>
+        <input type="search" id="guide-q" placeholder="Busca un rango: zeus, titan, hermes, sfmaster, fly…" autocomplete="off">
         <p class="guide-search__count" id="guide-count"></p>
       </div>
-      <p class="guide-empty is-hidden" id="guide-empty">No encontramos nada con eso. Prueba con otra palabra.</p>
-</div>
 
-    <section class="container guide-section" id="rangos">
-      <h2>Rangos y qué desbloquea cada uno</h2>
-      <p class="guide-section__note">Los rangos son <strong>pases de 30 días</strong> y no se renuevan solos. Cada uno hereda todo lo del anterior, así que lo que ves en una fila se suma a las de arriba. Tu rango funciona igual en las cuatro modalidades.</p>
-
-      <div class="rank-scroll">
-        <table class="rank-table">
-          <caption class="sr-only">Comparación de rangos: hogares, bóvedas, protecciones, warps de jugador, tiendas e isla</caption>
-          <thead>
-            <tr><th scope="col">Rango</th><th scope="col">Hogares</th><th scope="col">Bóvedas</th><th scope="col">Protección</th><th scope="col">Protecciones a la vez</th><th scope="col">Warps</th><th scope="col">Tiendas</th><th scope="col">Isla</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row" data-rank="polis">Polis</th><td>1</td><td>2</td><td>31×31</td><td>2</td><td>3</td><td>10</td><td>128×128</td></tr>
-            <tr><th scope="row" data-rank="oldschool">OldSchool</th><td>1</td><td>2</td><td>113×113</td><td>5</td><td>5</td><td>15</td><td>128×128</td></tr>
-            <tr><th scope="row" data-rank="hercules">Hércules</th><td>3</td><td>3</td><td>49×49</td><td>3</td><td>5</td><td>15</td><td>144×144</td></tr>
-            <tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>3</td><td>81×81</td><td>4</td><td>5</td><td>20</td><td>160×160</td></tr>
-            <tr><th scope="row" data-rank="hermes">Hermes</th><td>6</td><td>5</td><td>113×113</td><td>5</td><td>8</td><td>30</td><td>176×176</td></tr>
-            <tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>5</td><td>177×177</td><td>6</td><td>8</td><td>40</td><td>192×192</td></tr>
-            <tr><th scope="row" data-rank="artemisa">Artemisa</th><td>10</td><td>5</td><td>241×241</td><td>8</td><td>12</td><td>50</td><td>208×208</td></tr>
-            <tr><th scope="row" data-rank="afrodita">Afrodita</th><td>12</td><td>7</td><td>353×353</td><td>10</td><td>15</td><td>65</td><td>224×224</td></tr>
-            <tr><th scope="row" data-rank="zeus">Zeus</th><td>20</td><td>10</td><td>481×481</td><td>15</td><td>25</td><td>80</td><td>250×250</td></tr>
-            <tr><th scope="row" data-rank="thor">Thor</th><td>25</td><td>12</td><td>601×601</td><td>18</td><td>25</td><td>100</td><td>280×280</td></tr>
-            <tr><th scope="row" data-rank="anubis">Anubis</th><td>30</td><td>14</td><td>721×721</td><td>20</td><td>25</td><td>120</td><td>310×310</td></tr>
-            <tr><th scope="row" data-rank="poseidon">Poseidón</th><td>35</td><td>16</td><td>841×841</td><td>22</td><td>25</td><td>150</td><td>340×340</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Japeto</th><td>40</td><td>18</td><td>1001×1001</td><td>25</td><td>25</td><td>200</td><td>400×400</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Oceanus</th><td>45</td><td>20</td><td>1301×1301</td><td>30</td><td>25</td><td>250</td><td>450×450</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Hiperión</th><td>50</td><td>22</td><td>1601×1601</td><td>35</td><td>25</td><td>300</td><td>500×500</td></tr>
-            <tr><th scope="row" data-rank="titan">Titán Cronos</th><td>60</td><td>25</td><td>2001×2001</td><td>40</td><td>25</td><td>400</td><td>550×550</td></tr>
-            <tr><th scope="row" data-rank="caos">Titán Caos</th><td>100</td><td>30</td><td>2501×2501</td><td>50</td><td>25</td><td>500</td><td>600×600</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="guide-section__note">«Protección» es el tamaño de la piedra que incluye el rango. «Protecciones a la vez» es cuántas puedes tener colocadas. «Tiendas» es el límite de tiendas de ChestShop.</p>
-
-      <h3 class="rank-subhead">Cosméticos: cómo se activan</h3>
-      <p class="guide-section__note">Se equipan con <code>/cosmeticos</code> y se quitan escribiendo <code>none</code> en vez del nombre: <code>/cosmeticos aura none</code>. El menú marca en verde lo que ya tienes y en gris lo que desbloquea cada rango.</p>
-      <div class="guide-table">
-        <div class="guide-row"><code>/cosmeticos aura &lt;nombre&gt;</code><p>Partículas permanentes a tu alrededor. Las nuevas tienen forma de verdad: alas que baten, halos, colas y órbitas.</p></div>
-        <div class="guide-row"><code>/cosmeticos rastro &lt;nombre&gt;</code><p>Lo que dejas atrás al caminar.</p></div>
-        <div class="guide-row"><code>/cosmeticos muerte &lt;nombre&gt;</code><p>El efecto que se dispara cuando mueres.</p></div>
-        <div class="guide-row"><code>/cosmeticos aura none</code><p>Apaga el aura. Igual para <code>rastro</code> y <code>muerte</code>.</p></div>
-      </div>
-      <p class="guide-section__note">Los cosméticos se revalidan solos: si tu rango caduca, el aura se apaga sola. Están pensados para lucirse, no dan ninguna ventaja.</p>
-
-      <h3 class="rank-subhead">SFMaster: acceso técnico controlado</h3>
-      <p class="guide-section__note">SFMaster es un pase temporal para retirar materiales técnicos desde una guía especial. No entrega el comando libre <code>/sf cheat</code> y no convierte esos objetos en mercancía.</p>
-      <div class="guide-table">
-        <div class="guide-row"><code>Duración</code><p>El pase corre durante 1 o 24 horas cronológicas desde la entrega, según el producto comprado.</p></div>
-        <div class="guide-row"><code>32 por hora</code><p>Los pases SFMaster de 1 h y 24 h permiten 32 reclamaciones dentro de cada ventana de 60 minutos. Cada reclamo entrega un stack si el objeto es apilable; máquinas y objetos no apilables entregan una unidad.</p></div>
-        <div class="guide-row"><code>Titán Caos: 48 por hora</code><p>Mientras su rango mensual esté activo conserva los mismos bloqueos y propiedad vinculada, pero dispone de 48 reclamaciones por cada ventana de 60 minutos.</p></div>
-        <div class="guide-row"><code>Bloqueos</code><p>No permite Supreme, InfinityExpansion, armas, herramientas, armaduras, arcos, tridentes, elytras, diamantes, esmeraldas, netherite ni ancient debris.</p></div>
-        <div class="guide-row"><code>Propiedad</code><p>Cada objeto queda marcado al comprador: no puede tirarse, intercambiarse, subastarse, guardarse para traspasarlo ni venderse.</p></div>
-        <div class="guide-row"><code>Caducidad</code><p>Al vencer se retira el rango y la guía deja de funcionar. El staff mantiene su acceso operativo separado.</p></div>
+      <!-- Filtros por categoría -->
+      <div class="guide-filters" role="group" aria-label="Filtrar por categoría">
+        <button type="button" data-filter="all" aria-pressed="true" class="is-active">Todo</button>
+        <button type="button" data-filter="tabla" aria-pressed="false">📊 Tabla Comparativa</button>
+        <button type="button" data-filter="desglose" aria-pressed="false">🏛️ Comandos por Rango</button>
+        <button type="button" data-filter="cosmeticos" aria-pressed="false">✨ Cosméticos & Auras</button>
+        <button type="button" data-filter="sfmaster" aria-pressed="false">⚙️ Pase SFMaster</button>
+        <button type="button" data-filter="info" aria-pressed="false">ℹ️ Roles & Entrega</button>
       </div>
 
-      <h3 class="rank-subhead">Comandos que suma cada rango</h3>
-      <div class="guide-table">
-        <div class="guide-row"><code>OldSchool</code><p><code>/ec</code> · <code>/feed</code> · <code>/hat</code> · <code>/near</code> · <code>/ptime</code> · <code>/pweather</code> · <code>/workbench</code> · <code>/condense</code><span class="guide-row__alias">Rango histórico, no está a la venta.</span></p></div>
-        <div class="guide-row"><code>Hércules</code><p>Color en el chat · <code>/clearinventory</code> · <code>/recipe</code><span class="guide-row__alias">Cosméticos: aura <strong>Llama</strong> · rastro <strong>Chispas</strong></span></p></div>
-        <div class="guide-row"><code>Hestia</code><p><code>/nick</code> · <code>/ext</code> · <code>/ptime</code> · <code>/pweather</code><span class="guide-row__alias">Cosméticos: aura <strong>Halo</strong> · muerte <strong>Tótem</strong></span></p></div>
-        <div class="guide-row"><code>Hermes</code><p><code>/fly</code> · <code>/speed</code> · <code>/back</code> · <code>/compass</code> · <code>/workbench</code> · <code>/ec</code> · RTP sin espera de movimiento<span class="guide-row__alias">Cosméticos: aura <strong>Alas Doradas</strong> · rastros <strong>Aliento</strong> y <strong>Plumas</strong></span></p></div>
-        <div class="guide-row"><code>Hefesto</code><p>Estaciones virtuales: <code>/anvil</code> · <code>/grindstone</code> · <code>/loom</code> · <code>/smithingtable</code> · <code>/stonecutter</code> · más <code>/condense</code> · <code>/depth</code> · <code>/dispose</code> · <code>/feed</code> · <code>/top</code> y RTP sin espera<span class="guide-row__alias">Cosméticos: muerte <strong>Rayo</strong></span></p></div>
-        <div class="guide-row"><code>Artemisa</code><p><code>/jump</code> · conservas la experiencia al morir<span class="guide-row__alias">Cosméticos: aura <strong>Cola Espectral</strong> · rastro <strong>Portal</strong></span></p></div>
-        <div class="guide-row"><code>Afrodita</code><p><code>/repair</code> · <code>/sell</code> · tus tiendas no pagan comisión<span class="guide-row__alias">Cosméticos: aura <strong>Halo de Ocaso</strong> · rastro <strong>Corazones</strong></span></p></div>
-        <div class="guide-row"><code>Zeus</code><p><code>/heal</code> · <code>/repair all</code> · <strong>conservas el inventario al morir</strong> · sin impuesto al comprar<span class="guide-row__alias">Cosméticos: aura <strong>Luciérnagas</strong> · muerte <strong>Explosión</strong></span></p></div>
-        <div class="guide-row"><code>Thor</code><p>Todo lo anterior, con más hogares, bóvedas, protecciones y tiendas.<span class="guide-row__alias">Cosméticos: aura <strong>Tormenta</strong></span></p></div>
-        <div class="guide-row"><code>Anubis</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosméticos: auras <strong>Ánima</strong> y <strong>Alas de Ocaso</strong></span></p></div>
-        <div class="guide-row"><code>Poseidón</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosméticos: aura <strong>Marea</strong></span></p></div>
-        <div class="guide-row"><code>Titán Japeto</code><p>Forja primordial. Primer Titán: entra el <strong>multiplicador ×5 de favor divino</strong>. Protección <strong>1001×1001</strong> · isla <strong>400×400</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
-        <div class="guide-row"><code>Titán Oceanus</code><p><strong>Vórtice Abisal</strong>: atrae a las hordas cercanas al centro. Protección <strong>1301×1301</strong> · isla <strong>450×450</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
-        <div class="guide-row"><code>Titán Hiperión</code><p><strong>Rayo solar</strong> y regeneración bajo el sol. Protección <strong>1601×1601</strong> · isla <strong>500×500</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Solar</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
-        <div class="guide-row"><code>Titán Cronos</code><p><strong>Parada del Tiempo</strong>: inmoviliza a los enemigos cercanos. Protección <strong>2001×2001</strong> · isla <strong>550×550</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
-        <div class="guide-row"><code>Titán Caos</code><p>La cima absoluta. <strong>Set primordial con trim Silence</strong>, Espada Voladora Autónoma, SFMaster controlado de <strong>48 reclamos/hora</strong> durante la vigencia del rango y <code>/ultragod</code> personal por 45 segundos cada 30 minutos. Protección <strong>2501×2501</strong> · isla <strong>600×600</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Caos</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastros <strong>Polvo Dorado</strong> y <strong>Polvo de Ocaso</strong></span></p></div>
-      </div>
-
-      <div class="guide-split" style="margin-top:1.5rem;">
-        <div class="guide-split__card">
-          <h3>Roles de aventura</h3>
-          <p style="margin:0 0 .6rem;font-size:.93rem;opacity:.85;">Pases de 30 días solo para identificarte en el chat. <strong>No incluyen kit, objetos ni Slimefun.</strong></p>
-          <ul>
-            <li>Minero · Cazador · Constructor</li>
-            <li>Leñador · Alquimista · Nómada</li>
-          </ul>
-        </div>
-        <div class="guide-split__card">
-          <h3>Cómo se entrega</h3>
-          <ul>
-            <li>Usa tu <strong>nick exacto</strong> al pagar</li>
-            <li>La entrega es automática al conectarte</li>
-            <li>Si estás desconectado, llega cuando entres</li>
-            <li>Los pases <strong>no se renuevan solos</strong></li>
-          </ul>
+      <!-- Botones expandir/contraer -->
+      <div class="guide-controls">
+        <span style="font-size:0.88rem; opacity:0.75;">Haz clic en cada sección para desplegar:</span>
+        <div class="guide-controls__btns">
+          <button type="button" id="btn-expand-all" class="guide-btn-action">🔽 Expandir Todo</button>
+          <button type="button" id="btn-collapse-all" class="guide-btn-action">🔼 Contraer Todo</button>
         </div>
       </div>
-    </section>
 
-    <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
-  <script src="scripts/site.js?v=20260811-liveguide"></script>
-  <script src="scripts/guia.js?v=20260811-liveguide"></script>
+      <p class="guide-empty is-hidden" id="guide-empty">No encontramos nada con esa búsqueda. Prueba con otro término.</p>
+
+      <!-- 1. TABLA COMPARATIVA -->
+      <details class="guide-accordion" data-cat="tabla" open>
+        <summary class="guide-accordion__summary">
+          <div class="guide-accordion__header-left">
+            <span class="guide-accordion__icon">📊</span>
+            <span>Tabla Comparativa de Rangos y Límites Efectivos</span>
+            <span class="guide-accordion__badge guide-accordion__badge--green">Límites</span>
+          </div>
+          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
+        </summary>
+        <div class="guide-accordion__content">
+          <p class="guide-section__note">Los rangos son <strong>pases de 30 días</strong> y no se renuevan solos. Cada uno hereda todo lo del anterior, así que lo que ves en una fila se suma a las de arriba. Tu rango funciona igual en las cuatro modalidades.</p>
+          <div class="rank-scroll">
+            <table class="rank-table">
+              <caption class="sr-only">Comparación de rangos: hogares, bóvedas, protecciones, warps de jugador, tiendas e isla</caption>
+              <thead>
+                <tr><th scope="col">Rango</th><th scope="col">Hogares</th><th scope="col">Bóvedas</th><th scope="col">Protección</th><th scope="col">Protecciones a la vez</th><th scope="col">Warps</th><th scope="col">Tiendas</th><th scope="col">Isla</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row" data-rank="polis">Polis</th><td>1</td><td>2</td><td>31×31</td><td>2</td><td>3</td><td>10</td><td>128×128</td></tr>
+                <tr><th scope="row" data-rank="oldschool">OldSchool</th><td>1</td><td>2</td><td>113×113</td><td>5</td><td>5</td><td>15</td><td>128×128</td></tr>
+                <tr><th scope="row" data-rank="hercules">Hércules</th><td>3</td><td>3</td><td>49×49</td><td>3</td><td>5</td><td>15</td><td>144×144</td></tr>
+                <tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>3</td><td>81×81</td><td>4</td><td>5</td><td>20</td><td>160×160</td></tr>
+                <tr><th scope="row" data-rank="hermes">Hermes</th><td>6</td><td>5</td><td>113×113</td><td>5</td><td>8</td><td>30</td><td>176×176</td></tr>
+                <tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>5</td><td>177×177</td><td>6</td><td>8</td><td>40</td><td>192×192</td></tr>
+                <tr><th scope="row" data-rank="artemisa">Artemisa</th><td>10</td><td>5</td><td>241×241</td><td>8</td><td>12</td><td>50</td><td>208×208</td></tr>
+                <tr><th scope="row" data-rank="afrodita">Afrodita</th><td>12</td><td>7</td><td>353×353</td><td>10</td><td>15</td><td>65</td><td>224×224</td></tr>
+                <tr><th scope="row" data-rank="zeus">Zeus</th><td>20</td><td>10</td><td>481×481</td><td>15</td><td>25</td><td>80</td><td>250×250</td></tr>
+                <tr><th scope="row" data-rank="thor">Thor</th><td>25</td><td>12</td><td>601×601</td><td>18</td><td>25</td><td>100</td><td>280×280</td></tr>
+                <tr><th scope="row" data-rank="anubis">Anubis</th><td>30</td><td>14</td><td>721×721</td><td>20</td><td>25</td><td>120</td><td>310×310</td></tr>
+                <tr><th scope="row" data-rank="poseidon">Poseidón</th><td>35</td><td>16</td><td>841×841</td><td>22</td><td>25</td><td>150</td><td>340×340</td></tr>
+                <tr><th scope="row" data-rank="titan">Titán Japeto</th><td>40</td><td>18</td><td>1001×1001</td><td>25</td><td>25</td><td>200</td><td>400×400</td></tr>
+                <tr><th scope="row" data-rank="titan">Titán Oceanus</th><td>45</td><td>20</td><td>1301×1301</td><td>30</td><td>25</td><td>250</td><td>450×450</td></tr>
+                <tr><th scope="row" data-rank="titan">Titán Hiperión</th><td>50</td><td>22</td><td>1601×1601</td><td>35</td><td>25</td><td>300</td><td>500×500</td></tr>
+                <tr><th scope="row" data-rank="titan">Titán Cronos</th><td>60</td><td>25</td><td>2001×2001</td><td>40</td><td>25</td><td>400</td><td>550×550</td></tr>
+                <tr><th scope="row" data-rank="caos">Titán Caos</th><td>100</td><td>30</td><td>2501×2501</td><td>50</td><td>25</td><td>500</td><td>600×600</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="guide-section__note" style="margin-top:1rem;">«Protección» es el tamaño del bloque que incluye el rango. «Protecciones a la vez» es cuántas puedes tener colocadas simultáneamente. «Tiendas» es el límite de cofres de venta de ChestShop.</p>
+        </div>
+      </details>
+
+      <!-- 2. DESGLOSE DE COMANDOS POR RANGO -->
+      <details class="guide-accordion" data-cat="desglose" open>
+        <summary class="guide-accordion__summary">
+          <div class="guide-accordion__header-left">
+            <span class="guide-accordion__icon">🏛️</span>
+            <span>Comandos y Beneficios que Suma Cada Rango</span>
+            <span class="guide-accordion__badge guide-accordion__badge--purple">Permisos</span>
+          </div>
+          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
+        </summary>
+        <div class="guide-accordion__content">
+          <div class="guide-rows">
+            <div class="guide-row"><code>OldSchool</code><p><code>/ec</code> · <code>/feed</code> · <code>/hat</code> · <code>/near</code> · <code>/ptime</code> · <code>/pweather</code> · <code>/workbench</code> · <code>/condense</code><span class="guide-row__alias">Rango histórico, no está a la venta.</span></p></div>
+            <div class="guide-row"><code>Hércules</code><p>Color en el chat · <code>/clearinventory</code> · <code>/recipe</code><span class="guide-row__alias">Cosméticos: aura <strong>Llama</strong> · rastro <strong>Chispas</strong></span></p></div>
+            <div class="guide-row"><code>Hestia</code><p><code>/nick</code> · <code>/ext</code> · <code>/ptime</code> · <code>/pweather</code><span class="guide-row__alias">Cosméticos: aura <strong>Halo</strong> · muerte <strong>Tótem</strong></span></p></div>
+            <div class="guide-row"><code>Hermes</code><p><code>/fly</code> · <code>/speed</code> · <code>/back</code> · <code>/compass</code> · <code>/workbench</code> · <code>/ec</code> · RTP sin espera de movimiento<span class="guide-row__alias">Cosméticos: aura <strong>Alas Doradas</strong> · rastros <strong>Aliento</strong> y <strong>Plumas</strong></span></p></div>
+            <div class="guide-row"><code>Hefesto</code><p>Estaciones virtuales: <code>/anvil</code> · <code>/grindstone</code> · <code>/loom</code> · <code>/smithingtable</code> · <code>/stonecutter</code> · más <code>/condense</code> · <code>/depth</code> · <code>/dispose</code> · <code>/feed</code> · <code>/top</code> y RTP sin espera<span class="guide-row__alias">Cosméticos: muerte <strong>Rayo</strong></span></p></div>
+            <div class="guide-row"><code>Artemisa</code><p><code>/jump</code> · conservas la experiencia al morir<span class="guide-row__alias">Cosméticos: aura <strong>Cola Espectral</strong> · rastro <strong>Portal</strong></span></p></div>
+            <div class="guide-row"><code>Afrodita</code><p><code>/repair</code> · <code>/sell</code> · tus tiendas no pagan comisión<span class="guide-row__alias">Cosméticos: aura <strong>Halo de Ocaso</strong> · rastro <strong>Corazones</strong></span></p></div>
+            <div class="guide-row"><code>Zeus</code><p><code>/heal</code> · <code>/repair all</code> · <strong>conservas el inventario al morir</strong> · sin impuesto al comprar<span class="guide-row__alias">Cosméticos: aura <strong>Luciérnagas</strong> · muerte <strong>Explosión</strong></span></p></div>
+            <div class="guide-row"><code>Thor</code><p>Todo lo anterior, con más hogares, bóvedas, protecciones y tiendas.<span class="guide-row__alias">Cosméticos: aura <strong>Tormenta</strong></span></p></div>
+            <div class="guide-row"><code>Anubis</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosméticos: auras <strong>Ánima</strong> y <strong>Alas de Ocaso</strong></span></p></div>
+            <div class="guide-row"><code>Poseidón</code><p>Sigue subiendo cada límite.<span class="guide-row__alias">Cosméticos: aura <strong>Marea</strong></span></p></div>
+            <div class="guide-row"><code>Titán Japeto</code><p>Forja primordial. Primer Titán: entra el <strong>multiplicador ×5 de favor divino</strong>. Protección <strong>1001×1001</strong> · isla <strong>400×400</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
+            <div class="guide-row"><code>Titán Oceanus</code><p><strong>Vórtice Abisal</strong>: atrae a las hordas cercanas al centro. Protección <strong>1301×1301</strong> · isla <strong>450×450</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
+            <div class="guide-row"><code>Titán Hiperión</code><p><strong>Rayo solar</strong> y regeneración bajo el sol. Protección <strong>1601×1601</strong> · isla <strong>500×500</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Solar</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
+            <div class="guide-row"><code>Titán Cronos</code><p><strong>Parada del Tiempo</strong>: inmoviliza a los enemigos cercanos. Protección <strong>2001×2001</strong> · isla <strong>550×550</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
+            <div class="guide-row"><code>Titán Caos</code><p>La cima absoluta. <strong>Set primordial con trim Silence</strong>, Espada Voladora Autónoma, SFMaster controlado de <strong>48 reclamos/hora</strong> durante la vigencia del rango y <code>/ultragod</code> personal por 45 segundos cada 30 minutos. Protección <strong>2501×2501</strong> · isla <strong>600×600</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Caos</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastros <strong>Polvo Dorado</strong> y <strong>Polvo de Ocaso</strong></span></p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. COSMÉTICOS -->
+      <details class="guide-accordion" data-cat="cosmeticos">
+        <summary class="guide-accordion__summary">
+          <div class="guide-accordion__header-left">
+            <span class="guide-accordion__icon">✨</span>
+            <span>Cosméticos, Auras y Efectos de Muerte</span>
+            <span class="guide-accordion__badge guide-accordion__badge--blue">Estética</span>
+          </div>
+          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
+        </summary>
+        <div class="guide-accordion__content">
+          <p class="guide-section__note">Se equipan con <code>/cosmeticos</code> y se quitan escribiendo <code>none</code> en vez del nombre: <code>/cosmeticos aura none</code>. El menú marca en verde lo que ya tienes y en gris lo que desbloquea cada rango.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>/cosmeticos aura &lt;nombre&gt;</code><p>Partículas permanentes a tu alrededor. Las nuevas tienen forma 3D de verdad: alas que baten, halos, colas y órbitas.</p></div>
+            <div class="guide-row"><code>/cosmeticos rastro &lt;nombre&gt;</code><p>Partículas que dejas atrás al caminar o correr.</p></div>
+            <div class="guide-row"><code>/cosmeticos muerte &lt;nombre&gt;</code><p>El efecto cinematográfico que se dispara al morir.</p></div>
+            <div class="guide-row"><code>/cosmeticos aura none</code><p>Apaga el aura activa. Funciona igual para <code>rastro</code> y <code>muerte</code>.</p></div>
+          </div>
+          <p class="guide-section__note" style="margin-top:1rem;">Los cosméticos se revalidan solos: si tu rango caduca, el aura se apaga automáticamente. Están pensados para lucirse y no otorgan ventajas en combate.</p>
+        </div>
+      </details>
+
+      <!-- 4. SFMASTER -->
+      <details class="guide-accordion" data-cat="sfmaster">
+        <summary class="guide-accordion__summary">
+          <div class="guide-accordion__header-left">
+            <span class="guide-accordion__icon">⚙️</span>
+            <span>SFMaster: Acceso Técnico Controlado</span>
+            <span class="guide-accordion__badge guide-accordion__badge--red">Técnico</span>
+          </div>
+          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
+        </summary>
+        <div class="guide-accordion__content">
+          <p class="guide-section__note">SFMaster es un pase temporal para retirar materiales técnicos desde una guía especial. No entrega el comando libre <code>/sf cheat</code> y no convierte esos objetos en mercancía.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>Duración</code><p>El pase corre durante 1 o 24 horas cronológicas desde la entrega, según el producto comprado.</p></div>
+            <div class="guide-row"><code>32 reclamaciones por hora</code><p>Los pases SFMaster de 1 h y 24 h permiten 32 reclamaciones dentro de cada ventana de 60 minutos. Cada reclamo entrega un stack si el objeto es apilable; máquinas y objetos no apilables entregan una unidad.</p></div>
+            <div class="guide-row"><code>Titán Caos: 48 por hora</code><p>Mientras su rango mensual esté activo conserva los mismos bloqueos y propiedad vinculada, pero dispone de 48 reclamaciones por cada ventana de 60 minutos.</p></div>
+            <div class="guide-row"><code>Bloqueos</code><p>No permite Supreme, InfinityExpansion, armas, herramientas, armaduras, arcos, tridentes, elytras, diamantes, esmeraldas, netherite ni ancient debris.</p></div>
+            <div class="guide-row"><code>Propiedad Vinculada</code><p>Cada objeto queda marcado al comprador: no puede tirarse, intercambiarse, subastarse, guardarse para traspasarlo ni venderse.</p></div>
+            <div class="guide-row"><code>Caducidad</code><p>Al vencer se retira el rango y la guía deja de funcionar. El staff mantiene su acceso operativo separado.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 5. ROLES Y ENTREGA -->
+      <details class="guide-accordion" data-cat="info">
+        <summary class="guide-accordion__summary">
+          <div class="guide-accordion__header-left">
+            <span class="guide-accordion__icon">ℹ️</span>
+            <span>Roles de Aventura y Entrega Automática</span>
+            <span class="guide-accordion__badge guide-accordion__badge--green">Tienda</span>
+          </div>
+          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
+        </summary>
+        <div class="guide-accordion__content">
+          <div class="guide-split">
+            <div class="guide-split__card">
+              <h3>Roles de Aventura</h3>
+              <p style="margin:0 0 .6rem;font-size:.93rem;opacity:.85;">Pases de 30 días solo para identificarte con prefijo visual en el chat. <strong>No incluyen kit, objetos ni Slimefun.</strong></p>
+              <ul>
+                <li>Minero · Cazador · Constructor</li>
+                <li>Leñador · Alquimista · Nómada</li>
+              </ul>
+            </div>
+            <div class="guide-split__card">
+              <h3>Cómo se Entrega</h3>
+              <ul>
+                <li>Usa tu <strong>nick exacto</strong> de Minecraft al pagar en la tienda web</li>
+                <li>La entrega es 100% automática al conectarte al servidor</li>
+                <li>Si estás desconectado, se entrega al iniciar sesión</li>
+                <li>Los pases <strong>no se renuevan solos</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div>
+        <strong>DrakesCraft</strong>
+        <p>Una guía viva y actualizada para 1.21.11. Si tienes dudas, te ayudamos en Discord.</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="store.html">Tienda</a>
+        <a href="support.html">Soporte</a>
+        <a href="terms.html">Términos</a>
+        <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <div class="site-footer__sponsor">
+        <span>Apoya el proyecto</span>
+        <iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe>
+        <iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/site.js?v=20260820-accordion"></script>
+  <script src="scripts/guia.js?v=20260820-accordion"></script>
 </body>
 </html>
