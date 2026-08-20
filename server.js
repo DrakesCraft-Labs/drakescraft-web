@@ -7,7 +7,7 @@ import Fastify from 'fastify';
 import { estadoServidor } from './lib/mc-status.js';
 
 // Direccion publica del servidor de juego. Configurable por si cambia el dominio.
-const MC_HOST = process.env.MC_HOST || 'play.drakescraft.net';
+const MC_HOST = process.env.MC_HOST || 'mc.drakescraft.cl';
 const MC_PUERTO = Number(process.env.MC_PORT || 25565);
 import fastifyStatic from '@fastify/static';
 import { storeCatalog } from './catalog/store-catalog.js';
