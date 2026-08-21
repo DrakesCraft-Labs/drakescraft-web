@@ -65,11 +65,11 @@
 }
 
 /* --- Secciones y tabla --- */
-.guide-section { margin-bottom: 3rem; scroll-margin-top: 5rem; }
-.guide-section > h2 { margin: 0 0 .35rem; font-size: clamp(1.4rem, 3.4vw, 1.9rem); }
+.guide-section { margin-bottom: 3rem; scroll-margin-top: 5rem; width: 100%; max-width: 100%; box-sizing: border-box; }
+.guide-section > h2 { margin: 0 0 .35rem; font-size: clamp(1.4rem, 3.4vw, 1.9rem); word-break: break-word; }
 .guide-section__note { margin: 0 0 1.25rem; font-size: .95rem; line-height: 1.6; opacity: .75; }
 
-.guide-table { display: grid; gap: .5rem; }
+.guide-table, .guide-rows { display: grid; gap: .5rem; width: 100%; max-width: 100%; box-sizing: border-box; }
 
 .guide-row {
   display: grid;
@@ -80,6 +80,9 @@
   background: rgba(255, 255, 255, .035);
   border: 1px solid rgba(255, 255, 255, .09);
   border-radius: .7rem;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
 }
 
 .guide-row code {
@@ -88,9 +91,10 @@
   font-weight: 500;
   color: var(--dk-oro);
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
-.guide-row p { margin: 0; font-size: .95rem; line-height: 1.55; opacity: .85; }
+.guide-row p { margin: 0; font-size: .95rem; line-height: 1.55; opacity: .85; word-break: break-word; overflow-wrap: anywhere; }
 .guide-row__alias { display: block; margin-top: .3rem; font-size: .82rem; opacity: .55; }
 
 .guide-tag {
@@ -103,6 +107,7 @@
   text-transform: uppercase;
   vertical-align: middle;
   border-radius: 1rem;
+  white-space: nowrap;
 }
 
 .guide-tag--vip { color: var(--dk-oro); background: rgba(255, 176, 60, .16); }
@@ -114,7 +119,7 @@
 .guide-row.is-hidden, .guide-section.is-hidden { display: none; }
 
 /* --- Modalidades --- */
-.guide-modes { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-bottom: 1.5rem; }
+.guide-modes { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-bottom: 1.5rem; width: 100%; box-sizing: border-box; }
 
 .guide-mode {
   padding: 1.4rem;
@@ -122,19 +127,23 @@
   border: 1px solid rgba(255, 255, 255, .1);
   border-left: 3px solid var(--mode-accent, var(--dk-verde));
   border-radius: .8rem;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .guide-mode h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
 .guide-mode p { margin: 0 0 .75rem; font-size: .95rem; line-height: 1.6; opacity: .85; }
 .guide-mode ul { margin: 0; padding-left: 1.1rem; font-size: .9rem; line-height: 1.7; opacity: .8; }
 
-.guide-split { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.guide-split { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); width: 100%; box-sizing: border-box; }
 
 .guide-split__card {
   padding: 1.25rem;
   background: rgba(255, 255, 255, .035);
   border: 1px solid rgba(255, 255, 255, .1);
   border-radius: .8rem;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .guide-split__card h3 { margin: 0 0 .6rem; font-size: 1.05rem; }
@@ -143,36 +152,43 @@
 .guide-empty { padding: 2rem; text-align: center; opacity: .6; }
 .guide-empty.is-hidden { display: none; }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .guide-hero { padding: 3.25rem 0 2.25rem; }
-  .guide-hero h1 { font-size: clamp(2rem, 10vw, 2.7rem); }
+  .guide-hero h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
   .guide-search { margin: 1.4rem 0 .7rem; }
   .guide-search input { min-height: 3.1rem; font-size: 1rem; }
 
   .guide-filters {
+    display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    margin: 1rem -1rem 2rem;
-    padding: 0 1rem .45rem;
-    scroll-snap-type: x proximity;
+    gap: .45rem;
+    margin: 1rem 0 1.75rem;
+    padding: 0.2rem 0 .5rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .guide-filters button {
     flex: 0 0 auto;
-    min-height: 2.65rem;
-    scroll-snap-align: start;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.84rem;
+    white-space: nowrap;
   }
 
   .guide-section { margin-bottom: 2.25rem; scroll-margin-top: 4.5rem; }
-  .guide-row { grid-template-columns: 1fr; gap: .45rem; padding: .9rem; }
+  .guide-row { grid-template-columns: 1fr; gap: .45rem; padding: .85rem; }
   .guide-row code { font-size: .92rem; }
   .guide-row p { font-size: .92rem; }
   .guide-mode, .guide-split__card { padding: 1rem; }
+  .guide-modes, .guide-split { grid-template-columns: 1fr; }
 }
 
 /* --- Tabla comparativa de rangos --- */
-.rank-scroll { overflow-x: auto; margin-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+.rank-scroll { width: 100%; max-width: 100%; overflow-x: auto; margin-bottom: 1rem; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
 
 .rank-table {
   width: 100%;
@@ -257,30 +273,30 @@
   border: 0;
 }
 
-/* Pestañas entre las tres páginas de la guía. */
-.guide-tabs { display: flex; flex-wrap: wrap; gap: .5rem; max-width: 1100px; margin: 1.5rem auto 0; padding: 0 1.2rem; }
-.guide-tabs a { padding: .55rem .9rem; border: 1px solid var(--dk-linea); border-radius: 6px; color: var(--dk-suave); background: var(--dk-panel); font: 700 .85rem var(--font-body, sans-serif); text-decoration: none; }
+/* Pestañas entre las páginas de la guía. */
+.guide-tabs { display: flex; flex-wrap: wrap; gap: .5rem; width: 100%; max-width: 1100px; margin: 1.5rem auto 0; padding: 0 1rem; box-sizing: border-box; }
+.guide-tabs a { padding: .55rem .9rem; border: 1px solid var(--dk-linea); border-radius: 6px; color: var(--dk-suave); background: var(--dk-panel); font: 700 .85rem var(--font-body, sans-serif); text-decoration: none; transition: all .15s ease; }
 .guide-tabs a:hover { border-color: #4fbf7f; color: #eafff2; }
 .guide-tabs a.is-active { color: #08120d; border-color: var(--dk-verde); background: var(--dk-verde); }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .guide-tabs {
     flex-wrap: nowrap;
     overflow-x: auto;
     margin-top: 1rem;
-    padding-bottom: .35rem;
+    padding: 0 1rem .45rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
 
   .guide-tabs a {
     flex: 0 0 auto;
-    min-height: 2.65rem;
+    min-height: 2.5rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
   }
 
-  .rank-scroll { margin-right: -1rem; padding-right: 1rem; }
   .boss-price-grid { grid-template-columns: 1fr; }
 }
 
