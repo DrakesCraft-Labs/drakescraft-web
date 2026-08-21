@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Guía completa del servidor DrakesCraft 1.21.11: modalidades, protecciones, economía, magia elemental, panteón de dioses, clima y jefes aislados.">
-  <title>El Servidor · DrakesCraft</title>
+  <meta name="description" content="Guía completa de DrakesCraft: todos los comandos del servidor y cómo funcionan las cinco modalidades: Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio Creativo.">
+  <title>Guia · DrakesCraft</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260820-accordion">
-  <link rel="stylesheet" href="styles/guia.css?v=20260820-accordion">
+  <link rel="stylesheet" href="styles/base.css?v=20260821-mobilefix">
+  <link rel="stylesheet" href="styles/guia.css?v=20260821-mobilefix">
 </head>
 <body class="page-shell" data-page="guia">
   <nav class="site-nav" aria-label="Navegación principal">
@@ -21,12 +21,10 @@
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
-        <li><a href="guia-comandos.html">Comandos</a></li>
-        <li><a class="active" href="guia.html">El servidor</a></li>
+        <li><a class="active" href="#comandos">Comandos</a></li>
         <li><a href="guia-rangos.html">Rangos</a></li>
         <li><a href="guia-slimefun.html">Slimefun</a></li>
-        <li><a href="metricas.html">Métricas</a></li>
-        <li><a href="store.html">Tienda</a></li>
+        <li><a href="metricas.html">Métricas</a></li><li><a href="store.html">Tienda</a></li>
         <li><a href="apoya.html">Apoyar</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
       </ul>
@@ -37,302 +35,490 @@
     <header class="guide-hero">
       <div class="guide-hero__backdrop" aria-hidden="true"></div>
       <div class="container guide-hero__grid">
-        <p class="eyebrow">Manual general de la comunidad</p>
-        <h1>Guía de <em>El Servidor</em></h1>
-        <p class="guide-hero__lead">Un servidor de Minecraft <strong>1.21.11</strong> con varias modalidades en una sola instancia. Conoce las reglas, el clima global, la magia de Arcana, el panteón de Dioses y las arenas privadas de jefes.</p>
+        <p class="eyebrow">Todo lo que puedes escribir</p>
+        <h1>Guía de <em>comandos</em><br>y 5 modalidades</h1>
+        <p class="guide-hero__lead">Busca cualquier comando, mira para qué sirve y dónde funciona. Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio Creativo conviven en el mismo host.</p>
       </div>
     </header>
 
-    <nav class="guide-tabs" aria-label="Secciones de la guia">
-      <a href="guia-comandos.html">Comandos</a>
-      <a href="guia.html" class="is-active">El servidor</a>
-      <a href="guia-rangos.html">Rangos</a>
-      <a href="guia-slimefun.html">Slimefun & Addons</a>
-    </nav>
-
-    <div class="container">
-      <!-- Buscador -->
+          <nav class="guide-tabs" aria-label="Secciones de la guia">
+        <a href="guia-comandos.html">Comandos</a>
+        <a href="guia.html" class="is-active">El servidor</a>
+        <a href="guia-rangos.html">Rangos</a>
+        <a href="guia-slimefun.html">Slimefun</a>
+      </nav>
+<section class="container" id="comandos">
       <div class="guide-search">
-        <label class="sr-only" for="guide-q">Buscar en la guía general</label>
-        <input type="search" id="guide-q" placeholder="Busca una modalidad, regla, jefe, mecánica del clima o sistema propio…" autocomplete="off">
+        <label class="sr-only" for="guide-q">Buscar un comando</label>
+        <input type="search" id="guide-q" placeholder="Escribe un comando o lo que quieres hacer: casa, vender, isla, proteger…" autocomplete="off">
         <p class="guide-search__count" id="guide-count"></p>
       </div>
 
-      <!-- Filtros por categoría -->
       <div class="guide-filters" role="group" aria-label="Filtrar por categoría">
-        <button type="button" data-filter="all" aria-pressed="true" class="is-active">Todas las secciones</button>
-        <button type="button" data-filter="modalidades" aria-pressed="false">🏰 Modalidades</button>
-        <button type="button" data-filter="sistemas" aria-pressed="false">🔮 Magia, Dioses & Jefes</button>
-        <button type="button" data-filter="clima" aria-pressed="false">🌡️ El Clima & Ecosistema</button>
-        <button type="button" data-filter="economia" aria-pressed="false">💰 Economía & Comercio</button>
-        <button type="button" data-filter="protecciones" aria-pressed="false">🛡️ Protecciones</button>
-        <button type="button" data-filter="soporte" aria-pressed="false">📜 Normas & Soporte</button>
+        <button type="button" data-filter="all" aria-pressed="true">Todo</button>
+        <button type="button" data-filter="basico" aria-pressed="false">Básicos</button>
+        <button type="button" data-filter="modalidades" aria-pressed="false">Modalidades</button>
+        <button type="button" data-filter="proteccion" aria-pressed="false">Protecciones</button>
+        <button type="button" data-filter="economia" aria-pressed="false">Economía</button>
+        <button type="button" data-filter="slimefun" aria-pressed="false">Slimefun</button>
+        <button type="button" data-filter="drakes" aria-pressed="false">Magia y jefes</button>
+        <button type="button" data-filter="social" aria-pressed="false">Social</button>
+        <button type="button" data-filter="extra" aria-pressed="false">Extras</button>
       </div>
 
-      <!-- Botones expandir/contraer -->
-      <div class="guide-controls">
-        <span style="font-size:0.88rem; opacity:0.75;">Haz clic en cada sección para desplegar los detalles:</span>
-        <div class="guide-controls__btns">
-          <button type="button" id="btn-expand-all" class="guide-btn-action">🔽 Expandir Todo</button>
-          <button type="button" id="btn-collapse-all" class="guide-btn-action">🔼 Contraer Todo</button>
+      <p class="guide-empty is-hidden" id="guide-empty">No encontramos ningún comando con eso. Prueba con otra palabra.</p>
+
+      <section class="guide-section" data-cat="basico">
+        <h2>Básicos</h2>
+        <p class="guide-section__note">Lo primero que vas a necesitar. Clásico mantiene hogares y protecciones, pero bloquea los atajos marcados para que su progresión siga siendo sencilla.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/spawn</code><p>Te lleva al punto de inicio del servidor (Lobby principal).<span class="guide-row__alias">También: /hub, /lobby</span></p></div>
+          <div class="guide-row"><code>/sethome &lt;nombre&gt;</code><p>Guarda tu ubicación actual como hogar. La cantidad de hogares sube con tu rango.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/home &lt;nombre&gt;</code><p>Te teletransporta a un hogar guardado. Sin nombre te lleva al principal.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/delhome &lt;nombre&gt;</code><p>Borra un hogar guardado.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/back</code><p>Vuelve al último lugar desde donde te teletransportaste o donde moriste.<span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
+          <div class="guide-row"><code>/rtp</code><p>Te lanza a un punto aleatorio del mundo, lejos de todo.<span class="guide-row__alias">También: /wild</span><span class="guide-tag guide-tag--bedrock">Bedrock: hasta 150.000 bloques</span></p></div>
+          <div class="guide-row"><code>/tpa &lt;jugador&gt;</code><p>Pide teletransportarte a otra persona. Si juegas en <strong>Bedrock</strong> no podrás cruzar los 150.000 bloques: tu cliente pierde precisión ahí y el mundo deja de responder. Desde <strong>Java</strong> sí puedes viajar hasta donde esté quien juega en Bedrock.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/tpaccept</code><p>Acepta una solicitud de teletransporte.<span class="guide-row__alias">Rechazar: /tpdeny</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/warps</code><p>Lista los puntos públicos del servidor.<span class="guide-row__alias">Ir a uno: /warp &lt;nombre&gt;</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
+          <div class="guide-row"><code>/ayuda</code><p>Ayuda dentro del juego.<span class="guide-row__alias">También: /comandos, /helpo</span></p></div>
+          <div class="guide-row"><code>/lista</code><p>Muestra quién está conectado.</p></div>
+          <div class="guide-row"><code>/kit</code><p>Reclama tu kit. Cada rango tiene el suyo y se renueva cada 30 días.<span class="guide-row__alias">También: /kits</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
+          <div class="guide-row"><code>/daily</code><p>Recompensa diaria. Entra todos los días para subir tu racha.</p></div>
+          <div class="guide-row"><code>/misiones</code><p>Abre el panel de misiones.</p></div>
+          <div class="guide-row"><code>/papatrueque</code><p>El trueque del Comerciante de la Papa de mar. También se abre hablándole en el spawn.<span class="guide-row__alias">Deposita tus papas para juntar más de las que caben encima</span></p></div>
+          <div class="guide-row"><code>/borde</code><p>Muestra u oculta el borde de cristal de tu protección.<span class="guide-row__alias">También: /bordes, /limite</span></p></div>
+          <div class="guide-row"><code>/arcana</code><p>Tu escuela mágica, tu arquetipo y tu progreso. Cada cuenta recibe una afinidad al entrar.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="modalidades">
+        <h2>Modalidades (5 en 1)</h2>
+        <p class="guide-section__note">Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio conviven en el mismo host. Tu rango, tus jobs, tus skills y tu dinero te siguen; el inventario queda aislado entre cada una para proteger la economía.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre las 5 modalidades del servidor.<span class="guide-row__alias">También: /modalidad, /modos, /menu</span></p></div>
+          <div class="guide-row"><code>/slimefun</code><p>La modalidad principal: máquinas, magia, jefes y progresión completa. <strong>Antes se llamaba Survival</strong> y el comando de siempre sigue valiendo.<span class="guide-row__alias">También: /survival, /principal, /polis</span></p></div>
+          <div class="guide-row"><code>/clasico</code><p>Minecraft tradicional: <strong>sin Slimefun, sin máquinas y sin mobs modificados</strong>. Terreno generado con Terralith, biomas únicos y borde de 200.000 bloques.<span class="guide-row__alias">Muévete con /rtp</span></p></div>
+          <div class="guide-row"><code>/is</code><p>Tu isla de <strong>SkyBlock</strong>. Sin isla, te crea una.<span class="guide-row__alias">También: /skyblock. Ojo: no es lo mismo que /ob</span></p></div>
+          <div class="guide-row"><code>/ob</code><p>Tu isla de <strong>OneBlock</strong>, el bloque infinito que evoluciona por fases.<span class="guide-row__alias">También: /oneblock</span></p></div>
+          <div class="guide-row"><code>/warp laboratorio</code><p>🧪 <strong>Laboratorio Creativo</strong>: Mundo plano pacífico, sin mobs y en modo creativo. Diseñado para diseñar y probar maquinaria, circuitos y redes de Slimefun sin perder materiales en el Survival.<span class="guide-row__alias">Acceso al Cheat Sheet con /sf cheat</span></p></div>
+          <div class="guide-row"><code>/sf cheat</code><p>🎁 <strong>Cheat Sheet de Slimefun</strong>: Abre el catálogo completo para retirar cualquier máquina o ítem con un solo clic. También se abre haciendo <strong>Shift + Clic Derecho</strong> con la guía de Slimefun en la mano.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p></div>
+          <div class="guide-row"><code>/is level</code><p>Nivel de tu isla. Sube rompiendo y construyendo con bloques valiosos.<span class="guide-row__alias">En OneBlock: /ob level</span></p></div>
+          <div class="guide-row"><code>/is team</code><p>Invita amigos a tu isla y administra tu equipo.</p></div>
+          <div class="guide-row"><code>/is settings</code><p>Permisos y ajustes de tu isla: visitantes, construcción y cofres.</p></div>
+          <div class="guide-row"><code>/is sethome</code><p>Fija dónde apareces al volver a tu isla.</p></div>
+          <div class="guide-row"><code>/is reset</code><p><strong>Borra tu isla y empiezas de cero.</strong> Pide confirmación, pero no se puede deshacer.</p></div>
+          <div class="guide-row"><code>/pv</code><p>Tus bóvedas personales. <strong>Cada modalidad tiene las suyas</strong>: lo que guardes en tu isla o laboratorio no aparece en Slimefun.<span class="guide-row__alias">También: /vault</span></p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="proteccion">
+        <h2>Protecciones</h2>
+        <p class="guide-section__note">En Slimefun y en Clásico tu terreno se protege con piedras de ProtectionStones. Dentro de las islas no hace falta: ahí protege el propio sistema de islas.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/tiendaprot</code><p>Tienda de piedras de protección, se pagan con Dragmas.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/ps get &lt;nombre&gt;</code><p>Compra una piedra concreta del catálogo.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
+          <div class="guide-row"><code>/ps home</code><p>Lista tus protecciones y te lleva a la que elijas. Funciona tanto en Slimefun como en Clásico.</p></div>
+          <div class="guide-row"><code>/ps info</code><p>Datos de la protección donde estás parado.</p></div>
+          <div class="guide-row"><code>/ps add &lt;jugador&gt;</code><p>Da permiso de construir en tu terreno.<span class="guide-row__alias">Quitar: /ps remove &lt;jugador&gt;</span></p></div>
+          <div class="guide-row"><code>/ps flag</code><p>Ajusta reglas de tu terreno: PvP, explosiones, spawn de mobs.</p></div>
+          <div class="guide-row"><code>/ps unclaim</code><p>Elimina tu protección y recuperas la piedra.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="economia">
+        <h2>Economía y comercio</h2>
+        <p class="guide-section__note">La moneda son los <strong>Dragmas</strong> y es la misma en todas las modalidades: lo que ganes en Clásico lo puedes gastar en Slimefun o en tu isla.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/tienda</code><p>Hub de comercio del servidor: categorías, protecciones y más.</p></div>
+          <div class="guide-row"><code>/buy</code><p>Enlace a la tienda oficial de rangos y kits.<span class="guide-row__alias">También: /comprar, /store, /shop</span></p></div>
+          <div class="guide-row"><code>/balance</code><p>Tu dinero disponible.<span class="guide-row__alias">También: /bal, /money</span></p></div>
+          <div class="guide-row"><code>/baltop</code><p>Ranking de los más ricos del servidor.</p></div>
+          <div class="guide-row"><code>/pay &lt;jugador&gt; &lt;monto&gt;</code><p>Transfiere Dragmas a otra persona.</p></div>
+          <div class="guide-row"><code>/bank</code><p>Tu cuenta bancaria. <strong>El dinero del banco no sirve para comprar</strong>: sácalo antes con <code>/sb withdraw</code>.</p></div>
+          <div class="guide-row"><code>/jobs</code><p>Empleos. Únete a uno y ganas dinero por minar, talar, cultivar o cazar.<span class="guide-row__alias">Unirse: /jobs join &lt;empleo&gt;</span></p></div>
+          <div class="guide-row"><code>/ah</code><p>Casa de subastas independiente por modalidad. Solo verás anuncios creados en la modalidad donde estés.</p></div>
+          <div class="guide-row"><code>/sellinv</code><p>Vende de una vez los materiales de tu inventario.</p></div>
+          <div class="guide-row"><code>/sfmercado</code><p>Mercado dinámico de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Solo Slimefun</span></p></div>
+          <div class="guide-row"><code>/pw</code><p>Warps de jugadores: visita las tiendas y bases que otros publicaron.<span class="guide-row__alias">También: /pwarp</span></p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="slimefun">
+        <h2>Slimefun y tecnología</h2>
+        <p class="guide-section__note">Slimefun está mantenido y portado a 1.21.11 por nosotros, con más de 40 expansiones. Es el corazón del servidor.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/sf guide</code><p>Te entrega la guía de Slimefun si la perdiste.</p></div>
+          <div class="guide-row"><code>/sf search &lt;texto&gt;</code><p>Busca una receta o un objeto por nombre.</p></div>
+          <div class="guide-row"><code>/sf stats</code><p>Tu progreso de investigación.</p></div>
+          <div class="guide-row"><code>/skills</code><p>Tus habilidades de AuraSkills: minería, lucha, agricultura y más.</p></div>
+        </div>
+
+        <h3>Acelerar cultivos y máquinas</h3>
+        <p class="guide-section__note">Las plantas de <strong>Cultivation</strong> tardan lo suyo en cada cruce, y ese tiempo no se toca desde la configuración. Lo que sí puedes hacer es meterlas en una <strong>Campana de Jardín</strong> (<em>Garden Cloche</em>), que es la máquina pensada justo para eso.</p>
+        <p class="guide-section__note">Para los cultivos normales está el <strong>Acelerador de Crecimiento</strong> de Slimefun. Si te sonaba que iba flojo, tenías razón: arrastraba un fallo por el que la mayoría de los aceleradores colocados <strong>no llegaban a activarse nunca</strong>. Ya está corregido, así que rinden como deberían.</p>
+
+      <section class="guide-section" data-cat="social">
+        <h2>Social y chat</h2>
+        <p class="guide-section__note">El servidor es hispanohablante, pero el chat se puede traducir automáticamente.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/msg &lt;jugador&gt; &lt;texto&gt;</code><p>Mensaje privado.<span class="guide-row__alias">Responder: /r &lt;texto&gt;</span></p></div>
+          <div class="guide-row"><code>/wwct &lt;idioma&gt;</code><p><strong>Traductor.</strong> Con <code>/wwct es</code> lees todo en español; con <code>/wwct en</code>, en inglés. Se apaga con <code>/wwct stop</code>.</p></div>
+          <div class="guide-row"><code>/team</code><p>Crea o gestiona tu equipo, con chat propio y cofre compartido.</p></div>
+          <div class="guide-row"><code>/tc</code><p>Chat de equipo. Solo lo leen los tuyos. Sin nada detrás alterna el modo; con texto detrás manda ese mensaje sin cambiar de canal.<span class="guide-row__alias">También: /team chat</span></p></div>
+          <div class="guide-row"><code>/ac</code><p>Chat de aliados: llega a tu equipo y a los equipos con los que tengas alianza.<span class="guide-row__alias">También: /team allychat</span></p></div>
+          <div class="guide-row"><code>!mensaje</code><p><strong>Atajos sin comando.</strong> Empieza una frase con <code>!</code> y va a tu equipo; con <code>?</code>, a tus aliados. Estando en el chat de equipo, <code>!</code> la devuelve al chat global.</p></div>
+          <div class="guide-row"><code>/ignore &lt;jugador&gt;</code><p>Deja de ver los mensajes de alguien.</p></div>
+          <div class="guide-row"><code>/mail</code><p>Correo interno del servidor.<span class="guide-row__alias">Enviar: /mail send &lt;jugador&gt; &lt;texto&gt;</span></p></div>
+          <div class="guide-row"><code>/discord</code><p>Enlace a nuestro Discord y vinculación de tu cuenta.</p></div>
+          <div class="guide-row"><code>/rules</code><p>Las reglas del servidor dentro del juego.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="drakes">
+        <h2>Sistemas propios de DrakesCraft</h2>
+        <p class="guide-section__note">Magia, dioses y jefes están programados para este servidor. No existen en ningún otro.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/arcana</code><p>Abre el <strong>Códice de Arcana</strong>: afinidad elemental, espiritualidad, habilidades, costos y enfriamientos.<span class="guide-row__alias">También: /arc, /magia</span></p></div>
+          <div class="guide-row"><code>/arcana guide</code><p>Guía de uso de tu Catalizador Arcano y de las seis afinidades disponibles.</p></div>
+          <div class="guide-row"><code>/arcana spirit</code><p>Muestra tu espiritualidad, esencia y progreso actual.<span class="guide-row__alias">Recuperar objetos: /arcana book y /arcana catalyst</span></p></div>
+          <div class="guide-row"><code>/arcana meditate</code><p>Inicia la meditación cuando cumples sus condiciones; no dispara poderes ofensivos.</p></div>
+          <div class="guide-row"><code>/dioses</code><p>Abre el <strong>Códice Divino</strong>. Ahí eliges panteón y deidad, equipas habilidades y ves favor, mantenimiento y enfriamientos.<span class="guide-row__alias">También: /dios, /panteon</span></p></div>
+          <div class="guide-row"><code>/bosswarp precios</code><p>Muestra todos los jefes y la entrada por jugador antes de crear una arena.</p></div>
+          <div class="guide-row"><code>/bosswarp &lt;jefe&gt; solo</code><p>Reserva una arena aislada y entra en solitario. El cobro sólo se confirma si la arena pudo prepararse.</p></div>
+          <div class="guide-row"><code>/bosswarp &lt;jefe&gt; grupo &lt;jugadores...&gt;</code><p>Crea una sesión privada con jugadores conectados; cada integrante paga su entrada.</p></div>
+          <div class="guide-row"><code>/bosswarp spectate &lt;jugador&gt;</code><p>Observa la arena activa de otro jugador sin entrar al combate.</p></div>
+          <div class="guide-row"><code>/tienda</code><p>Hub de comercio con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades, encantamientos y kits VIP.</p></div>
+          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Slimefun, Clásico, SkyBlock y OneBlock.</p></div>
+          <div class="guide-row"><code>/cosmeticos</code><p>Menú de auras, rastros y efectos de muerte que vienen con tu rango.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="extra">
+        <h2>El clima</h2>
+        <p class="guide-section__note">Hay dos cosas distintas y conviene no mezclarlas: la <strong>temperatura de fondo</strong>, que sube poco a poco con la contaminación, y los <strong>fenómenos</strong>, que van y vienen.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>Termómetro</code><p>Mide la temperatura donde estás. <strong>Clic derecho</strong> para cambiar entre Celsius, Fahrenheit y Kelvin.</p></div>
+          <div class="guide-row"><code>Medidor de Calidad del Aire</code><p>Muestra cuánta contaminación acumula el mundo.</p></div>
+          <div class="guide-row"><code>Compresor de Aire</code><p>Convierte carbono en Bombonas de CO₂, que es el primer paso para limpiar.</p></div>
+          <div class="guide-row"><code>Sumidero de Carbono</code><p><strong>Nuevo.</strong> Consume Bombonas de CO₂, te devuelve la bombona vacía y <strong>baja la contaminación del mundo</strong>.</p></div>
+          <div class="guide-row"><code>Climatizador</code><p><strong>Nuevo.</strong> Dentro de su radio la temperatura es la que le pongas, pase lo que pase fuera, <strong>y la nieve no se posa</strong>.</p></div>
+          <div class="guide-row"><code>/gw silenciar</code><p>Deja de recibir los mensajes del clima. Se recuerda entre reinicios.</p></div>
+        </div>
+
+        <h3>¿Por qué la temperatura solo sube?</h3>
+        <p class="guide-section__note">Porque así funciona: la contaminación se <strong>acumula</strong> y casi nada la baja. Cada receta de carbón, uranio o lingotes ardientes suma; sólo la bajan el Compresor de Aire, que crezca un árbol y criar animales, y lo hacen en cantidades minúsculas.</p>
+        <p class="guide-section__note">Para que se vea la escala: el mundo de Slimefun lleva unas <strong>1.370 unidades</strong> acumuladas, que son unos <strong>+2,7 °C</strong> sobre lo normal.</p>
+        <p class="guide-section__note"><strong>Eso ya se puede revertir.</strong> Antes no: lo que bajaba la contaminación eran cantidades tan pequeñas que habrían hecho falta más de 270.000 árboles. Ahora está el <strong>Sumidero de Carbono</strong>, que cierra el ciclo entero:</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>1. Compresor de Aire</code><p>Con carbono y una bombona vacía, fabrica una <strong>Bombona de CO₂</strong>.</p></div>
+          <div class="guide-row"><code>2. Sumidero de Carbono</code><p>Consume esa bombona, te la devuelve vacía y <strong>descuenta contaminación del mundo</strong>.</p></div>
+        </div>
+        <p class="guide-section__note">Son unos <strong>2,5 puntos por minuto</strong> con una máquina: se ve moverse el Medidor de Calidad del Aire. Limpiar el mundo entero sigue siendo un proyecto de varias horas, o de varias máquinas a la vez. Ensuciar siempre será más barato que limpiar &mdash; pero ya no es irreversible. Plantar árboles también cuenta ahora, aunque sigue siendo lo lento.</p>
+
+        <h3>Tu propio clima</h3>
+        <p class="guide-section__note">El <strong>Climatizador</strong> mantiene su propio clima alrededor. Mientras tenga energía, dentro de su radio la temperatura es la que tú le pongas, aunque fuera haya una ola de calor, y <strong>la nieve de una nevada no se posa</strong>. Es la forma de que tu base se vea como tú quieres sin depender de lo que pase en el mundo.</p>
+
+        <h3>¿Y las tormentas dónde están?</h3>
+        <p class="guide-section__note">Cada <strong>10 minutos</strong> se echa a suertes si empieza un fenómeno, con un <strong>35 %</strong> de probabilidad, y dura entre <strong>4 y 10 minutos</strong>. O sea que de media pasa algo cada media hora larga, no todo el rato.</p>
+        <p class="guide-section__note">Cuando empieza uno se <strong>avisa por el chat</strong>, así que si silenciaste los mensajes con <code>/gw silenciar</code> te enterarás sólo por el termómetro y por el cielo. Los fenómenos <strong>sólo ocurren en mundos normales con gente dentro</strong>: en el Nether y el End no hay.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>Ola de calor</code><p>+12 °C y cielo despejado.</p></div>
+          <div class="guide-row"><code>Ola de frío</code><p>−12 °C.</p></div>
+          <div class="guide-row"><code>Nevada</code><p>−8 °C y nieve sobre el suelo natural. No se posa sobre construcciones.</p></div>
+          <div class="guide-row"><code>Tormenta</code><p>−6 °C, lluvia y truenos.</p></div>
+          <div class="guide-row"><code>Bochorno</code><p>+6 °C, calor pegajoso.</p></div>
+        </div>
+        <p class="guide-section__note" style="margin-top:1rem;"><strong>El clima no te hace daño.</strong> No quema, no ralentiza, no mata, y no hay sed ni temperatura corporal. Solo cambia el mundo: es ambientación, no una barra que administrar.</p>
+      </section>
+
+      <section class="guide-section" data-cat="extra">
+        <h2>Extras y cosméticos</h2>
+        <p class="guide-section__note">Detalles que hacen el día a día más cómodo. Algunos vienen con los rangos.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>/ec</code><p>Abre a distancia tu cofre de ender. <strong>Es distinto en cada modalidad.</strong><span class="guide-row__alias">También: /enderchest</span><span class="guide-tag guide-tag--survival">Acceso remoto bloqueado en Clásico</span></p></div>
+          <div class="guide-row"><code>/sit</code><p>Siéntate donde estés. También funciona en escaleras y bloques.</p></div>
+          <div class="guide-row"><code>/cosmeticos</code><p>Auras, rastros y efectos de muerte.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
+          <div class="guide-row"><code>/fly</code><p>Vuelo.<span class="guide-tag guide-tag--vip">Desde Hermes</span></p></div>
+          <div class="guide-row"><code>/feed</code><p>Rellena tu hambre.<span class="guide-tag guide-tag--vip">Desde Hefesto</span></p></div>
+          <div class="guide-row"><code>/nick &lt;nombre&gt;</code><p>Cambia tu nombre visible.<span class="guide-tag guide-tag--vip">Desde Hestia</span></p></div>
+          <div class="guide-row"><code>/chatgames</code><p>Juegos de chat automáticos. Responde primero y ganas Dragmas.</p></div>
+          <div class="guide-row"><code>/jb</code><p>Reproductor de música con cientos de canciones.<span class="guide-row__alias">También: /jukebox</span></p></div>
+          <div class="guide-row"><code>/afk</code><p>Te marca como ausente.</p></div>
+          <div class="guide-row"><code>/gw silenciar</code><p>Silencia los mensajes del clima solo para ti: boletines de contaminación y avisos de olas de calor, tormentas y nevadas. Se recuerda entre reinicios y se vuelve a activar con el mismo comando.<span class="guide-row__alias">También: /globalwarming silenciar</span></p></div>
+          <div class="guide-row"><code>/exc</code><p>Tus cofres y llaves de recompensas.</p></div>
+        </div>
+      </section>
+
+      <section class="guide-section" data-cat="basico">
+        <h2>Reportar un fallo</h2>
+        <p class="guide-section__note">Si algo no funciona, <strong>dilo en el foro de reportes de Discord</strong>, no en el chat del juego. En el chat se pierde entre conversaciones; en el foro queda como un hilo que se puede seguir, etiquetar y cerrar cuando está resuelto.</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>Qué pasó</code><p>Una frase. Qué esperabas y qué ocurrió en su lugar.</p></div>
+          <div class="guide-row"><code>Dónde</code><p>La modalidad y, si puedes, las coordenadas.</p></div>
+          <div class="guide-row"><code>Con qué</code><p>El nombre exacto del objeto, máquina o comando.</p></div>
+          <div class="guide-row"><code>Cuándo</code><p>La hora aproximada. Con eso se puede buscar en los registros.</p></div>
+          <div class="guide-row"><code>Captura</code><p>Si se ve en pantalla, una imagen ahorra veinte mensajes.</p></div>
+        </div>
+        <p class="guide-section__note" style="margin-top:1rem;">Hay registros de casi todo, así que un reporte con hora y lugar casi siempre se puede verificar. Eso también significa que aprovecharse de un fallo en vez de reportarlo se acaba viendo.</p>
+
+        <h3>Cuándo se atienden</h3>
+        <p class="guide-section__note">DrakesCraft lo mantiene <strong>una sola persona</strong>, con ayuda puntual de Chagui, Nix, Lauti y Pepino. Para que eso sea sostenible hay un horario:</p>
+        <div class="guide-table">
+          <div class="guide-row"><code>Lunes a jueves</code><p><strong>Días de trabajo en el servidor.</strong> Es cuando se revisan los reportes, se arreglan cosas y se despliegan cambios.</p></div>
+          <div class="guide-row"><code>Viernes a domingo</code><p><strong>Descanso y estudios.</strong> El servidor sigue encendido y el staff sigue moderando, pero no se tocan plugins ni se contestan reportes.</p></div>
+        </div>
+        <p class="guide-section__note" style="margin-top:1rem;">Puedes abrir un reporte <strong>cualquier día</strong>: para eso es el foro, para que no se pierda nada. Lo que cambia es cuándo recibe respuesta. Si algo tumba el servidor entero, eso sí se mira cuando sea.</p>
+      </section>
+    </section>
+
+    
+<section class="container guide-section" id="modalidades">
+      <h2>Cómo funcionan las modalidades</h2>
+      <p class="guide-section__note">Las cuatro corren en el mismo servidor. No cambias de IP ni pierdes tu progreso: cambias de mundo con <code>/modalidades</code>.</p>
+
+      <div class="guide-modes">
+        <article class="guide-mode" style="--mode-accent:#9ce6a4;">
+          <h3>Slimefun</h3>
+          <p>La modalidad principal y la más completa. Antes se llamaba Survival.</p>
+          <ul>
+            <li>Slimefun con todas sus expansiones</li>
+            <li>Magia, jefes y eventos</li>
+            <li>Protecciones con piedras</li>
+            <li>Subastas, mercados y warps de jugadores</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#7fc98f;">
+          <h3>Clásico</h3>
+          <p>Minecraft del de siempre. Solo el juego, tú y el terreno.</p>
+          <ul>
+            <li><strong>Sin Slimefun</strong>: ni máquinas, ni guía, ni investigaciones</li>
+            <li><strong>Solo mobs vanilla</strong>: sin jefes, sin niveles, sin infernales</li>
+            <li>Terreno con Terralith: biomas que no existen en el juego normal</li>
+            <li>Mundo con borde de 200.000 bloques, con su propio <code>/rtp</code></li>
+            <li>Hogares con <code>/sethome</code>, <code>/home</code> y <code>/delhome</code></li>
+            <li>Solicitudes entre jugadores con <code>/tpa</code>, <code>/tpaccept</code> y <code>/tpdeny</code></li>
+            <li>Protecciones con piedras y regreso con <code>/ps home</code></li>
+            <li>Entras con <code>/clasico</code></li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#8ad8ff;">
+          <h3>SkyBlock</h3>
+          <p>Tu isla flotando en el vacío. Empiezas con lo justo.</p>
+          <ul>
+            <li>Tu isla crece según tu rango</li>
+            <li>Nether y End propios</li>
+            <li>Slimefun funciona igual que en la modalidad Slimefun</li>
+            <li>Entras con <code>/is</code></li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#d9a4ff;">
+          <h3>OneBlock</h3>
+          <p>Un solo bloque infinito que va cambiando por fases.</p>
+          <ul>
+            <li>21 fases con sus propias recompensas</li>
+            <li>De las llanuras a las cuevas de azufre</li>
+            <li>Tu isla crece según tu rango</li>
+            <li>Entras con <code>/ob</code></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="guide-split">
+        <div class="guide-split__card">
+          <h3>Lo que te sigue entre modalidades</h3>
+          <ul>
+            <li><strong>Tu rango</strong> y todos sus permisos</li>
+            <li><strong>El cooldown de tus kits</strong>, aunque no se reclaman en Clásico</li>
+            <li><strong>Tu dinero</strong>: los Dragmas son comunes</li>
+            <li><strong>Tus empleos</strong> y tus habilidades</li>
+            <li><strong>Tu progreso de Slimefun</strong></li>
+          </ul>
+        </div>
+        <div class="guide-split__card">
+          <h3>Lo que va separado</h3>
+          <ul>
+            <li><strong>Tu inventario</strong> y tu experiencia</li>
+            <li><strong>Tu cofre de ender</strong></li>
+            <li><strong>Tus bóvedas</strong> <code>/pv</code></li>
+            <li><strong>Las subastas</strong>: cada modalidad tiene su propio mercado aislado</li>
+            <li><strong>Las protecciones</strong>: en las islas protege el sistema de islas</li>
+          </ul>
         </div>
       </div>
 
-      <p class="guide-empty is-hidden" id="guide-empty">No encontramos nada con ese término. Prueba con otra palabra.</p>
+      <p class="guide-section__note" style="margin-top:1.5rem;">No se pueden pasar objetos de una modalidad a otra. Es a propósito: cada una tiene que valer por sí misma.</p>
+    </section>
 
-      <!-- 1. MODALIDADES -->
-      <details class="guide-accordion" data-cat="modalidades" open>
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">🏰</span>
-            <span>Las Modalidades de Juego</span>
-            <span class="guide-accordion__badge guide-accordion__badge--green">Mundos</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">Todas las modalidades corren en la misma instancia y comparten tu rango y tu dinero (Dragmas), pero mantienen inventarios aislados.</p>
-          <div class="guide-modes">
-            <article class="guide-mode" style="--mode-accent:#9ce6a4;">
-              <h3>Slimefun</h3>
-              <p>La modalidad principal con tecnología, magia, reactores y combate épico.</p>
-              <ul>
-                <li>Slimefun con más de 60 expansiones activas</li>
-                <li>Magia de Arcana, Dioses y Jefes</li>
-                <li>Protecciones con piedras de ProtectionStones</li>
-                <li>Subastas, mercados y warps de jugadores</li>
-              </ul>
-            </article>
-            <article class="guide-mode" style="--mode-accent:#7fc98f;">
-              <h3>Clásico</h3>
-              <p>Minecraft vanilla tradicional. Sin tecnología ni magia.</p>
-              <ul>
-                <li><strong>Sin Slimefun</strong>: sin máquinas ni investigaciones</li>
-                <li><strong>Solo mobs vanilla</strong>: sin infernales ni jefes</li>
-                <li>Terreno con Terralith (biomas únicos) y borde de 200.000 bloques</li>
-                <li>Protecciones con piedras y comandos <code>/sethome</code> y <code>/tpa</code></li>
-              </ul>
-            </article>
-            <article class="guide-mode" style="--mode-accent:#8ad8ff;">
-              <h3>SkyBlock</h3>
-              <p>Tu isla en el vacío con misiones y progresión por fases.</p>
-              <ul>
-                <li>El tamaño de tu isla escala según tu rango</li>
-                <li>Nether y End independientes</li>
-                <li>Slimefun completo habilitado</li>
-                <li>Entras con <code>/is</code></li>
-              </ul>
-            </article>
-            <article class="guide-mode" style="--mode-accent:#d9a4ff;">
-              <h3>OneBlock</h3>
-              <p>Un solo bloque infinito que va evolucionando por biomas.</p>
-              <ul>
-                <li>21 fases con recompensas y cofres de botín</li>
-                <li>De llanuras a cuevas profundas y el vacío del End</li>
-                <li>Tu isla crece según tu rango</li>
-                <li>Entras con <code>/ob</code></li>
-              </ul>
-            </article>
-          </div>
-          <div class="guide-rows" style="margin-top:1.25rem;">
-            <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Slimefun, Clásico, SkyBlock y OneBlock sin perder progreso.</p></div>
-          </div>
+    
+<section class="container guide-section" id="sistemas">
+      <h2>Magia, dioses y jefes</h2>
+      <p class="guide-section__note">Tres sistemas escritos para este servidor. Se cruzan entre sí: el favor que ganas con un dios alimenta lo que puedes hacer contra los jefes.</p>
+
+      <div class="guide-modes">
+        <article class="guide-mode" style="--mode-accent:var(--dk-verde);">
+          <h3>Arcana · magia elemental</h3>
+          <p>Magia con progresión propia, dominios visuales y seis afinidades: fuego, tierra, aire, agua, hielo y electro.</p>
+          <ul>
+            <li>Abres el códice con <code>/arcana</code></li>
+            <li>La afinidad se asigna al entrar por primera vez</li>
+            <li>El Catalizador activa poderes; los comandos sólo informan</li>
+            <li>Los ataques son PvE, respetan claims y no dañan jugadores</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#ffd479;">
+          <h3>Dioses · el panteón</h3>
+          <p>Eliges panteón y deidad, acumulas <strong>favor divino</strong> y equipas una selección de habilidades.</p>
+          <ul>
+            <li>Abres el panteón con <code>/dioses</code></li>
+            <li>El mantenimiento es semanal y escala con tu progreso</li>
+            <li>Renunciar borra el progreso ligado y aplica 48 horas de espera</li>
+            <li>En Slimefun los poderes PvP están desactivados</li>
+            <li>Los rangos Titán multiplican tu favor <strong>×5</strong></li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#ff6b6b;">
+          <h3>Jefes · arenas aisladas</h3>
+          <p>Peleas contra jefes en <code>drakes_bosses</code>, con sesiones separadas para que nadie interfiera.</p>
+          <ul>
+            <li>Consulta primero con <code>/bosswarp precios</code></li>
+            <li>En grupo, cada integrante paga su entrada</li>
+            <li>Si crear o invocar falla, el cobro se revierte una sola vez</li>
+            <li>Los jefes no aparecen libres de forma natural</li>
+            <li>Cada jefe tiene patrones y fases propias</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 class="rank-subhead">Entradas de BossArena</h3>
+      <p class="guide-section__note">Precios por jugador. En grupo, cada integrante paga el mismo valor. El comando <code>/bosswarp precios</code> siempre muestra el valor vigente dentro del juego.</p>
+      <div class="boss-price-grid" aria-label="Precio de entrada de todos los jefes">
+        <span data-boss="zeus" data-fee="1250000"><strong>Zeus</strong><b>1.250.000 ₯</b></span>
+        <span data-boss="hades" data-fee="1875000"><strong>Hades</strong><b>1.875.000 ₯</b></span>
+        <span data-boss="circe" data-fee="2500000"><strong>Circe</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="polifemo" data-fee="2500000"><strong>Polifemo</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="dios_corrupto" data-fee="2500000"><strong>Dios Corrupto</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="thor" data-fee="2500000"><strong>Thor</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="ares" data-fee="2500000"><strong>Ares</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="poseidon" data-fee="2500000"><strong>Poseidón</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="loki" data-fee="2500000"><strong>Loki</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="jax" data-fee="2500000"><strong>Jax / Ajax</strong><b>2.500.000 ₯</b></span>
+        <span data-boss="heimdall" data-fee="3750000"><strong>Heimdall</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="hidra" data-fee="3750000"><strong>Hidra</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="cerbero" data-fee="3750000"><strong>Cerbero</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="artemisa" data-fee="3750000"><strong>Artemisa</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="prometeo" data-fee="3750000"><strong>Prometeo</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="coloso_end" data-fee="3750000"><strong>Coloso del End</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="ra" data-fee="3750000"><strong>Ra</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="isis" data-fee="3750000"><strong>Isis</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="anubis" data-fee="3750000"><strong>Anubis</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="set" data-fee="3750000"><strong>Set</strong><b>3.750.000 ₯</b></span>
+        <span data-boss="odin" data-fee="5000000"><strong>Odín</strong><b>5.000.000 ₯</b></span>
+        <span data-boss="kratos" data-fee="5000000"><strong>Kratos</strong><b>5.000.000 ₯</b></span>
+        <span data-boss="tifon" data-fee="7500000"><strong>Tifón</strong><b>7.500.000 ₯</b></span>
+        <span data-boss="dragon" data-fee="12500000"><strong>Dragón Ancestral</strong><b>12.500.000 ₯</b></span>
+        <span data-boss="wither_storm" data-fee="25000000"><strong>Wither Storm</strong><b>25.000.000 ₯</b></span>
+      </div>
+
+      <h3 class="rank-subhead">Los menús del servidor</h3>
+      <p class="guide-section__note">Casi todo se hace desde menús con clic, no escribiendo comandos largos.</p>
+      <div class="guide-table">
+        <div class="guide-row"><code>/tienda</code><p>El hub de comercio. Nueve accesos: <strong>protecciones</strong>, <strong>subastas</strong>, <strong>Slimefun</strong>, <strong>warps</strong>, <strong>materiales</strong>, <strong>trabajos</strong>, <strong>habilidades</strong>, <strong>encantamientos</strong> y <strong>kits VIP</strong>.</p></div>
+        <div class="guide-row"><code>/modalidades</code><p>Menú visual de las modalidades. Te dice qué se conserva al cambiar antes de moverte.</p></div>
+        <div class="guide-row"><code>/kit</code><p>Lista tus kits, cuáles puedes reclamar y cuánto falta para el siguiente.<span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
+        <div class="guide-row"><code>/cosmeticos</code><p>Marca en verde lo que tienes y en gris lo que desbloquea cada rango.</p></div>
+        <div class="guide-row"><code>/arcana</code> · <code>/dioses</code><p>Códice de magia y panteón divino, con tu progreso a la vista.</p></div>
+        <div class="guide-row"><code>/sf guide</code><p>La guía de Slimefun: todas las recetas del servidor, buscables.</p></div>
+      </div>
+    </section>
+
+    
+<section class="container guide-section" id="servidor">
+      <h2>Qué es DrakesCraft</h2>
+      <p class="guide-section__note">Un servidor de Minecraft <strong>1.21.11</strong> con varias modalidades corriendo en una sola instancia, sin proxy ni servidores separados. Slimefun reúne tecnología, magia y jefes; Clásico conserva la experiencia vanilla con hogares y protección de terreno.</p>
+
+      <div class="guide-modes">
+        <article class="guide-mode" style="--mode-accent:#ffb03c;">
+          <h3>Slimefun propio</h3>
+          <p>No usamos la versión pública: mantenemos y portamos <strong>nuestro propio Slimefun a 1.21.11</strong>, con más de 40 expansiones, varias portadas a mano porque sus autores las abandonaron.</p>
+          <ul>
+            <li>Networks, InfinityExpansion, DynaTech</li>
+            <li>SlimeTinker, FluffyMachines, FoxyMachines</li>
+            <li>EcoPower, LiteXpansion, ExoticGarden</li>
+            <li>Gastronomicon, Cultivation, Supreme</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:var(--dk-verde);">
+          <h3>Plugins hechos aquí</h3>
+          <p>Buena parte de lo que juegas está programado para este servidor y no existe en ningún otro.</p>
+          <ul>
+            <li><strong>Odysseia</strong>: tienda, kits, modalidades, cosméticos</li>
+            <li><strong>DrakesBosses</strong> y <strong>DiosesDrakes</strong>: jefes y favor divino</li>
+            <li><strong>ArcanaDrakes</strong>: magia</li>
+            <li><strong>DrakesSlimeMarket</strong>: mercado dinámico</li>
+          </ul>
+        </article>
+        <article class="guide-mode" style="--mode-accent:#8ad8ff;">
+          <h3>Espacio y exploración</h3>
+          <p>Con Galactifun puedes construir cohetes y viajar a otros mundos de verdad, cada uno con sus reglas.</p>
+          <ul>
+            <li>La Luna, Marte, Venus, Ío</li>
+            <li>Titán, Encélado y órbita terrestre</li>
+            <li>Nether y End propios</li>
+            <li>Arenas de jefes y mundos de eventos</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="guide-split">
+        <div class="guide-split__card">
+          <h3>Progresión</h3>
+          <ul>
+            <li><strong>AuraSkills</strong>: subes habilidades jugando</li>
+            <li><strong>Jobs</strong>: cobras por minar, talar, cultivar o cazar</li>
+            <li><strong>Misiones</strong> con <code>/misiones</code></li>
+            <li><strong>Recompensa diaria</strong> con racha, <code>/daily</code></li>
+            <li><strong>Jefes</strong> con botín propio</li>
+          </ul>
         </div>
-      </details>
-
-      <!-- 2. SISTEMAS PROPIOS (Arcana, Dioses, BossArena) -->
-      <details class="guide-accordion" data-cat="sistemas" open>
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">🔮</span>
-            <span>Magia, Dioses & BossArena</span>
-            <span class="guide-accordion__badge guide-accordion__badge--purple">Exclusivo</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">Sistemas desarrollados a medida para DrakesCraft. El favor que ganas con los dioses potencia tu desempeño contra los jefes.</p>
-          <div class="guide-modes">
-            <article class="guide-mode" style="--mode-accent:var(--dk-verde);">
-              <h3>Arcana · Magia Elemental</h3>
-              <p>Seis afinidades: fuego, tierra, aire, agua, hielo y electro con progresión por niveles de espiritualidad.</p>
-              <ul>
-                <li>Códice de habilidades con <code>/arcana</code></li>
-                <li>Usa tu Catalizador Arcano para canalizar hechizos</li>
-                <li>Respeta claims protegidos y no daña a otros jugadores</li>
-              </ul>
-            </article>
-            <article class="guide-mode" style="--mode-accent:#ffd479;">
-              <h3>Dioses · Panteón Divino</h3>
-              <p>Elige deidad, acumula favor divino y equipa dones de combate pasivos.</p>
-              <ul>
-                <li>Abre el panteón con <code>/dioses</code></li>
-                <li>Mantenimiento semanal escalonado</li>
-                <li>Los rangos Titán multiplican el favor divino <strong>×5</strong></li>
-              </ul>
-            </article>
-            <article class="guide-mode" style="--mode-accent:#ff6b6b;">
-              <h3>Jefes · Arenas Aisladas</h3>
-              <p>Arenas de combate privadas en <code>drakes_bosses</code> donde nadie interfiere en tu pelea.</p>
-              <ul>
-                <li>Consulta tarifas con <code>/bosswarp precios</code></li>
-                <li>Entra en solitario con <code>/bosswarp &lt;jefe&gt; solo</code></li>
-                <li>Observa a otros con <code>/bosswarp spectate &lt;jugador&gt;</code></li>
-              </ul>
-            </article>
-          </div>
-
-          <div class="guide-rows" style="margin:1.25rem 0;">
-            <div class="guide-row"><code>/arcana</code><p>Abre el <strong>Códice de Arcana</strong>: afinidad elemental, espiritualidad, habilidades, costos y enfriamientos.<span class="guide-row__alias">También: /arc, /magia</span></p></div>
-            <div class="guide-row"><code>/arcana guide</code><p>Guía de uso de tu Catalizador Arcano y de las seis afinidades disponibles.</p></div>
-            <div class="guide-row"><code>/arcana spirit</code><p>Muestra tu espiritualidad, esencia y progreso actual.<span class="guide-row__alias">Recuperar objetos: /arcana book y /arcana catalyst</span></p></div>
-            <div class="guide-row"><code>/arcana meditate</code><p>Inicia la meditación cuando cumples sus condiciones; no dispara poderes ofensivos.</p></div>
-            <div class="guide-row"><code>/dioses</code><p>Abre el <strong>Códice Divino</strong>. Ahí eliges panteón y deidad, equipas habilidades y ves favor, mantenimiento y enfriamientos.<span class="guide-row__alias">También: /dios, /panteon</span></p></div>
-            <div class="guide-row"><code>/bosswarp precios</code><p>Muestra todos los jefes y la entrada por jugador antes de crear una arena.</p></div>
-            <div class="guide-row"><code>/bosswarp &lt;jefe&gt; solo</code><p>Reserva una arena aislada y entra en solitario. El cobro sólo se confirma si la arena pudo prepararse.</p></div>
-            <div class="guide-row"><code>/bosswarp &lt;jefe&gt; grupo &lt;jugadores...&gt;</code><p>Crea una sesión privada con jugadores conectados; cada integrante paga su entrada.</p></div>
-            <div class="guide-row"><code>/bosswarp spectate &lt;jugador&gt;</code><p>Observa la arena activa de otro jugador sin entrar al combate.</p></div>
-          </div>
-
-          <h3 class="rank-subhead">Tarifas Oficiales de BossArena (26 Jefes)</h3>
-          <div class="boss-price-grid" aria-label="Precio de entrada de todos los jefes">
-            <span data-boss="zeus" data-fee="1250000"><strong>Zeus</strong><b>1.250.000 ₯</b></span>
-            <span data-boss="hades" data-fee="1875000"><strong>Hades</strong><b>1.875.000 ₯</b></span>
-            <span data-boss="circe" data-fee="2500000"><strong>Circe</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="polifemo" data-fee="2500000"><strong>Polifemo</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="dios_corrupto" data-fee="2500000"><strong>Dios Corrupto</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="thor" data-fee="2500000"><strong>Thor</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="ares" data-fee="2500000"><strong>Ares</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="poseidon" data-fee="2500000"><strong>Poseidón</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="loki" data-fee="2500000"><strong>Loki</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="jax" data-fee="2500000"><strong>Jax / Ajax</strong><b>2.500.000 ₯</b></span>
-            <span data-boss="heimdall" data-fee="3750000"><strong>Heimdall</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="hidra" data-fee="3750000"><strong>Hidra</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="cerbero" data-fee="3750000"><strong>Cerbero</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="artemisa" data-fee="3750000"><strong>Artemisa</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="prometeo" data-fee="3750000"><strong>Prometeo</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="coloso_end" data-fee="3750000"><strong>Coloso del End</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="ra" data-fee="3750000"><strong>Ra</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="isis" data-fee="3750000"><strong>Isis</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="anubis" data-fee="3750000"><strong>Anubis</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="set" data-fee="3750000"><strong>Set</strong><b>3.750.000 ₯</b></span>
-            <span data-boss="odin" data-fee="5000000"><strong>Odín</strong><b>5.000.000 ₯</b></span>
-            <span data-boss="kratos" data-fee="5000000"><strong>Kratos</strong><b>5.000.000 ₯</b></span>
-            <span data-boss="tifon" data-fee="7500000"><strong>Tifón</strong><b>7.500.000 ₯</b></span>
-            <span data-boss="dragon" data-fee="12500000"><strong>Dragón Ancestral</strong><b>12.500.000 ₯</b></span>
-            <span data-boss="wither_storm" data-fee="25000000"><strong>Wither Storm</strong><b>25.000.000 ₯</b></span>
-            <span data-boss="garou" data-fee="30000000"><strong>Garou [Cazador]</strong><b>30.000.000 ₯</b></span>
-          </div>
+        <div class="guide-split__card">
+          <h3>Economía</h3>
+          <ul>
+            <li>Moneda: <strong>Dragmas</strong>, común a todas las modalidades</li>
+            <li>Tiendas de jugador con QuickShop y ChestShop</li>
+            <li>Casa de subastas, <code>/ah</code></li>
+            <li>Banco con intereses, <code>/bank</code></li>
+            <li>Mercado dinámico de Slimefun</li>
+          </ul>
         </div>
-      </details>
-
-      <!-- 3. CLIMA -->
-      <details class="guide-accordion" data-cat="clima">
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">🌡️</span>
-            <span>El Clima, Contaminación y Fenómenos (GlobalWarming)</span>
-            <span class="guide-accordion__badge guide-accordion__badge--blue">Clima</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">El calentamiento global sube con los generadores térmicos y hornos industriales; regula el entorno de tu base.</p>
-          <div class="guide-rows">
-            <div class="guide-row"><code>Termómetro</code><p>Mide la temperatura actual. Clic derecho para cambiar entre °C, °F y Kelvin.</p></div>
-            <div class="guide-row"><code>Medidor de Calidad del Aire</code><p>Muestra el nivel de contaminación atmosférica acumulado en el mundo.</p></div>
-            <div class="guide-row"><code>Compresor de Aire</code><p>Convierte carbono en bombonas de CO₂ presurizado.</p></div>
-            <div class="guide-row"><code>Sumidero de Carbono</code><p>Consume bombonas de CO₂ y descuenta contaminación del mundo a un ritmo de 2,5 puntos/minuto.</p></div>
-            <div class="guide-row"><code>Climatizador</code><p>Fija la temperatura deseada dentro de tu base: la nieve no se posa y los cultivos crecen a ritmo óptimo.</p></div>
-            <div class="guide-row"><code>/gw silenciar</code><p>Silencia los avisos meteorológicos en tu chat.<span class="guide-row__alias">También: /globalwarming silenciar</span></p></div>
-          </div>
+        <div class="guide-split__card">
+          <h3>Tu base está a salvo</h3>
+          <ul>
+            <li>Protecciones que crecen con tu rango</li>
+            <li>Reglas por terreno: PvP, explosiones, mobs</li>
+            <li>Invitas a quien quieras con <code>/ps add</code></li>
+            <li><strong>CoreProtect</strong>: todo queda registrado</li>
+            <li>Tumbas al morir: no pierdes tus cosas</li>
+          </ul>
         </div>
-      </details>
-
-      <!-- 4. ECONOMÍA -->
-      <details class="guide-accordion" data-cat="economia">
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">💰</span>
-            <span>Economía Global, Subastas & Bancos</span>
-            <span class="guide-accordion__badge">Economía</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">La moneda del servidor son los Dragmas (₯), común a todas las modalidades.</p>
-          <div class="guide-rows">
-            <div class="guide-row"><code>/tienda</code><p>Hub comercial con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades y kits.</p></div>
-            <div class="guide-row"><code>/bank</code><p>Tu cuenta bancaria: genera intereses sobre el saldo depositado.<span class="guide-row__alias">Retirar: /sb withdraw</span></p></div>
-            <div class="guide-row"><code>/ah</code><p>Casa de subastas aislada por modalidad: lo que publicas en Slimefun solo se compra en Slimefun.</p></div>
-            <div class="guide-row"><code>/jobs</code><p>Oficios automáticos para generar ingresos mientras juegas.</p></div>
-          </div>
+        <div class="guide-split__card">
+          <h3>Para entrar</h3>
+          <ul>
+            <li>IP: <strong>mc.drakescraft.cl</strong></li>
+            <li>Java y <strong>Bedrock</strong> (móvil y consolas)</li>
+            <li>Puerto Bedrock: <strong>25565</strong></li>
+            <li><strong>Semi-premium</strong>: original y no premium</li>
+            <li>Chat traducible a tu idioma</li>
+          </ul>
         </div>
-      </details>
+      </div>
 
-      <!-- 5. PROTECCIONES -->
-      <details class="guide-accordion" data-cat="protecciones">
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">🛡️</span>
-            <span>Protección de Terreno y Seguridad</span>
-            <span class="guide-accordion__badge guide-accordion__badge--green">Claims</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">ProtectionStones te protege de griefings, robos y explosiones. Todo queda además registrado en CoreProtect.</p>
-          <div class="guide-rows">
-            <div class="guide-row"><code>/tiendaprot</code><p>Compra piedras de mayor radio a medida que ahorras Dragmas.</p></div>
-            <div class="guide-row"><code>/ps add &lt;jugador&gt;</code><p>Agrega amigos con permiso de construcción dentro de tu claim.</p></div>
-            <div class="guide-row"><code>/ps flag</code><p>Ajusta banderas de seguridad: PvP, explosiones de creeper y spawn de monstruos.</p></div>
-          </div>
-        </div>
-      </details>
-
-      <!-- 6. SOPORTE Y NORMAS -->
-      <details class="guide-accordion" data-cat="soporte">
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">📜</span>
-            <span>Normas del Servidor & Cómo Reportar Fallos</span>
-            <span class="guide-accordion__badge guide-accordion__badge--red">Soporte</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">Si encuentras un bug o fallo, repórtalo en el canal <code>#reportes</code> de nuestro Discord oficial para darle seguimiento técnico.</p>
-          <div class="guide-rows">
-            <div class="guide-row"><code>Qué incluir en el reporte</code><p>1) Qué esperabas y qué ocurrió.<br>2) Modalidad y coordenadas.<br>3) Nombre exacto de la máquina o ítem.<br>4) Captura de pantalla si aplica.</p></div>
-            <div class="guide-row"><code>Reinicios Automáticos</code><p>Reinicio diario de mantenimiento a las <strong>08:00 (Chile)</strong> con avisos previos en el chat.</p></div>
-          </div>
-        </div>
-      </details>
-
-    </div>
+      <p class="guide-section__note" style="margin-top:1.5rem;">Reinicio diario a las <strong>08:00 hora de Chile</strong>. Recibes avisos desde las 07:45 y en el último minuto se cierran cofres y máquinas para proteger tus objetos.</p>
+    </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__grid">
-      <div>
-        <strong>DrakesCraft</strong>
-        <p>Una guía viva y actualizada para 1.21.11. Si tienes dudas, te ayudamos en Discord.</p>
-      </div>
-      <div class="site-footer__links">
-        <a href="store.html">Tienda</a>
-        <a href="support.html">Soporte</a>
-        <a href="terms.html">Términos</a>
-        <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a>
-      </div>
-      <div class="site-footer__sponsor">
-        <span>Apoya el proyecto</span>
-        <iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe>
-        <iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe>
-      </div>
-    </div>
-  </footer>
-
-  <script src="scripts/site.js?v=20260820-accordion"></script>
-  <script src="scripts/guia.js?v=20260820-accordion"></script>
+  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
+  <script src="scripts/site.js?v=20260811-liveguide"></script>
+  <script src="scripts/guia.js?v=20260811-liveguide"></script>
 </body>
 </html>

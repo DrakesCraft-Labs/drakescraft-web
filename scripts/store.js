@@ -50,21 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function revealProducts() {
         productObserver?.disconnect();
         const cards = [...grid.querySelectorAll(".store-product")];
-        if (!("IntersectionObserver" in window)) {
-            cards.forEach((card) => card.classList.add("is-visible"));
-            return;
-        }
-        productObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add("is-visible");
-                productObserver.unobserve(entry.target);
-            });
-        }, { rootMargin: "0px 0px -8%", threshold: 0.08 });
-        cards.forEach((card, index) => {
-            card.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
-            productObserver.observe(card);
-        });
+        cards.forEach((card) => card.classList.add("is-visible"));
     }
 
     function renderTabs() {
@@ -223,18 +209,23 @@ document.addEventListener("DOMContentLoaded", () => {
   var ip = boton.querySelector('.server-card__ip-text').textContent.trim();
 
   function pintar(datos) {
+    var motdElem = document.getElementById('server-motd');
     if (!datos || !datos.enLinea) {
       tarjeta.classList.remove('is-online');
       tarjeta.classList.add('is-offline');
-      estado.textContent = 'No se pudo comprobar el estado';
+      estado.textContent = 'Servidor en comprobación';
+      if (motdElem) motdElem.textContent = 'mc.drakescraft.cl · 1.21.11';
       return;
     }
     tarjeta.classList.remove('is-offline');
     tarjeta.classList.add('is-online');
     var n = datos.jugadores;
     estado.textContent = n === 0
-      ? 'En linea · nadie conectado ahora'
-      : 'En linea · ' + n + (n === 1 ? ' jugador conectado' : ' jugadores conectados');
+      ? 'En línea · Nadie conectado ahora'
+      : 'En línea · ' + n + (n === 1 ? ' jugador conectado' : ' jugadores conectados');
+    if (motdElem && datos.motd) {
+      motdElem.textContent = datos.motd;
+    }
   }
 
   function consultar() {
