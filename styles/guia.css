@@ -88,6 +88,105 @@ body[data-section="support-project"] .guide-hero { background-image: url("../ass
   border-color: rgba(111, 227, 162, .7);
 }
 
+/* --- Acordeones y controles --- */
+.guide-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: .85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, .035);
+}
+
+.guide-controls__btns { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.guide-btn-action {
+  min-height: 2.45rem;
+  padding: .48rem .8rem;
+  color: var(--dk-suave);
+  font: 700 .82rem var(--font-body, sans-serif);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: .55rem;
+  background: rgba(255, 255, 255, .06);
+}
+
+.guide-btn-action:hover { color: #fff; border-color: rgba(111, 227, 162, .55); }
+
+.guide-accordion {
+  width: 100%;
+  margin: 0 0 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .11);
+  border-radius: .9rem;
+  background: rgba(8, 15, 25, .72);
+}
+
+.guide-accordion.is-hidden { display: none; }
+
+.guide-accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4rem;
+  padding: .85rem 1rem;
+  color: #f2f5f4;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  background: rgba(255, 255, 255, .035);
+}
+
+.guide-accordion__summary::-webkit-details-marker { display: none; }
+.guide-accordion__summary::marker { content: ""; }
+.guide-accordion__summary:hover { background: rgba(255, 255, 255, .065); }
+
+.guide-accordion__header-left {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  min-width: 0;
+}
+
+.guide-accordion__icon { flex: 0 0 auto; font-size: 1.15rem; }
+.guide-accordion__header-left > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
+
+.guide-accordion__badge {
+  flex: 0 0 auto;
+  padding: .18rem .48rem;
+  border-radius: 999px;
+  color: #b9f3d1;
+  background: rgba(111, 227, 162, .14);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.guide-accordion__badge--purple { color: #d8c9ff; background: rgba(150, 120, 255, .15); }
+
+.guide-accordion__caret {
+  display: grid;
+  flex: 0 0 1.7rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .07);
+  transition: transform .18s ease;
+}
+
+.guide-accordion__caret svg { display: block; width: 1rem; height: 1rem; fill: currentColor; }
+.guide-accordion[open] .guide-accordion__caret { transform: rotate(180deg); }
+
+.guide-accordion__content {
+  padding: 1.15rem;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
 /* --- Secciones y tabla --- */
 .guide-section {
   width: min(1180px, calc(100% - 2rem));
@@ -219,6 +318,7 @@ body[data-section="support-project"] .guide-hero { background-image: url("../ass
 
 /* --- Tabla comparativa de rangos --- */
 .rank-scroll { width: 100%; max-width: 100%; overflow-x: auto; margin-bottom: 1rem; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
+.rank-scroll-hint { display: none; }
 
 .rank-table {
   width: 100%;
@@ -328,6 +428,21 @@ body[data-section="support-project"] .guide-hero { background-image: url("../ass
   }
 
   .boss-price-grid { grid-template-columns: 1fr; }
+
+  .guide-controls { align-items: flex-start; flex-direction: column; padding: .75rem; }
+  .guide-controls__btns { width: 100%; }
+  .guide-btn-action { flex: 1 1 8rem; }
+  .guide-accordion__summary { align-items: flex-start; min-height: 0; padding: .85rem; }
+  .guide-accordion__header-left { align-items: flex-start; gap: .5rem; font-size: .94rem; line-height: 1.35; }
+  .guide-accordion__badge { display: none; }
+  .guide-accordion__content { padding: .9rem .75rem 1rem; }
+  .guide-accordion__caret { margin-top: -.05rem; }
+  .rank-scroll-hint { display: block; margin: -.35rem 0 .6rem; color: var(--dk-suave); font-size: .75rem; opacity: .72; }
+  .rank-scroll { border-right: 1px solid rgba(111, 227, 162, .35); }
+  .rank-table { min-width: 43rem; font-size: .84rem; }
+  .rank-table th, .rank-table td { padding: .55rem .6rem; }
+  .rank-table thead th:first-child,
+  .rank-table tbody th { position: sticky; left: 0; z-index: 2; background: #08120f; }
 }
 
 /* Alineacion con la tienda: la guia usaba sans-serif y acento violeta, la tienda serif
