@@ -758,9 +758,9 @@ await app.register(fastifyStatic, {
   immutable: false
 });
 
-// The public site begins at the storefront. Minecraft resources are hosted
-// separately at pack.drakescraft.cl once its DNS cutover is complete.
-app.get('/', async (_request, reply) => reply.sendFile('store.html'));
+// The editorial home introduces the world first; the proven storefront and
+// Tebex checkout remain isolated in store.html and its existing API routes.
+app.get('/', async (_request, reply) => reply.sendFile('index.html'));
 for (const alias of ['/metricas', '/stats', '/estadisticas']) {
   app.get(alias, async (_request, reply) => reply.sendFile('metricas.html'));
 }
@@ -783,10 +783,9 @@ for (const [alias, file] of [
   app.get(alias, async (_request, reply) => reply.sendFile(file));
 }
 
-// The former portal is no longer part of the public surface. Keep old links
-// useful without exposing pages that describe stale systems or dead widgets.
+// Keep removed legacy pages useful without exposing stale systems.
 for (const legacyPath of [
-  '/index.html', '/server.html', '/odysseia.html', '/dioses.html',
+  '/server.html', '/odysseia.html', '/dioses.html',
   '/slimefun.html', '/bosses.html', '/community.html', '/jack.html',
   '/rules.html', '/admin-quote.html'
 ]) {
@@ -796,7 +795,7 @@ for (const legacyPath of [
 await app.register(fastifyStatic, {
   root,
   wildcard: false,
-  // `/` is the explicit storefront route above. Do not let the static plugin
+  // `/` is the explicit home route above. Do not let the static plugin
   // register a competing index/HEAD handler for it.
   index: false,
   maxAge: '1h',
@@ -808,6 +807,7 @@ await app.register(fastifyStatic, {
   },
   allowedPath: (pathname) => {
     const publicFiles = new Set([
+      'index.html',
       'store.html',
       'guia.html',
       'apoya.html',

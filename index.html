@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DrakesCraft | Cinco mundos. Una comunidad.</title>
+  <meta name="description" content="DrakesCraft es un servidor Minecraft Java y Bedrock con cinco modalidades conectadas: Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio.">
+  <meta name="theme-color" content="#071712">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DrakesCraft | Tu forma de jugar. Tu legado.">
+  <meta property="og:description" content="Cinco modalidades, sistemas propios y una comunidad que sigue construyendo.">
+  <meta property="og:image" content="https://web.drakescraft.cl/assets/home/hero-aurora-1600.webp">
+  <meta property="og:url" content="https://web.drakescraft.cl/">
+  <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/home/hero-aurora-1600.webp" as="image" type="image/webp" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css?v=20260824-home-v2">
+  <link rel="stylesheet" href="styles/home.css?v=20260824-home-v2">
+</head>
+<body class="page-shell home-page" data-page="home">
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <nav class="site-nav home-nav" aria-label="Navegación principal">
+    <div class="container site-nav__bar">
+      <a class="brand" href="/" aria-label="Inicio de DrakesCraft">
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="" width="46" height="46">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <ul class="site-nav__links" id="nav-menu">
+        <li><a class="active" href="/">Inicio</a></li>
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="guia.html">Guía</a></li>
+        <li><a href="guia-slimefun.html">Slimefun</a></li>
+        <li><a href="store.html">Tienda</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="home-hero">
+      <picture class="home-hero__media" aria-hidden="true">
+        <source media="(max-width: 720px)" srcset="assets/home/hero-aurora-960.webp">
+        <img src="assets/home/hero-aurora-1600.webp" alt="" width="1600" height="841" fetchpriority="high">
+      </picture>
+      <div class="home-hero__veil" aria-hidden="true"></div>
+      <div class="container home-hero__content">
+        <p class="home-kicker">Minecraft Java + Bedrock · Chile</p>
+        <h1>Tu forma de jugar.<br><em>Tu legado.</em></h1>
+        <p>Supervivencia técnica, magia, máquinas, islas y experimentación dentro de cinco mundos conectados por una sola comunidad.</p>
+        <div class="home-actions">
+          <button class="home-button home-button--gold" type="button" data-copy-ip>Copiar IP</button>
+          <a class="home-button home-button--glass" href="guia.html">Empezar a jugar</a>
+          <a class="home-button home-button--quiet" href="store.html">Explorar la tienda</a>
+        </div>
+        <div class="home-hero__modes" aria-label="Modalidades disponibles">
+          <span>Slimefun</span><span>Clásico</span><span>SkyBlock</span><span>OneBlock</span><span>Laboratorio</span>
+        </div>
+      </div>
+      <div class="home-hero__status" data-live-status aria-live="polite">
+        <span class="live-dot" aria-hidden="true"></span>
+        <strong data-live-label>Comprobando DrakesCraft…</strong>
+        <small>mc.drakescraft.cl</small>
+      </div>
+      <a class="home-hero__scroll" href="#ahora" aria-label="Descubrir DrakesCraft">Descubrir <span>↓</span></a>
+    </header>
+
+    <section class="now-strip" id="ahora" aria-labelledby="now-title">
+      <div class="container now-strip__grid">
+        <div><p class="home-kicker">Drakes ahora</p><h2 id="now-title">Un mundo en movimiento.</h2></div>
+        <div class="now-strip__live" data-live-status><span class="live-dot" aria-hidden="true"></span><strong data-live-count>Estado en tiempo real</strong><small data-live-version>Java + Bedrock</small></div>
+        <button class="now-strip__ip" type="button" data-copy-ip><span>IP DEL SERVIDOR</span><strong>mc.drakescraft.cl</strong><small data-copy-label>Copiar al portapapeles</small></button>
+        <div class="now-strip__worlds"><span>01 SF</span><span>02 CL</span><span>03 SB</span><span>04 OB</span><span>05 LAB</span></div>
+      </div>
+    </section>
+
+    <section class="home-editorial reveal" aria-labelledby="world-title">
+      <div class="home-editorial__image home-image-frame">
+        <picture><source media="(max-width:720px)" srcset="assets/home/world-garden-960.webp"><img src="assets/home/world-garden-1600.webp" alt="Jardines y arquitectura construidos dentro de DrakesCraft" width="1600" height="841" loading="lazy"></picture>
+        <span>Capturado dentro del servidor</span>
+      </div>
+      <div class="home-editorial__copy">
+        <p class="home-kicker">Conoce DrakesCraft</p>
+        <h2 id="world-title">Más que survival.</h2>
+        <p class="home-lead">Aquí una base puede convertirse en fábrica, templo, observatorio o ciudad. Slimefun, magia, dimensiones, jefes y sistemas propios amplían Minecraft sin borrar la historia que construyes bloque a bloque.</p>
+        <dl class="home-facts"><div><dt>60+</dt><dd>expansiones Slimefun</dd></div><div><dt>5</dt><dd>formas de jugar</dd></div><div><dt>1</dt><dd>comunidad conectada</dd></div></dl>
+        <a class="home-text-link" href="guia.html">Conocer el servidor <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="modes-section" id="modalidades" aria-labelledby="modes-title">
+      <div class="container">
+        <div class="modes-heading reveal"><div><p class="home-kicker">Cinco formas de jugar</p><h2 id="modes-title">Elige tu mundo.<br>No tu comunidad.</h2></div><p>Cada modalidad tiene su ritmo, su inventario y su progreso. Puedes cambiar de ruta sin cambiar de servidor.</p></div>
+        <div class="modes-canvas">
+          <picture class="modes-canvas__image"><source media="(max-width:720px)" srcset="assets/home/modes-sunset-960.webp"><img src="assets/home/modes-sunset-1600.webp" alt="Paisaje fantástico al atardecer en DrakesCraft" width="1600" height="833" loading="lazy"></picture>
+          <div class="modes-list">
+            <article class="mode-line mode-line--sf"><span>01</span><div><small>Tecnología y magia</small><h3>Slimefun</h3><p>Máquinas, energía, dioses, dimensiones y el endgame más profundo.</p><code>/slimefun</code></div><a href="guia-slimefun.html" aria-label="Abrir guía de Slimefun">↗</a></article>
+            <article class="mode-line mode-line--classic"><span>02</span><div><small>Minecraft esencial</small><h3>Clásico</h3><p>Supervivencia vanilla, Terralith, hogares y protecciones. Sin Slimefun.</p><code>/clasico</code></div><a href="guia.html#modalidades" aria-label="Conocer Clásico">↗</a></article>
+            <article class="mode-line mode-line--sky"><span>03</span><div><small>Tu isla en el cielo</small><h3>SkyBlock</h3><p>Empieza con lo justo y transforma el vacío con Slimefun.</p><code>/skyblock</code></div><a href="guia.html#modalidades" aria-label="Conocer SkyBlock">↗</a></article>
+            <article class="mode-line mode-line--one"><span>04</span><div><small>Veintiuna fases</small><h3>OneBlock</h3><p>Un bloque infinito que evoluciona contigo, fase tras fase.</p><code>/oneblock</code></div><a href="guia.html#modalidades" aria-label="Conocer OneBlock">↗</a></article>
+            <article class="mode-line mode-line--lab"><span>05</span><div><small>Zona de experimentación</small><h3>Laboratorio</h3><p>Prototipa máquinas y redes sin comprometer tu survival.</p><code>/warp laboratorio</code></div><a href="#laboratorio" aria-label="Conocer Laboratorio">↗</a></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-spotlight reveal" id="laboratorio" aria-labelledby="lab-title">
+      <picture class="lab-spotlight__media"><source media="(max-width:720px)" srcset="assets/home/laboratory-cosmos-960.webp"><img src="assets/home/laboratory-cosmos-1600.webp" alt="Horizonte cósmico para representar la experimentación de DrakesCraft" width="1600" height="839" loading="lazy"></picture>
+      <div class="lab-spotlight__veil" aria-hidden="true"></div>
+      <div class="container lab-spotlight__content"><p class="home-kicker"><span>Nuevo</span> · Laboratorio</p><h2 id="lab-title">Construye lo que sería demasiado peligroso para Survival.</h2><p>Mundo creativo, maquinaria, reactores, prototipos y experimentación. Un espacio aislado para comprobar ideas antes de llevarlas a tu base.</p><div class="lab-spotlight__facts"><span>Catálogo con <code>/sf cheat</code></span><span>Investigación temporal</span><span>Pruebas sin explosión real</span></div><a class="home-button home-button--gold" href="guia-slimefun.html#laboratorio-cheat">Conocer Laboratorio</a></div>
+    </section>
+
+    <section class="progress-section reveal" aria-labelledby="progress-title">
+      <div class="container progress-section__grid"><div><p class="home-kicker">Una cuenta. Cinco mundos.</p><h2 id="progress-title">Lo global une.<br>El progreso se protege.</h2><a class="home-text-link" href="guia.html#modalidades">Ver cómo funcionan las modalidades <span>↗</span></a></div><div class="progress-columns"><div><span>Se comparte</span><strong>Rango</strong><strong>Dragmas</strong></div><div><span>Cada modalidad conserva</span><strong>Inventario · Experiencia</strong><strong>Ender chest · Bóvedas</strong><strong>Vida · Avances · Progreso</strong></div></div></div>
+    </section>
+
+    <section class="legacy-section" aria-labelledby="legacy-title">
+      <div class="legacy-section__image home-image-frame reveal"><picture><source media="(max-width:720px)" srcset="assets/home/legacy-community-960.webp"><img src="assets/home/legacy-community-1600.webp" alt="Jugadores reunidos frente a una construcción de DrakesCraft" width="1600" height="926" loading="lazy"></picture></div>
+      <div class="legacy-section__story reveal"><p class="home-kicker">El legado de DrakesCraft</p><h2 id="legacy-title">Un mundo heredado.<br>Un proyecto vivo.</h2><ol><li><span>Origen</span><p><strong>TheSavior22</strong> crea DrakesCraft y define su primera identidad.</p></li><li><span>Continuidad</span><p>El proyecto pasa a <strong>JackStar6677</strong>, que conserva su historia y asume su evolución.</p></li><li><span>Expansión</span><p>Slimefun, Odysseia, infraestructura y sistemas propios amplían el mundo.</p></li><li><span>2026 · Hoy</span><p>Cinco modalidades. Una comunidad. DrakesCraft sigue creciendo.</p></li></ol></div>
+    </section>
+
+    <section class="community-band reveal" aria-labelledby="community-title"><div class="container community-band__grid"><div><p class="home-kicker">Comunidad activa</p><h2 id="community-title">Las grandes construcciones rara vez empiezan solas.</h2></div><p>Discord reúne anuncios, soporte, ideas y a quienes están levantando su próximo proyecto dentro del servidor.</p><a class="home-button home-button--glass" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Entrar a Discord</a></div></section>
+
+    <section class="home-store" id="tienda" aria-labelledby="store-title">
+      <div class="container"><div class="home-store__heading reveal"><div><p class="home-kicker">Apoya el mundo</p><h2 id="store-title">Pases para tu forma de jugar.</h2></div><p>La tienda existe para sostener DrakesCraft. Todo se entrega mediante el checkout seguro de Tebex y ningún pase se renueva solo.</p></div><div class="home-store__tiers reveal"><a href="store.html?category=monthly"><span>Desde $4.990 CLP</span><h3>Hércules</h3><p>El punto de entrada VIP para empezar con una base más sólida.</p><b>Ver pase ↗</b></a><a class="is-featured" href="store.html?category=monthly"><span>Recomendado · $10.990 CLP</span><h3>Hermes</h3><p>Movilidad, vuelo y calidad de vida para survival intensivo.</p><b>Ver pase ↗</b></a><a href="store.html?category=titans"><span>Endgame</span><h3>Titanes</h3><p>La línea superior para proyectos y progresión de escala primordial.</p><b>Explorar Titanes ↗</b></a></div><div class="home-store__footer"><a class="home-button home-button--gold" href="store.html">Explorar la tienda completa</a><span>Precios, límites y entrega visibles antes de pagar.</span></div></div>
+    </section>
+
+    <section class="team-section" id="equipo" aria-labelledby="team-title"><div class="container"><div class="team-section__heading reveal"><p class="home-kicker">Las personas detrás</p><h2 id="team-title">Equipo de DrakesCraft</h2></div><article class="founder-card reveal"><img src="assets/staff/TheSavior22.png" alt="Skin de TheSavior22" width="72" height="72" loading="lazy"><div><span>Fundador original</span><h3>TheSavior22</h3><p>El origen del servidor y de un legado que la comunidad sigue construyendo.</p></div></article><div class="team-grid reveal">
+        <article><img src="assets/staff/JackStar6677.png" alt="Skin de JackStar6677" width="56" height="56" loading="lazy"><div><span>Desarrollo · Infraestructura</span><h3>JackStar6677</h3></div></article>
+        <article><img src="assets/staff/KikaStar704.png" alt="Skin de KikaStar704" width="56" height="56" loading="lazy"><div><span>Marketing · Comunidad</span><h3>KikaStar704</h3></div></article>
+        <article><img src="assets/staff/Chagui68.png" alt="Skin de Chagui68" width="56" height="56" loading="lazy"><div><span>Desarrollo · Texturas</span><h3>Chagui68</h3></div></article>
+        <article><img src="assets/staff/Lautix16.png" alt="Skin de Lautix16" width="56" height="56" loading="lazy"><div><span>Administración técnica</span><h3>Lautix16</h3></div></article>
+        <article><img src="assets/staff/JessielPR.png" alt="Skin de JessielPR" width="56" height="56" loading="lazy"><div><span>Administración · Moderación</span><h3>JessielPR</h3></div></article>
+        <article><img src="assets/staff/Nixcobt.png" alt="Skin de Nixcobt" width="56" height="56" loading="lazy"><div><span>QA · Configuración</span><h3>Nixcobt</h3></div></article>
+        <article><img src="assets/staff/elpepinoraro18.png" alt="Skin de elpepinoraro18" width="56" height="56" loading="lazy"><div><span>Slimefun · Construcción</span><h3>elpepinoraro18</h3></div></article>
+        <article><img src="assets/staff/Derem8503.png" alt="Skin de Derem8503" width="56" height="56" loading="lazy"><div><span>Soporte</span><h3>Derem8503</h3></div></article>
+      </div></div></section>
+
+    <section class="final-cta" aria-labelledby="final-title"><picture class="final-cta__media"><source media="(max-width:720px)" srcset="assets/home/cta-aurora-960.webp"><img src="assets/home/cta-aurora-1600.webp" alt="Paisaje nocturno con aurora dentro de DrakesCraft" width="1600" height="900" loading="lazy"></picture><div class="final-cta__veil" aria-hidden="true"></div><div class="container final-cta__content reveal"><p class="home-kicker">Tu historia empieza aquí</p><h2 id="final-title">¿Qué vas a construir?</h2><p>Cinco mundos. Decenas de sistemas. Tu partida no tiene por qué parecerse a ninguna otra.</p><strong class="final-cta__ip">mc.drakescraft.cl</strong><div class="home-actions"><button class="home-button home-button--gold" type="button" data-copy-ip>Copiar IP</button><a class="home-button home-button--glass" href="guia.html">Empezar a jugar</a><a class="home-button home-button--glass" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="final-cta__status" data-live-status><span class="live-dot" aria-hidden="true"></span><span data-live-label>Comprobando el mundo…</span></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Cinco mundos. Una comunidad. Un legado que sigue creciendo.</p></div><div class="site-footer__links"><a href="guia.html">Guía</a><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><a href="apoya.html">Patrocinar DrakesCraft</a></div></div></footer>
+  <script src="scripts/site.js?v=20260824-home-v2"></script>
+  <script src="scripts/home.js?v=20260824-home-v2"></script>
+</body>
+</html>
