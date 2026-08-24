@@ -59,19 +59,27 @@
 
     <section class="container guide-section" id="laboratorio-cheat">
       <h2>🧪 Laboratorio Creativo &amp; Modo Cheat</h2>
-      <p class="guide-section__note">El <strong>Laboratorio</strong> (<code>/warp laboratorio</code>) es un mundo plano pacífico, sin daño ni mobs, con modo creativo. Aquí puedes diseñar y probar cualquier automatización, planta nuclear, red o maquinaria de Slimefun antes de montarla en tu base del Survival.</p>
+      <p class="guide-section__note">El <strong>Laboratorio</strong> (<code>/warp laboratorio</code>) es un entorno aislado para probar Slimefun. Puedes alternar entre creativo y survival, pero no usar aventura o espectador. Sus límites protegen al servidor y evitan que objetos gratuitos entren en la economía.</p>
       <div class="guide-rows">
         <div class="guide-row">
           <code>/sf cheat</code>
-          <p>Abre el <strong>Cheat Sheet</strong> de Slimefun. Te muestra todo el catálogo de los 60+ addons y te entrega cualquier máquina, material o ítem directamente con un solo clic.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p>
+          <p>Abre el <strong>Cheat Sheet</strong> de Slimefun y permite retirar máquinas, materiales e ítems. Todas las investigaciones aparecen desbloqueadas mientras estés aquí, sin modificar el progreso que tienes fuera.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p>
         </div>
         <div class="guide-row">
           <code>Shift + Clic Derecho con la Guía</code>
-          <p>Si tienes la Guía de Slimefun en la mano (<code>/sf guide</code>), <strong>agáchate (Shift) y haz clic derecho</strong> para abrir el menú de trucos/creativo sin necesidad de escribir comandos.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p>
+          <p>Si tienes la Guía de Slimefun en la mano (<code>/sf guide</code>), <strong>agáchate (Shift) y haz clic derecho</strong> para abrir el catálogo sin escribir comandos.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p>
         </div>
         <div class="guide-row">
-          <code>Aislamiento Seguro</code>
-          <p>El Centinela Universal mantiene el inventario del Laboratorio totalmente separado del Survival. Todo lo que generes en modo trampa se queda en el Laboratorio para garantizar la economía limpia del servidor.</p>
+          <code>Aislamiento seguro</code>
+          <p>El sistema de modalidades respalda y separa inventario, ender chest, experiencia, vida, hambre, estadísticas y avances. Quédate quieto durante el cambio y no intentes salir por teletransportes alternativos.</p>
+        </div>
+        <div class="guide-row">
+          <code>Comandos restringidos</code>
+          <p><code>/sf give</code> y <code>/sf research</code> son administrativos. También se bloquean subastas, tiendas, ventas, bóvedas, ender chest, homes y otros caminos que podrían sacar objetos de prueba. Usa <code>/sf cheat</code>.</p>
+        </div>
+        <div class="guide-row">
+          <code>Pruebas sin daño</code>
+          <p>Hay un máximo de 120 bloques Slimefun por chunk. Explosivos, armas explosivas, aceleradores y cargadores peligrosos se limitan: podrás comprobar sus efectos visuales, pero no provocar una explosión real ni dañar el servidor.</p>
         </div>
       </div>
     </section>
@@ -604,6 +612,16 @@
         <div class="guide-row"><code>PrivateStorage</code><p>Almacenamiento atado al bloque, no a tu inventario. No cruza entre modalidades porque lo que guarda se queda en el bloque, donde lo dejaste.</p></div>
       </div>
     </section>
+    <section class="container guide-section" id="diagnostico">
+      <h2>Antes de decir «Slimefun no funciona»</h2>
+      <p class="guide-section__note">Esta revisión corta resuelve la mayoría de los casos y deja un reporte que sí podemos investigar.</p>
+      <div class="guide-rows">
+        <div class="guide-row"><code>1 · Modalidad</code><p>Confirma dónde estás. Slimefun funciona en Slimefun, SkyBlock, OneBlock y Laboratorio; está desactivado completamente en Clásico.</p></div>
+        <div class="guide-row"><code>2 · Ítem exacto</code><p>Busca el objeto en <code>/sf guide</code>. Dos addons pueden tener materiales con nombres parecidos que no son intercambiables.</p></div>
+        <div class="guide-row"><code>3 · Máquina</code><p>Comprueba investigación, receta o multibloque, energía suficiente, espacio de entrada y salida, orientación y límites de entidades cercanas.</p></div>
+        <div class="guide-row"><code>4 · Reporte útil</code><p>Envía tu nick, hora, modalidad, mundo, coordenadas, nombre exacto del ítem o máquina y qué esperabas que ocurriera. Una captura del menú y del mensaje ayuda mucho.</p></div>
+      </div>
+    </section>
     <section class="container guide-section" id="qol">
       <h2>Los que no hacen ruido pero se notan</h2>
       <p class="guide-section__note">Addons pequeños que cambian el día a día más que muchas máquinas.</p>
@@ -627,7 +645,7 @@
     </section>
 
     <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
-  <script src="scripts/site.js?v=20260811-networks"></script>
-  <script src="scripts/guia.js?v=20260811-networks"></script>
+  <script src="scripts/site.js?v=20260824-slimefun"></script>
+  <script src="scripts/guia.js?v=20260824-slimefun"></script>
 </body>
 </html>

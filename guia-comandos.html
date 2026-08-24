@@ -82,13 +82,14 @@
       <h2>Moverte entre las 5 modalidades</h2>
       <p class="guide-section__note">Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio son mundos aislados con inventario separado para proteger tu progreso y la economía.</p>
       <div class="guide-rows">
-        <div class="guide-row"><code>/modalidades</code><p>El menú visual para saltar entre las 5 modalidades del servidor.<span class="guide-row__alias">También: /modalidad, /modos, /hub, /menu</span></p></div>
+        <div class="guide-row"><code>/modalidades</code><p>El menú visual para saltar entre las 5 modalidades del servidor.<span class="guide-row__alias">También: /modalidad, /modos, /menu</span></p></div>
         <div class="guide-row"><code>/survival</code><p>Directo a la modalidad principal con Slimefun, magia y jefes.<span class="guide-row__alias">También: /slimefun, /principal, /polis, /main</span></p></div>
         <div class="guide-row"><code>/clasico</code><p>Directo al survival clásico tradicional sin Slimefun ni máquinas.<span class="guide-row__alias">Muévete con /rtp</span></p></div>
         <div class="guide-row"><code>/island</code><p>Tu isla de SkyBlock. La primera vez te la crea.<span class="guide-row__alias">También: /is, /skyblock, /sb</span><span class="guide-tag guide-tag--survival">SkyBlock</span></p></div>
         <div class="guide-row"><code>/ob</code><p>Tu isla de OneBlock.<span class="guide-row__alias">También: /oneblock</span><span class="guide-tag guide-tag--survival">OneBlock</span></p></div>
         <div class="guide-row"><code>/warp laboratorio</code><p>🧪 Laboratorio de pruebas en modo creativo, pacífico y sin mobs.<span class="guide-row__alias">Acceso a trucos de Slimefun: /sf cheat</span><span class="guide-tag guide-tag--survival">Laboratorio</span></p></div>
-        <div class="guide-row"><code>/sf cheat</code><p>🎁 Abre el Cheat Sheet para sacar cualquier máquina o ítem de Slimefun directamente con un clic (o usa Shift + Clic Derecho con la guía).<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p></div>
+        <div class="guide-row"><code>/sf cheat</code><p>🎁 Abre el Cheat Sheet para sacar cualquier máquina o ítem de Slimefun con un clic. En Laboratorio todas las investigaciones aparecen desbloqueadas temporalmente.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p></div>
+        <div class="guide-row"><code>Cambio seguro</code><p>Al cambiar de modalidad debes quedarte quieto unos segundos mientras se respalda el inventario de origen. Inventario, ender chest, experiencia, vida, hambre, estadísticas y avances se cargan por separado; el dinero y el rango sí son globales.</p></div>
         <div class="guide-row"><code>/rtp</code><p>Te lanza a un punto aleatorio, lejos de todo.<span class="guide-row__alias">También: /wild, /randomtp</span><span class="guide-tag guide-tag--bedrock">Bedrock: hasta 150.000 bloques</span></p></div>
         <div class="guide-row"><code>/warps</code><p>Los puntos públicos del servidor.<span class="guide-row__alias">Ir a uno: /warp &lt;nombre&gt;</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
         <div class="guide-row"><code>/pw</code><p>Los warps que abren otros jugadores, y los tuyos.<span class="guide-row__alias">Crear el tuyo: /pw set &lt;nombre&gt;</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
@@ -112,9 +113,9 @@
     </section>
     <section class="container guide-section" id="guardar">
       <h2>Guardar y mover cosas</h2>
-      <p class="guide-section__note">Un aviso importante: la bóveda es la misma caja mires desde donde la mires, así que está limitada a la modalidad Slimefun. Si estuviera en todas sería un túnel para pasar objetos entre ellas.</p>
+      <p class="guide-section__note">Inventarios, cofres de ender y bóvedas se resuelven por modalidad. Un objeto guardado en Slimefun no aparecerá en Clásico, OneBlock, SkyBlock o Laboratorio.</p>
       <div class="guide-rows">
-        <div class="guide-row"><code>/pv</code><p>Tus bóvedas personales.<span class="guide-row__alias">También: /vault, /playervault</span><span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
+        <div class="guide-row"><code>/pv</code><p>Abre las bóvedas personales de la modalidad actual. Cada modalidad mantiene contenido independiente.<span class="guide-row__alias">También: /vault, /playervault</span><span class="guide-tag guide-tag--survival">Bloqueado en Laboratorio</span></p></div>
         <div class="guide-row"><code>/enderchest</code><p>Tu cofre de ender de siempre, sin tener que llevarlo encima.<span class="guide-row__alias">También: /echest</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
         <div class="guide-row"><code>/disposal</code><p>Una papelera portátil. Lo que metas ahí no vuelve.<span class="guide-row__alias">También: /trash</span></p></div>
         <div class="guide-row"><code>/workbench</code><p>Mesa de crafteo portátil.<span class="guide-row__alias">También: /craft, /wb</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
@@ -124,14 +125,15 @@
     </section>
     <section class="container guide-section" id="dinero">
       <h2>Dinero, tiendas y subastas</h2>
-      <p class="guide-section__note">La economía es común a Slimefun y Clásico. La casa de subastas tiene un mercado independiente por modalidad: un anuncio creado en Slimefun, Clásico, OneBlock o SkyBlock solo aparece y se compra dentro de esa misma modalidad.</p>
+      <p class="guide-section__note">Los Dragmas son globales. Los objetos no: cada modalidad tiene su propia casa de subastas y el Laboratorio no permite comerciar para evitar convertir objetos de prueba en dinero real.</p>
       <div class="guide-rows">
         <div class="guide-row"><code>/balance</code><p>Tu dinero.<span class="guide-row__alias">También: /bal, /money</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
         <div class="guide-row"><code>/baltop</code><p>Quién tiene más. Actualízalo antes de presumir.<span class="guide-row__alias">También: /balancetop</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
         <div class="guide-row"><code>/pay &lt;jugador&gt; &lt;cantidad&gt;</code><p>Le pasas dinero a alguien. No hay devoluciones.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
         <div class="guide-row"><code>/sbank</code><p>El banco: depósitos, intereses y préstamos.<span class="guide-row__alias">También: /bank, /sb</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
         <div class="guide-row"><code>/ah</code><p>La casa de subastas de tu modalidad. Los anuncios y compras no cruzan entre Slimefun, Clásico, OneBlock y SkyBlock.<span class="guide-row__alias">También: /crazyauctions, /ca</span></p></div>
-        <div class="guide-row"><code>/sfmercado</code><p>El mercado de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
+        <div class="guide-row"><code>/sfmercado</code><p>Mercado especializado en materiales de Slimefun.<span class="guide-tag guide-tag--survival">Slimefun, SkyBlock y OneBlock</span></p></div>
+        <div class="guide-row"><code>/sellgui</code><p>Abre una venta selectiva: deposita solo lo que quieras vender. Al cerrar, vende los objetos reconocidos y devuelve los que no tengan precio.<span class="guide-tag guide-tag--survival">Bloqueado en Laboratorio</span></p></div>
         <div class="guide-row"><code>/qs</code><p>Crea y gestiona tus tiendas de cofre.<span class="guide-row__alias">Buscar tiendas: /qs find</span><span class="guide-tag guide-tag--survival">No disponible en Clásico</span></p></div>
         <div class="guide-row"><code>/sellinv</code><p>Vende de golpe los recursos que lleves en el inventario principal.<span class="guide-row__alias">También: /venderinv, /sellall</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
         <div class="guide-row"><code>/worth</code><p>Cuánto vale lo que tienes en la mano antes de venderlo.<span class="guide-row__alias">También: /price</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
@@ -142,13 +144,15 @@
     </section>
     <section class="container guide-section" id="slimefun">
       <h2>Slimefun</h2>
-      <p class="guide-section__note">Todo lo de Slimefun vive en la modalidad Slimefun, SkyBlock y OneBlock. En Clásico está apagado a propósito: esa modalidad es vanilla de verdad.</p>
+      <p class="guide-section__note">Slimefun funciona en Slimefun, SkyBlock y OneBlock. En Clásico está apagado para conservar una experiencia vanilla; Laboratorio es una zona de pruebas aislada.</p>
       <div class="guide-rows">
-        <div class="guide-row"><code>/sf guide</code><p>Abre la guía de Slimefun. Es tu libro de recetas y lo vas a usar constantemente.<span class="guide-row__alias">También: /slimefun guide</span><span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
-        <div class="guide-row"><code>/sf search &lt;texto&gt;</code><p>Busca un objeto por nombre sin tener que navegar categorías.<span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
-        <div class="guide-row"><code>/sfcalc</code><p>Calcula todo lo que hace falta para fabricar algo, incluidos los pasos intermedios.<span class="guide-row__alias">También: /sfc</span><span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
-        <div class="guide-row"><code>/sfa</code><p>Tus logros de Slimefun: qué has desbloqueado y qué te falta.<span class="guide-row__alias">También: /sfadvancements</span><span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
-        <div class="guide-row"><code>/networks</code><p>Ayuda del sistema de redes de Networks: almacenamiento, transporte y cuadrículas.<span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
+        <div class="guide-row"><code>/sf guide</code><p>Abre la guía de recetas de Slimefun.<span class="guide-row__alias">También: /slimefun guide</span><span class="guide-tag guide-tag--survival">Slimefun, islas y Laboratorio</span></p></div>
+        <div class="guide-row"><code>/sf search &lt;texto&gt;</code><p>Busca un objeto por nombre sin navegar categorías.<span class="guide-tag guide-tag--survival">Slimefun, islas y Laboratorio</span></p></div>
+        <div class="guide-row"><code>/sf give · /sf research</code><p>Son herramientas administrativas, no métodos de juego. En Laboratorio usa <code>/sf cheat</code>; las investigaciones se desbloquean allí de forma virtual y no alteran tu progreso real.</p></div>
+        <div class="guide-row"><code>Laboratorio seguro</code><p>No permite subastas, tiendas, ventas, bóvedas, ender chest, homes ni teletransportes económicos. Solo puedes alternar entre creativo y survival; explosivos y máquinas de alto riesgo muestran su efecto sin causar explosiones reales.</p></div>
+        <div class="guide-row"><code>/sfcalc</code><p>Calcula todo lo necesario para fabricar algo, incluidos pasos intermedios.<span class="guide-row__alias">También: /sfc</span><span class="guide-tag guide-tag--survival">Modalidades con Slimefun</span></p></div>
+        <div class="guide-row"><code>/sfa</code><p>Tus logros de Slimefun: qué has desbloqueado y qué te falta.<span class="guide-row__alias">También: /sfadvancements</span><span class="guide-tag guide-tag--survival">Modalidades con Slimefun</span></p></div>
+        <div class="guide-row"><code>/networks</code><p>Ayuda de Networks: almacenamiento, transporte y cuadrículas.<span class="guide-tag guide-tag--survival">Modalidades con Slimefun</span></p></div>
         <div class="guide-row"><code>/nex</code><p>El sistema de investigación de Nexcavate.<span class="guide-row__alias">También: /nexcavate</span><span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
         <div class="guide-row"><code>/stb</code><p>Los comandos de SensibleToolbox.<span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
         <div class="guide-row"><code>/dank</code><p>Gestiona tus Dank Tech.<span class="guide-row__alias">También: /dt, /danktech2</span><span class="guide-tag guide-tag--survival">Solo modalidad Slimefun</span></p></div>
@@ -221,12 +225,14 @@
         <div class="guide-row"><code>«No tienes permiso»</code><p>El comando existe pero tu rango no lo alcanza, o estás en una modalidad donde está cerrado a propósito. Mira la etiqueta que lleva al lado en esta página.</p></div>
         <div class="guide-row"><code>«Unknown command»</code><p>Eso sí es raro: significa que el plugin no cargó. Dilo en el foro de Discord con el nombre exacto que escribiste.</p></div>
         <div class="guide-row"><code>Funciona en una modalidad y en otra no</code><p>Algunos sistemas están separados a propósito. La casa de subastas sí funciona en cada modalidad, pero muestra un mercado distinto en cada una; las bóvedas y el mercado de materiales Slimefun conservan sus restricciones.</p></div>
+        <div class="guide-row"><code>Mi inventario «desapareció»</code><p>Comprueba primero la modalidad: cada una carga un inventario distinto. No vuelvas a cambiar de mundo mientras aparece el mensaje de respaldo. Si falta algo después, reporta jugador, hora, modalidad de origen y destino.</p></div>
+        <div class="guide-row"><code>La máquina no hace nada</code><p>Revisa la receta exacta en <code>/sf guide</code>, investigación, energía, espacio de salida, multibloque y límite de entidades. Al reportarlo indica mundo, coordenadas, nombre exacto de la máquina y hora.</p></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
-  <script src="scripts/site.js?v=20260814-comandos"></script>
-  <script src="scripts/guia.js?v=20260814-comandos"></script>
+  <script src="scripts/site.js?v=20260824-comandos"></script>
+  <script src="scripts/guia.js?v=20260824-comandos"></script>
 </body>
 </html>

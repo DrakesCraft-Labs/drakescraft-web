@@ -95,7 +95,7 @@
 
       <section class="guide-section" data-cat="modalidades">
         <h2>Modalidades (5 en 1)</h2>
-        <p class="guide-section__note">Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio conviven en el mismo host. Tu rango, tus jobs, tus skills y tu dinero te siguen; el inventario queda aislado entre cada una para proteger la economía.</p>
+        <p class="guide-section__note">Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio conviven en el mismo host. Solo tu rango y tus Dragmas son globales; inventario y progreso jugable quedan aislados para proteger cada economía.</p>
         <div class="guide-table">
           <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre las 5 modalidades del servidor.<span class="guide-row__alias">También: /modalidad, /modos, /menu</span></p></div>
           <div class="guide-row"><code>/slimefun</code><p>La modalidad principal: máquinas, magia, jefes y progresión completa. <strong>Antes se llamaba Survival</strong> y el comando de siempre sigue valiendo.<span class="guide-row__alias">También: /survival, /principal, /polis</span></p></div>
@@ -140,7 +140,9 @@
           <div class="guide-row"><code>/jobs</code><p>Empleos. Únete a uno y ganas dinero por minar, talar, cultivar o cazar.<span class="guide-row__alias">Unirse: /jobs join &lt;empleo&gt;</span></p></div>
           <div class="guide-row"><code>/ah</code><p>Casa de subastas independiente por modalidad. Solo verás anuncios creados en la modalidad donde estés.</p></div>
           <div class="guide-row"><code>/sellinv</code><p>Vende de una vez los materiales de tu inventario.</p></div>
-          <div class="guide-row"><code>/sfmercado</code><p>Mercado dinámico de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Solo Slimefun</span></p></div>
+          <div class="guide-row"><code>/sellgui</code><p>Venta selectiva: deposita los objetos, se venden los reconocidos y se devuelven los que no tengan precio.</p></div>
+          <div class="guide-row"><code>/sfmercado</code><p>Mercado dinámico de materiales de Slimefun.<span class="guide-tag guide-tag--survival">Slimefun, SkyBlock y OneBlock</span></p></div>
+          <div class="guide-row"><code>Laboratorio</code><p>No permite tiendas, ventas ni subastas: allí los objetos de <code>/sf cheat</code> son solo para pruebas.</p></div>
           <div class="guide-row"><code>/pw</code><p>Warps de jugadores: visita las tiendas y bases que otros publicaron.<span class="guide-row__alias">También: /pwarp</span></p></div>
         </div>
       </section>
@@ -151,7 +153,8 @@
         <div class="guide-table">
           <div class="guide-row"><code>/sf guide</code><p>Te entrega la guía de Slimefun si la perdiste.</p></div>
           <div class="guide-row"><code>/sf search &lt;texto&gt;</code><p>Busca una receta o un objeto por nombre.</p></div>
-          <div class="guide-row"><code>/sf stats</code><p>Tu progreso de investigación.</p></div>
+          <div class="guide-row"><code>/sf stats</code><p>Tu progreso de investigación. En Laboratorio todo aparece desbloqueado temporalmente.</p></div>
+          <div class="guide-row"><code>/sf cheat</code><p>Catálogo de pruebas exclusivo del Laboratorio. <code>/sf give</code> y <code>/sf research</code> siguen reservados al staff.</p></div>
           <div class="guide-row"><code>/skills</code><p>Tus habilidades de AuraSkills: minería, lucha, agricultura y más.</p></div>
         </div>
 
@@ -276,7 +279,7 @@
     
 <section class="container guide-section" id="modalidades">
       <h2>Cómo funcionan las modalidades</h2>
-      <p class="guide-section__note">Las cuatro corren en el mismo servidor. No cambias de IP ni pierdes tu progreso: cambias de mundo con <code>/modalidades</code>.</p>
+      <p class="guide-section__note">Las cinco corren en el mismo servidor. No cambias de IP: cambias de entorno con <code>/modalidades</code> y el servidor respalda el inventario antes de llevarte.</p>
 
       <div class="guide-modes">
         <article class="guide-mode" style="--mode-accent:#9ce6a4;">
@@ -323,6 +326,16 @@
             <li>Entras con <code>/ob</code></li>
           </ul>
         </article>
+        <article class="guide-mode" style="--mode-accent:#ffcf70;">
+          <h3>Laboratorio</h3>
+          <p>Sandbox creativo para comprobar máquinas y automatizaciones sin afectar la economía.</p>
+          <ul>
+            <li>Catálogo completo con <code>/sf cheat</code></li>
+            <li>Investigaciones desbloqueadas solo durante la prueba</li>
+            <li>Inventario totalmente aislado y respaldado al salir</li>
+            <li>Sin tiendas, subastas, bóvedas, homes ni explosiones reales</li>
+          </ul>
+        </article>
       </div>
 
       <div class="guide-split">
@@ -330,10 +343,7 @@
           <h3>Lo que te sigue entre modalidades</h3>
           <ul>
             <li><strong>Tu rango</strong> y todos sus permisos</li>
-            <li><strong>El cooldown de tus kits</strong>, aunque no se reclaman en Clásico</li>
             <li><strong>Tu dinero</strong>: los Dragmas son comunes</li>
-            <li><strong>Tus empleos</strong> y tus habilidades</li>
-            <li><strong>Tu progreso de Slimefun</strong></li>
           </ul>
         </div>
         <div class="guide-split__card">
@@ -342,6 +352,8 @@
             <li><strong>Tu inventario</strong> y tu experiencia</li>
             <li><strong>Tu cofre de ender</strong></li>
             <li><strong>Tus bóvedas</strong> <code>/pv</code></li>
+            <li><strong>Tu vida, hambre, modo de juego, estadísticas y avances</strong></li>
+            <li><strong>Tu progreso jugable</strong>, incluidos empleos, habilidades e investigaciones</li>
             <li><strong>Las subastas</strong>: cada modalidad tiene su propio mercado aislado</li>
             <li><strong>Las protecciones</strong>: en las islas protege el sistema de islas</li>
           </ul>
@@ -519,7 +531,7 @@
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
-  <script src="scripts/site.js?v=20260811-liveguide"></script>
-  <script src="scripts/guia.js?v=20260811-liveguide"></script>
+  <script src="scripts/site.js?v=20260824-modalidades"></script>
+  <script src="scripts/guia.js?v=20260824-modalidades"></script>
 </body>
 </html>
