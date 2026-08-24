@@ -850,3 +850,45 @@ body[data-page="store"]::after,
   white-space: normal !important;
   overflow-wrap: break-word !important;
 }
+
+/* Cabecera comercial compacta: la narrativa del servidor vive en la portada. */
+.store-intro {
+  padding: clamp(3.5rem, 7vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid rgba(247, 213, 107, .3);
+  color: #f4efdf;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(127, 233, 166, .12), transparent 34%),
+    linear-gradient(135deg, #071712, #10271f 62%, #0b1d17);
+}
+
+.store-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .72fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: end;
+}
+
+.store-intro .eyebrow { color: #d8b65a; }
+.store-intro h1 {
+  max-width: 12ch;
+  margin: .65rem 0 0;
+  font: 600 clamp(3rem, 6.5vw, 6.3rem)/.92 "Cinzel", serif;
+  letter-spacing: -.045em;
+}
+.store-intro h1 em { color: #7fe9a6; font-style: italic; font-weight: 600; }
+.store-intro__copy > p { margin: 0; color: rgba(244, 239, 223, .72); font-size: 1.05rem; line-height: 1.75; }
+.store-intro__links { display: flex; flex-wrap: wrap; gap: .65rem 1.25rem; margin-top: 1.5rem; }
+.store-intro__links a { color: #f7d56b; font-weight: 700; border-bottom: 1px solid rgba(247, 213, 107, .35); padding-bottom: .2rem; }
+
+/* Estas secciones se conservan temporalmente en el documento solo para evitar
+   alterar dependencias históricas; la experiencia de tienda ya no las presenta. */
+#modalidades[hidden], #equipo[hidden] { display: none !important; }
+
+@media (max-width: 760px) {
+  .store-intro { padding: 3.2rem 0 2.7rem; }
+  .store-intro__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .store-intro h1 { font-size: clamp(2.7rem, 13vw, 4.2rem); }
+  .store-intro__copy > p { font-size: .96rem; line-height: 1.65; }
+  .store-intro__links { display: grid; grid-template-columns: 1fr; }
+  .store-path__inner { display: flex !important; min-height: 0 !important; }
+}
