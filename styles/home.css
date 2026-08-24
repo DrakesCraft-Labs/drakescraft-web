@@ -1,8 +1,6 @@
 :root { --home-bg:#071712; --home-cream:#f4efdf; --home-gold:#d8b65a; --home-line:rgba(244,239,223,.14); }
 .home-page { background:var(--home-bg); color:var(--home-cream); }
 .home-page::before,.home-page::after { display:none; }
-.home-nav { background:rgba(5,19,15,.78); border-color:rgba(244,239,223,.08); }
-.home-nav .nav-discord { background:transparent; color:var(--home-cream); border:1px solid rgba(216,182,90,.5); box-shadow:none; }
 .home-kicker { margin:0 0 1rem; color:#d8b65a; font:500 .72rem/1.2 "DM Mono",monospace; letter-spacing:.2em; text-transform:uppercase; }
 .home-hero { min-height:calc(100svh - 76px); position:relative; display:grid; align-items:center; overflow:hidden; isolation:isolate; }
 .home-hero__media,.home-hero__veil { position:absolute; inset:0; z-index:-2; }

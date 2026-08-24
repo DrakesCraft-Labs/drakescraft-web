@@ -892,6 +892,33 @@ body::before, .page-shell::before, .page-shell::after { display: none; }
     body:not(.portal-page) .metric-card { min-height: 0; overflow-wrap: anywhere; }
 }
 
+/* Cabecera canónica compartida por portada, tienda, guías y soporte. */
+.site-nav {
+    background: rgba(5, 19, 15, .94);
+    border-bottom: 1px solid rgba(216, 182, 90, .32);
+}
+
+.site-nav__bar { min-height: 76px; }
+.brand__mark {
+    border-color: rgba(216, 182, 90, .34);
+    border-radius: 10px;
+    background: rgba(22, 43, 34, .9);
+}
+.site-nav__links a { color: rgba(244, 239, 223, .72); border-radius: 5px; }
+.site-nav__links a:hover,
+.site-nav__links a.active { color: #f4efdf; background: rgba(244, 239, 223, .08); }
+.site-nav__links .nav-discord {
+    color: #10231b;
+    border-radius: 5px;
+    background: #e1c36c;
+    box-shadow: none;
+}
+
+@media (max-width: 760px) {
+    .site-nav__links { background: rgba(5, 19, 15, .98); border-color: rgba(216, 182, 90, .28); }
+    .site-nav__links a { min-height: 44px; display: flex; align-items: center; }
+}
+
 /* Tema DrakesCraft. Definidos una sola vez para que la tienda y la guia no deriven:
    estaban usando dorados y verdes casi iguales pero distintos, que se nota como
    descuido sin que se sepa por que. */

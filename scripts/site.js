@@ -1,5 +1,71 @@
 /* Shared storefront interactions. Public pages are intentionally store-only. */
 (function () {
+    /**
+     * Construye una única navegación para todo el portal y evita que cada
+     * página mantenga una copia distinta de enlaces, títulos y estados activos.
+     */
+    function renderPrimaryNavigation() {
+        const navigation = document.querySelector(".site-nav");
+        const menu = document.getElementById("nav-menu");
+        const brandSubtitle = document.querySelector(".brand__meta span");
+        if (!navigation || !menu) return;
+
+        const path = window.location.pathname.split("/").pop() || "index.html";
+        const activeKey = path === "index.html" ? "home"
+            : path === "store.html" ? "store"
+                : path === "guia.html" ? "server"
+                    : path === "guia-comandos.html" ? "commands"
+                        : path === "guia-rangos.html" ? "ranks"
+                            : path === "guia-slimefun.html" ? "slimefun"
+                                : path === "metricas.html" ? "metrics"
+                                    : path === "apoya.html" ? "support"
+                                        : path === "support.html" || path === "terms.html" ? "help"
+                                            : "";
+        const items = [
+            ["home", "Inicio", "/"],
+            ["server", "El servidor", "guia.html"],
+            ["commands", "Comandos", "guia-comandos.html"],
+            ["ranks", "Rangos", "guia-rangos.html"],
+            ["slimefun", "Slimefun", "guia-slimefun.html"],
+            ["store", "Tienda", "store.html"],
+            ["metrics", "Métricas", "metricas.html"],
+            ["support", "Apoyar", "apoya.html"],
+            ["help", "Soporte", "support.html"]
+        ];
+
+        try {
+            const fragment = document.createDocumentFragment();
+            items.forEach(([key, label, href]) => {
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = href;
+                link.textContent = label;
+                if (key === activeKey) {
+                    link.classList.add("active");
+                    link.setAttribute("aria-current", "page");
+                }
+                listItem.appendChild(link);
+                fragment.appendChild(listItem);
+            });
+
+            const discordItem = document.createElement("li");
+            const discordLink = document.createElement("a");
+            discordLink.className = "nav-discord";
+            discordLink.href = "https://discord.gg/rR7FbfCt9Y";
+            discordLink.target = "_blank";
+            discordLink.rel = "noopener";
+            discordLink.textContent = "Discord";
+            discordItem.appendChild(discordLink);
+            fragment.appendChild(discordItem);
+
+            menu.replaceChildren(fragment);
+            navigation.classList.remove("home-nav");
+            if (brandSubtitle) brandSubtitle.textContent = "Portal oficial";
+        } catch (error) {
+            console.error("No se pudo unificar la navegación principal", error);
+        }
+    }
+
     function showToast(message) {
         let toast = document.querySelector(".toast");
         if (!toast) {
@@ -66,6 +132,7 @@
     window.setupTilt = setupTilt;
 
     document.addEventListener("DOMContentLoaded", () => {
+        renderPrimaryNavigation();
         setupNavigation();
         setupProgress();
         setupCrestStage();

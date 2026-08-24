@@ -10,13 +10,6 @@ body[data-page="store"]::after,
 #particles-canvas,
 .scroll-progress { display: none; }
 
-.site-nav { background: rgba(13, 20, 29, .94); border-bottom-color: rgba(232, 191, 79, .32); }
-.site-nav__bar { min-height: 74px; }
-.brand__mark { background: #1d2b32; border-color: rgba(232, 191, 79, .38); border-radius: 10px; }
-.site-nav__links a { border-radius: 5px; color: #d6e0dc; }
-.site-nav__links a:hover, .site-nav__links a.active { color: #fff9e8; background: #25342f; }
-.nav-discord { background: #e8bf4f; color: #182019 !important; box-shadow: none; }
-
 .btn { border-radius: 5px; font-weight: 800; letter-spacing: 0; }
 .btn-primary { background: #e8bf4f; border-color: #e8bf4f; color: #172019; box-shadow: 0 9px 20px rgba(232, 191, 79, .22); }
 .btn-primary:hover { background: #f5d773; border-color: #f5d773; transform: translateY(-1px); }
