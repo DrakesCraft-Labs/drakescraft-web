@@ -846,12 +846,49 @@ body[data-page="store"]::after,
 
 /* Cabecera comercial compacta: la narrativa del servidor vive en la portada. */
 .store-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding: clamp(3.5rem, 7vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
   border-bottom: 1px solid rgba(247, 213, 107, .3);
   color: #f4efdf;
   background:
     radial-gradient(circle at 85% 10%, rgba(127, 233, 166, .12), transparent 34%),
     linear-gradient(135deg, #071712, #10271f 62%, #0b1d17);
+}
+
+.store-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("../assets/editorial/store-lake.webp") center 54% / cover no-repeat;
+}
+.store-intro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(4,18,13,.97) 0%, rgba(4,18,13,.9) 45%, rgba(4,18,13,.48) 100%), linear-gradient(0deg, rgba(4,18,13,.8), transparent 60%);
+}
+.store-intro__grid { text-shadow: 0 2px 22px rgba(0,0,0,.48); }
+
+body[data-section="support"] .store-subpage,
+body[data-section="terms"] .store-subpage {
+  position: relative;
+  isolation: isolate;
+  background-color: #101a16;
+  background-image: linear-gradient(90deg, rgba(8,20,15,.97), rgba(8,20,15,.88)), url("../assets/editorial/support-village.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+  body[data-section="support"] .store-subpage,
+  body[data-section="terms"] .store-subpage {
+    background-attachment: scroll;
+  }
 }
 
 .store-intro__grid {

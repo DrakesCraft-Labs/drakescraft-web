@@ -4,6 +4,10 @@
   position: relative;
   padding: clamp(4rem, 12vw, 7rem) 0 clamp(2.5rem, 6vw, 4rem);
   overflow: hidden;
+  isolation: isolate;
+  background-color: #071712;
+  background-position: center;
+  background-size: cover;
 }
 
 .guide-hero__backdrop {
@@ -13,7 +17,27 @@
     radial-gradient(120% 90% at 15% 0%, rgba(255, 226, 137, .18), transparent 60%),
     radial-gradient(90% 70% at 90% 15%, rgba(255, 176, 60, .18), transparent 55%);
   pointer-events: none;
+  z-index: -1;
 }
+
+/* Una fotografía real identifica cada familia de contenido sin convertir las
+   guías en galerías ni competir con la lectura. */
+body[data-section="server"] .guide-hero,
+body[data-section="commands"] .guide-hero { background-image: url("../assets/editorial/support-village.webp"); }
+body[data-section="ranks"] .guide-hero { background-image: url("../assets/editorial/store-lake.webp"); background-position: center 56%; }
+body[data-section="slimefun"] .guide-hero { background-image: url("../assets/editorial/slimefun-cosmos.webp"); }
+body[data-section="metrics"] .guide-hero,
+body[data-section="support-project"] .guide-hero { background-image: url("../assets/editorial/community-pagoda.webp"); background-position: center 42%; }
+
+.guide-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(4,17,13,.96) 0%, rgba(4,17,13,.8) 48%, rgba(4,17,13,.32) 78%), linear-gradient(0deg, rgba(4,17,13,.78), transparent 58%);
+}
+
+.guide-hero__grid { text-shadow: 0 2px 22px rgba(0,0,0,.55); }
 
 .guide-hero__grid { position: relative; max-width: 46rem; }
 .guide-hero h1 { margin: .4rem 0 1rem; font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.05; }
