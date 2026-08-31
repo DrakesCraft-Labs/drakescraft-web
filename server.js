@@ -1005,7 +1005,7 @@ app.get('/api/edge-metrics', async (_request, reply) => {
       ]
     },
     minecraft_infrastructure: {
-      host: 'Clúster Dedicado Star (Chile)',
+      host: 'Game Hosting Dedicado (Dallas, TX, USA)',
       subdomain: 'mc.drakescraft.cl',
       java_port: 25565,
       bedrock_port: 19132,
