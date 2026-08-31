@@ -1,0 +1,12 @@
+name = "drakescraft-shield"
+main = "cloudflare-worker-shield.js"
+compatibility_date = "2026-08-31"
+account_id = "2fa0ead62c61c5d1b594d956c3005283"
+workers_dev = false
+
+routes = [
+  { pattern = "web.drakescraft.cl/*", zone_id = "702d2115ab63af718ba13f947b4b326e" }
+]
+
+[observability]
+enabled = true

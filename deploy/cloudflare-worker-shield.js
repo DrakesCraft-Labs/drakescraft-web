@@ -1,116 +1,12 @@
 /**
  * Cloudflare Worker Error Shield para DrakesCraft (*.drakescraft.cl)
  * 
- * Intercepta fallos de túnel (502, 503, 504, 520, 521, 522, 523, 524) y caídas
- * del origen para mostrar siempre la pantalla oficial de mantenimiento y sincronización
+ * Intercepta fallos de túnel (502, 503, 504, 520, 521, 522, 523, 524, 1033) y caídas
+ * de Star para mostrar siempre la pantalla oficial de mantenimiento y sincronización
  * de DrakesCraft con estética dorada/dragón, en lugar de la pantalla de error genérica de Cloudflare.
  */
 
-const FALLBACK_MAINTENANCE_HTML = `<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mantenimiento &amp; Sincronización | DrakesCraft</title>
-  <meta name="theme-color" content="#071712">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: #071712;
-      color: #f8fafc;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      text-align: center;
-      background: radial-gradient(circle at 50% 35%, rgba(16, 185, 129, 0.12) 0%, rgba(7, 23, 18, 0.98) 75%);
-    }
-    .card {
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(234, 179, 8, 0.35);
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(234, 179, 8, 0.15);
-      backdrop-filter: blur(16px);
-    }
-    .logo {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 1.5rem;
-      filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.4));
-    }
-    h1 {
-      font-size: 2rem;
-      color: #fef08a;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    p {
-      font-size: 1.05rem;
-      color: #94a3b8;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-    .actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 0.85rem 1.6rem;
-      border-radius: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: none;
-    }
-    .btn-gold {
-      background: linear-gradient(135deg, #fcd34d 0%, #ca8a04 100%);
-      color: #0f172a;
-      box-shadow: 0 4px 15px rgba(202, 138, 4, 0.35);
-    }
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(202, 138, 4, 0.5);
-    }
-    .btn-discord {
-      background: #5865F2;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.35);
-    }
-    .btn-discord:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-    }
-    .footer-note {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: #64748b;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <img class="logo" src="https://web.drakescraft.cl/assets/logo-drakescraft.png" alt="DrakesCraft" onerror="this.style.display='none'">
-    <h1>Mantenimiento &amp; Sincronización</h1>
-    <p>El portal web y los servicios de DrakesCraft se encuentran en una breve pausa técnica para aplicar mejoras y sincronización de servidores. Todos los datos están seguros y volvemos en breve.</p>
-    <div class="actions">
-      <button class="btn btn-gold" onclick="location.reload()">Reintentar conexión</button>
-      <a class="btn btn-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Avisos en Discord</a>
-    </div>
-    <div class="footer-note">DrakesCraft · mc.drakescraft.cl</div>
-  </div>
-</body>
-</html>`;
+const FALLBACK_MAINTENANCE_HTML = '<!doctype html>\n<html lang="es">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>Mantenimiento &amp; Sincronización Divina | DrakesCraft</title>\n  <meta name="description" content="El portal y servidores de DrakesCraft se encuentran en una breve pausa técnica para aplicar mejoras y sincronización de dimensiones.">\n  <meta name="theme-color" content="#071712">\n  <meta property="og:type" content="website">\n  <meta property="og:title" content="DrakesCraft | Mantenimiento &amp; Sincronización">\n  <meta property="og:description" content="Tus datos, inventarios y cofres están completamente seguros. Volvemos en breve.">\n  <meta property="og:image" content="https://web.drakescraft.cl/assets/home/hero-aurora-1600.webp">\n  <link rel="icon" type="image/png" href="https://web.drakescraft.cl/assets/logo-drakescraft.png">\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">\n  <style>\n    :root {\n      --bg-dark: #071712;\n      --gold-primary: #f59e0b;\n      --gold-light: #fef08a;\n      --gold-glow: rgba(245, 158, 11, 0.4);\n      --emerald-glow: rgba(16, 185, 129, 0.25);\n      --slate-border: rgba(234, 179, 8, 0.3);\n      --card-bg: rgba(10, 20, 24, 0.82);\n    }\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body {\n      background-color: var(--bg-dark);\n      color: #f8fafc;\n      font-family: \'Instrument Sans\', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;\n      min-height: 100vh;\n      display: flex;\n      flex-direction: column;\n      justify-content: space-between;\n      align-items: center;\n      padding: 2rem 1.25rem 1.5rem;\n      position: relative;\n      overflow-x: hidden;\n      background: radial-gradient(circle at 50% 25%, rgba(16, 185, 129, 0.15) 0%, rgba(7, 23, 18, 0.98) 75%);\n    }\n\n    /* Ambient animated orbs */\n    .ambient-orb {\n      position: absolute;\n      border-radius: 50%;\n      filter: blur(80px);\n      pointer-events: none;\n      z-index: 0;\n      opacity: 0.6;\n      animation: float 8s ease-in-out infinite alternate;\n    }\n    .orb-1 { width: 450px; height: 450px; top: -100px; left: 15%; background: var(--emerald-glow); }\n    .orb-2 { width: 400px; height: 400px; top: 30%; right: 10%; background: var(--gold-glow); animation-delay: -4s; }\n    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(40px) scale(1.08); } }\n\n    .main-wrap {\n      position: relative;\n      z-index: 1;\n      width: 100%;\n      max-width: 760px;\n      margin: auto 0;\n    }\n\n    .card {\n      background: var(--card-bg);\n      border: 1px solid var(--slate-border);\n      border-radius: 24px;\n      padding: 3rem 2.25rem;\n      text-align: center;\n      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.15);\n      backdrop-filter: blur(20px);\n      -webkit-backdrop-filter: blur(20px);\n      position: relative;\n    }\n\n    .logo-badge {\n      display: inline-flex;\n      align-items: center;\n      justify-content: center;\n      width: 96px;\n      height: 96px;\n      border-radius: 50%;\n      background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, rgba(7, 23, 18, 0.8) 80%);\n      border: 2px solid rgba(245, 158, 11, 0.5);\n      box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);\n      margin-bottom: 1.5rem;\n      animation: pulse-glow 3s infinite;\n    }\n    .logo-badge img {\n      width: 68px;\n      height: 68px;\n      object-fit: contain;\n    }\n    @keyframes pulse-glow {\n      0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(245, 158, 11, 0.3); }\n      50% { transform: scale(1.04); box-shadow: 0 0 45px rgba(245, 158, 11, 0.6); }\n    }\n\n    .badge-label {\n      display: inline-block;\n      font-family: \'DM Mono\', monospace;\n      font-size: 0.82rem;\n      letter-spacing: 0.12em;\n      text-transform: uppercase;\n      color: #fbbf24;\n      background: rgba(245, 158, 11, 0.12);\n      border: 1px solid rgba(245, 158, 11, 0.3);\n      padding: 0.35rem 1rem;\n      border-radius: 9999px;\n      margin-bottom: 1.25rem;\n    }\n\n    h1 {\n      font-family: \'Cinzel\', serif;\n      font-size: clamp(2rem, 5vw, 2.9rem);\n      font-weight: 800;\n      color: #ffffff;\n      line-height: 1.15;\n      margin-bottom: 1rem;\n      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);\n    }\n    h1 span {\n      background: linear-gradient(180deg, #fef08a 0%, #f59e0b 60%, #b45309 100%);\n      -webkit-background-clip: text;\n      -webkit-text-fill-color: transparent;\n    }\n\n    p.lead {\n      font-size: 1.12rem;\n      color: #cbd5e1;\n      line-height: 1.65;\n      max-width: 620px;\n      margin: 0 auto 2rem;\n    }\n\n    /* Live status box */\n    .status-panel {\n      background: rgba(15, 23, 42, 0.6);\n      border: 1px solid rgba(16, 185, 129, 0.3);\n      border-radius: 16px;\n      padding: 1.25rem 1.5rem;\n      margin-bottom: 2.25rem;\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: space-between;\n      gap: 1rem;\n      text-align: left;\n    }\n    .status-panel__info {\n      display: flex;\n      align-items: center;\n      gap: 0.85rem;\n    }\n    .status-dot {\n      width: 12px;\n      height: 12px;\n      border-radius: 50%;\n      background: #10b981;\n      box-shadow: 0 0 12px #10b981;\n      animation: blink 2s infinite;\n    }\n    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }\n    .status-panel strong {\n      display: block;\n      color: #f1f5f9;\n      font-size: 0.98rem;\n    }\n    .status-panel small {\n      color: #94a3b8;\n      font-size: 0.85rem;\n    }\n    .timer-badge {\n      font-family: \'DM Mono\', monospace;\n      color: #38bdf8;\n      background: rgba(56, 189, 248, 0.1);\n      border: 1px solid rgba(56, 189, 248, 0.25);\n      padding: 0.4rem 0.85rem;\n      border-radius: 8px;\n      font-size: 0.88rem;\n      white-space: nowrap;\n    }\n\n    /* Action buttons */\n    .action-row {\n      display: flex;\n      gap: 1rem;\n      justify-content: center;\n      flex-wrap: wrap;\n      margin-bottom: 2.5rem;\n    }\n    .btn {\n      display: inline-flex;\n      align-items: center;\n      justify-content: center;\n      gap: 0.6rem;\n      padding: 0.9rem 1.8rem;\n      border-radius: 12px;\n      font-size: 1rem;\n      font-weight: 600;\n      text-decoration: none;\n      cursor: pointer;\n      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);\n      border: none;\n      font-family: inherit;\n    }\n    .btn-gold {\n      background: linear-gradient(135deg, #fcd34d 0%, #ca8a04 100%);\n      color: #0f172a;\n      box-shadow: 0 8px 25px -4px rgba(202, 138, 4, 0.4);\n    }\n    .btn-gold:hover {\n      transform: translateY(-2px);\n      box-shadow: 0 12px 30px -4px rgba(202, 138, 4, 0.6);\n    }\n    .btn-discord {\n      background: #5865F2;\n      color: #ffffff;\n      box-shadow: 0 8px 25px -4px rgba(88, 101, 242, 0.4);\n    }\n    .btn-discord:hover {\n      transform: translateY(-2px);\n      box-shadow: 0 12px 30px -4px rgba(88, 101, 242, 0.6);\n    }\n    .btn-glass {\n      background: rgba(30, 41, 59, 0.7);\n      color: #f1f5f9;\n      border: 1px solid rgba(245, 158, 11, 0.25);\n    }\n    .btn-glass:hover {\n      background: rgba(51, 65, 85, 0.9);\n      border-color: rgba(245, 158, 11, 0.6);\n      transform: translateY(-2px);\n    }\n\n    /* Community and GitHub grid */\n    .support-grid {\n      border-top: 1px solid rgba(255, 255, 255, 0.1);\n      padding-top: 2rem;\n      display: grid;\n      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));\n      gap: 1rem;\n      text-align: left;\n    }\n    .support-item {\n      background: rgba(15, 23, 42, 0.5);\n      border: 1px solid rgba(255, 255, 255, 0.08);\n      border-radius: 14px;\n      padding: 1.1rem 1.1rem;\n      text-decoration: none;\n      color: inherit;\n      transition: all 0.2s ease;\n      display: flex;\n      flex-direction: column;\n      gap: 0.35rem;\n    }\n    .support-item:hover {\n      background: rgba(30, 41, 59, 0.8);\n      border-color: rgba(245, 158, 11, 0.4);\n      transform: translateY(-2px);\n    }\n    .support-item__title {\n      font-family: \'Cinzel\', serif;\n      font-weight: 700;\n      color: #fef08a;\n      font-size: 0.98rem;\n      display: flex;\n      align-items: center;\n      gap: 0.5rem;\n    }\n    .support-item p {\n      font-size: 0.83rem;\n      color: #94a3b8;\n      line-height: 1.45;\n    }\n\n    /* Footer */\n    footer {\n      position: relative;\n      z-index: 1;\n      margin-top: 2rem;\n      text-align: center;\n      color: #64748b;\n      font-size: 0.85rem;\n    }\n    footer a {\n      color: #94a3b8;\n      text-decoration: none;\n    }\n    footer a:hover { color: #f59e0b; }\n  </style>\n</head>\n<body>\n  <div class="ambient-orb orb-1" aria-hidden="true"></div>\n  <div class="ambient-orb orb-2" aria-hidden="true"></div>\n\n  <main class="main-wrap">\n    <div class="card">\n      <div class="logo-badge">\n        <img src="https://web.drakescraft.cl/assets/logo-drakescraft.png" alt="DrakesCraft Dragon Emblem" onerror="this.src=\'assets/logo-drakescraft.png\'">\n      </div>\n      <div><span class="badge-label">Sincronización del Nexo · 2026</span></div>\n      <h1>Mantenimiento <span>Programado</span></h1>\n      <p class="lead">\n        El portal web y los servidores de DrakesCraft se encuentran en una breve pausa técnica para aplicar mejoras, nuevos parches y sincronización de dimensiones.\n      </p>\n\n      <div class="status-panel">\n        <div class="status-panel__info">\n          <span class="status-dot" aria-hidden="true"></span>\n          <div>\n            <strong>Mundos e Inventarios Protegidos</strong>\n            <small>Volcado completo de máquinas Slimefun e inventarios realizado.</small>\n          </div>\n        </div>\n        <div class="timer-badge" id="reconnect-box">\n          Reintento automático en <span id="timer-sec">10</span>s\n        </div>\n      </div>\n\n      <div class="action-row">\n        <button class="btn btn-gold" onclick="location.reload()">\n          <span>🔄</span> Reintentar Ahora\n        </button>\n        <a class="btn btn-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">\n          <span>💬</span> Avisos en Discord\n        </a>\n        <button class="btn btn-glass" onclick="copyIp()" id="ip-btn">\n          <span>📋</span> Copiar IP mc.drakescraft.cl\n        </button>\n      </div>\n\n      <div class="support-grid">\n        <a class="support-item" href="https://github.com/DrakesCraft-Labs" target="_blank" rel="noopener">\n          <span class="support-item__title">🌟 GitHub Open Source</span>\n          <p>Explora el código, plugins y proyectos comunitarios de DrakesCraft Labs.</p>\n        </a>\n        <a class="support-item" href="https://web.drakescraft.cl/apoya.html" target="_blank" rel="noopener">\n          <span class="support-item__title">💖 Apoyar el Proyecto</span>\n          <p>Descubre cómo patrocinar el servidor y colaborar con el hosting y desarrollo.</p>\n        </a>\n        <a class="support-item" href="https://web.drakescraft.cl/store.html" target="_blank" rel="noopener">\n          <span class="support-item__title">💎 Tienda Oficial</span>\n          <p>Rangos, pases y llaves exclusivas mediante pasarela segura Tebex.</p>\n        </a>\n      </div>\n    </div>\n  </main>\n\n  <footer>\n    <p>DrakesCraft · Cinco mundos. Una comunidad. · <a href="https://github.com/DrakesCraft-Labs" target="_blank" rel="noopener">GitHub</a> · <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></p>\n  </footer>\n\n  <script>\n    // Contador regresivo y recarga suave\n    let count = 10;\n    const secEl = document.getElementById(\'timer-sec\');\n    const timerInterval = setInterval(() => {\n      count--;\n      if (secEl) secEl.textContent = count;\n      if (count <= 0) {\n        clearInterval(timerInterval);\n        location.reload();\n      }\n    }, 1000);\n\n    // Copiar IP\n    function copyIp() {\n      const btn = document.getElementById(\'ip-btn\');\n      navigator.clipboard.writeText(\'mc.drakescraft.cl\').then(() => {\n        const prev = btn.innerHTML;\n        btn.innerHTML = \'<span>✓</span> ¡IP Copiada!\';\n        setTimeout(() => btn.innerHTML = prev, 2500);\n      });\n    }\n  </script>\n</body>\n</html>\n';
 
 export default {
   async fetch(request, env, ctx) {
@@ -119,13 +15,13 @@ export default {
       
       // Si el origen devuelve error 5xx de servidor o túnel caído
       if (response.status >= 500 && response.status <= 599) {
-        const accept = request.headers.get('Accept') || '';
-        if (accept.includes('text/html')) {
+        const accept = request.headers.get("Accept") || "";
+        if (accept.includes("text/html") || request.mode === "navigate") {
           return new Response(FALLBACK_MAINTENANCE_HTML, {
             status: 503,
             headers: {
-              'Content-Type': 'text/html; charset=utf-8',
-              'Cache-Control': 'no-store, max-age=0'
+              "Content-Type": "text/html; charset=utf-8",
+              "Cache-Control": "no-store, max-age=0"
             }
           });
         }
@@ -133,12 +29,12 @@ export default {
       
       return response;
     } catch (err) {
-      // Si la conexión al túnel falló por completo
+      // Si la conexión al túnel falló por completo (Star apagado / sin conexión)
       return new Response(FALLBACK_MAINTENANCE_HTML, {
         status: 503,
         headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'no-store, max-age=0'
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-store, max-age=0"
         }
       });
     }

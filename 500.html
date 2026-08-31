@@ -3,147 +3,377 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>500 - Sincronización en Proceso | DrakesCraft</title>
-  <meta name="description" content="El portal o servidor web de DrakesCraft se encuentra en mantenimiento breve o sincronizando dimensiones.">
+  <title>Mantenimiento &amp; Sincronización Divina | DrakesCraft</title>
+  <meta name="description" content="El portal y servidores de DrakesCraft se encuentran en una breve pausa técnica para aplicar mejoras y sincronización de dimensiones.">
   <meta name="theme-color" content="#071712">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mantenimiento y Sincronización | DrakesCraft">
-  <meta property="og:description" content="El servidor está aplicando una actualización técnica segura. Volvemos en breve.">
+  <meta property="og:title" content="DrakesCraft | Mantenimiento &amp; Sincronización">
+  <meta property="og:description" content="Tus datos, inventarios y cofres están completamente seguros. Volvemos en breve.">
   <meta property="og:image" content="https://web.drakescraft.cl/assets/home/hero-aurora-1600.webp">
-  <meta property="og:url" content="https://web.drakescraft.cl/500.html">
-  <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+  <link rel="icon" type="image/png" href="https://web.drakescraft.cl/assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css?v=20260824-nav-v1">
-  <link rel="stylesheet" href="styles/home.css?v=20260824-home-v3-olympus">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .error-hero {
-      min-height: 85vh;
+    :root {
+      --bg-dark: #071712;
+      --gold-primary: #f59e0b;
+      --gold-light: #fef08a;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --slate-border: rgba(234, 179, 8, 0.3);
+      --card-bg: rgba(10, 20, 24, 0.82);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: #f8fafc;
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 1.25rem 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 25%, rgba(16, 185, 129, 0.15) 0%, rgba(7, 23, 18, 0.98) 75%);
+    }
+
+    /* Ambient animated orbs */
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 450px; height: 450px; top: -100px; left: 15%; background: var(--emerald-glow); }
+    .orb-2 { width: 400px; height: 400px; top: 30%; right: 10%; background: var(--gold-glow); animation-delay: -4s; }
+    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(40px) scale(1.08); } }
+
+    .main-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 760px;
+      margin: auto 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--slate-border);
+      border-radius: 24px;
+      padding: 3rem 2.25rem;
+      text-align: center;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .logo-badge {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      position: relative;
-      padding: 6rem 1.5rem 4rem;
-      background: radial-gradient(circle at 50% 35%, rgba(234, 179, 8, 0.08) 0%, rgba(7, 23, 18, 0.95) 70%);
-      overflow: hidden;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, rgba(7, 23, 18, 0.8) 80%);
+      border: 2px solid rgba(245, 158, 11, 0.5);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
+      margin-bottom: 1.5rem;
+      animation: pulse-glow 3s infinite;
     }
-    .error-code {
+    .logo-badge img {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(245, 158, 11, 0.3); }
+      50% { transform: scale(1.04); box-shadow: 0 0 45px rgba(245, 158, 11, 0.6); }
+    }
+
+    .badge-label {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(4.5rem, 13vw, 8.5rem);
+      font-size: clamp(2rem, 5vw, 2.9rem);
       font-weight: 800;
-      line-height: 1;
-      margin: 0;
-      background: linear-gradient(180deg, #fcd34d 0%, #f59e0b 50%, #b45309 100%);
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    h1 span {
+      background: linear-gradient(180deg, #fef08a 0%, #f59e0b 60%, #b45309 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 35px rgba(245, 158, 11, 0.4));
-      letter-spacing: 0.05em;
     }
-    .error-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.3rem);
-      color: #f8fafc;
-      margin: 0.5rem 0 1rem;
-    }
-    .error-desc {
-      max-width: 580px;
-      margin: 0 auto 2.5rem;
-      font-size: 1.1rem;
-      color: #94a3b8;
-      line-height: 1.6;
-    }
-    .status-badge-box {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1.25rem 2rem;
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      margin-bottom: 2.5rem;
-      max-width: 500px;
-    }
-    .status-badge-box strong {
-      color: #fef08a;
-      font-size: 1.1rem;
-    }
-    .status-badge-box p {
-      margin: 0;
-      font-size: 0.95rem;
+
+    p.lead {
+      font-size: 1.12rem;
       color: #cbd5e1;
+      line-height: 1.65;
+      max-width: 620px;
+      margin: 0 auto 2rem;
     }
-    .countdown-ring {
+
+    /* Live status box */
+    .status-panel {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: left;
+    }
+    .status-panel__info {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .status-panel strong {
+      display: block;
+      color: #f1f5f9;
+      font-size: 0.98rem;
+    }
+    .status-panel small {
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+    .timer-badge {
       font-family: 'DM Mono', monospace;
       color: #38bdf8;
-      font-size: 0.9rem;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      white-space: nowrap;
     }
+
+    /* Action buttons */
+    .action-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      font-family: inherit;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #fcd34d 0%, #ca8a04 100%);
+      color: #0f172a;
+      box-shadow: 0 8px 25px -4px rgba(202, 138, 4, 0.4);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -4px rgba(202, 138, 4, 0.6);
+    }
+    .btn-discord {
+      background: #5865F2;
+      color: #ffffff;
+      box-shadow: 0 8px 25px -4px rgba(88, 101, 242, 0.4);
+    }
+    .btn-discord:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -4px rgba(88, 101, 242, 0.6);
+    }
+    .btn-glass {
+      background: rgba(30, 41, 59, 0.7);
+      color: #f1f5f9;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .btn-glass:hover {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: rgba(245, 158, 11, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Community and GitHub grid */
+    .support-grid {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      text-align: left;
+    }
+    .support-item {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.1rem 1.1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .support-item:hover {
+      background: rgba(30, 41, 59, 0.8);
+      border-color: rgba(245, 158, 11, 0.4);
+      transform: translateY(-2px);
+    }
+    .support-item__title {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: #fef08a;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .support-item p {
+      font-size: 0.83rem;
+      color: #94a3b8;
+      line-height: 1.45;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 2rem;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+    footer a:hover { color: #f59e0b; }
   </style>
 </head>
-<body class="page-shell">
-  <nav class="site-nav" aria-label="Navegación principal">
-    <div class="container site-nav__bar">
-      <a class="brand" href="/" aria-label="Inicio de DrakesCraft">
-        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="" width="46" height="46">
-        <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
-      </a>
-      <ul class="site-nav__links" id="nav-menu">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="guia.html">Guía</a></li>
-        <li><a href="store.html">Tienda</a></li>
-        <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
-      </ul>
-    </div>
-  </nav>
+<body>
+  <div class="ambient-orb orb-1" aria-hidden="true"></div>
+  <div class="ambient-orb orb-2" aria-hidden="true"></div>
 
-  <main>
-    <section class="error-hero">
-      <div class="container">
-        <h1 class="error-code">500</h1>
-        <h2 class="error-title">El Nexo se está restableciendo</h2>
-        <p class="error-desc">
-          El portal está experimentando un mantenimiento breve, reinicio de dimensiones o una actualización técnica. Tus datos, inventarios y cofres se encuentran completamente guardados y protegidos.
-        </p>
+  <main class="main-wrap">
+    <div class="card">
+      <div class="logo-badge">
+        <img src="https://web.drakescraft.cl/assets/logo-drakescraft.png" alt="DrakesCraft Dragon Emblem" onerror="this.src='assets/logo-drakescraft.png'">
+      </div>
+      <div><span class="badge-label">Sincronización del Nexo · 2026</span></div>
+      <h1>Mantenimiento <span>Programado</span></h1>
+      <p class="lead">
+        El portal web y los servidores de DrakesCraft se encuentran en una breve pausa técnica para aplicar mejoras, nuevos parches y sincronización de dimensiones.
+      </p>
 
-        <div class="status-badge-box">
-          <strong>⚡ Mantenimiento &amp; Sincronización Segura</strong>
-          <p>Los sistemas regresan automáticamente en un par de minutos.</p>
-          <div class="countdown-ring" id="retry-timer">Reintentando conexión automáticamente en <span id="sec">10</span>s...</div>
+      <div class="status-panel">
+        <div class="status-panel__info">
+          <span class="status-dot" aria-hidden="true"></span>
+          <div>
+            <strong>Mundos e Inventarios Protegidos</strong>
+            <small>Volcado completo de máquinas Slimefun e inventarios realizado.</small>
+          </div>
         </div>
-
-        <div class="home-actions" style="justify-content: center;">
-          <button class="home-button home-button--gold" onclick="location.reload()">Reintentar ahora</button>
-          <a class="home-button home-button--glass" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Ver avisos en Discord</a>
+        <div class="timer-badge" id="reconnect-box">
+          Reintento automático en <span id="timer-sec">10</span>s
         </div>
       </div>
-    </section>
+
+      <div class="action-row">
+        <button class="btn btn-gold" onclick="location.reload()">
+          <span>🔄</span> Reintentar Ahora
+        </button>
+        <a class="btn btn-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">
+          <span>💬</span> Avisos en Discord
+        </a>
+        <button class="btn btn-glass" onclick="copyIp()" id="ip-btn">
+          <span>📋</span> Copiar IP mc.drakescraft.cl
+        </button>
+      </div>
+
+      <div class="support-grid">
+        <a class="support-item" href="https://github.com/DrakesCraft-Labs" target="_blank" rel="noopener">
+          <span class="support-item__title">🌟 GitHub Open Source</span>
+          <p>Explora el código, plugins y proyectos comunitarios de DrakesCraft Labs.</p>
+        </a>
+        <a class="support-item" href="https://web.drakescraft.cl/apoya.html" target="_blank" rel="noopener">
+          <span class="support-item__title">💖 Apoyar el Proyecto</span>
+          <p>Descubre cómo patrocinar el servidor y colaborar con el hosting y desarrollo.</p>
+        </a>
+        <a class="support-item" href="https://web.drakescraft.cl/store.html" target="_blank" rel="noopener">
+          <span class="support-item__title">💎 Tienda Oficial</span>
+          <p>Rangos, pases y llaves exclusivas mediante pasarela segura Tebex.</p>
+        </a>
+      </div>
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__grid">
-      <div>
-        <strong>DrakesCraft</strong>
-        <p>Servidor chileno de Minecraft Java &amp; Bedrock. Slimefun, magia y tecnología conectadas.</p>
-      </div>
-      <div>
-        <small>© 2026 DrakesCraft. Todos los derechos reservados.</small>
-      </div>
-    </div>
+  <footer>
+    <p>DrakesCraft · Cinco mundos. Una comunidad. · <a href="https://github.com/DrakesCraft-Labs" target="_blank" rel="noopener">GitHub</a> · <a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></p>
   </footer>
 
   <script>
-    let timeLeft = 10;
-    const secEl = document.getElementById('sec');
-    const timer = setInterval(() => {
-      timeLeft--;
-      if (secEl) secEl.textContent = timeLeft;
-      if (timeLeft <= 0) {
-        clearInterval(timer);
+    // Contador regresivo y recarga suave
+    let count = 10;
+    const secEl = document.getElementById('timer-sec');
+    const timerInterval = setInterval(() => {
+      count--;
+      if (secEl) secEl.textContent = count;
+      if (count <= 0) {
+        clearInterval(timerInterval);
         location.reload();
       }
     }, 1000);
+
+    // Copiar IP
+    function copyIp() {
+      const btn = document.getElementById('ip-btn');
+      navigator.clipboard.writeText('mc.drakescraft.cl').then(() => {
+        const prev = btn.innerHTML;
+        btn.innerHTML = '<span>✓</span> ¡IP Copiada!';
+        setTimeout(() => btn.innerHTML = prev, 2500);
+      });
+    }
   </script>
 </body>
 </html>
