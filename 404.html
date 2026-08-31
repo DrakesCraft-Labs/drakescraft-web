@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 - Dimensión no encontrada | DrakesCraft</title>
+  <meta name="description" content="El portal o la página que buscas no existe en las coordenadas de DrakesCraft.">
+  <meta name="theme-color" content="#071712">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="404 - Dimensión no encontrada | DrakesCraft">
+  <meta property="og:description" content="Parece que las coordenadas de este portal se han desvanecido en el Vacío.">
+  <meta property="og:image" content="https://web.drakescraft.cl/assets/home/hero-aurora-1600.webp">
+  <meta property="og:url" content="https://web.drakescraft.cl/404.html">
+  <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css?v=20260824-nav-v1">
+  <link rel="stylesheet" href="styles/home.css?v=20260824-home-v3-olympus">
+  <style>
+    .error-hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 6rem 1.5rem 4rem;
+      background: radial-gradient(circle at 50% 35%, rgba(16, 185, 129, 0.08) 0%, rgba(7, 23, 18, 0.95) 70%);
+      overflow: hidden;
+    }
+    .error-code {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(5rem, 15vw, 10rem);
+      font-weight: 800;
+      line-height: 1;
+      margin: 0;
+      background: linear-gradient(180deg, #fef08a 0%, #ca8a04 50%, #854d0e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 35px rgba(234, 179, 8, 0.35));
+      letter-spacing: 0.05em;
+    }
+    .error-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: #f8fafc;
+      margin: 0.5rem 0 1rem;
+    }
+    .error-desc {
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.1rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .error-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 780px;
+      margin: 0 auto 2.5rem;
+      text-align: left;
+    }
+    .error-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(234, 179, 8, 0.2);
+      border-radius: 12px;
+      padding: 1.25rem 1rem;
+      color: #f1f5f9;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .error-card:hover {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(234, 179, 8, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(234, 179, 8, 0.2);
+    }
+    .error-card strong {
+      color: #fef08a;
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+    }
+    .error-card span {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .error-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1.2rem;
+      background: rgba(2, 6, 23, 0.7);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      margin-top: 1.5rem;
+    }
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+  </style>
+</head>
+<body class="page-shell">
+  <nav class="site-nav" aria-label="Navegación principal">
+    <div class="container site-nav__bar">
+      <a class="brand" href="/" aria-label="Inicio de DrakesCraft">
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="" width="46" height="46">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <ul class="site-nav__links" id="nav-menu">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="guia.html">Guía</a></li>
+        <li><a href="guia-slimefun.html">Slimefun</a></li>
+        <li><a href="store.html">Tienda</a></li>
+        <li><a class="nav-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="error-hero">
+      <div class="container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Dimensión no encontrada</h2>
+        <p class="error-desc">
+          Las coordenadas a las que intentas teletransportarte no existen en DrakesCraft o el portal ha cambiado de ubicación.
+        </p>
+
+        <div class="error-grid">
+          <a class="error-card" href="/">
+            <strong>🏰 Inicio</strong>
+            <span>Regresa al nexo central de la comunidad.</span>
+          </a>
+          <a class="error-card" href="guia-slimefun.html">
+            <strong>🧪 Guía Slimefun</strong>
+            <span>Máquinas, circuitos, energía y recetas.</span>
+          </a>
+          <a class="error-card" href="guia-comandos.html">
+            <strong>📜 Comandos</strong>
+            <span>Lista completa de utilidades del juego.</span>
+          </a>
+          <a class="error-card" href="store.html">
+            <strong>💎 Tienda Oficial</strong>
+            <span>Rangos, pases y llaves exclusivas.</span>
+          </a>
+        </div>
+
+        <div class="home-actions" style="justify-content: center; margin-bottom: 2rem;">
+          <a class="home-button home-button--gold" href="/">Volver al Inicio</a>
+          <a class="home-button home-button--glass" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Soporte en Discord</a>
+        </div>
+
+        <div>
+          <div class="error-status" id="mc-status-widget">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span id="mc-status-text">Comprobando estado de mc.drakescraft.cl...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div>
+        <strong>DrakesCraft</strong>
+        <p>Servidor chileno de Minecraft Java &amp; Bedrock. Slimefun, magia y tecnología conectadas.</p>
+      </div>
+      <div>
+        <small>© 2026 DrakesCraft. Todos los derechos reservados.</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function checkServer() {
+      const widget = document.getElementById('mc-status-text');
+      try {
+        const res = await fetch('/api/mcstatus');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.online) {
+            widget.textContent = `mc.drakescraft.cl · ${data.players || 0} jugadores online`;
+          } else {
+            widget.textContent = 'mc.drakescraft.cl · En reinicio / mantenimiento breve';
+          }
+        } else {
+          widget.textContent = 'mc.drakescraft.cl · Java + Bedrock';
+        }
+      } catch (e) {
+        widget.textContent = 'mc.drakescraft.cl · Java + Bedrock';
+      }
+    }
+    checkServer();
+
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const exp = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !exp);
+        menu.classList.toggle('is-open');
+      });
+    }
+  </script>
+</body>
+</html>

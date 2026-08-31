@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👁️ El Ojo Divino de Atenea · SaoriStar Live HUD & 3D Voxel</title>
+  <link rel="stylesheet" href="/styles/ojo-de-atenea.css?v=3.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="/three.min.js"></script>
+</head>
+<body class="cyber-greek-theme">
+  <div class="hud-scanlines"></div>
+  <div class="hud-vignette"></div>
+
+  <!-- Barra Superior de Estado -->
+  <header class="hud-header">
+    <div class="logo-box">
+      <div class="aegis-shield-icon">🛡️</div>
+      <div class="title-group">
+        <h1>EL OJO DIVINO DE ATENEA</h1>
+        <div class="subtitle">SISTEMA DE TELEMETRÍA, RECONSTRUCCIÓN 3D Y COGNICIÓN EN VIVO · SAORISTAR</div>
+      </div>
+    </div>
+
+    <div class="header-status-pill">
+      <span class="status-dot pulsating"></span>
+      <span id="conn-status">ENLACE NEURONAL ACTIVO</span>
+      <span class="divider">|</span>
+      <span id="server-dim" class="dim-badge">WORLD</span>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal del HUD -->
+  <main class="hud-grid">
+    
+    <!-- Panel Izquierdo: Constantes Vitales & Posición -->
+    <section class="hud-card vitals-panel">
+      <div class="card-header">
+        <span class="icon">🏛️</span>
+        <h2>ESTADO VITAL</h2>
+      </div>
+
+      <!-- Salud & Comida -->
+      <div class="vital-row">
+        <div class="vital-label">
+          <span>SALUD DIVINA</span>
+          <span id="health-val" class="val-highlight">26.0 / 20</span>
+        </div>
+        <div class="meter-bar"><div id="health-fill" class="meter-fill health-glow" style="width: 100%;"></div></div>
+      </div>
+
+      <div class="vital-row">
+        <div class="vital-label">
+          <span>SATURACIÓN</span>
+          <span id="food-val" class="val-highlight">20 / 20</span>
+        </div>
+        <div class="meter-bar"><div id="food-fill" class="meter-fill food-glow" style="width: 100%;"></div></div>
+      </div>
+
+      <!-- Coordenadas Espaciales -->
+      <div class="coords-box">
+        <div class="coord-item">
+          <span class="axis">X</span>
+          <span id="coord-x" class="coord-num">0</span>
+        </div>
+        <div class="coord-item">
+          <span class="axis">Y</span>
+          <span id="coord-y" class="coord-num">0</span>
+        </div>
+        <div class="coord-item">
+          <span class="axis">Z</span>
+          <span id="coord-z" class="coord-num">0</span>
+        </div>
+      </div>
+
+      <!-- Ciclo Solar / Lunar -->
+      <div class="time-box">
+        <div class="time-header">
+          <span id="time-icon">☀️</span>
+          <span id="time-text">DÍA SOLAR</span>
+          <span id="time-tick" class="sub-tick">Tick: 0</span>
+        </div>
+        <div class="meter-bar"><div id="time-fill" class="meter-fill time-glow" style="width: 50%;"></div></div>
+      </div>
+
+      <!-- Resumen de Arsenal Rápido -->
+      <div class="quick-arsenal">
+        <div class="arsenal-title">ARSENAL ACTIVO</div>
+        <div id="arsenal-items" class="arsenal-tags">
+          <span class="tag-item">⚔️ En guardia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel Central: Viewport 3D Vóxel & Radar Táctico -->
+    <section class="hud-card radar-panel">
+      <div class="card-header radar-header">
+        <div class="header-left">
+          <span class="icon">👁️</span>
+          <h2 id="view-title">RECONSTRUCCIÓN 3D EN VIVO</h2>
+        </div>
+        
+        <!-- Selector de Modo de Vista -->
+        <div class="view-switch-tabs">
+          <button id="btn-mode-3d" class="tab-btn active">🌐 3D VÓXEL</button>
+          <button id="btn-mode-2d" class="tab-btn">🎯 RADAR 2D</button>
+        </div>
+
+        <div class="radar-controls">
+          <button id="btn-cam-reset" class="hud-btn-mini" title="Reiniciar Cámara 3D">↺</button>
+          <button id="btn-zoom-in" class="hud-btn-mini">+</button>
+          <button id="btn-zoom-out" class="hud-btn-mini">-</button>
+          <span id="zoom-level" class="zoom-tag">16m</span>
+        </div>
+      </div>
+
+      <div class="canvas-wrapper">
+        <!-- Viewport 3D con Three.js -->
+        <div id="three-viewport" class="three-container"></div>
+        <!-- Canvas 2D Radar Clásico -->
+        <canvas id="radar-canvas" width="500" height="500" style="display: none;"></canvas>
+        
+        <div class="viewport-overlay-info">
+          <span class="badge-cam">Arrastra para rotar · Rueda para zoom</span>
+        </div>
+      </div>
+
+      <!-- Leyenda de Detección -->
+      <div class="radar-legend">
+        <span class="legend-item"><span class="dot dot-saori"></span> SaoriStar (Atenea)</span>
+        <span class="legend-item"><span class="dot dot-hostile"></span> Hostiles</span>
+        <span class="legend-item"><span class="dot dot-player"></span> Jugadores</span>
+        <span class="legend-item"><span class="dot dot-resource"></span> Vóxeles / Recursos</span>
+      </div>
+    </section>
+
+    <!-- Panel Derecho: Flujo Cognitivo & Órdenes Divinas -->
+    <section class="hud-card cognition-panel">
+      <div class="card-header">
+        <span class="icon">🧠</span>
+        <h2>EL PENSAMIENTO DE ATENEA</h2>
+      </div>
+
+      <!-- Stream de Pensamiento en Vivo -->
+      <div id="thought-stream" class="thought-stream">
+        <div class="thought-entry system">
+          <span class="time">[12:00:00]</span>
+          <span class="content">Sincronizando con los sentidos de SaoriStar...</span>
+        </div>
+      </div>
+
+      <!-- Órdenes Rápidas -->
+      <div class="quick-orders">
+        <div class="orders-title">⚡ ÓRDENES DIVINAS RÁPIDAS</div>
+        <div class="orders-grid">
+          <button class="btn-divine" onclick="sendQuickAction('SAY', '¡Que la luz de Atenea guíe sus pasos!')">☀️ Día Solar</button>
+          <button class="btn-divine" onclick="sendQuickAction('SAY', 'Regresando al templo del Spawn.')">🏛️ Ir a Spawn</button>
+          <button class="btn-divine" onclick="sendQuickAction('SAY', '¡Saludos nobles mortales de DrakesCraft!')">💬 Saludo</button>
+          <button class="btn-divine" onclick="sendQuickAction('SAY', 'Analizando el entorno con el Ojo de Atenea.')">💥 Despejar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel Inferior: Inventario Físico Completo (36 Slots) -->
+    <section class="hud-card inventory-panel">
+      <div class="card-header inv-header">
+        <div class="header-left">
+          <span class="icon">🎒</span>
+          <h2>INVENTARIO FÍSICO</h2>
+        </div>
+        <div class="inv-summary">
+          <span id="total-food-count">🥩 Comida: 0</span>
+          <span class="divider">|</span>
+          <span id="total-mats-count">🪵 Materiales: 0</span>
+        </div>
+      </div>
+
+      <div class="inv-container">
+        <!-- Rejilla Principal de 27 Slots -->
+        <div id="inv-grid-main" class="inv-grid main-grid"></div>
+        <!-- Barra Rápida / Hotbar de 9 Slots -->
+        <div id="inv-grid-hotbar" class="inv-grid hotbar-grid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/scripts/ojo-de-atenea.js?v=3.0"></script>
+</body>
+</html>

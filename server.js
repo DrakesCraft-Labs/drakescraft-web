@@ -778,7 +778,8 @@ for (const alias of ['/comandos', '/commands', '/cmds']) {
 for (const [alias, file] of [
   ['/apoya', 'apoya.html'], ['/apoyar', 'apoya.html'], ['/donar', 'apoya.html'], ['/sponsors', 'apoya.html'],
   ['/rangos', 'guia-rangos.html'], ['/ranks', 'guia-rangos.html'],
-  ['/slimefun', 'guia-slimefun.html'], ['/sf', 'guia-slimefun.html']
+  ['/slimefun', 'guia-slimefun.html'], ['/sf', 'guia-slimefun.html'],
+  ['/atenea', 'ojo-de-atenea.html'], ['/saori', 'ojo-de-atenea.html'], ['/ojo-de-atenea', 'ojo-de-atenea.html'], ['/radar', 'ojo-de-atenea.html']
 ]) {
   app.get(alias, async (_request, reply) => reply.sendFile(file));
 }
@@ -801,7 +802,7 @@ await app.register(fastifyStatic, {
   maxAge: '1h',
   immutable: false,
   setHeaders: (reply, filePath) => {
-    if (filePath.endsWith('.html')) {
+    if (filePath.endsWith('.html') || filePath.endsWith('.js') || filePath.endsWith('.css')) {
       reply.header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
     }
   },
@@ -814,6 +815,10 @@ await app.register(fastifyStatic, {
       'guia-comandos.html',
       'guia-rangos.html',
       'guia-slimefun.html',
+      'ojo-de-atenea.html',
+      '404.html',
+      '500.html',
+      'maintenance.html',
       'metricas.html',
       'support.html',
       'terms.html',
@@ -835,6 +840,86 @@ await app.register(fastifyStatic, {
 });
 
 // ── /api/mcstatus — estado del servidor Minecraft ────────────────────────
+
+// ── /api/saori/telemetry — Telemetría en vivo del Ojo Divino de Atenea ──────
+import net from 'node:net';
+
+let cachedTelemetry = { ready: false };
+let lastTelemetryAt = 0;
+let thoughtsLog = [
+  { time: new Date().toLocaleTimeString(), type: 'system', text: 'El Ojo Divino de Atenea sincronizado con SaoriStar.' }
+];
+
+app.get('/api/saori/telemetry', async (_request, reply) => {
+  const now = Date.now();
+  if (cachedTelemetry.ready && now - lastTelemetryAt < 800) {
+    return reply.send(cachedTelemetry);
+  }
+
+  return new Promise((resolve) => {
+    try {
+      const client = net.createConnection('/tmp/saoristar-bot.sock', () => {
+        client.write(JSON.stringify({ action: 'PERCEPTION' }) + '\n');
+      });
+
+      let buffer = '';
+      client.on('data', (chunk) => {
+        buffer += chunk.toString();
+        if (buffer.includes('\n') || buffer.trim().endsWith('}')) {
+          try {
+            const parsed = JSON.parse(buffer.trim());
+            if (parsed && parsed.ready) {
+              cachedTelemetry = parsed;
+              lastTelemetryAt = Date.now();
+              client.end();
+              resolve(reply.send(cachedTelemetry));
+            }
+          } catch (e) {}
+        }
+      });
+
+      client.on('error', (err) => {
+        resolve(reply.send(cachedTelemetry.ready ? cachedTelemetry : { ready: false, error: err.message }));
+      });
+
+      setTimeout(() => {
+        client.destroy();
+        resolve(reply.send(cachedTelemetry));
+      }, 800);
+    } catch (e) {
+      resolve(reply.send(cachedTelemetry));
+    }
+  });
+});
+
+app.get('/api/saori/thoughts', async (_request, reply) => {
+  return reply.send(thoughtsLog);
+});
+
+app.post('/api/saori/cmd', async (request, reply) => {
+  return new Promise((resolve) => {
+    try {
+      const { action, message, args } = request.body || {};
+      const client = net.createConnection('/tmp/saoristar-bot.sock', () => {
+        client.write(JSON.stringify({ action, message, args }) + '\n');
+      });
+
+      client.on('data', (d) => {
+        client.end();
+        thoughtsLog.unshift({ time: new Date().toLocaleTimeString(), type: 'action', text: `Comando divino ejecutado: ${message || action}` });
+        if (thoughtsLog.length > 30) thoughtsLog.pop();
+        resolve(reply.send({ success: true }));
+      });
+
+      client.on('error', (err) => {
+        resolve(reply.code(500).send({ error: err.message }));
+      });
+    } catch (e) {
+      resolve(reply.code(500).send({ error: e.message }));
+    }
+  });
+});
+
 let mcStatusCache = null;
 let mcStatusCacheAt = 0;
 const MC_CACHE_TTL = 60_000;
@@ -956,13 +1041,23 @@ app.post('/api/tebex/webhook', async (request, reply) => {
   }
 });
 
-app.setNotFoundHandler((request, reply) => {
-  if (request.raw.url?.startsWith('/api/')) return reply.code(404).send({ error: 'Ruta no encontrada' });
+app.setNotFoundHandler(async (request, reply) => {
+  if (request.raw.url?.startsWith('/api/')) {
+    return reply.code(404).send({ error: 'Ruta no encontrada' });
+  }
   const requestedPath = request.raw.url?.split('?')[0] || '';
-  if (path.extname(requestedPath)) return reply.code(404).send('Not found');
-  // Fastify v5 espera (url, code). Con el orden viejo tomaba 302 como destino y '/' como
-  // codigo, asi que toda ruta sin extension moria con FST_ERR_BAD_STATUS_CODE y devolvia 500.
-  return reply.redirect('/', 302);
+  if (path.extname(requestedPath) && !requestedPath.endsWith('.html')) {
+    return reply.code(404).send('Not found');
+  }
+  return reply.code(404).sendFile('404.html');
+});
+
+app.setErrorHandler(async (error, request, reply) => {
+  app.log.error(error);
+  if (request.raw.url?.startsWith('/api/')) {
+    return reply.code(error.statusCode || 500).send({ error: error.message || 'Error interno' });
+  }
+  return reply.code(error.statusCode || 500).sendFile('500.html');
 });
 
 try {

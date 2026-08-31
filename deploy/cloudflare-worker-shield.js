@@ -1,0 +1,146 @@
+/**
+ * Cloudflare Worker Error Shield para DrakesCraft (*.drakescraft.cl)
+ * 
+ * Intercepta fallos de túnel (502, 503, 504, 520, 521, 522, 523, 524) y caídas
+ * del origen para mostrar siempre la pantalla oficial de mantenimiento y sincronización
+ * de DrakesCraft con estética dorada/dragón, en lugar de la pantalla de error genérica de Cloudflare.
+ */
+
+const FALLBACK_MAINTENANCE_HTML = `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mantenimiento &amp; Sincronización | DrakesCraft</title>
+  <meta name="theme-color" content="#071712">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #071712;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 35%, rgba(16, 185, 129, 0.12) 0%, rgba(7, 23, 18, 0.98) 75%);
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(234, 179, 8, 0.15);
+      backdrop-filter: blur(16px);
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.4));
+    }
+    h1 {
+      font-size: 2rem;
+      color: #fef08a;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    p {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.85rem 1.6rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #fcd34d 0%, #ca8a04 100%);
+      color: #0f172a;
+      box-shadow: 0 4px 15px rgba(202, 138, 4, 0.35);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(202, 138, 4, 0.5);
+    }
+    .btn-discord {
+      background: #5865F2;
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.35);
+    }
+    .btn-discord:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+    }
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="https://web.drakescraft.cl/assets/logo-drakescraft.png" alt="DrakesCraft" onerror="this.style.display='none'">
+    <h1>Mantenimiento &amp; Sincronización</h1>
+    <p>El portal web y los servicios de DrakesCraft se encuentran en una breve pausa técnica para aplicar mejoras y sincronización de servidores. Todos los datos están seguros y volvemos en breve.</p>
+    <div class="actions">
+      <button class="btn btn-gold" onclick="location.reload()">Reintentar conexión</button>
+      <a class="btn btn-discord" href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Avisos en Discord</a>
+    </div>
+    <div class="footer-note">DrakesCraft · mc.drakescraft.cl</div>
+  </div>
+</body>
+</html>`;
+
+export default {
+  async fetch(request, env, ctx) {
+    try {
+      const response = await fetch(request);
+      
+      // Si el origen devuelve error 5xx de servidor o túnel caído
+      if (response.status >= 500 && response.status <= 599) {
+        const accept = request.headers.get('Accept') || '';
+        if (accept.includes('text/html')) {
+          return new Response(FALLBACK_MAINTENANCE_HTML, {
+            status: 503,
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'no-store, max-age=0'
+            }
+          });
+        }
+      }
+      
+      return response;
+    } catch (err) {
+      // Si la conexión al túnel falló por completo
+      return new Response(FALLBACK_MAINTENANCE_HTML, {
+        status: 503,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-store, max-age=0'
+        }
+      });
+    }
+  }
+};
