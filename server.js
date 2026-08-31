@@ -1011,12 +1011,12 @@ app.get('/api/edge-metrics', async (_request, reply) => {
       bedrock_port: 19132,
       tps_target: '20.0 TPS',
       ddos_mitigation: 'Filtrado perimetral L4/L7 + Rate Limiting Activo',
-      worlds: [
-        { name: 'Nexus', type: 'Hub / Ciudad Principal', status: 'online' },
-        { name: 'Drake', type: 'Supervivencia & Slimefun', status: 'online' },
-        { name: 'Nether Divino', type: 'Dimensión Infernal', status: 'online' },
-        { name: 'End Cósmico', type: 'Dimensión del Vacío', status: 'online' },
-        { name: 'Arenas PvP', type: 'Combate & Desafíos', status: 'online' }
+      modalities: [
+        { name: 'Slimefun', type: 'Supervivencia Técnica & Energía', status: 'online' },
+        { name: 'One Block', type: 'Supervivencia en 1 Bloque', status: 'online' },
+        { name: 'Skyblock', type: 'Islas Flotantes & Desafíos', status: 'online' },
+        { name: 'Clásico Vanilla', type: 'Supervivencia Tradicional', status: 'online' },
+        { name: 'Laboratorio', type: 'Entorno Experimental & Tecnología', status: 'online' }
       ]
     }
   };
