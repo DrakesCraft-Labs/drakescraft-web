@@ -801,9 +801,9 @@ await app.register(fastifyStatic, {
   index: false,
   maxAge: '1h',
   immutable: false,
-  setHeaders: (reply, filePath) => {
+  setHeaders: (res, filePath) => {
     if (filePath.endsWith('.html') || filePath.endsWith('.js') || filePath.endsWith('.css')) {
-      reply.header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate');
     }
   },
   allowedPath: (pathname) => {
