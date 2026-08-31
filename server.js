@@ -802,8 +802,15 @@ await app.register(fastifyStatic, {
   maxAge: '1h',
   immutable: false,
   setHeaders: (res, filePath) => {
-    if (filePath.endsWith('.html') || filePath.endsWith('.js') || filePath.endsWith('.css')) {
-      res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+    const isDynamic = filePath.endsWith('.html') || filePath.endsWith('.js') || filePath.endsWith('.css');
+    if (isDynamic) {
+      if (typeof res?.setHeader === 'function') {
+        res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+      } else if (typeof res?.header === 'function') {
+        res.header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+      } else if (typeof res?.raw?.setHeader === 'function') {
+        res.raw.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+      }
     }
   },
   allowedPath: (pathname) => {
