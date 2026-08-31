@@ -123,6 +123,26 @@
 .team-grid article { min-height:135px; display:flex; align-items:center; gap:1rem; padding:1.4rem 1rem; border-right:1px solid var(--home-line); border-top:1px solid var(--home-line); }
 .team-grid article:nth-child(4n) { border-right:0; }
 .team-grid h3 { font-size:1rem; }
+.home-sponsors { padding:clamp(4rem,8vw,7rem) 0; background:rgba(4,14,11,.6); border-top:1px solid var(--home-line); }
+.home-sponsor-spotlight { margin-top:2rem; }
+.founder-sponsor-card {
+  display:flex; justify-content:space-between; align-items:center; gap:2rem;
+  padding:1.8rem 2.2rem; border-radius:4px;
+  background:linear-gradient(135deg,rgba(16,36,28,.85) 0%,rgba(10,24,19,.95) 100%),radial-gradient(circle at 90% 20%,rgba(99,179,237,.18),transparent 60%);
+  border:1px solid rgba(99,179,237,.35); box-shadow:0 12px 32px rgba(0,0,0,.45);
+}
+.founder-sponsor-card__left { display:flex; align-items:center; gap:1.6rem; }
+.founder-sponsor-card__avatar { border-radius:8px; background:rgba(0,0,0,.35); padding:4px; border:1px solid rgba(99,179,237,.4); filter:drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+.founder-sponsor-card__badges { display:flex; gap:.6rem; margin-bottom:.35rem; }
+.badge-gem { font:700 .72rem/1.2 "DM Mono",monospace; color:#90cdf4; background:rgba(66,153,225,.2); padding:.2rem .55rem; border-radius:3px; border:1px solid rgba(99,179,237,.35); }
+.badge-tier { font:600 .72rem/1.2 "DM Mono",monospace; color:#ffd700; background:rgba(255,215,0,.15); padding:.2rem .55rem; border-radius:3px; border:1px solid rgba(255,215,0,.3); }
+.founder-sponsor-card h3 { margin:0 0 .25rem; font-family:"Cinzel",serif; font-size:1.45rem; color:#fff; }
+.founder-sponsor-card p { margin:0; color:rgba(244,239,223,.68); font-size:.92rem; }
+@media (max-width:768px) {
+  .founder-sponsor-card { flex-direction:column; align-items:stretch; text-align:center; padding:1.5rem; }
+  .founder-sponsor-card__left { flex-direction:column; text-align:center; }
+  .founder-sponsor-card__badges { justify-content:center; }
+}
 .final-cta { min-height:780px; text-align:center; }
 .final-cta__veil { z-index:-1; background:linear-gradient(0deg,rgba(3,15,11,.94),rgba(3,15,11,.2) 55%,rgba(3,15,11,.62)),radial-gradient(circle at center,transparent,rgba(3,15,11,.55)); }
 .final-cta__content { display:flex; flex-direction:column; align-items:center; }
