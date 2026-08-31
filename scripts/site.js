@@ -51,7 +51,7 @@
             const discordItem = document.createElement("li");
             const discordLink = document.createElement("a");
             discordLink.className = "nav-discord";
-            discordLink.href = "https://discord.gg/rR7FbfCt9Y";
+            discordLink.href = "https://discord.gg/rv3vtXZTk7";
             discordLink.target = "_blank";
             discordLink.rel = "noopener";
             discordLink.textContent = "Discord";

@@ -7,7 +7,7 @@ export const storeCatalog = {
   currency: 'CLP',
   payment: {
     mode: 'tebex',
-    discord: 'https://discord.gg/rR7FbfCt9Y',
+    discord: 'https://discord.gg/rv3vtXZTk7',
     checkout: 'https://pay.tebex.io'
   },
   categories: [
