@@ -533,42 +533,300 @@ body[data-section="support-project"] .guide-hero { background-image: url("../ass
 }
 
 /* ==========================================================================
-   Patrocinadores Oficiales (GitHub Sponsors)
+   Página de Patrocinio & Sponsors (Olympus Premium Aesthetic)
    ========================================================================== */
-.guide-row--sponsor {
-  background: rgba(255, 215, 0, 0.04);
-  border-color: rgba(255, 215, 0, 0.25);
+.sponsor-page-intro {
+  margin-bottom: 3.5rem;
+}
+.sponsor-section-heading {
+  margin-bottom: 2.2rem;
+}
+.sponsor-section-heading h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  color: #fff;
+  margin: 0.35rem 0 0.5rem;
+}
+.sponsor-section-heading p {
+  color: var(--dk-suave, #a0aec0);
+  font-size: 1rem;
+  max-width: 48ch;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* --- 1. Canales de Patrocinio (3 Column Grid) --- */
+.sponsor-channels-grid {
   display: grid;
-  grid-template-columns: minmax(180px, 260px) 1fr;
-  gap: 1.25rem;
-  align-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
 }
-.guide-row--sponsor:hover {
-  background: rgba(255, 215, 0, 0.07);
-  border-color: rgba(255, 215, 0, 0.4);
+.sponsor-channel-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.8rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(145deg, rgba(14, 34, 27, 0.85) 0%, rgba(8, 20, 16, 0.95) 100%);
+  border: 1px solid rgba(111, 227, 162, 0.22);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
-.sponsor-profile {
+.sponsor-channel-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(111, 227, 162, 0.5);
+  box-shadow: 0 18px 46px rgba(111, 227, 162, 0.16);
+}
+.sponsor-channel-card--featured {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(216, 182, 90, 0.16), transparent 55%),
+    linear-gradient(145deg, rgba(20, 42, 33, 0.9) 0%, rgba(10, 24, 19, 0.98) 100%);
+  border: 1px solid rgba(216, 182, 90, 0.45);
+  box-shadow: 0 16px 42px rgba(216, 182, 90, 0.12);
+}
+.sponsor-channel-card--featured:hover {
+  border-color: rgba(216, 182, 90, 0.75);
+  box-shadow: 0 20px 52px rgba(216, 182, 90, 0.24);
+}
+.sponsor-channel-card__badge {
+  position: absolute;
+  top: -12px;
+  right: 1.5rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #172019;
+  background: #e1c36c;
+  box-shadow: 0 4px 12px rgba(225, 195, 108, 0.4);
+}
+.sponsor-channel-card__header {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
 }
-.sponsor-profile__avatar {
-  border-radius: 6px;
+.sponsor-channel-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
 }
-.sponsor-profile__badge {
+.sponsor-channel-card__header h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: #fff;
+}
+.sponsor-channel-card__tag {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--dk-oro, #d8b65a);
   font-family: var(--font-mono, monospace);
-  margin-top: 0.25rem;
+  margin-top: 0.15rem;
 }
-@media (max-width: 760px) {
-  .guide-row--sponsor {
+.sponsor-channel-card p {
+  color: rgba(244, 239, 223, 0.75);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  margin: 0 0 1.8rem 0;
+}
+.sponsor-channel-card .sponsor-btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  border-radius: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #10231b;
+  background: #e1c36c;
+  border: 1px solid #e1c36c;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.sponsor-channel-card .sponsor-btn-link:hover {
+  transform: translateY(-2px);
+  background: #f0d588;
+  box-shadow: 0 8px 20px rgba(225, 195, 108, 0.3);
+}
+.sponsor-channel-card .sponsor-btn-link--ghost {
+  color: #eaffea;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(111, 227, 162, 0.4);
+}
+.sponsor-channel-card .sponsor-btn-link--ghost:hover {
+  background: rgba(111, 227, 162, 0.2);
+  box-shadow: 0 8px 20px rgba(111, 227, 162, 0.2);
+}
+
+/* --- 2. Salón de Patrocinadores Oficiales (Hall of Fame) --- */
+.sponsor-hall-section {
+  padding: 3.5rem 0;
+  margin: 3rem 0;
+  border-top: 1px solid rgba(244, 239, 223, 0.12);
+  border-bottom: 1px solid rgba(244, 239, 223, 0.12);
+  background: radial-gradient(circle at 50% 30%, rgba(14, 38, 30, 0.5) 0%, transparent 70%);
+}
+.sponsor-hall-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+.sponsor-honor-card {
+  position: relative;
+  padding: 1.6rem 1.8rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, rgba(16, 38, 30, 0.9) 0%, rgba(9, 22, 17, 0.96) 100%);
+  border: 1px solid rgba(99, 179, 237, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.sponsor-honor-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 179, 237, 0.7);
+  box-shadow: 0 16px 40px rgba(99, 179, 237, 0.15);
+}
+.sponsor-honor-card__avatar {
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(99, 179, 237, 0.5);
+  padding: 3px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+}
+.sponsor-honor-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.sponsor-honor-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.badge-honor-diamond {
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #90cdf4;
+  background: rgba(66, 153, 225, 0.2);
+  border: 1px solid rgba(99, 179, 237, 0.4);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.badge-honor-tier {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.sponsor-honor-card h3 {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  color: #fff;
+}
+.sponsor-honor-card p {
+  margin: 0;
+  color: rgba(244, 239, 223, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* --- 3. Grid de Impacto (A dónde va el dinero) --- */
+.impact-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.impact-card {
+  padding: 1.8rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition: border-color 0.2s ease;
+}
+.impact-card:hover {
+  border-color: rgba(111, 227, 162, 0.35);
+}
+.impact-card__icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.impact-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: #e1c36c;
+  margin: 0 0 0.6rem;
+}
+.impact-card p {
+  margin: 0;
+  color: rgba(244, 239, 223, 0.75);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* --- 4. Grid de Transparencia (Lo que el patrocinio NO es) --- */
+.transparency-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.transparency-card {
+  padding: 1.8rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+.transparency-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.transparency-card p {
+  margin: 0;
+  color: rgba(244, 239, 223, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 960px) {
+  .sponsor-channels-grid,
+  .impact-cards-grid,
+  .transparency-cards-grid {
     grid-template-columns: 1fr;
-    gap: 0.6rem;
+  }
+  .sponsor-hall-grid {
+    grid-template-columns: 1fr;
   }
 }
+
 
