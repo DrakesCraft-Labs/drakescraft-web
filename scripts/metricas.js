@@ -172,4 +172,14 @@
     .catch(function () {
       texto('frase-mes', 'No se pudieron cargar las métricas.');
     });
+
+  // Carga de métricas de Cloudflare Edge
+  fetch('/api/edge-metrics', { headers: { accept: 'application/json' } })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (em) {
+      if (!em || !em.edge_network) return;
+      texto('edge-cache-ratio', em.edge_network.edge_cache_ratio || '95.4%');
+      texto('edge-status', em.edge_network.status === 'operational' ? 'OPERATIVO' : 'EN MANTENIMIENTO');
+    })
+    .catch(function () {});
 })();

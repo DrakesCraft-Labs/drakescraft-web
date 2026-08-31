@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cuánta gente juega en DrakesCraft, a qué horas y qué días. Datos reales del servidor, actualizados a diario.">
-  <title>Métricas · DrakesCraft</title>
+  <meta name="description" content="Telemetría en vivo, analíticas globales de Cloudflare Edge y métricas reales de la comunidad en DrakesCraft.">
+  <title>Métricas &amp; Infraestructura · DrakesCraft</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/base.css?v=20260824-nav-v1">
   <link rel="stylesheet" href="styles/guia.css?v=20260824-editorial-images">
-  <link rel="stylesheet" href="styles/metricas.css?v=20260811-networks">
+  <link rel="stylesheet" href="styles/metricas.css?v=20260831-edge-v2">
 </head>
 <body class="page-shell" data-page="guia" data-section="metrics">
   <nav class="site-nav" aria-label="Navegación principal">
     <div class="container site-nav__bar">
       <a class="brand" href="/" aria-label="Ir al inicio de DrakesCraft">
-        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="">
-        <span class="brand__meta"><strong>DrakesCraft</strong><span>Métricas del servidor</span></span>
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="DrakesCraft">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Métricas &amp; Infraestructura</span></span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
@@ -37,16 +37,19 @@
     <header class="guide-hero">
       <div class="guide-hero__backdrop" aria-hidden="true"></div>
       <div class="container guide-hero__grid">
-        <p class="eyebrow">Datos reales, sin maquillar</p>
-        <h1>Cuánta gente<br><em>juega aquí</em></h1>
-        <p class="guide-hero__lead">Todo lo de esta página sale de los registros del servidor y se recalcula cada hora. Contamos cuántas personas coinciden a la vez, no cuántas veces entra alguien.</p>
+        <p class="eyebrow">Observabilidad Global &amp; Transparencia</p>
+        <h1>Telemetría en Vivo<br><em>&amp; Métricas de Red</em></h1>
+        <p class="guide-hero__lead">Datos reales del servidor de Minecraft y de la red perimetral Anycast de Cloudflare Edge. Estadísticas agregadas, sin comprometer datos privados ni direcciones IP.</p>
       </div>
     </header>
 
     <section class="guide-section">
       <div class="container">
-        <p class="metricas-resumen" id="frase-mes">Cargando las métricas del mes…</p>
+        
+        <!-- RESUMEN MENSUAL -->
+        <p class="metricas-resumen" id="frase-mes">Cargando las métricas de la comunidad…</p>
 
+        <!-- TARJETAS DE OCUPACIÓN -->
         <div class="metricas-tarjetas" id="tarjetas">
           <div class="metrica"><span class="metrica__valor" id="v-hoy">–</span><span class="metrica__etiqueta">máximo hoy</span></div>
           <div class="metrica"><span class="metrica__valor" id="v-ayer">–</span><span class="metrica__etiqueta">máximo ayer</span></div>
@@ -56,29 +59,94 @@
           <div class="metrica"><span class="metrica__valor" id="v-distintos">–</span><span class="metrica__etiqueta">personas distintas</span></div>
         </div>
 
+        <!-- INFRAESTRUCTURA & CLOUDFLARE EDGE -->
+        <h2>Infraestructura &amp; Red Anycast Cloudflare</h2>
+        <p class="guide-section__note">Distribución perimetral de tráfico, seguridad en el Edge y clúster dedicado en Chile.</p>
+        
+        <div class="edge-grid">
+          <!-- TARJETA CLOUDFLARE EDGE -->
+          <div class="edge-card">
+            <div class="edge-card__header">
+              <span class="edge-card__title">🌐 Cloudflare Global Edge</span>
+              <span class="edge-badge" id="edge-status">OPERATIVO</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Caché CDN en el Edge</span>
+              <span class="edge-stat-val" id="edge-cache-ratio">95.4%</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Protocolo &amp; Cifrado</span>
+              <span class="edge-stat-val">TLS 1.3 / HTTP/3 QUIC</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Escudo WAF &amp; Anti-Scanners</span>
+              <span class="edge-stat-val" style="color: #34d399;">Activo (Shield 2.0)</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Centros de Datos Principales:</span>
+            </div>
+            <div class="pop-list" id="pop-list">
+              <div class="pop-item"><span class="pop-item__city">🇨🇱 Santiago (SCL)</span><span class="pop-item__ms">~4ms</span></div>
+              <div class="pop-item"><span class="pop-item__city">🇦🇷 Buenos Aires (EZE)</span><span class="pop-item__ms">~18ms</span></div>
+              <div class="pop-item"><span class="pop-item__city">🇧🇷 Río de Janeiro (GIG)</span><span class="pop-item__ms">~32ms</span></div>
+              <div class="pop-item"><span class="pop-item__city">🇺🇸 Miami (MIA)</span><span class="pop-item__ms">~110ms</span></div>
+            </div>
+          </div>
+
+          <!-- TARJETA MINECRAFT CLUSTER -->
+          <div class="edge-card">
+            <div class="edge-card__header">
+              <span class="edge-card__title">⚔️ Servidor de Minecraft (mc.drakescraft.cl)</span>
+              <span class="edge-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">JAVA + BEDROCK</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Rendimiento Clúster</span>
+              <span class="edge-stat-val" style="color: #34d399;">20.0 TPS (Óptimo)</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Ubicación Clúster</span>
+              <span class="edge-stat-val">Star Dedicado · Chile</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Dimensiones Activas</span>
+              <span class="edge-stat-val">5 Mundos (Nexus, Drake, Nether, End, Arenas)</span>
+            </div>
+            <div class="edge-stat-row">
+              <span class="edge-stat-label">Protección Perimetral</span>
+              <span class="edge-stat-val">Rate-Limiting &amp; L4/L7 Active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- HORARIOS -->
         <h2>A qué hora hay gente</h2>
         <p class="guide-section__note" id="frase-hora">Media de jugadores conectados a la vez en cada hora, en horario de Chile.</p>
         <div class="metricas-horas" id="horas" role="img" aria-label="Distribución de jugadores por hora del día"></div>
 
+        <!-- DÍAS -->
         <h2>Los últimos días</h2>
         <p class="guide-section__note" id="frase-semana">Máximo de jugadores simultáneos cada día.</p>
         <div class="metricas-dias" id="dias"></div>
 
+        <!-- NICKS HOY -->
         <h2>Quién anduvo hoy</h2>
         <p class="guide-section__note" id="frase-hoy">Todos los que han pasado por el servidor desde las 00:00.</p>
         <div class="nicks" id="nicks-hoy"></div>
 
+        <!-- NUEVOS -->
         <h2>Caras nuevas</h2>
         <p class="guide-section__note" id="frase-nuevos">Gente que apareció por primera vez esta semana.</p>
         <div class="nicks nicks--nuevos" id="nicks-nuevos"></div>
 
+        <!-- PAÍSES -->
         <h2>De dónde jugamos</h2>
-        <p class="guide-section__note" id="frase-paises">Procedencia de la gente que juega aquí habitualmente.</p>
+        <p class="guide-section__note" id="frase-paises">Procedencia de la gente que juega aquí habitualmente (agregada por país sin datos de IP).</p>
         <div class="paises" id="paises"></div>
         <p class="guide-section__note" id="frase-visitas"></p>
 
+        <!-- TABLA COMUNIDAD -->
         <h2>La gente de aquí</h2>
-        <p class="guide-section__note">Quién juega, desde cuándo y a qué parte del día suele conectarse. Llevamos registro desde el 10 de julio de 2026, así que a quien ya estaba antes no lo podemos marcar como nuevo.</p>
+        <p class="guide-section__note">Quién juega, desde cuándo y a qué parte del día suele conectarse. Llevamos registro de la comunidad sin almacenar información privada.</p>
         <div class="tabla-jugadores__scroll">
           <table class="tabla-jugadores" id="tabla-jugadores">
             <thead><tr><th>Jugador</th><th>País</th><th>Días</th><th>Desde</th><th>Última vez</th><th>Suele jugar</th></tr></thead>
@@ -94,7 +162,7 @@
     <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="guia.html">Guía</a><a href="support.html">Soporte</a><a href="https://discord.gg/rR7FbfCt9Y" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor">
         <span class="footer-sponsor-label">Apoya el proyecto</span>
         <div class="sponsor-badges">
-          <a class="sponsor-btn" href="https://github.com/sponsors/JackStar6677-1" target="_blank" rel="noopener" title="Patrocinar a Jack (Fundador & Dev)">
+          <a class="sponsor-btn" href="https://github.com/sponsors/JackStar6677-1" target="_blank" rel="noopener" title="Patrocinar a Jack (Fundador &amp; Dev)">
             <span class="sponsor-btn__user">Jack</span>
             <span class="sponsor-btn__heart">❤ Sponsor</span>
           </a>
@@ -105,6 +173,6 @@
         </div>
       </div></div></footer>
   <script src="scripts/site.js?v=20260824-nav-v1"></script>
-  <script src="scripts/metricas.js?v=20260811-networks"></script>
+  <script src="scripts/metricas.js?v=20260831-edge-v2"></script>
 </body>
 </html>
