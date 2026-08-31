@@ -618,6 +618,82 @@ app.get('/api/store', async () => {
   };
 });
 
+const sponsorsFile = path.join(dataDir, 'sponsors.json');
+
+async function readSponsors() {
+  try {
+    const raw = await fs.readFile(sponsorsFile, 'utf8');
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    try {
+      const defaultPath = path.join(contentDir, 'sponsors.json');
+      const raw = await fs.readFile(defaultPath, 'utf8');
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
+  }
+}
+
+async function writeSponsors(list) {
+  try {
+    await fs.mkdir(path.dirname(sponsorsFile), { recursive: true });
+    await fs.writeFile(sponsorsFile, JSON.stringify(list, null, 2), 'utf8');
+  } catch (err) {
+    app.log.error(err, 'Failed to save sponsors');
+  }
+}
+
+app.get('/api/sponsors', async () => {
+  const sponsors = await readSponsors();
+  return {
+    ok: true,
+    sponsors: sponsors.filter(s => s.active !== false)
+  };
+});
+
+app.post('/api/webhooks/github-sponsors', async (request, reply) => {
+  const body = request.body || {};
+  const action = body.action || '';
+  const sponsorship = body.sponsorship || {};
+  const sponsor = sponsorship.sponsor || {};
+  const tier = sponsorship.tier || {};
+  const login = sponsor.login || sponsor.name || '';
+
+  if (!login) {
+    return reply.code(200).send({ ignored: true, reason: 'no-login' });
+  }
+
+  const sponsors = await readSponsors();
+  const existingIndex = sponsors.findIndex(s => s.username.toLowerCase() === login.toLowerCase());
+
+  if (action === 'created') {
+    const monthlyAmount = tier.monthly_price_in_dollars ? `$${tier.monthly_price_in_dollars}.00 USD / mes` : '$5.00 USD / mes';
+    const newEntry = {
+      username: login,
+      tier: monthlyAmount,
+      badge: '💎 GitHub Sponsor Oficial',
+      note: 'Patrocinador oficial de DrakesCraft Network.',
+      date: new Date().toISOString().slice(0, 10),
+      active: true
+    };
+    if (existingIndex >= 0) {
+      sponsors[existingIndex] = { ...sponsors[existingIndex], ...newEntry };
+    } else {
+      sponsors.push(newEntry);
+    }
+    await writeSponsors(sponsors);
+  } else if (action === 'cancelled') {
+    if (existingIndex >= 0) {
+      sponsors[existingIndex].active = false;
+      await writeSponsors(sponsors);
+    }
+  }
+
+  return reply.code(200).send({ ok: true, action, user: login });
+});
+
 app.post('/api/store/tebex/checkout', async (request, reply) => {
   const body = request.body || {};
   const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
