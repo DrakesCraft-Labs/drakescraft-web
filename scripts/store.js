@@ -15,7 +15,6 @@ function deliveryType(product) {
     return product.tebexEnabled ? "tebex" : "unavailable";
 }
 
-// Escapa todo el contenido antes de restaurar únicamente el marcado inline permitido.
 function storeInlineMarkup(value) {
     return storeEscape(value)
         .replaceAll("&lt;code&gt;", "<code>")
@@ -35,47 +34,116 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartCount = document.getElementById("store-cart-count");
     const cartJump = document.getElementById("store-cart-jump");
     const cartJumpCount = document.getElementById("store-cart-jump-count");
+    const nickInput = document.getElementById("input-nick");
+    const avatarImg = document.getElementById("player-avatar");
+    const platformJava = document.getElementById("btn-platform-java");
+    const platformBedrock = document.getElementById("btn-platform-bedrock");
+    const nickHint = document.getElementById("nick-platform-hint");
+
     if (!grid || !tabs || !form) return;
 
-    form.elements.nick?.insertAdjacentHTML("afterend", '<p class="store-bedrock-notice"><strong>¿Juegas desde Bedrock?</strong> Escribe tu nick exacto incluyendo el punto inicial. Ejemplo: <code>.JackStar</code>.</p>');
+    let selectedPlatform = "java";
+    let avatarDebounceTimer = null;
+
+    // Actualizador de Avatar y Validación de Plataforma
+    function updateAvatar() {
+        const rawNick = (nickInput?.value || "").trim();
+        if (!rawNick || rawNick.length < 3) {
+            if (avatarImg) avatarImg.src = "https://minotar.net/helm/Steve/48.png";
+            return;
+        }
+
+        // Limpiar el nick para la llamada al CDN de skins (ignorar punto en bedrock para la skin)
+        const skinLookup = rawNick.startsWith(".") ? rawNick.substring(1) : rawNick;
+        if (avatarImg) {
+            avatarImg.src = `https://minotar.net/helm/${encodeURIComponent(skinLookup)}/48.png`;
+            avatarImg.onerror = () => {
+                avatarImg.src = "https://minotar.net/helm/Steve/48.png";
+            };
+        }
+    }
+
+    function setPlatform(platform) {
+        selectedPlatform = platform;
+        if (platform === "bedrock") {
+            platformBedrock?.classList.add("is-active");
+            platformJava?.classList.remove("is-active");
+            if (nickHint) {
+                nickHint.innerHTML = "📱 <strong>Bedrock detectado:</strong> Si juegas en móvil/consola/Win10, asegúrate de que tu nick incluya el punto inicial (ejemplo: <code>.TuNick</code>).";
+            }
+            if (nickInput && nickInput.value && !nickInput.value.startsWith(".")) {
+                nickInput.value = "." + nickInput.value;
+            }
+        } else {
+            platformJava?.classList.add("is-active");
+            platformBedrock?.classList.remove("is-active");
+            if (nickHint) {
+                nickHint.innerHTML = "☕ <strong>Java Edition:</strong> Escribe tu nick tal cual aparece en el juego (sin puntos al inicio).";
+            }
+            if (nickInput && nickInput.value.startsWith(".")) {
+                nickInput.value = nickInput.value.substring(1);
+            }
+        }
+        updateAvatar();
+    }
+
+    platformJava?.addEventListener("click", () => setPlatform("java"));
+    platformBedrock?.addEventListener("click", () => setPlatform("bedrock"));
+
+    nickInput?.addEventListener("input", () => {
+        clearTimeout(avatarDebounceTimer);
+        avatarDebounceTimer = setTimeout(updateAvatar, 400);
+    });
 
     const requestedCategory = new URLSearchParams(window.location.search).get("categoria");
     const state = { catalog: null, category: requestedCategory || "monthly", selected: new Set() };
     const productById = (id) => state.catalog.products.find((product) => product.id === id);
     const selectedProducts = () => [...state.selected].map(productById).filter(Boolean);
     const selectedMode = () => selectedProducts()[0] ? deliveryType(selectedProducts()[0]) : null;
-    let productObserver = null;
     let lastFocusedElement = null;
 
-    function revealProducts() {
-        productObserver?.disconnect();
-        const cards = [...grid.querySelectorAll(".store-product")];
-        cards.forEach((card) => card.classList.add("is-visible"));
-    }
-
     function renderTabs() {
-        tabs.innerHTML = state.catalog.categories.map((category) => `<button class="store-tab ${category.id === state.category ? "is-active" : ""}" type="button" data-category="${storeEscape(category.id)}">${storeEscape(category.label)}</button>`).join("");
+        if (!state.catalog?.categories) return;
+        tabs.innerHTML = state.catalog.categories.map((category) => 
+            `<button class="store-tab ${category.id === state.category ? "is-active" : ""}" type="button" data-category="${storeEscape(category.id)}">${storeEscape(category.label)}</button>`
+        ).join("");
+        
         const category = state.catalog.categories.find((entry) => entry.id === state.category);
-        document.getElementById("store-category-title").textContent = category?.label || "Catálogo DrakesCraft";
-        document.getElementById("store-category-description").textContent = category?.tagline || "Revisa cada beneficio antes de añadirlo al carrito.";
+        const titleElem = document.getElementById("store-category-title");
+        if (titleElem) titleElem.textContent = category?.label || "Catálogo DrakesCraft";
     }
 
     function renderProducts() {
+        if (!state.catalog?.products) return;
         const products = state.catalog.products.filter((product) => product.category === state.category);
         const currentMode = selectedMode();
+        
         grid.innerHTML = products.map((product) => {
             const mode = deliveryType(product);
             const selected = state.selected.has(product.id);
             const incompatible = currentMode && currentMode !== mode;
             const purchasable = mode !== "in-game" && mode !== "unavailable";
             return `<article class="store-product" data-accent="${storeEscape(product.accent || "emerald")}" data-product="${storeEscape(product.id)}">
-                <div class="store-product__top"><div><span class="store-product__tag">${storeEscape(product.badge || deliveryLabel[mode])}</span><h3>${storeEscape(product.name)}</h3></div><strong class="store-product__price">${storeMoney(product.clp, product)}</strong></div>
+                <div class="store-product__top">
+                    <div>
+                        <span class="store-product__tag">${storeEscape(product.badge || deliveryLabel[mode])}</span>
+                        <h3>${storeEscape(product.name)}</h3>
+                    </div>
+                    <strong class="store-product__price">${storeMoney(product.clp, product)}</strong>
+                </div>
                 <p>${storeEscape(product.summary)}</p>
-                <div class="store-product__delivery"><span>${deliveryLabel[mode]}</span><span>${mode === "tebex" && Number.isFinite(product.usd) ? `USD ${product.usd}` : ""}</span></div>
-                <div class="store-product__actions"><button class="btn btn-secondary" type="button" data-detail="${storeEscape(product.id)}">Detalle</button><button class="btn ${selected ? "btn-primary" : "btn-secondary"}" type="button" data-select="${storeEscape(product.id)}" aria-pressed="${selected}" ${!purchasable || incompatible ? "disabled" : ""}>${mode === "unavailable" ? "No disponible" : !purchasable ? "In-game" : selected ? "Seleccionado" : incompatible ? "Otro flujo" : "Agregar"}</button></div>
+                <div class="store-product__delivery">
+                    <span>${deliveryLabel[mode]}</span>
+                    <span>${mode === "tebex" && Number.isFinite(product.usd) ? `USD $${product.usd}` : ""}</span>
+                </div>
+                <div class="store-product__actions">
+                    <button class="btn btn-secondary" type="button" data-detail="${storeEscape(product.id)}">Ver Detalle</button>
+                    <button class="btn ${selected ? "btn-primary" : "btn-secondary"}" type="button" data-select="${storeEscape(product.id)}" aria-pressed="${selected}" ${!purchasable || incompatible ? "disabled" : ""}>
+                        ${mode === "unavailable" ? "No disponible" : !purchasable ? "In-game" : selected ? "✓ En Carrito" : incompatible ? "Otro flujo" : "+ Agregar"}
+                    </button>
+                </div>
             </article>`;
         }).join("");
-        revealProducts();
     }
 
     function renderSelection() {
@@ -84,22 +152,44 @@ document.addEventListener("DOMContentLoaded", () => {
         const total = document.getElementById("quote-total");
         const products = selectedProducts();
         const itemCount = products.length;
+
         if (cartCount) cartCount.textContent = String(itemCount);
         if (cartJumpCount) cartJumpCount.textContent = String(itemCount);
         cartJump?.classList.toggle("hidden", itemCount === 0);
+
         if (!products.length) {
-            target.innerHTML = "";
-            note.textContent = "Agrega un producto para ver su método de entrega.";
-            total.textContent = "$0 CLP";
+            if (target) target.innerHTML = "";
+            if (note) {
+                note.textContent = "Selecciona un producto del catálogo para continuar.";
+                note.classList.remove("hidden");
+            }
+            if (total) total.textContent = "$0 CLP";
             return;
         }
-        const mode = selectedMode();
-        note.textContent = "Estos productos abren un checkout seguro de Tebex.";
-        target.innerHTML = products.map((product) => `<div class="store-selection-item"><div><strong>${storeEscape(product.name)}</strong><p>${storeMoney(product.clp, product)} · ${deliveryLabel[deliveryType(product)]}</p></div><button type="button" data-remove="${storeEscape(product.id)}">Quitar</button></div>`).join("");
-        total.textContent = storeMoney(products.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0));
+
+        if (note) note.classList.add("hidden");
+        if (target) {
+            target.innerHTML = products.map((product) => 
+                `<div class="store-selection-item">
+                    <div>
+                        <strong>${storeEscape(product.name)}</strong>
+                        <p>${storeMoney(product.clp, product)} · ${deliveryLabel[deliveryType(product)]}</p>
+                    </div>
+                    <button type="button" data-remove="${storeEscape(product.id)}">Quitar</button>
+                </div>`
+            ).join("");
+        }
+
+        if (total) {
+            total.textContent = storeMoney(products.reduce((sum, product) => sum + (Number.isFinite(product.clp) ? product.clp : 0), 0));
+        }
     }
 
-    function renderAll() { renderTabs(); renderProducts(); renderSelection(); if (window.setupTilt) window.setupTilt(); }
+    function renderAll() {
+        renderTabs();
+        renderProducts();
+        renderSelection();
+    }
 
     function closeDetail() {
         const modal = document.getElementById("store-modal");
@@ -113,7 +203,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const body = document.getElementById("store-modal-body");
         if (!modal || !body || !product) return;
         lastFocusedElement = document.activeElement;
-        body.innerHTML = `<p class="eyebrow">${deliveryLabel[deliveryType(product)]}</p><h2>${storeEscape(product.name)}</h2><p>${storeEscape(product.summary)}</p><ul>${(product.includes || []).map((item) => `<li>${storeInlineMarkup(item)}</li>`).join("")}</ul>`;
+        body.innerHTML = `
+            <span class="store-product__tag">${deliveryLabel[deliveryType(product)]}</span>
+            <h2>${storeEscape(product.name)}</h2>
+            <p>${storeEscape(product.summary)}</p>
+            <ul>${(product.includes || []).map((item) => `<li>${storeInlineMarkup(item)}</li>`).join("")}</ul>
+        `;
         modal.classList.remove("hidden");
         document.getElementById("store-modal-close")?.focus();
     }
@@ -138,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderAll();
     });
 
-    document.getElementById("quote-items").addEventListener("click", (event) => {
+    document.getElementById("quote-items")?.addEventListener("click", (event) => {
         const remove = event.target.closest("[data-remove]");
         if (!remove) return;
         state.selected.delete(remove.dataset.remove);
@@ -152,101 +247,85 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key === "Escape") closeDetail();
     });
 
+    cartJump?.addEventListener("click", () => {
+        document.getElementById("carrito")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Carga inicial del Catálogo desde la API backend
+    async function loadCatalog() {
+        const healthBadge = document.getElementById("store-health");
+        const countBadge = document.getElementById("store-product-count");
+        try {
+            const response = await fetch("/api/store");
+            if (!response.ok) throw new Error("No se pudo cargar el catálogo.");
+            state.catalog = await response.json();
+            if (healthBadge) healthBadge.textContent = "Catálogo Online";
+            if (countBadge) countBadge.textContent = `${state.catalog.products?.length || 0} productos`;
+            renderAll();
+        } catch (error) {
+            if (healthBadge) healthBadge.textContent = "Error de conexión";
+            console.error("Fallo cargando catálogo de la tienda:", error);
+        }
+    }
+
+    // Manejador de Submit hacia Tebex Checkout (Backend API intacta)
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const products = selectedProducts();
-        if (!products.length) return window.showToast?.("Selecciona un producto antes de continuar.");
+        if (!products.length) {
+            alert("Por favor agrega al menos un producto al carrito antes de continuar.");
+            return;
+        }
+
         const fields = new FormData(form);
-        const payload = { nick: fields.get("nick"), contact: fields.get("contact"), notes: fields.get("notes"), website: fields.get("website"), items: products.map((product) => product.id) };
+        const nickVal = (fields.get("nick") || "").trim();
+        if (!nickVal) {
+            alert("Por favor escribe tu nick exacto de Minecraft.");
+            return;
+        }
+
+        const payload = {
+            nick: nickVal,
+            contact: fields.get("contact") || "",
+            notes: fields.get("notes") || "",
+            website: fields.get("website") || "",
+            items: products.map((product) => product.id)
+        };
+
         const endpoint = "/api/store/tebex/checkout";
         const result = document.getElementById("quote-result");
-        const submit = form.querySelector('button[type="submit"]');
-        const originalLabel = submit?.textContent;
+        const submit = document.getElementById("btn-submit-checkout");
+
         try {
             if (submit) {
                 submit.disabled = true;
-                submit.textContent = "Preparando pago seguro...";
+                submit.innerHTML = '<span>⏳ Conectando con Tebex...</span>';
             }
-            const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+            const response = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || "No se pudo preparar la compra.");
-            if (!data.init_point) throw new Error("Tebex no devolvió una URL de pago.");
-            result.innerHTML = `<strong>Checkout listo.</strong><p>Redirigiendo a Tebex...</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}">Continuar al pago</a>`;
-            result.classList.remove("hidden");
+            if (!response.ok) throw new Error(data.error || "No se pudo preparar la orden en Tebex.");
+            if (!data.init_point) throw new Error("Tebex no devolvió una URL de pago válida.");
+
+            if (result) {
+                result.innerHTML = `<strong>✅ Orden creada con éxito.</strong><p>Redirigiendo al checkout seguro de Tebex...</p><a class="btn btn-primary" href="${storeEscape(data.init_point)}" style="display:inline-block;margin-top:0.5rem;">Ir al Pago Seguro</a>`;
+                result.classList.remove("hidden");
+            }
             window.location.assign(data.init_point);
         } catch (error) {
-            result.innerHTML = `<strong>No se pudo continuar.</strong><p>${storeEscape(error.message)}</p>`;
-            result.classList.remove("hidden");
+            if (result) {
+                result.innerHTML = `<strong>⚠️ Error al procesar:</strong><p>${storeEscape(error.message)}</p>`;
+                result.classList.remove("hidden");
+            }
             if (submit) {
                 submit.disabled = false;
-                submit.textContent = originalLabel;
+                submit.innerHTML = '<span class="btn-icon">🔒</span><span>Ir al Pago Seguro en Tebex</span>';
             }
         }
     });
 
-    fetch("/api/store").then((response) => response.ok ? response.json() : Promise.reject()).then((catalog) => {
-        state.catalog = catalog;
-        if (!catalog.categories.some((category) => category.id === state.category)) {
-            state.category = catalog.categories[0]?.id || "monthly";
-        }
-        document.getElementById("store-health").textContent = "Catálogo conectado";
-        document.getElementById("store-product-count").textContent = `${catalog.summary.products} productos`;
-        document.getElementById("store-updated").textContent = `Actualizado ${catalog.updatedAt}`;
-        renderAll();
-    }).catch(() => { grid.innerHTML = "<article class='store-product is-visible'><h3>Catálogo no disponible</h3><p>El backend no respondió. Intenta más tarde.</p></article>"; });
+    loadCatalog();
 });
-
-/* --- Estado del servidor en la portada --- */
-/* Pinta cuanta gente hay conectada y deja copiar la IP de un clic. Si la consulta
-   falla no se inventa un numero: se dice que no se pudo comprobar. */
-(function () {
-  var tarjeta = document.getElementById('server-card');
-  if (!tarjeta) return;
-
-  var estado = document.getElementById('server-state');
-  var boton = document.getElementById('server-ip');
-  var copiar = document.getElementById('server-copy');
-  var ip = boton.querySelector('.server-card__ip-text').textContent.trim();
-
-  function pintar(datos) {
-    var motdElem = document.getElementById('server-motd');
-    if (!datos || !datos.enLinea) {
-      tarjeta.classList.remove('is-online');
-      tarjeta.classList.add('is-offline');
-      estado.textContent = 'Servidor en comprobación';
-      if (motdElem) motdElem.textContent = 'mc.drakescraft.cl · 1.21.11';
-      return;
-    }
-    tarjeta.classList.remove('is-offline');
-    tarjeta.classList.add('is-online');
-    var n = datos.jugadores;
-    estado.textContent = n === 0
-      ? 'En línea · Nadie conectado ahora'
-      : 'En línea · ' + n + (n === 1 ? ' jugador conectado' : ' jugadores conectados');
-    if (motdElem && datos.motd) {
-      motdElem.textContent = datos.motd;
-    }
-  }
-
-  function consultar() {
-    fetch('/api/server-status', { headers: { accept: 'application/json' } })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(pintar)
-      .catch(function () { pintar(null); });
-  }
-
-  boton.addEventListener('click', function () {
-    var previo = copiar.textContent;
-    navigator.clipboard.writeText(ip).then(function () {
-      copiar.textContent = 'Copiada';
-      setTimeout(function () { copiar.textContent = previo; }, 1600);
-    }).catch(function () {
-      copiar.textContent = 'Copia a mano';
-      setTimeout(function () { copiar.textContent = previo; }, 2200);
-    });
-  });
-
-  consultar();
-  // El backend cachea 30 s, asi que refrescar cada minuto no genera trafico extra.
-  setInterval(consultar, 60000);
-})();

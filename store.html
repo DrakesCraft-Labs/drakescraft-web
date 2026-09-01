@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tienda oficial de DrakesCraft. Compara rangos, pases y utilidades, y completa tu compra de forma segura mediante Tebex.">
-  <title>DrakesCraft | Tienda oficial</title>
+  <meta name="description" content="Tienda oficial de DrakesCraft. Compara rangos, pases de Slimefun y utilidades con entrega instantánea mediante Tebex.">
+  <title>DrakesCraft | Tienda Oficial & Mejoras</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/base.css?v=20260824-nav-v1">
-  <link rel="stylesheet" href="styles/store.css?v=20260824-editorial-images">
+  <link rel="stylesheet" href="styles/store.css?v=20260901-modern-v4">
 </head>
-<body class="page-shell" data-page="store" data-section="store">
+<body class="page-shell store-theme" data-page="store" data-section="store">
   <nav class="site-nav" aria-label="Navegación principal">
     <div class="container site-nav__bar">
       <a class="brand" href="/" aria-label="Ir al inicio de DrakesCraft">
-        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="">
-        <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
+        <img class="brand__mark" src="assets/logo-drakescraft.png" alt="Logo DrakesCraft">
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Tienda oficial</span></span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
@@ -28,233 +28,392 @@
         <li><a href="guia-rangos.html">Rangos</a></li>
         <li><a href="guia-slimefun.html">Slimefun</a></li>
         <li><a href="metricas.html">Métricas</a></li>
-        <li><a href="apoya.html">Apoyar</a></li>
         <li><a href="support.html">Soporte</a></li>
+        <li><a href="terms.html">Términos</a></li>
+        <li><a href="apoya.html">Apoyar</a></li>
         <li><a class="nav-discord" href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Discord</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
-    <header class="store-intro">
-      <div class="container store-intro__grid">
-        <div>
-          <p class="eyebrow">Tienda oficial · pago mediante Tebex</p>
-          <h1>Elige tu mejora.<br><em>Sin rodeos.</em></h1>
+    <!-- Hero con Ilustración y Fondo Editorial -->
+    <header class="store-hero-modern">
+      <div class="store-hero-modern__bg-image">
+        <img src="assets/editorial/store-lake.webp" alt="DrakesCraft Ilustración de Fondo" loading="eager">
+        <div class="store-hero-modern__overlay"></div>
+      </div>
+      <div class="container store-hero-modern__grid">
+        <div class="store-hero-modern__content">
+          <div class="store-badge-live">
+            <span class="store-pulse-dot"></span>
+            <span>Entrega Automatizada en Vivo · Odysseia Engine</span>
+          </div>
+          <h1>Potencia tu legado.<br><em>Sin esperas ni enredos.</em></h1>
+          <p class="store-hero-modern__lead">
+            Adquiere rangos exclusivos, pases de Slimefun y mejoras con activación instantánea en el servidor. Todas las compras son definitivas y procesadas por la pasarela segura de Tebex.
+          </p>
+          <div class="store-hero-modern__features">
+            <div class="feature-item">
+              <span class="feature-icon">⚡</span>
+              <div>
+                <strong>Activación Inmediata</strong>
+                <span>Entregado por bot in-game</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔒</span>
+              <div>
+                <strong>Checkout Seguro</strong>
+                <span>Protección y cifrado Tebex</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🎮</span>
+              <div>
+                <strong>Java & Bedrock</strong>
+                <span>Soporte multiplataforma</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="store-intro__copy">
-          <p>Compara rangos, pases y utilidades con sus límites claros. Elige aquí y completa el pago seguro en Tebex; ningún pase se renueva automáticamente.</p>
-          <div class="store-intro__links"><a href="#catalogo">Ver catálogo ↓</a><a href="guia-rangos.html">Comparar rangos ↗</a><a href="support.html">Ayuda con una compra ↗</a></div>
+
+        <div class="store-hero-modern__server">
+          <div class="server-status-card">
+            <div class="server-status-card__header">
+              <span class="server-card__dot" id="server-dot" aria-hidden="true"></span>
+              <span class="server-card__state" id="server-state">Servidor Online</span>
+            </div>
+            <button class="server-status-card__btn" id="server-ip" type="button" title="Copiar IP">
+              <span class="ip-address">mc.drakescraft.cl</span>
+              <span class="ip-copy-tag" id="server-copy">Copiar IP</span>
+            </button>
+            <p class="server-status-card__motd" id="server-motd">⚡ DrakesCraft 1.21.11 · Cinco modalidades activas</p>
+            <div class="server-status-card__links">
+              <a href="#catalogo" class="btn-scroll-catalog">Explorar Catálogo ↓</a>
+              <a href="guia-rangos.html" class="btn-compare-ranks">Tabla de Rangos ↗</a>
+            </div>
+          </div>
         </div>
       </div>
     </header>
 
-    <section class="store-path" id="comprar" aria-label="Flujo de compra">
-      <div class="container store-path__inner">
-        <div class="server-card server-card--strip" id="server-card">
-          <div class="server-card__head">
-            <span class="server-card__dot" id="server-dot" aria-hidden="true"></span>
-            <span class="server-card__state" id="server-state">Comprobando el servidor…</span>
-          </div>
-          <button class="server-card__ip" id="server-ip" type="button" title="Copiar la IP de DrakesCraft">
-            <span class="server-card__ip-text">mc.drakescraft.cl</span>
-            <span class="server-card__copy" id="server-copy">Copiar IP</span>
-          </button>
-          <div class="server-card__motd" id="server-motd">⚡ DrakesCraft 1.21.11 · Cinco modalidades en una sola red</div>
-        </div>
-        <p><strong>Compra manual y segura.</strong> Ves los límites antes de pagar; Tebex entrega al nick indicado y ningún pase se renueva solo.</p>
-        <a class="store-path__support" href="support.html">Ayuda con una compra</a>
-        <ol><li><span>1</span> Elige</li><li><span>2</span> Paga en Tebex</li><li><span>3</span> Juega</li></ol>
-      </div>
-    </section>
-
-    <section class="store-catalog" id="catalogo">
+    <!-- Catálogo de Productos y Checkout -->
+    <section class="store-catalog-section" id="catalogo">
       <div class="container">
-        <div class="store-heading">
-          <div><p class="eyebrow">Catálogo oficial</p><h2 id="store-category-title">Encuentra tu siguiente mejora.</h2></div>
-          <p id="store-category-description">Rangos, utilidades y pases configurados para DrakesCraft.</p>
+        
+        <!-- Banner de Descargo Legal y Términos -->
+        <div class="store-legal-banner">
+          <span class="legal-icon">⚖️</span>
+          <div class="legal-text">
+            <strong>Compras Oficiales y Descargo de Responsabilidad:</strong>
+            Todas las transacciones son finales, voluntarias y de entrega digital inmediata. Al comprar aceptas de forma íntegra nuestros <a href="terms.html">Términos del Servicio, Políticas de No Reembolso y Descargo Técnico</a>.
+          </div>
         </div>
-        <div class="store-status" aria-live="polite"><span id="store-health">Conectando catálogo</span><span id="store-product-count">-- productos</span><span id="store-updated">--</span></div>
-        <div class="store-tabs" id="store-tabs" aria-label="Categorías de productos"></div>
-        <div class="store-layout">
-          <div class="store-grid" id="store-grid"></div>
-          <aside class="store-checkout" id="carrito" aria-label="Carrito de compra">
-            <div class="store-checkout__head"><div><p class="eyebrow">Tu pedido</p><h2>Carrito</h2></div><span class="store-cart-count" id="store-cart-count">0</span></div>
-            <p id="store-selection-note">Agrega un producto para continuar a Tebex.</p>
-            <div id="quote-items"></div>
-            <p class="store-total"><span>Total</span><strong id="quote-total">$0 CLP</strong></p>
-            <form id="quote-form">
-              <label>Nick de Minecraft<input name="nick" minlength="3" maxlength="17" pattern="\.?[A-Za-z0-9_]{3,16}" title="Usa de 3 a 16 letras, números o guiones bajos. En Bedrock puedes incluir el punto inicial." autocomplete="username" placeholder="Tal como aparece en el juego" required></label>
-              <p class="store-checkout__hint">Solo el nick es obligatorio. En Bedrock escribe el punto inicial si tu cuenta lo usa.</p>
-              <details class="store-checkout__optional">
-                <summary>Agregar contacto para soporte (opcional)</summary>
-                <label>Discord o correo<input name="contact" maxlength="80" autocomplete="email" placeholder="Para que podamos ayudarte si hace falta"></label>
-                <label>Nota opcional<textarea name="notes" rows="3" maxlength="500" placeholder="Algún detalle útil para soporte"></textarea></label>
-              </details>
-              <input class="hidden" name="website" tabindex="-1" autocomplete="off">
-              <button class="btn btn-primary" type="submit">Ir al pago seguro</button>
-            </form>
-            <div id="quote-result" class="hidden" aria-live="polite"></div>
+
+        <div class="store-section-header">
+          <div>
+            <span class="eyebrow-accent">CATÁLOGO OFICIAL</span>
+            <h2 id="store-category-title">Selecciona tu categoría</h2>
+          </div>
+          <div class="store-status-pill" aria-live="polite">
+            <span id="store-health" class="health-badge">Conectando catálogo</span>
+            <span id="store-product-count" class="count-badge">-- productos</span>
+          </div>
+        </div>
+
+        <!-- Pestañas de Categoría -->
+        <div class="store-tabs-modern" id="store-tabs" aria-label="Categorías de productos"></div>
+
+        <!-- Layout Catálogo + Checkout Sticky -->
+        <div class="store-layout-modern">
+          <div class="store-products-grid" id="store-grid"></div>
+
+          <!-- Aside Checkout / Resumen del Pedido -->
+          <aside class="store-checkout-panel" id="carrito" aria-label="Carrito de compra">
+            <div class="checkout-panel-card">
+              <div class="checkout-panel-header">
+                <div>
+                  <span class="eyebrow-small">TU PEDIDO</span>
+                  <h3>Resumen de Compra</h3>
+                </div>
+                <span class="cart-badge-count" id="store-cart-count">0</span>
+              </div>
+
+              <!-- Selector de Plataforma Java / Bedrock -->
+              <div class="platform-selector-box">
+                <span class="selector-label">1. Elige tu plataforma:</span>
+                <div class="platform-toggle-group">
+                  <button type="button" class="platform-btn is-active" id="btn-platform-java" data-platform="java">
+                    <span class="platform-icon">☕</span>
+                    <span>Java Edition</span>
+                  </button>
+                  <button type="button" class="platform-btn" id="btn-platform-bedrock" data-platform="bedrock">
+                    <span class="platform-icon">📱</span>
+                    <span>Bedrock (Móvil/Win10)</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Formulario de Compra y Validación de Nick -->
+              <form id="quote-form" class="checkout-form-modern">
+                <div class="nick-input-group">
+                  <div class="nick-label-row">
+                    <label for="input-nick">2. Nick exacto de Minecraft:</label>
+                    <span class="nick-required-tag">Obligatorio</span>
+                  </div>
+                  
+                  <div class="nick-input-wrapper">
+                    <div class="avatar-preview-box" id="avatar-container" title="Tu Skin de Minecraft">
+                      <img id="player-avatar" src="https://minotar.net/helm/Steve/48.png" alt="Avatar">
+                    </div>
+                    <input id="input-nick" name="nick" minlength="3" maxlength="17" pattern="\.?[A-Za-z0-9_]{3,16}" title="Escribe de 3 a 16 letras, números o guiones bajos." autocomplete="username" placeholder="Tu nick exacto in-game" required>
+                  </div>
+
+                  <div id="nick-platform-hint" class="nick-hint-message">
+                    💡 <strong>Atención:</strong> Escribe tu nick <em>exactamente igual</em> a como aparece en el juego (mayúsculas y minúsculas).
+                  </div>
+                </div>
+
+                <div class="checkout-divider"></div>
+
+                <!-- Lista de Productos en Carrito -->
+                <div class="cart-items-section">
+                  <span class="selector-label">3. Productos seleccionados:</span>
+                  <p id="store-selection-note" class="cart-empty-notice">Selecciona un producto del catálogo para continuar.</p>
+                  <div id="quote-items" class="cart-items-list"></div>
+                </div>
+
+                <!-- Total -->
+                <div class="checkout-total-row">
+                  <span>Total estimado:</span>
+                  <strong id="quote-total">$0 CLP</strong>
+                </div>
+
+                <!-- Opcionales para Soporte -->
+                <details class="checkout-optional-details">
+                  <summary>Contacto opcional para soporte</summary>
+                  <div class="optional-inputs">
+                    <label>Discord o correo (opcional):
+                      <input name="contact" maxlength="80" autocomplete="email" placeholder="Usuario de Discord o email">
+                    </label>
+                    <label>Nota adicional:
+                      <textarea name="notes" rows="2" maxlength="500" placeholder="Detalle útil para soporte si hiciera falta"></textarea>
+                    </label>
+                  </div>
+                </details>
+
+                <input class="hidden" name="website" tabindex="-1" autocomplete="off">
+                <button class="btn btn-primary btn-checkout-submit" type="submit" id="btn-submit-checkout">
+                  <span class="btn-icon">🔒</span>
+                  <span>Ir al Pago Seguro en Tebex</span>
+                </button>
+              </form>
+
+              <div id="quote-result" class="checkout-result-box hidden" aria-live="polite"></div>
+            </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="store-catalog" id="modalidades" style="padding: 4rem 0;" hidden>
+    <!-- Sección de Modalidades con Iconografía Visual -->
+    <section class="store-modes-section" id="modalidades">
       <div class="container">
-        <div class="store-heading">
+        <div class="store-section-header">
           <div>
-            <p class="eyebrow" style="color: #267c7f;">Cinco modalidades, una sola cuenta</p>
-            <h2>Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio</h2>
+            <span class="eyebrow-accent">MULTIVERSO DRAKESCRAFT</span>
+            <h2>Cinco Modalidades en una Sola Cuenta</h2>
           </div>
-          <p>Tu rango, empleos, habilidades y Dragmas te siguen entre todas. El inventario, la experiencia, el cofre de ender y las bóvedas quedan separados; los kits se usan en Slimefun, SkyBlock y OneBlock.</p>
+          <p class="section-desc">Tu rango, empleos, habilidades y Dragmas te siguen entre todas las modalidades.</p>
         </div>
-        <div class="store-grid" style="margin-top: 2rem;">
-          <article class="store-product is-visible" data-accent="gold">
-            <div class="store-product__top"><div><span class="store-product__tag">Modalidad base</span><h3>Slimefun</h3></div></div>
-            <p>El DrakesCraft de siempre: Slimefun completo con más de 60 expansiones, magia de Arcana, panteón de dioses, jefes y arenas privadas. Antes se llamaba Survival, y <code>/survival</code> sigue funcionando.</p>
-            <div class="store-product__delivery"><span>Comandos: <code>/slimefun</code> o <code>/survival</code></span><span>Territorio: ProtectionStones</span></div>
+
+        <div class="modes-grid">
+          <article class="mode-card" style="--mode-color: #f59e0b;">
+            <div class="mode-card__header">
+              <span class="mode-tag">Principal</span>
+              <h3>🐉 Slimefun</h3>
+            </div>
+            <p>Más de 60 expansiones tecnológicas, redes energéticas, reactores, magia de Arcana y panteón de dioses.</p>
+            <div class="mode-meta"><code>/slimefun</code> · ProtectionStones</div>
           </article>
-          <article class="store-product is-visible" data-accent="cyan">
-            <div class="store-product__top"><div><span class="store-product__tag">Vanilla puro</span><h3>Clásico</h3></div></div>
-            <p>Minecraft tradicional: sin Slimefun, sin máquinas y sin mobs personalizados. Terralith con biomas únicos, Nether y End propios, hogares, TPA y protecciones con borde de 200.000 bloques.</p>
-            <div class="store-product__delivery"><span>Comando: <code>/clasico</code></span><span><code>/home</code>, <code>/tpa</code> y <code>/ps home</code></span></div>
+
+          <article class="mode-card" style="--mode-color: #10b981;">
+            <div class="mode-card__header">
+              <span class="mode-tag">Vanilla Plus</span>
+              <h3>🌲 Clásico</h3>
+            </div>
+            <p>Minecraft tradicional sin Slimefun ni maquinaria. Biomas de Terralith, economía pura y protección de terrenos.</p>
+            <div class="mode-meta"><code>/clasico</code> · 200k bloques</div>
           </article>
-          <article class="store-product is-visible" data-accent="cyan">
-            <div class="store-product__top"><div><span class="store-product__tag">Desafío</span><h3>SkyBlock</h3></div></div>
-            <p>Tu isla en el vacío con misiones. Slimefun también funciona aquí. El tamaño de la isla escala según tu rango, desde 128×128 hasta 600×600 bloques.</p>
-            <div class="store-product__delivery"><span>Comandos: <code>/skyblock</code> o <code>/is</code></span><span>Inventario aislado</span></div>
+
+          <article class="mode-card" style="--mode-color: #38bdf8;">
+            <div class="mode-card__header">
+              <span class="mode-tag">En el Vacío</span>
+              <h3>☁️ SkyBlock</h3>
+            </div>
+            <p>Tu isla en el cielo con misiones y Slimefun activo. El tamaño de la isla escala según tu rango VIP.</p>
+            <div class="mode-meta"><code>/skyblock</code> · BentoBox</div>
           </article>
-          <article class="store-product is-visible" data-accent="violet">
-            <div class="store-product__top"><div><span class="store-product__tag">Progresión</span><h3>OneBlock</h3></div></div>
-            <p>Un solo bloque infinito que evoluciona por 21 fases de biomas. Empiezas con nada y construyes todo. También con Slimefun y con isla que crece según tu rango.</p>
-            <div class="store-product__delivery"><span>Comandos: <code>/oneblock</code> o <code>/ob</code></span><span>Inventario aislado</span></div>
+
+          <article class="mode-card" style="--mode-color: #c084fc;">
+            <div class="mode-card__header">
+              <span class="mode-tag">Progresión</span>
+              <h3>📦 OneBlock</h3>
+            </div>
+            <p>Un solo bloque infinito que evoluciona por 21 fases de biomas. Empiezas desde cero y desbloqueas todo.</p>
+            <div class="mode-meta"><code>/oneblock</code> · 21 Fases</div>
           </article>
-                    <article class="store-product is-visible" data-accent="gold" style="border: 2px solid rgba(247, 213, 107, 0.55); background: rgba(12, 38, 26, 0.88);">
-            <div class="store-product__top"><div><span class="store-product__tag" style="background: #f7d56b; color: #071a16; font-weight: 800;">¡5ª Modalidad Novedad!</span><h3>🔬 Laboratorio</h3></div></div>
-            <p>Mundo creativo plano y pacífico para prototipar maquinaria pesada, reactores y redes complejas con <code>/sf cheat</code>. Inventario blindado por el Centinela y reseteo semanal cada domingo.</p>
-            <div class="store-product__delivery"><span>Comando: <code>/warp laboratorio</code></span><span>Modo Creativo Libre</span></div>
-          </article>
-          <article class="store-product is-visible" data-accent="ember">
-            <div class="store-product__top"><div><span class="store-product__tag">Importante</span><h3>Qué se comparte y qué no</h3></div></div>
-            <p><strong>Se comparte:</strong> rango, permisos, Dragmas (₯), empleos y habilidades.<br><strong>Es propio de cada modalidad:</strong> inventario, experiencia, cofre de ender y bóvedas <code>/pv</code>. Los kits no se reclaman en Clásico.</p>
-            <div class="store-product__delivery"><span>Menú: <code>/modalidades</code></span><span>Válidas en todas</span></div>
+
+          <article class="mode-card mode-card--highlight" style="--mode-color: #f43f5e;">
+            <div class="mode-card__header">
+              <span class="mode-tag mode-tag--fire">¡Novedad Creativa!</span>
+              <h3>🔬 Laboratorio</h3>
+            </div>
+            <p>Mundo creativo plano para probar maquinaria pesada y reactores con <code>/sf cheat</code> sin riesgos.</p>
+            <div class="mode-meta"><code>/warp laboratorio</code> · Modo Libre</div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="store-team" id="equipo" hidden>
+    <!-- Sección del Equipo con Skins Oficiales (Jack de Cabeza / Líder Principal) -->
+    <section class="store-team-section" id="equipo">
       <div class="container">
-        <p class="eyebrow">Quiénes estamos detrás</p>
-        <h2>Equipo de DrakesCraft</h2>
-        <p>El equipo que desarrolla, modera y da soporte a la comunidad técnica. Si una entrega falla, estas son las personas que la revisan.</p>
-        <div class="store-legacy">
-          <img src="assets/staff/TheSavior22.png" alt="Skin de TheSavior22" width="64" height="64" loading="lazy">
+        <div class="store-section-header">
           <div>
-            <span class="store-legacy__role">Fundador original · Moderador</span>
-            <h3>TheSavior22</h3>
-            <p>DrakesCraft nació de sus manos y hoy forma parte del equipo activo de moderación. El servidor continúa su evolución y expansión bajo el liderazgo de JackStar6677 (Dueño Mayor), manteniendo vivo el corazón de Slimefun y el legado técnico que comenzó aquí.</p>
+            <span class="eyebrow-accent">DIRECCIÓN, DESARROLLO Y SOPORTE</span>
+            <h2>Equipo de DrakesCraft</h2>
+          </div>
+          <p class="section-desc">El equipo que desarrolla, modera y mantiene la infraestructura. Si una entrega requiere revisión, estas son las personas que te atienden.</p>
+        </div>
+
+        <!-- Líder y Dueño Mayor: JackStar6677 DE CABEZA -->
+        <div class="leader-hero-card">
+          <img src="assets/staff/JackStar6677.png" alt="Skin de JackStar6677" width="72" height="72" loading="lazy">
+          <div class="leader-hero-card__body">
+            <div class="leader-tag-row">
+              <span class="leader-role-badge">👑 DUEÑO MAYOR · DIRECCIÓN & DESARROLLO PRINCIPAL</span>
+              <span class="leader-active-tag">● Activo</span>
+            </div>
+            <h3>JackStar6677</h3>
+            <p>Dueño general, desarrollador principal, arquitectura de sistemas e infraestructura de DrakesCraft. Dirección del proyecto, balance de economía, desarrollo de plugins e integraciones y soporte técnico de máxima prioridad.</p>
           </div>
         </div>
-        <div class="store-team__grid">
-          <article class="store-team__card" style="--team-accent: #ff9d9d;">
-            <img src="assets/staff/JackStar6677.png" alt="Skin de JackStar6677" width="56" height="56" loading="lazy">
+
+        <!-- Grid del Equipo (Fundador Original + Staff) -->
+        <div class="team-grid">
+          <article class="team-card team-card--highlight" style="--member-color: #f59e0b;">
+            <img src="assets/staff/TheSavior22.png" alt="Skin de TheSavior22" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">Dueño Mayor / Desarrollo</span>
-              <h3>JackStar6677</h3>
-              <p>Dueño general, desarrollador principal, arquitectura, infraestructura y sistemas</p>
+              <span class="team-role">Fundador Original · Moderador</span>
+              <h3>TheSavior22</h3>
+              <p>Fundador original del proyecto y moderación activa</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #ffb3d9;">
-            <img src="assets/staff/KikaStar704.png" alt="Skin de KikaStar704" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #ffb3d9;">
+            <img src="assets/staff/KikaStar704.png" alt="Skin de KikaStar704" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">Marketing / Sostenedora</span>
+              <span class="team-role">Marketing / Sostenedora</span>
               <h3>KikaStar704</h3>
               <p>Marketing, Instagram y rostro público de DrakesCraft</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #ffc98a;">
-            <img src="assets/staff/Chagui68.png" alt="Skin de Chagui68" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #ffc98a;">
+            <img src="assets/staff/Chagui68.png" alt="Skin de Chagui68" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">Developer</span>
+              <span class="team-role">Developer</span>
               <h3>Chagui68</h3>
               <p>Desarrollo, texturas y dirección práctica de sistemas</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #a5d8ff;">
-            <img src="assets/staff/Lautix16.png" alt="Skin de Lautix16" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #a5d8ff;">
+            <img src="assets/staff/Lautix16.png" alt="Skin de Lautix16" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">DevAdmin</span>
+              <span class="team-role">DevAdmin</span>
               <h3>Lautix16</h3>
               <p>Apoyo técnico y configuración del servidor</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #c9b3ff;">
-            <img src="assets/staff/JessielPR.png" alt="Skin de JessielPR" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #c9b3ff;">
+            <img src="assets/staff/JessielPR.png" alt="Skin de JessielPR" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">Admin</span>
+              <span class="team-role">Admin</span>
               <h3>JessielPR</h3>
               <p>Jefe de moderadores y helpers</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #9ef0c4;">
-            <img src="assets/staff/Nixcobt.png" alt="Skin de Nixcobt" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #9ef0c4;">
+            <img src="assets/staff/Nixcobt.png" alt="Skin de Nixcobt" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">QA / Verdugo</span>
+              <span class="team-role">QA / Verdugo</span>
               <h3>Nixcobt</h3>
-              <p>QA, pruebas, votos, crates, configuración y moderación</p>
+              <p>QA, pruebas, votos, crates y moderación</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #ffe08a;">
-            <img src="assets/staff/elpepinoraro18.png" alt="Skin de elpepinoraro18" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #ffe08a;">
+            <img src="assets/staff/elpepinoraro18.png" alt="Skin de elpepinoraro18" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">Consultor Slimefun</span>
+              <span class="team-role">Consultor Slimefun</span>
               <h3>elpepinoraro18</h3>
-              <p>Slimefun, desarrollo y construcción</p>
+              <p>Slimefun, desarrollo y balance técnico</p>
             </div>
           </article>
-          <article class="store-team__card" style="--team-accent: #8ad8ff;">
-            <img src="assets/staff/Derem8503.png" alt="Skin de Derem8503" width="56" height="56" loading="lazy">
+
+          <article class="team-card" style="--member-color: #8ad8ff;">
+            <img src="assets/staff/Derem8503.png" alt="Skin de Derem8503" width="52" height="52" loading="lazy">
             <div>
-              <span class="store-team__role">Helper / Soporte</span>
+              <span class="team-role">Helper / Soporte</span>
               <h3>Derem8503</h3>
-              <p>Atención y soporte en Discord</p>
+              <p>Atención comunitaria y soporte en Discord</p>
             </div>
           </article>
         </div>
       </div>
     </section>
+
+    <!-- Modal de Detalle de Producto -->
+    <div id="store-modal" class="store-modal-backdrop hidden" role="dialog" aria-modal="true">
+      <div class="store-modal-window">
+        <button id="store-modal-close" class="store-modal-close-btn" type="button" aria-label="Cerrar modal">&times;</button>
+        <div id="store-modal-body" class="store-modal-content"></div>
+      </div>
+    </div>
+
+    <!-- Botón flotante para móvil (Scroll to Cart) -->
+    <button class="store-cart-jump hidden" id="store-cart-jump" type="button">
+      <span>Ver Carrito</span>
+      <strong id="store-cart-jump-count">0</strong>
+    </button>
   </main>
 
-  <a class="store-cart-jump hidden" id="store-cart-jump" href="#carrito" aria-label="Abrir carrito"><span>Ver carrito</span><strong id="store-cart-jump-count">0</strong></a>
-
-  <div id="store-modal" class="hidden" role="dialog" aria-modal="true" aria-label="Detalle de producto"><div><button id="store-modal-close" type="button" aria-label="Cerrar detalle">×</button><div id="store-modal-body"></div></div></div>
   <footer class="site-footer">
     <div class="container site-footer__grid">
       <div>
-        <strong>DrakesCraft</strong>
-        <p>Una tienda y portal diseñados para potenciar tu aventura.</p>
+        <strong>DrakesCraft Network</strong>
+        <p>Cinco modalidades, economías profundas y desarrollo independiente.</p>
       </div>
       <div class="site-footer__links">
-        <a href="guia.html">El Servidor</a>
-        <a href="guia-comandos.html">Comandos</a>
-        <a href="guia-rangos.html">Rangos</a>
-        <a href="guia-slimefun.html">Slimefun</a>
-        <a href="metricas.html">Métricas</a>
-        <a href="support.html">Soporte</a>
-        <a href="terms.html">Términos</a>
-        <a href="https://www.instagram.com/drakescraft.cl/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Discord</a>
+        <a href="/">Inicio</a>
+        <a href="guia.html">Guía</a>
+        <a href="terms.html">Términos del Servicio</a>
+        <a href="support.html">Soporte y Tickets</a>
+        <a href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Discord Oficial</a>
       </div>
       <div class="site-footer__sponsor">
         <span class="footer-sponsor-label">Apoya el proyecto</span>
         <div class="sponsor-badges">
-          <a class="sponsor-btn" href="https://github.com/sponsors/JackStar6677-1" target="_blank" rel="noopener" title="Patrocinar a Jack (Fundador & Dev)">
+          <a class="sponsor-btn" href="https://github.com/sponsors/JackStar6677-1" target="_blank" rel="noopener" title="Patrocinar a Jack">
             <span class="sponsor-btn__user">Jack</span>
             <span class="sponsor-btn__heart">❤ Sponsor</span>
           </a>
-          <a class="sponsor-btn" href="https://github.com/sponsors/DrakesCraft-Labs" target="_blank" rel="noopener" title="Patrocinar la Organización DrakesCraft-Labs">
+          <a class="sponsor-btn" href="https://github.com/sponsors/DrakesCraft-Labs" target="_blank" rel="noopener" title="Patrocinar a DrakesCraft-Labs">
             <span class="sponsor-btn__user">DrakesCraft-Labs</span>
             <span class="sponsor-btn__heart">❤ Sponsor</span>
           </a>
@@ -262,7 +421,8 @@
       </div>
     </div>
   </footer>
+
   <script src="scripts/site.js?v=20260824-nav-v1"></script>
-  <script src="scripts/store.js?v=20260820-motd-v9"></script>
+  <script src="scripts/store.js?v=20260901-modern-v4"></script>
 </body>
 </html>
