@@ -105,13 +105,30 @@
           <div class="guide-row"><code>/ob</code><p>Tu isla de <strong>OneBlock</strong>, el bloque infinito que evoluciona por fases.<span class="guide-row__alias">También: /oneblock</span></p></div>
           <div class="guide-row"><code>/warp laboratorio</code><p>🧪 <strong>Laboratorio Creativo</strong>: Mundo plano pacífico, sin mobs y en modo creativo. Diseñado para diseñar y probar maquinaria, circuitos y redes de Slimefun sin perder materiales en el Survival.<span class="guide-row__alias">Acceso al Cheat Sheet con /sf cheat</span></p></div>
           <div class="guide-row"><code>/sf cheat</code><p>🎁 <strong>Cheat Sheet de Slimefun</strong>: Abre el catálogo completo para retirar cualquier máquina o ítem con un solo clic. También se abre haciendo <strong>Shift + Clic Derecho</strong> con la guía de Slimefun en la mano.<span class="guide-tag guide-tag--survival">Solo en Laboratorio</span></p></div>
-          <div class="guide-row"><code>/is level</code><p>Nivel de tu isla. Sube rompiendo y construyendo con bloques valiosos.<span class="guide-row__alias">En OneBlock: /ob level</span></p></div>
+          <div class="guide-row"><code>/is level</code><p><strong>Recalcula</strong> el nivel de tu isla contando los bloques que tienes colocados. El número no sube solo: si no ejecutas el comando, sigue mostrando el último cálculo.<span class="guide-row__alias">En OneBlock: /ob level</span></p></div>
           <div class="guide-row"><code>/is team</code><p>Invita amigos a tu isla y administra tu equipo.</p></div>
           <div class="guide-row"><code>/is settings</code><p>Permisos y ajustes de tu isla: visitantes, construcción y cofres.</p></div>
           <div class="guide-row"><code>/is sethome</code><p>Fija dónde apareces al volver a tu isla.</p></div>
           <div class="guide-row"><code>/is reset</code><p><strong>Borra tu isla y empiezas de cero.</strong> Pide confirmación, pero no se puede deshacer.</p></div>
           <div class="guide-row"><code>/pv</code><p>Tus bóvedas personales. <strong>Cada modalidad tiene las suyas</strong>: lo que guardes en tu isla o laboratorio no aparece en Slimefun.<span class="guide-row__alias">También: /vault</span></p></div>
         </div>
+
+        <h3>Cómo Funciona el Nivel de Isla (SkyBlock y OneBlock)</h3>
+        <p class="guide-section__note">Es la duda número uno de las islas: <strong>«llevo horas construyendo y mi nivel sigue igual»</strong>. No es un fallo. El nivel no se actualiza solo mientras juegas: es un cálculo que se dispara únicamente cuando tú lo pides. Así funciona de verdad en DrakesCraft:</p>
+
+        <div class="guide-table">
+          <div class="guide-row"><code>Solo se recalcula a petición</code><p>El nivel se vuelve a calcular cuando ejecutas <code>/is level</code> (o <code>/ob level</code> en OneBlock) y también <strong>automáticamente al entrar al servidor</strong>. Entre un cálculo y otro, el número que ves es una foto antigua. Por eso <code>/is top</code> y <code>/ob top</code> parecen congelados: muestran el último valor guardado de cada isla, no el actual.</p></div>
+          <div class="guide-row"><code>Espera de 60 segundos</code><p>Hay un enfriamiento de <strong>1 minuto</strong> entre cálculos. Si pides el nivel dos veces seguidas, el servidor te hará esperar; no insistas ni lo reportes como error.</p></div>
+          <div class="guide-row"><code>Cuenta bloques colocados, no minados</code><p>El nivel suma el valor de los bloques que están <strong>puestos dentro de tu isla</strong>. Romper bloques no da nivel: si quieres subir, tienes que colocar material valioso en la isla y dejarlo ahí.</p></div>
+          <div class="guide-row"><code>Cada 100 puntos = 1 nivel</code><p>Se suma el valor de todos tus bloques y se divide entre 100. Referencias reales: <strong>bloque de diamante y faro valen 300</strong>; <strong>bloque de netherita, de oro, de esmeralda, cofre del End, mesa de encantamientos y huevo de dragón valen 150</strong>. En cambio <strong>la piedra, el adoquín, la netherrack y los troncos valen 0</strong>: rellenar la isla de adoquín no sube absolutamente nada.</p></div>
+          <div class="guide-row"><code>Lo guardado en cofres no cuenta</code><p>El cálculo <strong>ignora el contenido de cofres, barriles y shulkers</strong>. Un cofre con 20 bloques de diamante dentro vale lo que vale el cofre. Para que sumen, los bloques valiosos tienen que estar colocados en el mundo.</p></div>
+          <div class="guide-row"><code>Nether y End no suman</code><p>Solo cuenta la isla del mundo principal. Lo que construyas en tu isla del <strong>Nether o del End no aporta nivel</strong>.</p></div>
+          <div class="guide-row"><code>Cada muerte resta 1 nivel</code><p>Morir descuenta 100 puntos, es decir <strong>un nivel completo</strong>. En islas en equipo solo cuentan las muertes del <strong>líder</strong> de la isla, no las de todos los miembros.</p></div>
+          <div class="guide-row"><code>La isla inicial no cuenta</code><p>Los bloques con los que nace tu isla (o con los que renace tras un <code>/is reset</code>) quedan a cero. Tu nivel refleja <strong>solo lo que has añadido tú</strong>, así que todos empiezan igualados.</p></div>
+          <div class="guide-row"><code>Topes anti-spam</code><p>Aunque no valgan nada, solo se contabilizan hasta <strong>10.000 adoquines y 1.000 netherrack</strong> por isla. El sistema está pensado para premiar construcciones trabajadas, no montañas de relleno.</p></div>
+        </div>
+
+        <p class="guide-section__note"><strong>Resumen:</strong> construye con material de valor, déjalo colocado a la vista, evita morir y ejecuta <code>/is level</code> o <code>/ob level</code> cuando quieras ver tu progreso reflejado en el ranking.</p>
       </section>
 
       <section class="guide-section" data-cat="proteccion">
@@ -562,6 +579,7 @@
 
       <p class="guide-section__note" style="margin-top:1.5rem;">Reinicio diario a las <strong>08:00 hora de Chile</strong>. Recibes avisos desde las 07:45 y en el último minuto se cierran cofres y máquinas para proteger tus objetos.</p>
     </section>
+  </section>
   </main>
 
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Una guía viva. Si falta algo, dínoslo en Discord.</p></div><div class="site-footer__links"><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Discord</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><iframe src="https://github.com/sponsors/DrakesCraft-Labs/button" title="Patrocinar a DrakesCraft-Labs" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe><iframe src="https://github.com/sponsors/JackStar6677-1/button" title="Patrocinar a JackStar6677-1" height="32" width="114" loading="lazy" style="border:0;border-radius:6px;"></iframe></div></div></footer>
