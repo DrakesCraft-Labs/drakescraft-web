@@ -34,7 +34,7 @@
     },
     {
       "title": "Utilidad interna",
-      "text": "Vanish, auras, presencia y control SFMaster comparten la misma base."
+      "text": "Vanish, auras, presencia comparten la misma base."
     }
   ],
   "journey": [
@@ -84,7 +84,7 @@
   ],
   "cta": {
     "title": "Tecnología y Slimefun.",
-    "text": "Máquinas, progresión industrial y SFMaster se conectan a Odysseia sin perder control.",
+    "text": "Máquinas, progresión industrial se conectan a Odysseia sin perder control.",
     "primary": {
       "href": "slimefun.html",
       "label": "Ver Slimefun"

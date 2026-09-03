@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Guía completa de rangos en DrakesCraft 1.21.11: límites de protecciones, hogares, bóvedas, tiendas, permisos efectivos y pase técnico SFMaster.">
+  <meta name="description" content="Guía completa de rangos en DrakesCraft 1.21.11: límites de protecciones, hogares, bóvedas, tiendas, permisos efectivos y permisos efectivos.">
   <title>Rangos · DrakesCraft</title>
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +55,7 @@
       <!-- Buscador -->
       <div class="guide-search">
         <label class="sr-only" for="guide-q">Buscar rangos y beneficios</label>
-        <input type="search" id="guide-q" placeholder="Busca un rango: zeus, titan, hermes, sfmaster, fly…" autocomplete="off">
+        <input type="search" id="guide-q" placeholder="Busca un rango: zeus, titan, hermes, titan, fly…" autocomplete="off">
         <p class="guide-search__count" id="guide-count"></p>
       </div>
 
@@ -65,7 +65,6 @@
         <button type="button" data-filter="tabla" aria-pressed="false">📊 Tabla Comparativa</button>
         <button type="button" data-filter="desglose" aria-pressed="false">🏛️ Comandos por Rango</button>
         <button type="button" data-filter="cosmeticos" aria-pressed="false">✨ Cosméticos & Auras</button>
-        <button type="button" data-filter="sfmaster" aria-pressed="false">⚙️ Pase SFMaster</button>
         <button type="button" data-filter="info" aria-pressed="false">ℹ️ Roles & Entrega</button>
       </div>
 
@@ -151,7 +150,7 @@
             <div class="guide-row"><code>Titán Oceanus</code><p><strong>Vórtice Abisal</strong>: atrae a las hordas cercanas al centro. Protección <strong>1301×1301</strong> · isla <strong>450×450</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
             <div class="guide-row"><code>Titán Hiperión</code><p><strong>Rayo solar</strong> y regeneración bajo el sol. Protección <strong>1601×1601</strong> · isla <strong>500×500</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Solar</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
             <div class="guide-row"><code>Titán Cronos</code><p><strong>Parada del Tiempo</strong>: inmoviliza a los enemigos cercanos. Protección <strong>2001×2001</strong> · isla <strong>550×550</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastro <strong>Polvo Dorado</strong></span></p></div>
-            <div class="guide-row"><code>Titán Caos</code><p>La cima absoluta. <strong>Set primordial con trim Silence</strong>, Espada Voladora Autónoma, SFMaster controlado de <strong>48 reclamos/hora</strong> durante la vigencia del rango y <code>/ultragod</code> personal por 45 segundos cada 30 minutos. Protección <strong>2501×2501</strong> · isla <strong>600×600</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Caos</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastros <strong>Polvo Dorado</strong> y <strong>Polvo de Ocaso</strong></span></p></div>
+            <div class="guide-row"><code>Titán Caos</code><p>La cima absoluta. <strong>Set primordial con trim Silence</strong>, Espada Voladora Autónoma, <code>/ultragod</code> personal por 45 segundos cada 30 minutos. Protección <strong>2501×2501</strong> · isla <strong>600×600</strong>.<span class="guide-row__alias">Cosméticos: auras <strong>Caos</strong>, <strong>Titán</strong> y <strong>Órbita Dorada</strong> · rastros <strong>Polvo Dorado</strong> y <strong>Polvo de Ocaso</strong></span></p></div>
           </div>
         </div>
       </details>
@@ -175,29 +174,6 @@
             <div class="guide-row"><code>/cosmeticos aura none</code><p>Apaga el aura activa. Funciona igual para <code>rastro</code> y <code>muerte</code>.</p></div>
           </div>
           <p class="guide-section__note" style="margin-top:1rem;">Los cosméticos se revalidan solos: si tu rango caduca, el aura se apaga automáticamente. Están pensados para lucirse y no otorgan ventajas en combate.</p>
-        </div>
-      </details>
-
-      <!-- 4. SFMASTER -->
-      <details class="guide-accordion" data-cat="sfmaster">
-        <summary class="guide-accordion__summary">
-          <div class="guide-accordion__header-left">
-            <span class="guide-accordion__icon">⚙️</span>
-            <span>SFMaster: Acceso Técnico Controlado</span>
-            <span class="guide-accordion__badge guide-accordion__badge--red">Técnico</span>
-          </div>
-          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
-        </summary>
-        <div class="guide-accordion__content">
-          <p class="guide-section__note">SFMaster es un pase temporal para retirar materiales técnicos mediante el comando <code>/sf cheat</code> y la Guía SFMaster. No convierte esos objetos en mercancía.</p>
-          <div class="guide-rows">
-            <div class="guide-row"><code>Duración</code><p>El pase corre durante 1 o 24 horas cronológicas desde la entrega, según el producto comprado.</p></div>
-            <div class="guide-row"><code>32 reclamaciones por hora</code><p>Los pases SFMaster de 1 h y 24 h permiten 32 reclamaciones dentro de cada ventana de 60 minutos. Cada reclamo entrega un stack si el objeto es apilable; máquinas y objetos no apilables entregan una unidad.</p></div>
-            <div class="guide-row"><code>Titán Caos: 48 por hora</code><p>Mientras su rango mensual esté activo conserva los mismos bloqueos y propiedad vinculada, pero dispone de 48 reclamaciones por cada ventana de 60 minutos.</p></div>
-            <div class="guide-row"><code>Bloqueos</code><p>No permite Supreme, InfinityExpansion, armas, herramientas, armaduras, arcos, tridentes, elytras, diamantes, esmeraldas, netherite ni ancient debris.</p></div>
-            <div class="guide-row"><code>Propiedad Vinculada</code><p>Cada objeto queda marcado al comprador: no puede tirarse, intercambiarse, subastarse, guardarse para traspasarlo ni venderse.</p></div>
-            <div class="guide-row"><code>Caducidad</code><p>Al vencer se retira el rango y la guía deja de funcionar. El staff mantiene su acceso operativo separado.</p></div>
-          </div>
         </div>
       </details>
 

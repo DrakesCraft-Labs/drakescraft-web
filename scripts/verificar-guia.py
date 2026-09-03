@@ -82,7 +82,6 @@ for fila in (
     revisar(fila in rangos, f"Rangos: límite efectivo publicado para {fila.split('>')[2].split('<')[0]}")
 
 revisar("32 reclamaciones" in rangos and "InfinityExpansion" in rangos,
-        "SFMaster: límites y familias bloqueadas documentados")
 
 # 7 · Los precios visibles deben cubrir y coincidir con el catálogo de BossArena.
 try:

@@ -20,7 +20,7 @@
     },
     {
       "label": "Sinergia",
-      "value": "SFMaster"
+      "value": 
     }
   ],
   "pillars": [
@@ -37,7 +37,7 @@
       "text": "Las ciudades y granjas ganan escala cuando la infraestructura importa."
     },
     {
-      "title": "SFMaster controlado",
+      "title": "Slimefun avanzado",
       "text": "Pases temporales de pago real para la guía SF Cheat, entregados por Tebex y vigilados por Odysseia: máximo 12 reclamaciones por ventana de 60 minutos."
     }
   ],
@@ -72,15 +72,13 @@
       "items": [
         "Roles",
         "Economía",
-        "SFMaster",
+        
         "Construcción"
       ]
     },
     {
       "title": "Acceso especial",
       "items": [
-        "Pase SFMaster de 1 hora",
-        "Pase SFMaster de 24 horas",
         "12 reclamaciones por cada ventana de 60 minutos",
         "Guía SF Cheat personal; el comando libre /sf cheat permanece bloqueado",
         "Ítems marcados a su dueño: sin intercambio, subasta, venta ni traspaso",
@@ -92,7 +90,7 @@
   ],
   "cta": {
     "title": "Tecnología con límites claros.",
-    "text": "SFMaster entrega una guía personal, no poder ilimitado: 12 reclamaciones por hora, ítems rastreables y categorías sensibles bloqueadas. Revisa el detalle completo antes de comprar.",
+    "text": " Revisa el detalle completo antes de comprar.",
     "primary": {
       "href": "community.html",
       "label": "Ver comunidad"

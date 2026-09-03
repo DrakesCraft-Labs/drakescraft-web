@@ -118,8 +118,6 @@ const tebexPackageIds = {
   'protection-nether-colossus': 7596916,
   'protection-end-colossus': 7596920,
   'protection-atlas': 7596924,
-  'sfmaster-1h': 7545828,
-  'sfmaster-24h': 7545831,
   'titan-japeto': 7609642,
   'titan-oceanus': 7609645,
   'titan-hiperion': 7609646,
