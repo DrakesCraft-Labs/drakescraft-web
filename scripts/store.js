@@ -104,11 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderTabs() {
         if (!state.catalog?.categories) return;
-        tabs.innerHTML = state.catalog.categories.map((category) => 
+        const validCategories = state.catalog.categories.filter((cat) => state.catalog.products?.some((p) => p.category === cat.id && p.purchaseAvailable !== false));
+        tabs.innerHTML = validCategories.map((category) => 
             `<button class="store-tab ${category.id === state.category ? "is-active" : ""}" type="button" data-category="${storeEscape(category.id)}">${storeEscape(category.label)}</button>`
         ).join("");
         
-        const category = state.catalog.categories.find((entry) => entry.id === state.category);
+        const category = (validCategories || state.catalog.categories).find((entry) => entry.id === state.category);
         const titleElem = document.getElementById("store-category-title");
         if (titleElem) titleElem.textContent = category?.label || "Catálogo DrakesCraft";
     }

@@ -17,7 +17,6 @@ export const storeCatalog = {
     { id: 'kits', label: 'Kits y equipo', tagline: 'Resumen de lo que trae cada línea de rango.' },
     { id: 'protection', label: 'Protecciones', tagline: 'Territorio VIP para bases, gremios y proyectos.' },
     { id: 'utility', label: 'Utilidad', tagline: 'Dragmas de plata y beneficios de economía.' },
-    { id: 'custom', label: 'Pases especiales', tagline: 'Accesos temporales con checkout y activación gestionados por Tebex.' },
     { id: 'slimefun', label: 'Conocimiento Slimefun', tagline: 'Desbloqueos permanentes de investigación sin entregar objetos ni permisos de administración.' }
   ],
   products: [
