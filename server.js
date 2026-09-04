@@ -858,6 +858,12 @@ for (const [alias, file] of [
   app.get(alias, async (_request, reply) => reply.sendFile(file));
 }
 
+// Friendly short aliases for publicity and player convenience
+for (const storeAlias of ['/tienda', '/store', '/shop']) {
+  app.get(storeAlias, async (_request, reply) => reply.sendFile('store.html'));
+}
+app.get('/discord', async (_request, reply) => reply.code(302).redirect('https://discord.gg/rv3vtXZTk7'));
+
 // Keep removed legacy pages useful without exposing stale systems.
 for (const legacyPath of [
   '/server.html', '/odysseia.html', '/dioses.html',
