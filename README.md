@@ -20,37 +20,108 @@ Portal web oficial, catálogo interactivo de la tienda Tebex y centro de guías 
 
 ## 🎯 Objetivo
 
-Ofrecer a la comunidad de jugadores una interfaz web rápida, elegante y responsive para consultar el estado del servidor, guías de comandos, tutoriales de Slimefun, escalafón de rangos y catálogo de compras integrado con Tebex Headless API.
+Ofrecer a la comunidad de jugadores una interfaz web de alto rendimiento, elegante y responsive para consultar el estado en vivo del servidor, manuales interactivos de comandos y Slimefun, escalafón de rangos y límites, métricas del ecosistema y catálogo de compras integrado de forma segura con la API de Tebex.
+
+---
+
+## 🏛️ Arquitectura del Sistema
+
+```mermaid
+flowchart TD
+    subgraph Clientes["🌐 Tráfico Externo"]
+        WebUsers["Navegador Web / Jugadores"]
+        BedrockUsers["Jugadores Bedrock / Móvil"]
+    end
+
+    subgraph Edge["🛡️ Edge & Ingress"]
+        CF["Cloudflare CDN / SSL / DDoS Guard"]
+    end
+
+    subgraph WebStack["⚡ Fastify 5 Server (Node.js 20+ ESM)"]
+        Router["Fastify HTTP Router"]
+        StaticPlugin["@fastify/static Cache"]
+        APIHealth["/api/health (Liveness)"]
+        APIMetricas["/api/metricas (Telemetría)"]
+        StoreProxy["Tebex Headless API Gateway"]
+        SecurityLayer["Filtro Anti-DDoS & Rate Limit"]
+    end
+
+    subgraph Backend["🎮 Infraestructura DrakesCraft & Star"]
+        Minecraft["Servidor Paper / Purpur 1.21.11"]
+        Odysseia["Plugin Odysseia (Telemetría & Ingest)"]
+        TebexAPI["Tebex Checkout Backend"]
+        DataVolume["/data (Visitas, Métricas, Status)"]
+    end
+
+    WebUsers -->|HTTPS| CF
+    BedrockUsers -->|HTTPS| CF
+    CF --> Router
+    Router --> SecurityLayer
+    SecurityLayer --> StaticPlugin
+    SecurityLayer --> APIHealth
+    SecurityLayer --> APIMetricas
+    SecurityLayer --> StoreProxy
+    StaticPlugin -->|Servir HTML5/CSS/JS| WebUsers
+    APIMetricas --> DataVolume
+    StoreProxy --> TebexAPI
+    Odysseia -.->|Ingest firmado| Router
+    Minecraft -.->|Status Ping| Router
+```
 
 ---
 
 ## ⚡ Estructura del Sitio
 
 - **Portal Principal (`index.html`)**:
-  - Estado del servidor en tiempo real, dirección IP (`mc.drakescraft.cl`) y enlaces comunitarios.
-- **Centro de Guías**:
-  - `guia-comandos.html`: Manual interactivo con los 114 comandos del servidor clasificados por categoría.
-  - `guia-rangos.html`: Comparativa de beneficios, kits y multiplicadores de rangos mortales, divinos y titánicos.
-  - `guia-slimefun.html`: Documentación exhaustiva de máquinas, circuitos y addons activos.
+  - Estado del servidor en tiempo real vía socket Ping, dirección IP (`mc.drakescraft.cl` / `play.drakescraft.cl`) y accesos comunitarios.
+- **Centro de Guías Interactivas**:
+  - `guia-comandos.html`: Manual interactivo de comandos organizados por modalidad con filtros en tiempo real, soporte Bedrock (`/offhand`) y alias.
+  - `guia-rangos.html`: Comparativa de límites efectivos (hogares, protecciones, bóvedas, warps), kits y multiplicadores por rango.
+  - `guia-slimefun.html`: Documentación viva de máquinas, reactores, circuitos y los más de 28 addons de Slimefun activos.
+  - `guia.html`: Visión general de las 5 modalidades (Survival, Clásico, SkyBlock, OneBlock, Laboratorio).
 - **Tienda Oficial & Catálogo (`catalog/store-catalog.js`)**:
-  - Catálogo dinámico conectado con Tebex API para compras seguras en CLP / USD.
-- **Métricas (`metricas.html`)**:
-  - Telemetría de rendimiento y salud del servidor.
+  - Catálogo auditado con verificación estricta de 33 productos Tebex, precios en CLP/USD y pasarela protegida.
+- **Métricas & Telemetría (`metricas.html`)**:
+  - Datos de actividad, picos de jugadores y salud del ecosistema calculados periódicamente.
 
 ---
 
 ## 🛠️ Tecnologías y Despliegue
 
-- **Frontend**: Vanilla HTML5, CSS3 moderno con variables HSL, JavaScript ES6+.
-- **Servidor Web**: Contenedor Dockerizado con Nginx.
-- **Integración**: Tebex Headless API & DiscordSRV.
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Ingeniero / SAORI
+    participant Repo as /opt/stacks/repos/drakescraft-web
+    participant Check as npm run check
+    participant Docker as Docker Engine
+    participant Svc as Contenedor drakescraft-web
 
-## ⚖️ Upstream Attribution & License / Licencia y Créditos
+    Dev->>Repo: Modificación atómica de guías / frontend
+    Dev->>Check: Validación sintáctica y auditoría Tebex
+    Check-->>Dev: 33 productos auditados OK + 0 errores
+    Dev->>Repo: git commit + push main
+    Dev->>Docker: docker tag drakescraft-web:portal2 (Rollback backup)
+    Dev->>Docker: docker compose build --no-cache
+    Dev->>Docker: docker compose up -d --force-recreate
+    Docker->>Svc: Arranque de contenedor Fastify
+    Dev->>Svc: Healthcheck HTTP 200 (/api/health, /, /guia-comandos.html)
+    Svc-->>Dev: Estado Healthy + RestartCount=0
+```
 
-- **Original Project / Upstream**: Slimefun4 Community Addon.
-- **Port & Maintenance**: DrakesCraft Labs team (Compatibility for Paper / Purpur 1.21.11).
-- **License**: GPL-3.0 / MIT.
-- **Source Code**: [GitHub Repository](https://github.com/DrakesCraft-Labs/drakescraft-web)
-- **Support & Issues**: [GitHub Issues](https://github.com/DrakesCraft-Labs/drakescraft-web/issues) | [Discord](https://discord.gg/rv3vtXZTk7)
+- **Frontend**: Vanilla HTML5, CSS3 moderno con variables HSL y arquitectura modular, JavaScript ES6+ nativo sin bundles pesados.
+- **Backend**: Fastify 5 en Node.js 20+ ESM con `@fastify/static`.
+- **Contenedorización**: Docker Compose sobre `/opt/stacks/drakescraft-web` con healthcheck automatizado.
+- **Integraciones**: Tebex Headless API, Minecraft Server Ping protocol y telemetría Odysseia.
 
-*This project is an open-source derivative work maintained by DrakesCraft Labs under the terms of its original license. All original assets and concepts belong to their respective creators.*
+---
+
+## ⚖️ Licencia y Créditos
+
+- **Desarrollo y Mantenimiento**: DrakesCraft Labs & SAORI Autonomous Engineering Team.
+- **Compatibilidad**: Diseñado para el ecosistema DrakesCraft (Paper / Purpur 1.21.11, Slimefun, Geyser/Floodgate).
+- **Licencia**: MIT / GPL-3.0.
+- **Código Fuente**: [GitHub Repository](https://github.com/DrakesCraft-Labs/drakescraft-web)
+- **Soporte & Comunidad**: [GitHub Issues](https://github.com/DrakesCraft-Labs/drakescraft-web/issues) | [Discord Oficial](https://discord.gg/rv3vtXZTk7)
+
+*Mantenido con ingeniería continua y observabilidad activa en Star VPS.*
