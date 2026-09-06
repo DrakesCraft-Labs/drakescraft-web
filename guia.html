@@ -74,7 +74,8 @@
         <p class="guide-section__note">Lo primero que vas a necesitar. Clásico mantiene hogares y protecciones, pero bloquea los atajos marcados para que su progresión siga siendo sencilla.</p>
         <div class="guide-table">
           <div class="guide-row"><code>/spawn</code><p>Te lleva al punto de aparición de la modalidad en la que estés jugando, no al lobby.</p></div>
-          <div class="guide-row"><code>/lobby</code><p>Te devuelve al hub, donde se elige modalidad.<span class="guide-row__alias">También: /hub</span></p></div>
+          <div class="guide-row"><code>/lobby</code><p>Te devuelve al hub, donde se elige modalidad.<span class="guide-row__alias">También: /hub, /l</span></p></div>
+          <div class="guide-row"><code>/discord</code><p>Enlace a nuestro Discord oficial y vinculación de tu cuenta de Minecraft con el bot SAORI.</p></div>
           <div class="guide-row"><code>/sethome &lt;nombre&gt;</code><p>Guarda tu ubicación actual como hogar. La cantidad de hogares sube con tu rango.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
           <div class="guide-row"><code>/home &lt;nombre&gt;</code><p>Te teletransporta a un hogar guardado. Sin nombre te lleva al principal.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
           <div class="guide-row"><code>/delhome &lt;nombre&gt;</code><p>Borra un hogar guardado.<span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
@@ -98,7 +99,7 @@
         <h2>Modalidades (5 en 1)</h2>
         <p class="guide-section__note">Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio conviven en el mismo host. Solo tu rango y tus Dragmas son globales; inventario y progreso jugable quedan aislados para proteger cada economía.</p>
         <div class="guide-table">
-          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre las 5 modalidades del servidor.<span class="guide-row__alias">También: /modalidad, /modos, /menu</span></p></div>
+          <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre las 5 modalidades del servidor.<span class="guide-row__alias">También: /modalidad, /modos</span></p></div>
           <div class="guide-row"><code>/slimefun</code><p>La modalidad principal: máquinas, magia, jefes y progresión completa. <strong>Antes se llamaba Survival</strong> y el comando de siempre sigue valiendo.<span class="guide-row__alias">También: /survival, /principal, /polis</span></p></div>
           <div class="guide-row"><code>/clasico</code><p>Minecraft tradicional: <strong>sin Slimefun, sin máquinas y sin mobs modificados</strong>. Terreno generado con Terralith, biomas únicos y borde de 200.000 bloques.<span class="guide-row__alias">Muévete con /rtp</span></p></div>
           <div class="guide-row"><code>/is</code><p>Tu isla de <strong>SkyBlock</strong>. Sin isla, te crea una.<span class="guide-row__alias">También: /skyblock. Ojo: no es lo mismo que /ob</span></p></div>
@@ -157,15 +158,16 @@
           <div class="guide-row"><code>/jobs</code><p>Abre el panel de <strong>Empleos</strong> para unirte a oficios y cobrar automáticamente por trabajar.<span class="guide-row__alias">Comandos: /jobs browse, /jobs join &lt;empleo&gt;, /jobs stats</span></p></div>
           <div class="guide-row"><code>/qs</code><p>Crea y administra tus <strong>tiendas de cofres con QuickShop-Hikari</strong>. Sostén el ítem, mira un cofre y pon el precio.<span class="guide-row__alias">Buscar productos: /qs find &lt;item&gt;</span></p></div>
           <div class="guide-row"><code>/ah</code><p>La <strong>Casa de Subastas</strong> de tu modalidad. Vende ítems raros y puja por ofertas de otros jugadores.<span class="guide-row__alias">Vender: /ah sell &lt;precio&gt;</span></p></div>
-          <div class="guide-row"><code>/sbank</code><p>El <strong>Banco Central</strong>: deposita tus Dragmas y gana <strong>intereses pasivos periódicos</strong> sobre tus ahorros.<span class="guide-row__alias">Comandos: /bank, /bank deposit &lt;monto&gt;, /bank withdraw &lt;monto&gt;</span></p></div>
+          <div class="guide-row"><code>/sbank</code><p>El <strong>Banco Central</strong>: deposita tus Dragmas y gana <strong>intereses pasivos periódicos</strong> sobre tus ahorros.<span class="guide-row__alias">Comandos: /banco, /bank, /sb, /bank deposit &lt;monto&gt;, /bank withdraw &lt;monto&gt;</span></p></div>
           <div class="guide-row"><code>/sellgui</code><p>Abre un cofre virtual de venta rápida: deposita tus materiales y al cerrar se venden automáticamente.</p></div>
           <div class="guide-row"><code>/sellall</code><p>Vende de golpe todos los materiales y recursos compatibles de tu inventario principal.<span class="guide-row__alias">También: /sellinv, /venderinv</span></p></div>
           <div class="guide-row"><code>/sfmercado</code><p>Mercado algorítmico de Slimefun: compra y venta con precios fluctuantes según oferta y demanda.<span class="guide-tag guide-tag--survival">Slimefun, SkyBlock y OneBlock</span></p></div>
           <div class="guide-row"><code>/quests</code><p>Misiones de progresión y tareas diarias con recompensas en Dragmas y experiencia.<span class="guide-row__alias">También: /q, /quest</span></p></div>
           <div class="guide-row"><code>/daily</code><p>Reclama tu recompensa diaria por mantener tu racha activa de juego.</p></div>
-          <div class="guide-row"><code>/vote</code><p>Vota por el servidor en las listas oficiales para recibir Dragmas y llaves de cajas de recompensa.</p></div>
+          <div class="guide-row"><code>/vote</code><p>Vota por el servidor en las listas oficiales para recibir Dragmas y llaves de cajas de recompensa.<span class="guide-row__alias">También: /votar, /voto40</span></p></div>
           <div class="guide-row"><code>/pv &lt;1-N&gt;</code><p>Bóvedas personales seguras e indestructibles protegidas por el motor Odysseia.<span class="guide-row__alias">También: /vault, /playervault</span></p></div>
-          <div class="guide-row"><code>/tienda</code><p>Hub comercial con accesos directos a protecciones, subastas, Slimefun, warps y kits.</p></div>
+          <div class="guide-row"><code>/tienda</code><p>Hub comercial y catálogo principal del servidor: protecciones, subastas, Slimefun, warps y kits.<span class="guide-row__alias">También: /menu, /drakestienda</span></p></div>
+          <div class="guide-row"><code>/tiendaprot</code><p>Abre el catálogo para adquirir menas de protección con Dragmas.<span class="guide-row__alias">También: /protecciones, /menuprotes</span><span class="guide-tag guide-tag--survival">Slimefun y Clásico</span></p></div>
           <div class="guide-row"><code>/pwarp</code><p>Navega y visita las tiendas, granjas y centros comerciales construidos por la comunidad.<span class="guide-row__alias">También: /pw, /pwarps</span></p></div>
         </div>
 
@@ -244,7 +246,8 @@
           <div class="guide-row"><code>/bosswarp &lt;jefe&gt; solo</code><p>Reserva una arena aislada y entra en solitario. El cobro sólo se confirma si la arena pudo prepararse.</p></div>
           <div class="guide-row"><code>/bosswarp &lt;jefe&gt; grupo &lt;jugadores...&gt;</code><p>Crea una sesión privada con jugadores conectados; cada integrante paga su entrada.</p></div>
           <div class="guide-row"><code>/bosswarp spectate &lt;jugador&gt;</code><p>Observa la arena activa de otro jugador sin entrar al combate.</p></div>
-          <div class="guide-row"><code>/tienda</code><p>Hub de comercio con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades, encantamientos y kits VIP.</p></div>
+          <div class="guide-row"><code>/reencarnar</code><p>Rito de Reencarnación y Prestigio de Odysseia. Reinicia tu nivel para ganar prestigio permanente y resguardar reliquias selectas en tu Cápsula de Recuerdos.<span class="guide-row__alias">También: /prestigio, /ascender, /reborn</span><span class="guide-tag guide-tag--survival">Modalidad Slimefun</span></p></div>
+          <div class="guide-row"><code>/tienda</code><p>Hub de comercio con nueve accesos: protecciones, subastas, Slimefun, warps, materiales, trabajos, habilidades, encantamientos y kits VIP.<span class="guide-row__alias">También: /menu, /drakestienda</span></p></div>
           <div class="guide-row"><code>/modalidades</code><p>Menú visual para saltar entre Slimefun, Clásico, SkyBlock y OneBlock.</p></div>
           <div class="guide-row"><code>/cosmeticos</code><p>Menú de auras, rastros y efectos de muerte que vienen con tu rango.<span class="guide-tag guide-tag--vip">VIP y staff</span></p></div>
         </div>
@@ -355,6 +358,8 @@
             <li>Hogares con <code>/sethome</code>, <code>/home</code> y <code>/delhome</code></li>
             <li>Solicitudes entre jugadores con <code>/tpa</code>, <code>/tpaccept</code> y <code>/tpdeny</code></li>
             <li>Protecciones con piedras y regreso con <code>/ps home</code></li>
+            <li><strong>Límites independientes</strong>: 4 claims (Polis) o 10 claims (OldSchool) y 6 u 8 homes propios, sin consumir tu cupo de Slimefun</li>
+            <li>Menú de compra de menas con <code>/tiendaprot</code> (o <code>/protecciones</code>)</li>
             <li>Entras con <code>/clasico</code></li>
           </ul>
         </article>
