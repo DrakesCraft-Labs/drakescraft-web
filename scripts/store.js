@@ -95,7 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
         avatarDebounceTimer = setTimeout(updateAvatar, 400);
     });
 
-    const requestedCategory = new URLSearchParams(window.location.search).get("categoria");
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestedCategory = urlParams.get("categoria") || urlParams.get("category");
     const state = { catalog: null, category: requestedCategory || "monthly", selected: new Set() };
     const productById = (id) => state.catalog.products.find((product) => product.id === id);
     const selectedProducts = () => [...state.selected].map(productById).filter(Boolean);
@@ -220,6 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
         state.category = button.dataset.category;
         const url = new URL(window.location.href);
         url.searchParams.set("categoria", state.category);
+        url.searchParams.delete("category");
         window.history.replaceState({}, "", url);
         renderAll();
     });
