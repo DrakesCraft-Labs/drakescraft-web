@@ -43,6 +43,16 @@
       "sanction": "Ban fuerte o permanente según gravedad."
     },
     {
+      "title": "Mods de cliente & Litematica",
+      "items": [
+        "Litematica como guía visual (Holograma/Ghost Blocks) es 100% legal y permitida.",
+        "Easy Place / Printer (colocación automática de bloques en el aire o masiva) no funciona ni está permitida: GrimAC bloquea AirLiquidPlace y macros por estabilidad.",
+        "Para construir con esquemáticas debes colocar los bloques manualmente sobre bloques físicos reales.",
+        "Se permiten mods de rendimiento y estéticos (Sodium, Iris, Minimapas sin radar de jugadores o minerales)."
+      ],
+      "sanction": "Bloqueo por anticheat, kick o baneo en caso de bypass intencional."
+    },
+    {
       "title": "Bugs, duplicaciones y exploits",
       "items": [
         "Aprovechar fallos del servidor o de plugins está prohibido.",
