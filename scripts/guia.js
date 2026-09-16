@@ -77,6 +77,12 @@
     }
 
     input.addEventListener("input", apply);
+    // SAORI enlaza la guia con ?q=<busqueda> desde Discord/WhatsApp; el buscador
+    // arranca ya filtrado y desplegado sobre esa consulta.
+    try {
+        const q = new URLSearchParams(window.location.search).get("q");
+        if (q) { input.value = q; }
+    } catch (_) { /* sin query */ }
 
     filters.forEach((button) => {
         button.addEventListener("click", () => {
