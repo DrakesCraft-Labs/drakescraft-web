@@ -489,7 +489,7 @@ body[data-section="support-project"] .guide-hero { background-image: url("../ass
     background-image:
         linear-gradient(100deg, var(--dk-fondo) 6%, rgba(16, 26, 22, .88) 34%, rgba(16, 26, 22, .35) 62%, rgba(16, 26, 22, .55) 100%),
         radial-gradient(120% 90% at 15% 0%, rgba(255, 226, 137, .16), transparent 60%),
-        url("../assets/ecosystem-hero-v1.png");
+        url("../assets/ecosystem-hero-v1.webp");
     background-size: cover, cover, cover;
     background-position: center, center, center right;
     background-repeat: no-repeat;
@@ -507,7 +507,7 @@ body[data-section="support-project"] .guide-hero { background-image: url("../ass
     .guide-hero {
         background-image:
             linear-gradient(180deg, var(--dk-fondo) 20%, rgba(16, 26, 22, .82) 100%),
-            url("../assets/ecosystem-hero-v1.png");
+            url("../assets/ecosystem-hero-v1.webp");
         background-position: center, center right;
     }
 }

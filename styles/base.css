@@ -857,7 +857,7 @@ body { background: #080a12; }
 body::before, .page-shell::before, .page-shell::after { display: none; }
 .site-nav { background: rgba(8, 10, 18, 0.96); border-bottom: 1px solid rgba(222, 183, 94, 0.28); }
 .site-nav__bar::after { content: ""; position: absolute; inset: auto 0 -4px; height: 3px; background: #d7b45e; opacity: .7; }
-.hero { isolation: isolate; min-height: 640px; padding: 7rem 0 4rem; border-bottom: 1px solid rgba(222, 183, 94, .28); background-color: #080a12; background-image: url("../assets/drakes-olympus-v1.png"); background-repeat: no-repeat; background-size: cover; background-position: center right; }
+.hero { isolation: isolate; min-height: 640px; padding: 7rem 0 4rem; border-bottom: 1px solid rgba(222, 183, 94, .28); background-color: #080a12; background-image: url("../assets/drakes-olympus-v1.webp"); background-repeat: no-repeat; background-size: cover; background-position: center right; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(5, 7, 14, .58); }
 .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 18px; z-index: -1; border-top: 2px solid #d7b45e; border-bottom: 2px solid #d7b45e; opacity: .7; }
 .hero__grid { min-height: 520px; align-items: center; }
@@ -878,7 +878,7 @@ body::before, .page-shell::before, .page-shell::after { display: none; }
 .panel-card, .fact-card { min-height: 190px; }
 .site-footer { background: #05060c; border-top-color: rgba(222, 183, 94, .35); }
 @media (max-width: 760px) { .hero { min-height: auto; padding: 6rem 0 3.5rem; background-position: 68% center; }.hero::before { background: rgba(5, 7, 14, .72); }.hero-stage { min-height: 340px; }.site-nav__bar::after { display: none; } }
-.brief-hero { min-height: 480px; padding: 9rem 0 4rem; border-top: 0; border-bottom: 18px double rgba(215,180,94,.7); background-color: #080a12; background-image: url("../assets/drakes-olympus-v1.png"); background-repeat: no-repeat; background-position: center right; background-size: cover; }
+.brief-hero { min-height: 480px; padding: 9rem 0 4rem; border-top: 0; border-bottom: 18px double rgba(215,180,94,.7); background-color: #080a12; background-image: url("../assets/drakes-olympus-v1.webp"); background-repeat: no-repeat; background-position: center right; background-size: cover; }
 .brief-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(5,7,14,.64); }
 .brief-hero__inner { position: relative; }
 .canvas-bg, #particles-canvas { display: none !important; }
