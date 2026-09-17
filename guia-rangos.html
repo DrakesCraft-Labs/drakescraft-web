@@ -57,7 +57,7 @@
       <!-- Buscador -->
       <div class="guide-search">
         <label class="sr-only" for="guide-q">Buscar rangos y beneficios</label>
-        <input type="search" id="guide-q" placeholder="Busca un rango: zeus, titan, hermes, caos, fly…" autocomplete="off">
+        <input type="search" id="guide-q" placeholder="Busca un rango: zeus, titan, gojo, sukuna, fly, rankup…" autocomplete="off">
         <p class="guide-search__count" id="guide-count"></p>
       </div>
 
@@ -67,6 +67,7 @@
         <button type="button" data-filter="tabla" aria-pressed="false">📊 Tabla Comparativa</button>
         <button type="button" data-filter="desglose" aria-pressed="false">🏛️ Comandos por Rango</button>
         <button type="button" data-filter="cosmeticos" aria-pressed="false">✨ Cosméticos & Auras</button>
+        <button type="button" data-filter="rankup" aria-pressed="false">⛩️ Rangos Anime (50 Niveles)</button>
         <button type="button" data-filter="info" aria-pressed="false">ℹ️ Roles & Entrega</button>
       </div>
 
@@ -176,6 +177,121 @@
             <div class="guide-row"><code>/cosmeticos aura none</code><p>Apaga el aura activa. Funciona igual para <code>rastro</code> y <code>muerte</code>.</p></div>
           </div>
           <p class="guide-section__note" style="margin-top:1rem;">Los cosméticos se revalidan solos: si tu rango caduca, el aura se apaga automáticamente. Están pensados para lucirse y no otorgan ventajas en combate.</p>
+        </div>
+      </details>
+
+      <!-- 4. SISTEMA RANKUP DE ANIME (50 RANGOS) -->
+      <details class="guide-accordion" data-cat="rankup" open>
+        <summary class="guide-accordion__summary">
+          <div class="guide-accordion__header-left">
+            <span class="guide-accordion__icon">⛩️</span>
+            <span>Sistema DrakesRankup: 50 Rangos Anime de Progresión</span>
+            <span class="guide-accordion__badge guide-accordion__badge--gold">Economía In-Game</span>
+          </div>
+          <span class="guide-accordion__caret" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span>
+        </summary>
+        <div class="guide-accordion__content">
+          <p class="guide-section__note">
+            El sistema <strong>DrakesRankup</strong> es la escala oficial de superación personal de DrakesCraft. A diferencia de los rangos de donación que se adquieren en la tienda web, estos <strong>50 rangos se compran 100% con dinero del juego (Dragmas)</strong> generado mediante oficios (<code>/jobs</code>), comercio, granjas, misiones y cofres.
+          </p>
+          <div class="guide-split" style="margin-bottom: 1.5rem;">
+            <div class="guide-split__card">
+              <h3>⚡ Compatibilidad Total con Rangos VIP</h3>
+              <p style="font-size:0.92rem; line-height:1.6; opacity:0.88; margin-bottom:0.5rem;">
+                Si posees un rango de los Dioses o Titanes (Hércules, Hermes, Zeus, Caos, etc.), <strong>tus beneficios VIP nunca se pierden ni se degradan</strong>.
+              </p>
+              <ul style="font-size:0.88rem; line-height:1.5;">
+                <li>Tus bóvedas, hogares, permisos de vuelo (<code>/fly</code>) y kits VIP permanecen intactos.</li>
+                <li>Tu rango anime añade tu <strong>prefijo cosmético</strong>, efectos visuales y estatus en el tabulador.</li>
+                <li>Funciona en conjunto: puedes ser <strong>VIP Zeus</strong> y ostentar el rango anime <strong>Gojo</strong> o <strong>KamiSama</strong>.</li>
+              </ul>
+            </div>
+            <div class="guide-split__card">
+              <h3>🧭 Comandos de Progresión</h3>
+              <ul style="font-size:0.88rem; line-height:1.5;">
+                <li><code>/rankup</code> · Comprueba tu dinero y asciende al siguiente rango.</li>
+                <li><code>/ranks</code> o <code>/srangos</code> · Abre la interfaz gráfica con las 5 divisiones y 50 rangos.</li>
+                <li><code>/rankup gui</code> · Abre el menú visual para ver requisitos y beneficios.</li>
+                <li><code>/rankup max</code> · Sube automáticamente todos los rangos posibles de golpe.</li>
+                <li>En Discord: usa <code>/srangos</code> o <code>srangos</code> para consultar divisiones.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="rank-subhead" style="margin-top:1.5rem;">División I: Ciencia &amp; Nen (Niveles 1 al 10)</h3>
+          <p class="guide-section__note">El despertar del intelecto y la energía vital. Desde el Reino Científico hasta el pináculo de las Hormigas Quimera.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>Nivel 01 · Senku</code><p><strong>10.000 ₯</strong> · Prefijo <code>[Senku]</code> · Desbloquea kit de exploración científica inicial y comando <code>/recipe</code>.<span class="guide-row__alias">Dr. Stone · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 02 · Chrome</code><p><strong>20.000 ₯</strong> · Prefijo <code>[Chrome]</code> · Visión de recolector astuto y bonificación en recolección básica.<span class="guide-row__alias">Dr. Stone · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 03 · Kohaku</code><p><strong>35.000 ₯</strong> · Prefijo <code>[Kohaku]</code> · Destreza física primitiva y velocidad pasiva ligera en expedición.<span class="guide-row__alias">Dr. Stone · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 04 · Gen</code><p><strong>55.000 ₯</strong> · Prefijo <code>[Gen]</code> · Elocuencia del Mentalista y descuento en transacciones del mercado.<span class="guide-row__alias">Dr. Stone · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 05 · Tsukasa</code><p><strong>80.000 ₯</strong> · Prefijo <code>[Tsukasa]</code> · El primate de secundaria más fuerte: resistencia física pasiva.<span class="guide-row__alias">Dr. Stone · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 06 · Gon</code><p><strong>120.000 ₯</strong> · Prefijo <code>[Gon]</code> · Despertar de Nen (Ten y Ren): aura de energía vital inicial.<span class="guide-row__alias">Hunter x Hunter · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 07 · Killua</code><p><strong>175.000 ₯</strong> · Prefijo <code>[Killua]</code> · Transmutación de electricidad: rastro de chispas eléctricas al esprintar.<span class="guide-row__alias">Hunter x Hunter · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 08 · Kurapika</code><p><strong>250.000 ₯</strong> · Prefijo <code>[Kurapika]</code> · Cadenas del Juicio: partículas de juicio espectral en combate PvE.<span class="guide-row__alias">Hunter x Hunter · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 09 · Netero</code><p><strong>350.000 ₯</strong> · Prefijo <code>[Netero]</code> · Bodhisattva Guanyin de 100 tipos: bonificación de experiencia.<span class="guide-row__alias">Hunter x Hunter · División I</span></p></div>
+            <div class="guide-row"><code>Nivel 10 · Meruem</code><p><strong>500.000 ₯</strong> · Prefijo <code>[Meruem]</code> · Cima de la División I: Título dorado, aura regia y efecto sonoro al ingresar.<span class="guide-row__alias">Hunter x Hunter · División I</span></p></div>
+          </div>
+
+          <h3 class="rank-subhead" style="margin-top:2rem;">División II: Shinobi &amp; Hechicería (Niveles 11 al 20)</h3>
+          <p class="guide-section__note">El camino del sigilo, el chakra ancestral y la energía maldita de los grandes clanes de hechiceros.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>Nivel 11 · Genin</code><p><strong>750.000 ₯</strong> · Prefijo <code>[Genin]</code> · Salto shinobi potenciado y movilidad táctica inicial.<span class="guide-row__alias">Naruto · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 12 · Chunin</code><p><strong>1.000.000 ₯</strong> · Prefijo <code>[Chunin]</code> · Percepción estratégica y acceso táctico a <code>/near</code>.<span class="guide-row__alias">Naruto · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 13 · Jonin</code><p><strong>1.350.000 ₯</strong> · Prefijo <code>[Jonin]</code> · Élite de la aldea: kit de suministros ninja avanzados y mayor inventario virtual.<span class="guide-row__alias">Naruto · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 14 · ANBU</code><p><strong>1.800.000 ₯</strong> · Prefijo <code>[ANBU]</code> · Operaciones encubiertas: máscara cosmética y rastro de sombras negras.<span class="guide-row__alias">Naruto · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 15 · Kage</code><p><strong>2.400.000 ₯</strong> · Prefijo <code>[Kage]</code> · Mandatario de la aldea: anuncio especial de conexión en el chat global.<span class="guide-row__alias">Naruto · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 16 · Megumi</code><p><strong>3.200.000 ₯</strong> · Prefijo <code>[Megumi]</code> · Técnica de las Diez Sombras: invocación de lobo de jade compañero cosmético.<span class="guide-row__alias">Jujutsu Kaisen · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 17 · Nobara</code><p><strong>4.000.000 ₯</strong> · Prefijo <code>[Nobara]</code> · Técnica de Resonancia: partículas de clavos malditos y aura carmesí.<span class="guide-row__alias">Jujutsu Kaisen · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 18 · Yuji</code><p><strong>5.000.000 ₯</strong> · Prefijo <code>[Yuji]</code> · Destello Negro (Black Flash): efecto de impacto crítico con relámpago oscuro.<span class="guide-row__alias">Jujutsu Kaisen · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 19 · Gojo</code><p><strong>6.200.000 ₯</strong> · Prefijo <code>[Gojo]</code> · Vacío Inconmensurable: venda cosmética en ojos y aura divina de Seis Ojos.<span class="guide-row__alias">Jujutsu Kaisen · División II</span></p></div>
+            <div class="guide-row"><code>Nivel 20 · Sukuna</code><p><strong>7.500.000 ₯</strong> · Prefijo <code>[Sukuna]</code> · Rey de las Maldiciones: partículas de fuego infernal y título rojo carmesí.<span class="guide-row__alias">Jujutsu Kaisen · División II</span></p></div>
+          </div>
+
+          <h3 class="rank-subhead" style="margin-top:2rem;">División III: Ruta Pirata &amp; Segadores (Niveles 21 al 30)</h3>
+          <p class="guide-section__note">Los mares del Nuevo Mundo y la Sociedad de Almas. Haki de conquista y liberación de Zanpakutos.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>Nivel 21 · Grumete</code><p><strong>10.000.000 ₯</strong> · Prefijo <code>[Grumete]</code> · Respiración acuática prolongada y natación ágil.<span class="guide-row__alias">One Piece · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 22 · Pirata</code><p><strong>12.500.000 ₯</strong> · Prefijo <code>[Pirata]</code> · Gracia de delfín al explorar océanos y mapas marinos.<span class="guide-row__alias">One Piece · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 23 · Supernova</code><p><strong>15.500.000 ₯</strong> · Prefijo <code>[Supernova]</code> · La Peor Generación: cartel de recompensa interactivo sobre tu cabeza.<span class="guide-row__alias">One Piece · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 24 · Shichibukai</code><p><strong>19.000.000 ₯</strong> · Prefijo <code>[Shichibukai]</code> · Corsario del Gobierno: 0% aranceles en transacciones de cofre.<span class="guide-row__alias">One Piece · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 25 · Yonkou</code><p><strong>24.000.000 ₯</strong> · Prefijo <code>[Yonkou]</code> · Emperador del Mar: rastro visual de Haki del Conquistador.<span class="guide-row__alias">One Piece · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 26 · Shinigami</code><p><strong>30.000.000 ₯</strong> · Prefijo <code>[Shinigami]</code> · Segador de Almas: Zanpakuto cosmética y aura espiritual blanca.<span class="guide-row__alias">Bleach · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 27 · Teniente</code><p><strong>35.000.000 ₯</strong> · Prefijo <code>[Teniente]</code> · Oficial del Gotei 13: teletransporte instantáneo Shunpo en <code>/back</code>.<span class="guide-row__alias">Bleach · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 28 · Capitán</code><p><strong>40.000.000 ₯</strong> · Prefijo <code>[Capitán]</code> · Haori blanco de capitán y presión espiritual (Reiatsu) visible.<span class="guide-row__alias">Bleach · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 29 · Bankai</code><p><strong>45.000.000 ₯</strong> · Prefijo <code>[Bankai]</code> · Liberación definitiva: animación sonora y visual al desenvainar armas.<span class="guide-row__alias">Bleach · División III</span></p></div>
+            <div class="guide-row"><code>Nivel 30 · JoyBoy</code><p><strong>50.000.000 ₯</strong> · Prefijo <code>[JoyBoy]</code> · El Guerrero de la Liberación: halo de nubes blancas y tambores festivos.<span class="guide-row__alias">One Piece · División III</span></p></div>
+          </div>
+
+          <h3 class="rank-subhead" style="margin-top:2rem;">División IV: Guerreros Z &amp; Monarca (Niveles 31 al 40)</h3>
+          <p class="guide-section__note">Poder sin límites biológicos. Transformaciones legendarias Saiyajin y el ejército inmortal del Monarca de las Sombras.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>Nivel 31 · Saiyajin</code><p><strong>65.000.000 ₯</strong> · Prefijo <code>[Saiyajin]</code> · Raza guerrera: cola de mono cosmética y regeneración acelerada con comida.<span class="guide-row__alias">Dragon Ball · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 32 · SuperSaiyajin</code><p><strong>85.000.000 ₯</strong> · Prefijo <code>[SSJ]</code> · El Guerrero Legendario: aura dorada continua y cabello resplandeciente.<span class="guide-row__alias">Dragon Ball · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 33 · SSJ2</code><p><strong>110.000.000 ₯</strong> · Prefijo <code>[SSJ2]</code> · Rayo Ascendente: chispas eléctricas azules rodeando tu armadura.<span class="guide-row__alias">Dragon Ball · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 34 · SSJ3</code><p><strong>140.000.000 ₯</strong> · Prefijo <code>[SSJ3]</code> · Poder Desatado: melena dorada cósmica y estela destructiva al volar.<span class="guide-row__alias">Dragon Ball · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 35 · SSJGod</code><p><strong>180.000.000 ₯</strong> · Prefijo <code>[SSJGod]</code> · Ki Divino: llamas puras de fuego rojo celestial y resistencia divina.<span class="guide-row__alias">Dragon Ball · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 36 · SSJBlue</code><p><strong>230.000.000 ₯</strong> · Prefijo <code>[SSJBlue]</code> · Calma Trascendental: aura de deidad azul zafiro con partículas estelares.<span class="guide-row__alias">Dragon Ball · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 37 · Cazador-E</code><p><strong>260.000.000 ₯</strong> · Prefijo <code>[Cazador-E]</code> · El más débil de la humanidad: perseverancia inquebrantable.<span class="guide-row__alias">Solo Leveling · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 38 · Cazador-S</code><p><strong>290.000.000 ₯</strong> · Prefijo <code>[Cazador-S]</code> · Rango S Nacional: aura de poder opresivo y respeto instantáneo.<span class="guide-row__alias">Solo Leveling · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 39 · MonarcaSombras</code><p><strong>320.000.000 ₯</strong> · Prefijo <code>[MonarcaSombras]</code> · Ejército de la Noche: estela de soldados de sombra al desplazarte.<span class="guide-row__alias">Solo Leveling · División IV</span></p></div>
+            <div class="guide-row"><code>Nivel 40 · SungJinwoo</code><p><strong>350.000.000 ₯</strong> · Prefijo <code>[SungJinwoo]</code> · "SURGE": Ojos morados ardientes y comando cosmético de invocación.<span class="guide-row__alias">Solo Leveling · División IV</span></p></div>
+          </div>
+
+          <h3 class="rank-subhead" style="margin-top:2rem;">División V: Trascendencia Suprema (Niveles 41 al 50)</h3>
+          <p class="guide-section__note">Entidades multiversales, Reyes Demonio, Dioses de la Destrucción y la cúspide omnipotente del servidor.</p>
+          <div class="guide-rows">
+            <div class="guide-row"><code>Nivel 41 · Saitama</code><p><strong>400.000.000 ₯</strong> · Prefijo <code>[Saitama]</code> · Un Solo Golpe: efecto sonoro y partículas de impacto meteórico en combates.<span class="guide-row__alias">One Punch Man · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 42 · Rimuru</code><p><strong>480.000.000 ₯</strong> · Prefijo <code>[Rimuru]</code> · Gobernante Slime: compañero Slime flotante celestial con nombre personalizable.<span class="guide-row__alias">Tensura · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 43 · Anos</code><p><strong>580.000.000 ₯</strong> · Prefijo <code>[Anos]</code> · Rey Demonio de la Tiranía: Ojos Mágicos de la Destrucción.<span class="guide-row__alias">Misfit Demon King · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 44 · Alquimista</code><p><strong>700.000.000 ₯</strong> · Prefijo <code>[Alquimista]</code> · Alquimista de Acero: círculos de transmutación resplandecientes al craftear.<span class="guide-row__alias">Fullmetal Alchemist · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 45 · Hakari</code><p><strong>850.000.000 ₯</strong> · Prefijo <code>[Hakari]</code> · Jackpot Inmortal: música rítmica festiva cosmética y suerte al abrir cofres.<span class="guide-row__alias">Jujutsu Kaisen · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 46 · UltraInstinto</code><p><strong>1.000.000.000 ₯</strong> · Prefijo <code>[UltraInstinto]</code> · Doctrina Egoísta: aura plateada etérea y esquive cosmético.<span class="guide-row__alias">Dragon Ball Super · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 47 · Beerus</code><p><strong>1.150.000.000 ₯</strong> · Prefijo <code>[Beerus]</code> · Dios de la Destrucción: energía Hakai púrpura y mirada intimidatoria.<span class="guide-row__alias">Dragon Ball Super · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 48 · Whis</code><p><strong>1.300.000.000 ₯</strong> · Prefijo <code>[Whis]</code> · Asistente Angelical: halo orbital de ángel y aura de serenidad absoluta.<span class="guide-row__alias">Dragon Ball Super · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 49 · Zeno</code><p><strong>1.400.000.000 ₯</strong> · Prefijo <code>[Zeno]</code> · Omni-Rey del Multiverso: corona celestial y presencia anunciada a toda la red.<span class="guide-row__alias">Dragon Ball Super · División V</span></p></div>
+            <div class="guide-row"><code>Nivel 50 · KamiSama</code><p><strong>1.500.000.000 ₯</strong> · Prefijo <code>[KamiSama]</code> · <strong>La Cima Absoluta</strong>: Título divino resplandeciente, corona de oro puro y rango inmortal de DrakesCraft.<span class="guide-row__alias">DrakesCraft Core · División V</span></p></div>
+          </div>
         </div>
       </details>
 
