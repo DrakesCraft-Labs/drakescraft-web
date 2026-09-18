@@ -1,0 +1,489 @@
+/*
+ * DrakesCraft · Bootstrap visual system
+ *
+ * Bootstrap supplies the accessible, responsive foundation. This file is the
+ * brand layer: it deliberately overrides the neutral Bootstrap defaults
+ * instead of mixing several component libraries throughout the portal.
+ */
+
+:root {
+  --bs-body-font-family: "Instrument Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bs-body-font-size: 1rem;
+  --bs-body-line-height: 1.6;
+  --bs-body-color: #edf5ff;
+  --bs-body-bg: #050813;
+  --bs-primary: #58d7ff;
+  --bs-primary-rgb: 88, 215, 255;
+  --bs-secondary: #a79bff;
+  --bs-success: #65e5b3;
+  --bs-warning: #ffd36b;
+  --bs-danger: #ff8a9c;
+  --bs-border-color: rgba(181, 221, 255, 0.14);
+  --bs-border-radius: 1rem;
+  --bs-border-radius-lg: 1.35rem;
+  --bs-border-radius-xl: 1.85rem;
+  --dc-ink: #050813;
+  --dc-surface: rgba(11, 18, 36, 0.82);
+  --dc-surface-raised: rgba(17, 28, 53, 0.92);
+  --dc-line: rgba(166, 217, 255, 0.16);
+  --dc-text: #edf5ff;
+  --dc-muted: #9bacc8;
+  --dc-cyan: #58d7ff;
+  --dc-gold: #ffd36b;
+  --dc-violet: #a79bff;
+  --dc-green: #65e5b3;
+  --dc-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+body.page-shell,
+body.cyber-greek-theme {
+  min-width: 320px;
+  color: var(--dc-text);
+  background:
+    radial-gradient(circle at 8% -8%, rgba(88, 215, 255, 0.18), transparent 29rem),
+    radial-gradient(circle at 94% 12%, rgba(167, 155, 255, 0.15), transparent 28rem),
+    linear-gradient(160deg, #080d1d 0%, #050813 52%, #080a17 100%);
+}
+
+body.page-shell::before,
+body.page-shell::after {
+  opacity: 0.62;
+}
+
+.container {
+  width: min(1320px, calc(100% - 2rem));
+}
+
+/* The portal keeps its compact, content-led navigation but gains Bootstrap's
+ * spacing, focus behaviour and mobile rhythm through its base classes. */
+.site-nav {
+  background: rgba(4, 8, 19, 0.76);
+  border-bottom: 1px solid var(--dc-line);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
+}
+
+.site-nav__bar {
+  min-height: 78px;
+  gap: 1.25rem;
+}
+
+.brand__mark {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(88, 215, 255, 0.32);
+  box-shadow: 0 0 0 4px rgba(88, 215, 255, 0.08), 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.brand__meta strong,
+.site-footer strong,
+.guide-hero h1,
+.home-hero h1,
+.store-hero-modern h1,
+.prose-page h1,
+.error-card h1,
+.maintenance-card h1 {
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.035em;
+}
+
+.site-nav__links {
+  gap: 0.28rem;
+}
+
+.site-nav__links a {
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.site-nav__links a:hover,
+.site-nav__links a.active {
+  color: #fff;
+  border-color: rgba(88, 215, 255, 0.28);
+  background: rgba(88, 215, 255, 0.1);
+}
+
+.nav-discord,
+.home-button--gold,
+.btn-scroll-catalog,
+.prose-page__cta,
+.support-actions a:first-child {
+  border: 1px solid rgba(255, 224, 131, 0.65);
+  background: linear-gradient(135deg, var(--dc-gold), #ffb86e);
+  color: #16100a;
+  box-shadow: 0 12px 28px rgba(255, 184, 110, 0.2);
+}
+
+.nav-discord:hover,
+.home-button--gold:hover,
+.btn-scroll-catalog:hover,
+.prose-page__cta:hover,
+.support-actions a:first-child:hover {
+  color: #16100a;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.home-button,
+.btn-scroll-catalog,
+.btn-compare-ranks,
+.prose-page__cta,
+.support-actions a {
+  border-radius: 0.9rem;
+  font-weight: 750;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.home-button--glass,
+.home-button--store,
+.btn-compare-ranks,
+.support-actions a:not(:first-child) {
+  border: 1px solid var(--dc-line);
+  background: rgba(10, 19, 39, 0.74);
+  color: var(--dc-text);
+  box-shadow: none;
+}
+
+.home-button--glass:hover,
+.home-button--store:hover,
+.btn-compare-ranks:hover,
+.support-actions a:not(:first-child):hover {
+  color: #fff;
+  border-color: rgba(88, 215, 255, 0.62);
+  background: rgba(18, 43, 73, 0.82);
+  transform: translateY(-2px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(88, 215, 255, 0.72);
+  outline-offset: 3px;
+}
+
+/* Shared Bootstrap-flavoured panels. Existing content remains semantic and
+ * this layer makes every guide, store and support surface feel coherent. */
+.guide-hero,
+.store-hero-modern,
+.prose-page,
+.metricas-hero,
+.home-hero__status,
+.server-status-card,
+.store-legal-banner,
+.checkout-panel-card,
+.founder-card,
+.founder-sponsor-card,
+.home-sponsor-spotlight,
+.community-band,
+.final-cta__content,
+.error-card,
+.maintenance-card {
+  border: 1px solid var(--dc-line);
+  box-shadow: var(--dc-shadow);
+}
+
+.guide-hero,
+.store-hero-modern {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 2rem 2rem;
+}
+
+.guide-hero::after,
+.store-hero-modern::after,
+.prose-page::before {
+  content: "";
+  position: absolute;
+  width: 16rem;
+  height: 16rem;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(16px);
+  background: radial-gradient(circle, rgba(88, 215, 255, 0.18), transparent 68%);
+}
+
+.guide-hero::after,
+.store-hero-modern::after {
+  top: -8rem;
+  right: -5rem;
+}
+
+.guide-hero > *,
+.store-hero-modern > * {
+  position: relative;
+  z-index: 1;
+}
+
+.guide-tabs,
+.store-tabs-modern,
+.rank-tabs,
+.command-tabs,
+.slimefun-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.55rem;
+  border: 1px solid var(--dc-line);
+  border-radius: 1rem;
+  background: rgba(4, 10, 24, 0.72);
+}
+
+.guide-tabs a,
+.store-tabs-modern button,
+.rank-tabs button,
+.command-tabs button,
+.slimefun-tabs button {
+  border-radius: 0.7rem;
+  border: 1px solid transparent;
+  color: var(--dc-muted);
+  background: transparent;
+  font-weight: 700;
+}
+
+.guide-tabs a:hover,
+.guide-tabs a.active,
+.store-tabs-modern button:hover,
+.store-tabs-modern button.is-active,
+.rank-tabs button:hover,
+.rank-tabs button.is-active,
+.command-tabs button:hover,
+.command-tabs button.is-active,
+.slimefun-tabs button:hover,
+.slimefun-tabs button.is-active {
+  color: #fff;
+  border-color: rgba(88, 215, 255, 0.38);
+  background: linear-gradient(135deg, rgba(88, 215, 255, 0.17), rgba(167, 155, 255, 0.14));
+}
+
+.guide-grid > article,
+.guide-card,
+.command-card,
+.rank-card,
+.metric-card,
+.store-product-card,
+.team-grid > article,
+.home-store__tiers > a,
+.mode-line,
+.prose-page__grid > article,
+.table-wrap,
+.boss-card,
+.dios-card,
+.hud-panel {
+  border: 1px solid var(--dc-line);
+  border-radius: var(--bs-border-radius-lg);
+  background: linear-gradient(145deg, rgba(20, 34, 62, 0.76), rgba(8, 14, 30, 0.9));
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+}
+
+.guide-grid > article,
+.guide-card,
+.command-card,
+.rank-card,
+.metric-card,
+.store-product-card,
+.team-grid > article,
+.home-store__tiers > a,
+.mode-line,
+.prose-page__grid > article,
+.boss-card,
+.dios-card {
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.guide-grid > article:hover,
+.guide-card:hover,
+.command-card:hover,
+.rank-card:hover,
+.metric-card:hover,
+.store-product-card:hover,
+.team-grid > article:hover,
+.home-store__tiers > a:hover,
+.mode-line:hover,
+.prose-page__grid > article:hover,
+.boss-card:hover,
+.dios-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(88, 215, 255, 0.52);
+  box-shadow: 0 23px 50px rgba(0, 0, 0, 0.28);
+}
+
+.home-hero__status,
+.now-strip__live,
+.now-strip__ip,
+.server-status-card,
+.store-status-pill,
+.metric-card__value,
+.status-pill {
+  border: 1px solid rgba(101, 229, 179, 0.3);
+  background: linear-gradient(135deg, rgba(10, 34, 38, 0.86), rgba(10, 20, 40, 0.86));
+}
+
+.live-dot,
+.store-pulse-dot,
+.server-card__dot {
+  box-shadow: 0 0 0 5px rgba(101, 229, 179, 0.12), 0 0 20px rgba(101, 229, 179, 0.7);
+}
+
+.store-checkout-panel,
+.checkout-panel-card {
+  background: linear-gradient(160deg, rgba(20, 30, 57, 0.98), rgba(6, 11, 25, 0.98));
+}
+
+.checkout-form-modern input,
+.checkout-form-modern select,
+.checkout-form-modern textarea,
+.form-control,
+.form-select {
+  min-height: 3rem;
+  color: #eef7ff;
+  border: 1px solid rgba(157, 201, 240, 0.24);
+  border-radius: 0.8rem;
+  background: rgba(4, 11, 25, 0.82);
+}
+
+.checkout-form-modern input::placeholder,
+.form-control::placeholder {
+  color: #7e91b2;
+}
+
+.checkout-form-modern input:focus,
+.checkout-form-modern select:focus,
+.checkout-form-modern textarea:focus,
+.form-control:focus,
+.form-select:focus {
+  color: #fff;
+  border-color: var(--dc-cyan);
+  background: rgba(6, 18, 39, 0.94);
+  box-shadow: 0 0 0 0.25rem rgba(88, 215, 255, 0.15);
+}
+
+.platform-btn,
+.store-add-button,
+.checkout-submit,
+.quick-link-card,
+.filter-button {
+  border-radius: 0.82rem;
+}
+
+.store-add-button,
+.checkout-submit {
+  border: 1px solid rgba(88, 215, 255, 0.54);
+  background: linear-gradient(135deg, var(--dc-cyan), #798dff);
+  color: #07101d;
+  font-weight: 800;
+}
+
+.store-add-button:hover,
+.checkout-submit:hover {
+  color: #07101d;
+  filter: brightness(1.08);
+}
+
+.prose-page {
+  position: relative;
+  overflow: hidden;
+  margin-top: 3.25rem;
+  margin-bottom: 4rem;
+  padding: clamp(1.4rem, 3vw, 3.2rem);
+  background: linear-gradient(145deg, rgba(18, 31, 57, 0.9), rgba(7, 12, 27, 0.96));
+}
+
+.prose-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.prose-page::before {
+  right: -7rem;
+  bottom: -7rem;
+}
+
+.prose-page h1,
+.prose-page h2,
+.guide-hero h1,
+.guide-section h2,
+.store-section-header h2,
+.home-hero h1,
+.home-editorial h2,
+.modes-heading h2,
+.community-band h2 {
+  color: #f6fbff;
+  text-wrap: balance;
+}
+
+.prose-page p,
+.guide-hero p,
+.store-hero-modern p,
+.home-editorial p,
+.modes-heading p,
+.store-legal-banner,
+.site-footer p {
+  color: var(--dc-muted);
+}
+
+.table-wrap,
+.rank-table-wrap,
+.commands-table-wrap {
+  overflow: auto;
+  border-color: var(--dc-line);
+}
+
+table {
+  --bs-table-color: var(--dc-text);
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--dc-line);
+  --bs-table-striped-color: var(--dc-text);
+  --bs-table-striped-bg: rgba(88, 215, 255, 0.045);
+  --bs-table-hover-color: #fff;
+  --bs-table-hover-bg: rgba(88, 215, 255, 0.09);
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 5rem;
+  border-top: 1px solid var(--dc-line);
+  background: rgba(3, 6, 15, 0.78);
+}
+
+.cyber-greek-theme .hud-header,
+.cyber-greek-theme .hud-panel,
+.cyber-greek-theme .hud-card,
+.cyber-greek-theme .terminal-log,
+.cyber-greek-theme .agent-row {
+  border-color: rgba(88, 215, 255, 0.26);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.26);
+}
+
+.cyber-greek-theme .hud-grid {
+  width: min(1500px, calc(100% - 2rem));
+  gap: 1rem;
+}
+
+@media (max-width: 1199.98px) {
+  .site-nav__bar { align-items: center; }
+  .site-nav__links { gap: 0.2rem; }
+  .site-nav__links a { font-size: 0.8rem; padding-inline: 0.52rem; }
+}
+
+@media (max-width: 900px) {
+  .guide-hero,
+  .store-hero-modern { border-radius: 0 0 1.4rem 1.4rem; }
+  .prose-page { margin-top: 1.75rem; }
+}
+
+@media (max-width: 720px) {
+  .container { width: min(100% - 1.15rem, 1320px); }
+  .site-nav__bar { min-height: 68px; }
+  .brand__mark { width: 41px; height: 41px; }
+  .brand__meta span { display: none; }
+  .site-nav__links { border-color: var(--dc-line); background: rgba(5, 10, 24, 0.97); box-shadow: var(--dc-shadow); }
+  .site-nav__links a { min-height: 44px; display: flex; align-items: center; }
+  .nav-discord { justify-content: center; }
+  .home-button, .btn-scroll-catalog, .btn-compare-ranks { width: 100%; justify-content: center; }
+  .guide-tabs, .store-tabs-modern, .rank-tabs, .command-tabs, .slimefun-tabs { overflow-x: auto; flex-wrap: nowrap; }
+  .guide-tabs > *, .store-tabs-modern > *, .rank-tabs > *, .command-tabs > *, .slimefun-tabs > * { flex: 0 0 auto; }
+  .prose-page { border-radius: 1.25rem; padding: 1.25rem; }
+}
