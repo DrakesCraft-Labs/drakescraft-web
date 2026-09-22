@@ -1,0 +1,83 @@
+/* Marco compartido para páginas legales: conserva el contenido y unifica su lectura. */
+.legal-shell {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(2.5rem, 7vw, 5.5rem);
+}
+
+.legal-shell::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: 22rem;
+  content: "";
+  background:
+    radial-gradient(circle at 14% 2%, rgb(107 70 186 / 24%), transparent 46%),
+    radial-gradient(circle at 83% 10%, rgb(215 169 62 / 16%), transparent 42%);
+  pointer-events: none;
+}
+
+.legal-shell > h1,
+.legal-shell > p,
+.legal-shell > h2,
+.legal-shell > ul,
+.legal-shell > .alert-box,
+.legal-shell > .warning-box,
+.legal-shell > .info-box,
+.legal-shell > .success-box,
+.legal-shell > article {
+  max-width: 58rem;
+  margin-inline: auto;
+}
+
+.legal-shell > h1 {
+  color: #fff;
+  font-family: "Cinzel", serif;
+  font-size: clamp(2rem, 5vw, 3.45rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.legal-shell > h1 + p,
+.legal-shell > .prose-page > h1 + p {
+  color: #d4d0df;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.75;
+}
+
+.legal-shell h2 {
+  color: #e9d5ff;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.12rem, 2.5vw, 1.38rem);
+}
+
+.legal-shell > article,
+.legal-shell .prose-page > article,
+.legal-shell .legal-card {
+  margin-block: 1.15rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid rgb(183 148 255 / 26%);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgb(24 19 42 / 90%), rgb(13 16 33 / 90%));
+  box-shadow: 0 1.25rem 3.5rem rgb(0 0 0 / 20%);
+}
+
+.legal-shell > ul,
+.legal-shell .prose-page ul {
+  color: #d8d5e3;
+  line-height: 1.7;
+}
+
+.legal-shell .alert-box,
+.legal-shell .warning-box,
+.legal-shell .info-box,
+.legal-shell .success-box {
+  max-width: 58rem;
+  border-radius: .9rem;
+}
+
+@media (max-width: 42rem) {
+  .legal-shell { padding-block: 2.25rem; }
+  .legal-shell > article,
+  .legal-shell .prose-page > article { border-radius: .75rem; }
+}
