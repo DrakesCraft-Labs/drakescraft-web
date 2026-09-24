@@ -916,6 +916,8 @@ await app.register(fastifyStatic, {
       'previewdiscord1.png',
       'previewdiscord2.png',
       'favicon.ico',
+      'site.webmanifest',
+      'manifest.json',
       'three.min.js'
     ]);
     const normalized = pathname.replace(/^[/\\]+/, '').replaceAll('\\', '/');
