@@ -64,31 +64,105 @@
 
   <main>
     <header class="home-hero">
+      <div class="home-hero__cyber-grid" aria-hidden="true"></div>
       <picture class="home-hero__media" aria-hidden="true">
         <source media="(max-width: 720px)" srcset="assets/home/hero-aurora-960.webp">
         <img src="assets/home/hero-aurora-1600.webp" alt="" width="1600" height="841" fetchpriority="high">
       </picture>
       <div class="home-hero__veil" aria-hidden="true"></div>
-      <img class="home-hero__pillars" src="assets/home/greek-ivy-pillars.webp" alt="" width="522" height="1100" decoding="async" aria-hidden="true">
-      <img class="home-hero__garland" src="assets/home/greek-ivy-garland.webp" alt="" width="1100" height="526" decoding="async" aria-hidden="true">
-      <div class="container home-hero__content">
-        <p class="home-kicker">Minecraft Java &amp; Bedrock · Ecosistema Star · Creado por JackStar</p>
-        <h1>CINCO MUNDOS.<br><em>ALTA INGENIERÍA.</em><br>CERO LAG.</h1>
-        <p>La red de Minecraft insignia del ecosistema Star. 60+ expansiones Slimefun optimizadas, 26 dioses panteónicos, supervivencia clásica 100% vanilla y un servidor centralizado en Java 21 LTS acelerado en Rust nativo.</p>
-        <div class="home-actions">
-          <button class="home-button home-button--gold" type="button" data-copy-ip>Copiar IP (mc.drakescraft.cl)</button>
-          <a class="home-button home-button--store-prime" href="store.html"><strong>⚡ TIENDA OFICIAL TEBEX ↗</strong><small>Rangos Globales · Entrega Instantánea</small></a>
-          <a class="home-button home-button--glass" href="guia.html">Guía de Inicio</a>
+
+      <div class="container home-hero__split">
+        <!-- Columna Izquierda: Información Principal y Acción -->
+        <div class="home-hero__content">
+          <div class="home-tech-pill">
+            <span class="live-dot-mini" aria-hidden="true"></span>
+            <span>STAR NETWORK · ENGINE 26.X RUST · CINCO MODALIDADES</span>
+          </div>
+
+          <h1 class="home-hero__title">
+            CINCO MUNDOS.<br>
+            <span class="title-glow">ALTA INGENIERÍA.</span><br>
+            CERO LAG.
+          </h1>
+
+          <p class="home-hero__lead">
+            Servidor de alto rendimiento creado y dirigido por <strong>JackStar</strong>. Más de 60 expansiones StarSuites optimizadas en Rust off-heap, economía blindada en SQLite WAL y aislamiento estricto entre cinco modalidades en un solo host dedicado.
+          </p>
+
+          <!-- Botones de Acción Primarios -->
+          <div class="home-hero__ctas">
+            <a class="home-cta-store" href="store.html">
+              <div class="cta-store-tag"><span>⚡ TEBEX OFICIAL · ACTIVACIÓN AUTOMÁTICA</span></div>
+              <div class="cta-store-text">
+                <strong>TIENDA VIP GLOBAL ↗</strong>
+                <small>Rangos válidos en las 5 modalidades · Activación instantánea</small>
+              </div>
+            </a>
+
+            <div class="home-cta-group">
+              <button class="home-cta-copy" type="button" data-copy-ip>
+                <span class="copy-badge">COPIAR IP</span>
+                <strong>mc.drakescraft.cl</strong>
+                <small>Java 1.21.11 · Bedrock 19132</small>
+              </button>
+              <a class="home-cta-guide" href="guia.html">
+                <span>VER GUÍA DE COMANDOS →</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="home-hero__modes" aria-label="Modalidades activas">
+            <span class="is-active">01 SLIMEFUN SURVIVAL</span>
+            <span>02 SURVIVAL CLÁSICO</span>
+            <span>03 ONEBLOCK</span>
+            <span>04 SKYBLOCK</span>
+            <span>05 LABORATORIO CREATIVO</span>
+          </div>
         </div>
-        <div class="home-hero__modes" aria-label="Modalidades disponibles">
-          <span class="is-active">01 Slimefun</span><span>02 Clásico</span><span>03 OneBlock</span><span>04 SkyBlock</span><span>05 Laboratorio</span>
+
+        <!-- Columna Derecha: Tarjeta de Telemetría Star (Terminal Square) -->
+        <div class="home-hero__telemetry-col">
+          <div class="star-telemetry-hud" data-live-status>
+            <div class="hud-header">
+              <div class="hud-status-indicator">
+                <span class="live-dot" aria-hidden="true"></span>
+                <strong>STAR TELEMETRY MATRIX</strong>
+              </div>
+              <span class="hud-node">NODO DALLAS</span>
+            </div>
+
+            <div class="hud-body">
+              <div class="hud-item">
+                <span class="hud-key">ESTADO EN VIVO</span>
+                <span class="hud-val hud-val--green" data-live-label>20.0 TPS · ESTABLE</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-key">JUGADORES ONLINE</span>
+                <span class="hud-val hud-val--amber" data-live-count>Conectando…</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-key">KERNEL ENGINE</span>
+                <span class="hud-val">Star Engine 26.x (Rust FFM)</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-key">AISLAMIENTO</span>
+                <span class="hud-val">SQLite WAL · Cero Fugas</span>
+              </div>
+              <div class="hud-item">
+                <span class="hud-key">LATENCIA GLOBAL</span>
+                <span class="hud-val hud-val--cyan">&lt; 42 ms Anycast</span>
+              </div>
+            </div>
+
+            <div class="hud-footer">
+              <div class="hud-pill"><span>⚡ PURPUR 1.21.11</span></div>
+              <div class="hud-pill"><span>🛡️ ANTI-DUPE SRE</span></div>
+              <div class="hud-pill"><span>⭐ JACKSTAR ECOSYSTEM</span></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="home-hero__status" data-live-status aria-live="polite">
-        <span class="live-dot" aria-hidden="true"></span>
-        <strong data-live-label>Comprobando DrakesCraft…</strong>
-        <small>mc.drakescraft.cl · Puerto 19132</small>
-      </div>
+
       <a class="home-hero__scroll" href="#ahora" aria-label="Descubrir DrakesCraft">Explorar Infraestructura <span>↓</span></a>
     </header>
 
