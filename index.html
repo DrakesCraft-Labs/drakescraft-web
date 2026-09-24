@@ -45,18 +45,18 @@
     <div class="container site-nav__bar">
       <a class="brand" href="/" aria-label="Inicio de DrakesCraft">
         <img class="brand__mark" src="assets/logo-drakescraft.webp" alt="" width="46" height="46">
-        <span class="brand__meta"><strong>DrakesCraft</strong><span>Portal oficial</span></span>
+        <span class="brand__meta"><strong>DrakesCraft</strong><span>Star Network · Jack</span></span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <ul class="site-nav__links" id="nav-menu">
         <li><a class="active" href="/">Inicio</a></li>
         <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#arquitectura">Arquitectura</a></li>
         <li><a href="guia.html">Guía</a></li>
         <li><a href="guia-slimefun.html">Slimefun</a></li>
-        <li><a href="store.html">Tienda</a></li>
         <li><a href="apoya.html">Sponsors</a></li>
         <li><a href="#equipo">Equipo</a></li>
-        <li><a href="terms.html">Términos</a><a href="privacidad.html">Privacidad</a></li>
+        <li><a class="nav-store-btn" href="store.html"><span>TIENDA VIP ⚡</span><small>Tebex</small></a></li>
         <li><a class="nav-discord" href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Discord</a></li>
       </ul>
     </div>
@@ -72,46 +72,79 @@
       <img class="home-hero__pillars" src="assets/home/greek-ivy-pillars.webp" alt="" width="522" height="1100" decoding="async" aria-hidden="true">
       <img class="home-hero__garland" src="assets/home/greek-ivy-garland.webp" alt="" width="1100" height="526" decoding="async" aria-hidden="true">
       <div class="container home-hero__content">
-        <p class="home-kicker">Minecraft Java + Bedrock · Chile</p>
-        <h1>Tu forma de jugar.<br><em>Tu legado.</em></h1>
-        <p>Supervivencia técnica, magia, máquinas, islas y experimentación dentro de cinco mundos conectados por una sola comunidad.</p>
+        <p class="home-kicker">Minecraft Java &amp; Bedrock · Ecosistema Star · Creado por JackStar</p>
+        <h1>CINCO MUNDOS.<br><em>ALTA INGENIERÍA.</em><br>CERO LAG.</h1>
+        <p>La red de Minecraft insignia del ecosistema Star. 60+ expansiones Slimefun optimizadas, 26 dioses panteónicos, supervivencia clásica 100% vanilla y un servidor centralizado en Java 21 LTS acelerado en Rust nativo.</p>
         <div class="home-actions">
-          <button class="home-button home-button--gold" type="button" data-copy-ip>Copiar IP</button>
-          <a class="home-button home-button--glass" href="guia.html">Empezar a jugar</a>
-          <a class="home-button home-button--store" href="store.html"><span>Explorar la tienda</span><small>Rangos y pases · Tebex seguro</small></a>
+          <button class="home-button home-button--gold" type="button" data-copy-ip>Copiar IP (mc.drakescraft.cl)</button>
+          <a class="home-button home-button--store-prime" href="store.html"><strong>⚡ TIENDA OFICIAL TEBEX ↗</strong><small>Rangos Globales · Entrega Instantánea</small></a>
+          <a class="home-button home-button--glass" href="guia.html">Guía de Inicio</a>
         </div>
         <div class="home-hero__modes" aria-label="Modalidades disponibles">
-          <span>Slimefun</span><span>Clásico</span><span>SkyBlock</span><span>OneBlock</span><span>Laboratorio</span>
+          <span class="is-active">01 Slimefun</span><span>02 Clásico</span><span>03 OneBlock</span><span>04 SkyBlock</span><span>05 Laboratorio</span>
         </div>
       </div>
       <div class="home-hero__status" data-live-status aria-live="polite">
         <span class="live-dot" aria-hidden="true"></span>
         <strong data-live-label>Comprobando DrakesCraft…</strong>
-        <small>mc.drakescraft.cl</small>
+        <small>mc.drakescraft.cl · Puerto 19132</small>
       </div>
-      <a class="home-hero__scroll" href="#ahora" aria-label="Descubrir DrakesCraft">Descubrir <span>↓</span></a>
+      <a class="home-hero__scroll" href="#ahora" aria-label="Descubrir DrakesCraft">Explorar Infraestructura <span>↓</span></a>
     </header>
 
     <section class="now-strip" id="ahora" aria-labelledby="now-title">
       <div class="container now-strip__grid">
-        <div><p class="home-kicker">Drakes ahora</p><h2 id="now-title">Un mundo en movimiento.</h2></div>
-        <div class="now-strip__live" data-live-status><span class="live-dot" aria-hidden="true"></span><strong data-live-count>Estado en tiempo real</strong><small data-live-version>Java + Bedrock</small></div>
-        <button class="now-strip__ip" type="button" data-copy-ip><span>IP DEL SERVIDOR</span><strong>mc.drakescraft.cl</strong><small data-copy-label>Copiar al portapapeles</small></button>
-        <div class="now-strip__worlds"><span>01 SF</span><span>02 CL</span><span>03 SB</span><span>04 OB</span><span>05 LAB</span></div>
+        <div><p class="home-kicker">Estado del Servidor</p><h2 id="now-title">En vivo en Dallas, TX.</h2></div>
+        <div class="now-strip__live" data-live-status><span class="live-dot" aria-hidden="true"></span><strong data-live-count>Estado en tiempo real</strong><small data-live-version>Java 1.21.11 + Bedrock 19132 · 20.0 TPS</small></div>
+        <button class="now-strip__ip" type="button" data-copy-ip><span>IP CANÓNICA (CLIC PARA COPIAR)</span><strong>mc.drakescraft.cl</strong><small data-copy-label>Puerto Bedrock: 19132</small></button>
+        <div class="now-strip__worlds"><span>01 SLIMEFUN SURVIVAL</span><span>02 SURVIVAL CLÁSICO</span><span>03 ONEBLOCK</span><span>04 SKYBLOCK</span><span>05 LABORATORIO</span></div>
+      </div>
+    </section>
+
+    <!-- Sección Arquitectura Soberana: Star & Jack -->
+    <section class="star-tech-section reveal" id="arquitectura" aria-labelledby="tech-title">
+      <div class="container">
+        <div class="star-tech-heading">
+          <div>
+            <p class="home-kicker">Ingeniería Soberana · JackStar</p>
+            <h2 id="tech-title">Por qué DrakesCraft no colapsa.</h2>
+          </div>
+          <p>La mayoría de los servidores se caen por fragmentación de plugins y pausas de basura de Java. En DrakesCraft eliminamos el software genérico y construimos nuestra propia matriz de suites y puentes nativos.</p>
+        </div>
+        <div class="star-tech-grid">
+          <article class="star-tech-card">
+            <span class="tech-tag">01 · Aceleración Off-Heap</span>
+            <h3>Star Engine (Odysseia Evolution)</h3>
+            <p>El núcleo del servidor corre sobre Java 21 LTS y delega la resolución de topología de redes, grafos de transporte y auras divinas a bibliotecas compiladas en Rust nativo (FFM). Cero pausas de Garbage Collector.</p>
+            <code>Star-Rust FFM · 20.0 TPS Garantizados</code>
+          </article>
+          <article class="star-tech-card">
+            <span class="tech-tag">02 · Aislamiento Hermético</span>
+            <h3>5 Modalidades en un Servidor</h3>
+            <p>Eliminamos el gasto innecesario de servidores Bungee. Mediante InvSwitcher-Drake y SQLite WAL, cada modalidad mantiene sus inventarios, bóvedas (/pv) y economías 100% aisladas. Tus rangos VIP te acompañan en todas partes.</p>
+            <code>SQLite WAL · Cero mezcla de economías</code>
+          </article>
+          <article class="star-tech-card">
+            <span class="tech-tag">03 · Consolidación Soberana</span>
+            <h3>StarSuites & Anti-Dupe</h3>
+            <p>180 micro-repositorios absorbidos en las 8 suites maestras oficiales de JackStar. Tickers centralizados, mitigación de bugs de duplicación en GUIs y verificación idempotente de compras en Tebex.</p>
+            <code>Monorepo StarSuites · Cero exploits</code>
+          </article>
+        </div>
       </div>
     </section>
 
     <section class="home-editorial reveal" aria-labelledby="world-title">
       <div class="home-editorial__image home-image-frame">
         <picture><source media="(max-width:720px)" srcset="assets/home/world-garden-960.webp"><img src="assets/home/world-garden-1600.webp" alt="Jardines y arquitectura construidos dentro de DrakesCraft" width="1600" height="841" loading="lazy"></picture>
-        <span>Capturado dentro del servidor</span>
+        <span>Capturado en producción</span>
       </div>
       <div class="home-editorial__copy">
-        <p class="home-kicker">Conoce DrakesCraft</p>
-        <h2 id="world-title">Más que survival.</h2>
-        <p class="home-lead">Aquí una base puede convertirse en fábrica, templo, observatorio o ciudad. Slimefun, magia, dimensiones, jefes y sistemas propios amplían Minecraft sin borrar la historia que construyes bloque a bloque.</p>
-        <dl class="home-facts"><div><dt>60+</dt><dd>expansiones Slimefun</dd></div><div><dt>50</dt><dd>rangos rankup anime</dd></div><div><dt>5</dt><dd>formas de jugar</dd></div><div><dt>1</dt><dd>comunidad conectada</dd></div></dl>
-        <a class="home-text-link" href="guia.html">Conocer el servidor <span>↗</span></a>
+        <p class="home-kicker">Ecosistema Completo</p>
+        <h2 id="world-title">Ingeniería para jugadores.</h2>
+        <p class="home-lead">Desde automatización nuclear y botánica cuántica hasta supervivencia pura sin mods. En DrakesCraft tu partida avanza al ritmo que elijas, respaldada por infraestructura dedicada de nivel industrial.</p>
+        <dl class="home-facts"><div><dt>60+</dt><dd>Addons Slimefun integrados</dd></div><div><dt>26</dt><dd>Dioses con IA adaptativa</dd></div><div><dt>5</dt><dd>Modalidades aisladas</dd></div><div><dt>20.0</dt><dd>TPS estables en Dallas</dd></div></dl>
+        <a class="home-text-link" href="guia.html">Explorar Guía del Servidor <span>↗</span></a>
       </div>
     </section>
 
@@ -149,7 +182,39 @@
     <section class="community-band reveal" aria-labelledby="community-title"><div class="container community-band__grid"><div><p class="home-kicker">Comunidad activa</p><h2 id="community-title">Las grandes construcciones rara vez empiezan solas.</h2></div><p>Discord reúne anuncios, soporte, ideas y a quienes están levantando su próximo proyecto dentro del servidor.</p><a class="home-button home-button--glass" href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Entrar a Discord</a></div></section>
 
     <section class="home-store" id="tienda" aria-labelledby="store-title">
-      <div class="container"><div class="home-store__heading reveal"><div><p class="home-kicker">Apoya el mundo</p><h2 id="store-title">Pases para tu forma de jugar.</h2></div><p>La tienda existe para sostener DrakesCraft. Todo se entrega mediante el checkout seguro de Tebex y ningún pase se renueva solo.</p></div><div class="home-store__tiers reveal"><a href="store.html?category=monthly"><span>Desde $4.990 CLP</span><h3>Hércules</h3><p>El punto de entrada VIP con 3 bóvedas privadas y protección anti-robo 49x49.</p><b>Ver pase ↗</b></a><a class="is-featured" href="store.html?category=monthly"><span>Recomendado · $10.990 CLP</span><h3>Hermes</h3><p>¡El más popular! Vuelo /fly permanente, 5 bóvedas privadas y movilidad suprema.</p><b>Ver pase ↗</b></a><a href="store.html?category=titans"><span>Endgame</span><h3>Titanes</h3><p>La línea superior para proyectos y progresión de escala primordial.</p><b>Explorar Titanes ↗</b></a></div><div class="home-store__footer"><a class="home-button home-button--gold" href="store.html">Explorar la tienda completa</a><span>Precios, límites y entrega visibles antes de pagar.</span></div></div>
+      <div class="container">
+        <div class="home-store__heading reveal">
+          <div>
+            <p class="home-kicker">Tienda Oficial Tebex · Rangos Globales</p>
+            <h2 id="store-title">Un rango. Cinco modalidades.</h2>
+          </div>
+          <p>Tu inversión te acompaña en toda la red. Al adquirir un rango VIP o VIP++ en Tebex, tus beneficios sociales, /fly en claims, prefijo y cosméticos se activan automáticamente en Slimefun, Clásico, OneBlock y SkyBlock.</p>
+        </div>
+        <div class="home-store__tiers reveal">
+          <a href="store.html?category=monthly">
+            <span>VIP Dioses · Desde $4.990 CLP</span>
+            <h3>Hércules</h3>
+            <p>Punto de entrada VIP. 3 bóvedas privadas (/pv), prefijo exclusivo en chat y tablist, y protección de terreno ampliada.</p>
+            <b>Ver detalles del pase ↗</b>
+          </a>
+          <a class="is-featured" href="store.html?category=monthly">
+            <span>Recomendado Popular · $10.990 CLP</span>
+            <h3>Hermes</h3>
+            <p>Vuelo /fly en claims personales, 5 bóvedas privadas aisladas por modalidad, velocidad y respeto en toda la red.</p>
+            <b>Ver detalles del pase ↗</b>
+          </a>
+          <a href="store.html?category=titans">
+            <span>VIP++ Endgame</span>
+            <h3>Titanes</h3>
+            <p>La categoría suprema para proyectos industriales masivos. Capacidad máxima de almacenamiento, prioridad y cosméticos divinos.</p>
+            <b>Explorar Categoría Titanes ↗</b>
+          </a>
+        </div>
+        <div class="home-store__footer">
+          <a class="home-button home-button--gold" href="store.html">⚡ EXPLORAR LA TIENDA COMPLETA (TEBEX SEGURO) ↗</a>
+          <span>Entrega automatizada instantánea por bot · Cero renovaciones sorpresa.</span>
+        </div>
+      </div>
     </section>
 
     <section class="home-sponsors reveal" id="sponsors" aria-labelledby="sponsors-title">

@@ -15,14 +15,21 @@
 .home-hero h1 em { color:#e7c86e; font-style:italic; font-weight:500; }
 .home-hero__content>p:not(.home-kicker) { max-width:620px; font-size:clamp(1.05rem,2vw,1.35rem); line-height:1.65; color:rgba(244,239,223,.82); }
 .home-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2rem; }
-.home-button { min-height:48px; display:inline-flex; align-items:center; justify-content:center; padding:.88rem 1.35rem; border-radius:2px; border:1px solid var(--home-line); color:var(--home-cream); background:transparent; font-weight:700; cursor:pointer; transition:transform .22s ease,background .22s ease,border-color .22s ease; }
-.home-button:hover { transform:translateY(-3px); border-color:rgba(216,182,90,.7); }
-.home-button--gold { color:#10231b; background:#e1c36c; border-color:#e1c36c; }
-.home-button--glass { background:rgba(5,20,16,.48); backdrop-filter:blur(10px); }
-.home-button--store { border-color:rgba(216,182,90,.58); background:rgba(5,20,16,.58); flex-direction:column; align-items:flex-start; padding-block:.58rem; }
-.home-button--store small { color:rgba(244,239,223,.55); font:500 .58rem/1.2 "DM Mono",monospace; letter-spacing:.05em; }
-.home-hero__modes { display:flex; flex-wrap:wrap; gap:.5rem 1.35rem; margin-top:3rem; color:rgba(244,239,223,.7); font:.68rem "DM Mono",monospace; letter-spacing:.13em; text-transform:uppercase; }
-.home-hero__modes span::before { content:""; display:inline-block; width:5px; height:5px; margin-right:.55rem; border-radius:50%; background:#d8b65a; }
+.home-button { min-height:48px; display:inline-flex; align-items:center; justify-content:center; padding:.88rem 1.35rem; border-radius:1px; border:1px solid var(--home-line); color:var(--home-cream); background:transparent; font-weight:700; cursor:pointer; transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease; }
+.home-button:hover { transform:translateY(-2px); border-color:rgba(216,182,90,.7); }
+.home-button--gold { color:#10231b; background:linear-gradient(135deg, #f4c95d 0%, #e1c36c 100%); border-color:#f4c95d; font-weight:800; box-shadow:0 0 16px rgba(244,201,93,.35); }
+.home-button--gold:hover { box-shadow:0 0 25px rgba(244,201,93,.65); border-color:#fff; }
+.home-button--glass { background:rgba(5,20,16,.65); backdrop-filter:blur(10px); border-color:rgba(244,239,223,.22); }
+.home-button--glass:hover { background:rgba(12,35,28,.8); border-color:#d8b65a; }
+.home-button--store-prime { background:linear-gradient(135deg, rgba(244,201,93,.22) 0%, rgba(157,78,221,.25) 100%), #071712; border:1.5px solid #f4c95d; flex-direction:column; align-items:flex-start; padding:.65rem 1.4rem; box-shadow:0 0 20px rgba(244,201,93,.3), inset 0 0 10px rgba(244,201,93,.12); position:relative; overflow:hidden; }
+.home-button--store-prime strong { font-family:"Cinzel",serif; font-size:1.05rem; color:#f4c95d; display:flex; align-items:center; gap:.4rem; letter-spacing:.02em; }
+.home-button--store-prime small { color:rgba(244,239,223,.75); font:600 .62rem/1.2 "DM Mono",monospace; letter-spacing:.06em; text-transform:uppercase; margin-top:.15rem; }
+.home-button--store-prime:hover { background:linear-gradient(135deg, #f4c95d 0%, #e1a120 100%); border-color:#fff; box-shadow:0 0 32px rgba(244,201,93,.85); }
+.home-button--store-prime:hover strong { color:#10231b; }
+.home-button--store-prime:hover small { color:rgba(16,35,27,.9); }
+.home-hero__modes { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2.5rem; }
+.home-hero__modes span { padding:.35rem .75rem; border:1px solid rgba(244,239,223,.18); background:rgba(5,20,16,.5); color:rgba(244,239,223,.85); font:600 .68rem "DM Mono",monospace; letter-spacing:.1em; text-transform:uppercase; border-radius:1px; }
+.home-hero__modes span.is-active { border-color:#d8b65a; color:#f4c95d; background:rgba(216,182,90,.12); }
 .home-hero__status { position:absolute; right:max(1rem,calc((100vw - 1180px)/2)); bottom:4.8rem; display:grid; grid-template-columns:auto 1fr; column-gap:.65rem; align-items:center; padding:1rem 1.2rem; border:1px solid var(--home-line); background:rgba(5,20,16,.66); backdrop-filter:blur(12px); }
 .home-hero__status small { grid-column:2; color:rgba(244,239,223,.55); font-family:"DM Mono",monospace; }
 .live-dot { width:8px; height:8px; border-radius:50%; background:#8d968f; box-shadow:0 0 0 0 rgba(116,226,160,0); }
@@ -179,3 +186,18 @@
   .founder-card { grid-template-columns:1fr; }.team-grid { grid-template-columns:1fr; }.team-grid article { border-right:0!important; }.final-cta__content { padding-block:5rem; }
 }
 @media (prefers-reduced-motion:reduce) { .home-hero__media img,.live-dot { animation:none!important; }.reveal { opacity:1; transform:none; transition:none; }.home-image-frame img,.mode-line,.home-button,.home-store__tiers a { transition:none; } }
+
+/* Star & Jack Technical Architecture Section */
+.star-tech-section { padding:clamp(5rem, 8vw, 8rem) 0; background:#040d0a; border-block:1px solid var(--home-line); }
+.star-tech-heading { display:grid; grid-template-columns:1.3fr .7fr; gap:3rem; align-items:end; margin-bottom:3rem; }
+.star-tech-heading h2 { margin:0; font-size:clamp(2.5rem, 5vw, 4.5rem); line-height:1; }
+.star-tech-heading p { margin:0; color:rgba(244,239,223,.65); line-height:1.7; }
+.star-tech-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--home-line); margin-top:2rem; border:1px solid var(--home-line); }
+.star-tech-card { background:#071712; padding:2.2rem 2rem; display:flex; flex-direction:column; gap:.8rem; position:relative; transition:background .2s ease; border-radius:1px; }
+.star-tech-card:hover { background:#0b211a; }
+.star-tech-card span.tech-tag { font:600 .68rem "DM Mono", monospace; color:#f4c95d; letter-spacing:.12em; text-transform:uppercase; }
+.star-tech-card h3 { margin:0; font:600 1.5rem "Cinzel", serif; color:#fff; line-height:1.2; }
+.star-tech-card p { margin:0; color:rgba(244, 239, 223, 0.75); font-size:.92rem; line-height:1.65; }
+.star-tech-card code { margin-top:auto; padding-top:1rem; color:#79d7ff; font-size:.75rem; font-family:"DM Mono", monospace; }
+@media (max-width:960px) { .star-tech-heading { grid-template-columns:1fr; } .star-tech-grid { grid-template-columns:1fr; } }
+

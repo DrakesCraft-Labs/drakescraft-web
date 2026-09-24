@@ -73,7 +73,7 @@ body.store-theme {
   padding: 0.4rem 0.9rem;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.35);
-  border-radius: 999px;
+  border-radius: 2px;
   font-size: 0.8rem;
   font-weight: 600;
   color: #34d399;
@@ -1117,7 +1117,7 @@ body.store-theme {
   background: rgba(16, 185, 129, 0.15);
   color: #34d399;
   padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  border-radius: 2px;
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 

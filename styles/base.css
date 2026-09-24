@@ -13,11 +13,13 @@
     --emerald: #64f2bf;
     --danger: #ff8275;
     --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-    --radius-xl: 28px;
-    --radius-lg: 20px;
-    --radius-md: 14px;
+    --radius-xl: 4px;
+    --radius-lg: 3px;
+    --radius-md: 2px;
+    --radius-sm: 1px;
     --font-heading: "Cinzel", serif;
     --font-body: "Instrument Sans", sans-serif;
+    --font-mono: "DM Mono", monospace;
     --page-accent: var(--gold);
     --page-accent-soft: rgba(244, 201, 93, 0.22);
     --page-glow: rgba(121, 215, 255, 0.18);
@@ -211,11 +213,11 @@ textarea {
 }
 
 .site-nav__links a {
-    padding: 0.62rem 0.68rem;
-    border-radius: 999px;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-md);
     color: var(--muted);
     font-size: 0.86rem;
-    transition: 0.25s ease;
+    transition: 0.2s ease;
 }
 
 body[data-page="server"] { --page-accent: var(--cyan); --page-accent-soft: rgba(121, 215, 255, 0.2); }
@@ -227,19 +229,63 @@ body[data-page="rules"] { --page-accent: var(--gold); --page-accent-soft: rgba(2
 .site-nav__links a:hover,
 .site-nav__links a.active {
     color: var(--text);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-store-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.52rem 0.95rem !important;
+    border-radius: 2px !important;
+    background: linear-gradient(135deg, #f4c95d 0%, #e1a120 100%) !important;
+    color: #121808 !important;
+    font-weight: 800 !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 0 16px rgba(244, 201, 93, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid #ffd875 !important;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.nav-store-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(244, 201, 93, 0.75), inset 0 1px 0 #fff !important;
+    color: #000 !important;
+}
+
+.nav-store-btn small {
+    display: inline-block;
+    padding: 0.1rem 0.35rem;
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 2px;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: #fff;
+    font-weight: 600;
 }
 
 .nav-discord {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.78rem 1.15rem;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--page-accent), #fff1bc);
-    color: #1d1606;
+    padding: 0.55rem 0.95rem;
+    border-radius: 2px;
+    background: rgba(88, 101, 242, 0.16);
+    border: 1px solid rgba(88, 101, 242, 0.45);
+    color: #cfd6ff;
     font-weight: 700;
-    box-shadow: 0 14px 30px rgba(244, 201, 93, 0.24);
+    font-size: 0.82rem;
+    transition: 0.2s ease;
+}
+
+.nav-discord:hover {
+    background: #5865f2;
+    color: #fff;
+    box-shadow: 0 0 16px rgba(88, 101, 242, 0.45);
 }
 
 .hero {
