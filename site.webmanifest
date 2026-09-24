@@ -1,0 +1,16 @@
+{
+  "name": "DrakesCraft · Servidor Minecraft Java & Bedrock",
+  "short_name": "DrakesCraft",
+  "description": "Servidor Minecraft Java y Bedrock con cinco modalidades conectadas: Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071712",
+  "theme_color": "#071712",
+  "icons": [
+    {
+      "src": "/assets/logo-drakescraft.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    }
+  ]
+}

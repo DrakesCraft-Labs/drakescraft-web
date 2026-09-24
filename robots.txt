@@ -4,4 +4,6 @@ Disallow: /api/
 Disallow: /ojo-de-atenea.html
 Disallow: /maintenance.html
 Disallow: /500.html
+
 Sitemap: https://web.drakescraft.cl/sitemap.xml
+Sitemap: https://drakescraft.cl/sitemap.xml

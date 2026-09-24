@@ -8,11 +8,29 @@
   <meta name="description" content="DrakesCraft es un servidor Minecraft Java y Bedrock con cinco modalidades conectadas: Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio.">
   <meta name="theme-color" content="#071712">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DrakesCraft">
   <meta property="og:title" content="DrakesCraft | Tu forma de jugar. Tu legado.">
   <meta property="og:description" content="Cinco modalidades, sistemas propios y una comunidad que sigue construyendo.">
-  <meta property="og:image" content="https://web.drakescraft.cl/assets/home/hero-aurora-1600.webp">
+  <meta property="og:image" content="https://web.drakescraft.cl/assets/drakescraft-og-preview.png">
+  <meta property="og:image:secure_url" content="https://web.drakescraft.cl/assets/drakescraft-og-preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DrakesCraft · Servidor Minecraft Java & Bedrock">
   <meta property="og:url" content="https://web.drakescraft.cl/">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DrakesCraft | Cinco mundos. Una comunidad.">
+  <meta name="twitter:description" content="Servidor Minecraft Java y Bedrock con cinco modalidades conectadas: Slimefun, Clásico, SkyBlock, OneBlock y Laboratorio.">
+  <meta name="twitter:image" content="https://web.drakescraft.cl/assets/drakescraft-og-preview.png">
+  <meta name="twitter:image:alt" content="DrakesCraft · Servidor Minecraft Java & Bedrock">
+
+  <!-- Google Search Console Verification Placeholder -->
+  <meta name="google-site-verification" content="GSC_DRAKESCRAFT_VERIFICATION">
+
   <link rel="icon" type="image/png" href="assets/logo-drakescraft.webp">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="assets/home/hero-aurora-1600.webp" as="image" type="image/webp" fetchpriority="high">
@@ -175,8 +193,32 @@
 
     <section class="final-cta" aria-labelledby="final-title"><picture class="final-cta__media"><source media="(max-width:720px)" srcset="assets/home/cta-aurora-960.webp"><img src="assets/home/cta-aurora-1600.webp" alt="Paisaje nocturno con aurora dentro de DrakesCraft" width="1600" height="900" loading="lazy"></picture><div class="final-cta__veil" aria-hidden="true"></div><div class="container final-cta__content reveal"><p class="home-kicker">Tu historia empieza aquí</p><h2 id="final-title">¿Qué vas a construir?</h2><p>Cinco mundos. Decenas de sistemas. Tu partida no tiene por qué parecerse a ninguna otra.</p><strong class="final-cta__ip">mc.drakescraft.cl</strong><div class="home-actions"><button class="home-button home-button--gold" type="button" data-copy-ip>Copiar IP</button><a class="home-button home-button--glass" href="guia.html">Empezar a jugar</a><a class="home-button home-button--glass" href="https://discord.gg/rv3vtXZTk7" target="_blank" rel="noopener">Discord</a></div><div class="final-cta__status" data-live-status><span class="live-dot" aria-hidden="true"></span><span data-live-label>Comprobando el mundo…</span></div></div></section>
   </main>
-
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>DrakesCraft</strong><p>Cinco mundos. Una comunidad. Un legado que sigue creciendo.</p></div><div class="site-footer__links"><a href="guia.html">Guía</a><a href="store.html">Tienda</a><a href="support.html">Soporte</a><a href="terms.html">Términos</a><a href="privacidad.html">Privacidad</a></div><div class="site-footer__sponsor"><span>Apoya el proyecto</span><a href="apoya.html">Patrocinar DrakesCraft</a></div></div></footer>
+
+  <aside class="dk-cookie-banner" id="dk-cookie-banner" aria-label="Aviso de privacidad y cookies" role="dialog">
+    <p class="dk-cookie-text">
+      🛡️ <strong>Privacidad en DrakesCraft:</strong> No utilizamos cookies invasivas ni publicidad comercial. Solo almacenamiento local técnico necesario para tus preferencias y sesión.
+    </p>
+    <div class="dk-cookie-actions">
+      <button class="dk-cookie-btn" id="dk-cookie-accept" type="button">Entendido</button>
+      <a class="dk-cookie-link" href="privacidad.html">Ver política</a>
+    </div>
+  </aside>
+  <script>
+    (function() {
+      var b = document.getElementById('dk-cookie-banner');
+      var btn = document.getElementById('dk-cookie-accept');
+      if (localStorage.getItem('drakes_cookie_consent') === 'true') {
+        if (b) b.classList.add('hidden');
+      }
+      if (btn && b) {
+        btn.addEventListener('click', function() {
+          localStorage.setItem('drakes_cookie_consent', 'true');
+          b.classList.add('hidden');
+        });
+      }
+    })();
+  </script>
   <script src="scripts/site.js?v=20260824-nav-v1"></script>
   <script src="scripts/home.js?v=20260824-home-v2"></script>
 </body>
