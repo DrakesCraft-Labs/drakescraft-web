@@ -58,6 +58,24 @@
             discordItem.appendChild(discordLink);
             fragment.appendChild(discordItem);
 
+            const isTranslated = document.cookie.includes('googtrans=/es/en');
+            const langItem = document.createElement("li");
+            const langBtn = document.createElement("button");
+            langBtn.className = "nav-lang-btn";
+            langBtn.type = "button";
+            langBtn.id = "nav-lang-toggle";
+            langBtn.innerHTML = `🌐 <span>${isTranslated ? 'ES' : 'EN'}</span>`;
+            langBtn.title = isTranslated ? "Cambiar a Español" : "Translate to English";
+            langBtn.addEventListener("click", () => {
+                if (isTranslated) {
+                    resetGoogleTranslate();
+                } else {
+                    applyGoogleTranslate('en');
+                }
+            });
+            langItem.appendChild(langBtn);
+            fragment.appendChild(langItem);
+
             menu.replaceChildren(fragment);
             navigation.classList.remove("home-nav");
             if (brandSubtitle) brandSubtitle.textContent = "Portal oficial";
@@ -128,6 +146,98 @@
         container.addEventListener("mouseleave", () => { stage.style.transform = ""; });
     }
 
+    function setGoogleTranslateCookie(lang) {
+        const domain = window.location.hostname.includes('drakescraft.cl') ? '.drakescraft.cl' : window.location.hostname;
+        document.cookie = `googtrans=/es/${lang}; path=/;`;
+        document.cookie = `googtrans=/es/${lang}; path=/; domain=${domain};`;
+    }
+
+    function applyGoogleTranslate(lang) {
+        localStorage.setItem('drakes_lang_choice', lang);
+        setGoogleTranslateCookie(lang);
+        window.location.reload();
+    }
+
+    function resetGoogleTranslate() {
+        localStorage.removeItem('drakes_lang_choice');
+        const domain = window.location.hostname.includes('drakescraft.cl') ? '.drakescraft.cl' : window.location.hostname;
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+        window.location.reload();
+    }
+
+    function showLanguageBanner() {
+        if (document.getElementById('dk-lang-banner')) return;
+        const banner = document.createElement('aside');
+        banner.className = 'dk-lang-banner';
+        banner.id = 'dk-lang-banner';
+        banner.setAttribute('role', 'dialog');
+        banner.setAttribute('aria-label', 'Language selection');
+        banner.innerHTML = `
+          <div class="dk-lang-banner__content">
+            <span class="dk-lang-icon" aria-hidden="true">🌐</span>
+            <div class="dk-lang-text">
+              <strong>We noticed your browser is in English.</strong>
+              <span>Would you like to translate DrakesCraft into English?</span>
+            </div>
+            <div class="dk-lang-actions">
+              <button class="dk-lang-btn dk-lang-btn--primary" id="dk-lang-translate" type="button">🌐 Translate to English</button>
+              <button class="dk-lang-btn dk-lang-btn--ghost" id="dk-lang-dismiss" type="button" aria-label="Dismiss">✕ Not now</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(banner);
+
+        document.getElementById('dk-lang-translate')?.addEventListener('click', () => {
+            applyGoogleTranslate('en');
+        });
+
+        document.getElementById('dk-lang-dismiss')?.addEventListener('click', () => {
+            localStorage.setItem('drakes_lang_dismissed', 'true');
+            banner.classList.add('hidden');
+            setTimeout(() => banner.remove(), 400);
+        });
+    }
+
+    function initBilingualSystem() {
+        if (!document.getElementById('google_translate_element')) {
+            const gtDiv = document.createElement('div');
+            gtDiv.id = 'google_translate_element';
+            gtDiv.style.display = 'none';
+            document.body.appendChild(gtDiv);
+        }
+
+        window.googleTranslateElementInit = function() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'es',
+                    includedLanguages: 'en,es,pt,fr',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            } catch (ignored) {}
+        };
+
+        if (!document.querySelector('script[src*="translate.google.com"]')) {
+            const s = document.createElement('script');
+            s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            s.async = true;
+            document.body.appendChild(s);
+        }
+
+        const isAlreadyEn = document.cookie.includes('googtrans=/es/en') || localStorage.getItem('drakes_lang_choice') === 'en';
+        if (isAlreadyEn && !document.cookie.includes('googtrans=/es/en')) {
+            setGoogleTranslateCookie('en');
+        }
+
+        const userLang = (navigator.language || (navigator.languages && navigator.languages[0]) || '').toLowerCase();
+        const isNonSpanish = userLang && !userLang.startsWith('es');
+        const dismissed = localStorage.getItem('drakes_lang_dismissed') === 'true';
+
+        if (isNonSpanish && !isAlreadyEn && !dismissed) {
+            showLanguageBanner();
+        }
+    }
+
     window.showToast = showToast;
     window.setupTilt = setupTilt;
 
@@ -136,6 +246,7 @@
         setupNavigation();
         setupProgress();
         setupCrestStage();
+        initBilingualSystem();
         document.querySelectorAll("[data-year]").forEach((node) => { node.textContent = String(new Date().getFullYear()); });
     });
 }());
