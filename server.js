@@ -123,7 +123,23 @@ const tebexPackageIds = {
   'titan-hiperion': 7609646,
   'titan-cronos': 7609648,
   'titan-caos': 7609649,
-  'slimefun-research-all': 7609650
+  'slimefun-research-all': 7609650,
+  'anti-afk-permanent': 7609651,
+  'anti-afk-30d': 7609652,
+  'protection-campamento': 7609653,
+  'protection-aldea': 7609654,
+  'protection-fortaleza': 7609655,
+  'vaults-pack-3': 7609656,
+  'vaults-pack-10': 7609657,
+  'homes-pack-5': 7609658,
+  'homes-pack-15': 7609659,
+  'fly-pass-7d': 7609660,
+  'fly-pass-30d': 7609661,
+  'keys-atenea-3': 7609662,
+  'keys-hermes-5': 7609663,
+  'keys-zeus-3': 7609664,
+  'booster-money-1h': 7609665,
+  'booster-exp-1h': 7609666
 };
 // Los bloqueos excepcionales se declaran aquí para impedir que un producto llegue al checkout.
 // protection-481 fue verificada contra el alias vipzeus de ProtectionStones.
