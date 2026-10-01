@@ -77,11 +77,12 @@ for comando in ("/arcana guide", "/arcana spirit", "/dioses", "/bosswarp precios
 for fila in (
         '<tr><th scope="row" data-rank="polis">Polis</th><td>1</td><td>2</td>',
         '<tr><th scope="row" data-rank="oldschool">OldSchool</th><td>1</td><td>2</td>',
-        '<tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>3</td><td>81×81</td><td>4</td><td>5</td>',
-        '<tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>5</td><td>177×177</td><td>6</td><td>8</td>'):
+        '<tr><th scope="row" data-rank="hestia">Hestia</th><td>5</td><td>4</td><td>81×81</td><td>4</td><td>5</td>',
+        '<tr><th scope="row" data-rank="hefesto">Hefesto</th><td>8</td><td>7</td><td>177×177</td><td>6</td><td>8</td>'):
     revisar(fila in rangos, f"Rangos: límite efectivo publicado para {fila.split('>')[2].split('<')[0]}")
 
-revisar("32 reclamaciones" in rangos and "InfinityExpansion" in rangos,
+revisar("DrakesVIP++" in rangos and "Habilidades Divinas Activas" in rangos,
+        "Rangos: Habilidades VIP++ y menú GUI presentes")
 
 # 7 · Los precios visibles deben cubrir y coincidir con el catálogo de BossArena.
 try:
