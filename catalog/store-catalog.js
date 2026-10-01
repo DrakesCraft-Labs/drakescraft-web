@@ -11,6 +11,7 @@ export const storeCatalog = {
     checkout: 'https://pay.tebex.io'
   },
   categories: [
+    { id: 'halloween', label: '🎃 Eventos Únicos: Halloween', tagline: 'Edición mítica y ultra-limitada disponible exclusivamente durante el mes de Octubre con entrega digital inmediata.' },
     { id: 'monthly', label: 'Pases VIP', tagline: 'Pases manuales de 30 días, sin renovación automática. Progresión griega real, utilidades y auras integradas por Odysseia.' },
     { id: 'titans', label: 'Titanes Primordiales', tagline: 'La línea superior de rangos mensuales: equipo, protecciones y habilidades de escala primordial.' },
     { id: 'roles', label: 'Roles de Juego', tagline: 'Pases manuales de 30 días, sin renovación automática. Subrangos con identidad propia dentro de la comunidad.' },
@@ -23,6 +24,31 @@ export const storeCatalog = {
     { id: 'boosters', label: 'Boosters Globales', tagline: 'Activa bonificadores masivos para toda la comunidad durante 1 hora y destaca en todo el servidor.' }
   ],
   products: [
+    {
+      id: 'kit-halloween-tartaro',
+      category: 'halloween',
+      tier: 15,
+      name: 'Kit Legendario: Sombras del Tártaro (Halloween Edition)',
+      badge: '🎃 OFERTA ESPECIAL · EDICIÓN HALLOWEEN',
+      clp: 29990,
+      usd: 29.99,
+      featured: true,
+      accent: 'rose',
+      purchaseAvailable: true,
+      summary: '¡El kit de combate y supervivencia más devastador del servidor! Armadura completa del Rey del Tártaro con +10 Corazones (+20 HP), Inmunidad a Radiación Slimefun y Fuego/Lava, Guadaña Espectral de Caronte con Daño Verdadero y Vórtice de Almas, los 5 Cores Daxi de TranscEndence, Papa de Mar Espectral con PDC genuino y 500.000 Dragmas.',
+      includes: [
+        '👑 Corona del Rey del Tártaro: Protección VI, Irrompible X, Soulbound, +5 Corazones (+10 HP), Inmunidad Slimefun',
+        '⚔ Coraza del Castigo Eterno: Protección VI, Irrompible X, Soulbound, +5 Corazones, +3 Daño Base y Mitigación de Daño 25%',
+        '🛡 Grebas de las Cadenas Primordiales: Protección VI, Irrompible X, Soulbound, +15% Velocidad y Resistencia Cósmica',
+        '🔥 Botas del Río Aqueronte: Protección VI, Irrompible X, Soulbound, Inmunidad total a Lava, Fuego y Suelo Caliente',
+        '💀 Guadaña Espectral de Caronte: Filo VII, Fuego III, Irrompible X, Soulbound, Daño Verdadero que atraviesa armaduras y Habilidad Activa Clic Derecho: Vórtice de Almas del Tártaro (8 bloques de True Damage)',
+        '🥔 Reliquia Sagrada de Odysseia: Papa de Mar Espectral de Halloween (con PDC auténtico de Odysseia)',
+        '⚡ Los 5 Cores Daxi de TranscEndence (Fuerza, Absorción, Fortaleza, Saturación y Regeneración)',
+        '📦 Recursos Slimefun End-Game: 64x Aleación Reforzada, 32x Carbonado, 64x Diamante Sintético, 16x Ojos de Ender Mágicos, 1x Enhanced Auto Crafter',
+        '🪙 $500.000 ₯ en Dragmas acreditados directamente a tu cuenta',
+        '🎃 Distinción Exclusiva: Sufijo permanente en el chat [🎃 TÁRTARO]'
+      ]
+    },
     { id: 'hercules', category: 'monthly', tier: 1, name: 'Hércules', badge: 'Entrada VIP', clp: 4990, usd: 4.99, featured: false, accent: 'bronze', summary: 'El punto de partida VIP: 3 bóvedas privadas portátiles, protección anti-robo 49x49 y aura de combate Odysseia.', includes: ['Pase manual de 30 días, sin renovación automática, rango temporal y Hito VIP Hércules', '⭐ DrakesVIP++: +1 corazón extra (+2 HP), aura celestial y Habilidad Activa Sísmica Ground Slam (Sneak + F). Configurable vía /vip', '📦 3 Bóvedas Virtuales Privadas (<code>/pv 1-3</code>) portátiles y seguras en cualquier mundo', '🛡️ Hito Hércules 49x49 con Blindaje Anti-Robo de cofres, máquinas Slimefun y redes de Networks', '3 homes, 5 warps de jugador (<code>/pw</code>) y hasta 20 tiendas QuickShop', 'Kit Hércules automático: set de diamante, herramientas, escudo y consumibles', 'Aura de armadura Odysseia con set completo de diamante: Velocidad I + Resistencia I', 'Entrega automática del kit Hércules, 1 Hito PS y $35.000 ₯ en Dragmas'] },
     { id: 'hestia', category: 'monthly', tier: 2, name: 'Hestia', badge: 'Social', clp: 7990, usd: 7.99, featured: false, accent: 'rose', summary: 'Comodidad social y supervivencia extrema: 4 bóvedas privadas, sustentación en lava y territorio protegido 81x81.', includes: ['Pase manual de 30 días, sin renovación automática, hereda Hércules y suma Hito VIP Hestia', '⭐ DrakesVIP++: +1 corazón extra, inmunidad al fuego pasiva y Habilidad Activa Hearth (Llama purificadora y cura). Configurable vía /vip', '📦 4 Bóvedas Virtuales Privadas (<code>/pv 1-4</code>) portátiles y seguras', '🛡️ Hito Hestia 81x81 con Blindaje Anti-Robo de cofres, máquinas Slimefun y redes de Networks', '5 homes, <code>/nick</code>, <code>/ptime</code>, <code>/pweather</code>, <code>/ext</code> y hasta 30 tiendas QuickShop', 'Kit Hestia automático: set de netherita, herramientas, escudo y consumibles', 'Habilidad de Armadura: 🔥 Caminar en Lava (sustentación sobre lagos de lava, inmunidad al fuego y estela de llamas sagradas)', 'Aura de armadura Odysseia: Velocidad II + Health Boost I + Saturación', 'Entrega automática del kit Hestia, 1 Hito PS y $75.000 ₯ en Dragmas'] },
     { id: 'hermes', category: 'monthly', tier: 3, name: 'Hermes', badge: 'Vuelo /fly', clp: 10990, usd: 10.99, featured: true, accent: 'violet', summary: '¡El rango más codiciado! Vuelo permanente <code>/fly</code> ilimitado en todo el Survival (¡sin baterías ni gemas!), 5 bóvedas privadas y movilidad suprema.', includes: ['Pase manual de 30 días, sin renovación automática, hereda anteriores y suma Hito VIP Hermes', '⭐ DrakesVIP++: +1 corazón extra, Velocidad II permanente y Habilidad Activa Blink Dash (impulso sónico frontal). Configurable vía /vip', '🪽 ¡Vuelo Permanente <code>/fly</code> libre e ilimitado en todo el Survival! Olvídate de recargar energía o perder gemas', '📦 5 Bóvedas Virtuales Privadas (<code>/pv 1-5</code>) portátiles y 100% seguras anti-robo', '🛡️ Hito Hermes 113x113 con Blindaje Anti-Robo de máquinas Slimefun y redes de Networks', '6 homes, 8 warps, <code>/speed</code>, <code>/back</code>, <code>/workbench</code>, <code>/enderchest</code>, <code>/compass</code>, RTP instantáneo y hasta 40 tiendas QuickShop', 'Kit Hermes automático: set de netherita, herramientas, escudo y consumibles', 'Habilidad de Armadura: 🪽 Paso Ligero del Viento (estela de nubes, salto alado y sin romper cultivos)', 'Aura de armadura Odysseia: Velocidad IV + Health Boost I + Saturación', 'Entrega automática del kit Hermes, 1 Hito PS y $150.000 ₯ en Dragmas'] },
