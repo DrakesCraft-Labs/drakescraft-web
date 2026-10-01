@@ -193,6 +193,12 @@ document.addEventListener("DOMContentLoaded", () => {
             badge: "Edición Especial Limitada · Octubre 2026",
             badgeStyle: "background: rgba(255, 119, 0, 0.2); border: 1px solid #ff7700; color: #ffaa33;",
             dotColor: "#ff7700",
+            glowColor: "#ff7700",
+            containerBg: "linear-gradient(135deg, rgba(35, 10, 45, 0.95), rgba(75, 18, 20, 0.95))",
+            containerBorder: "2px solid #ff7700",
+            containerShadow: "0 0 30px rgba(255, 119, 0, 0.25)",
+            btnStyle: "background: linear-gradient(135deg, #ff7700, #b30000); box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4); border: 1px solid #ffaa33;",
+            btnTextColor: "#fff",
             title: "La Noche Perpetua del Tártaro ha comenzado",
             desc: "En DrakesCraft la luz solar ha sido desterrada durante todo octubre. Descubre el <strong>Kit Legendario: Sombras del Tártaro</strong>, con la armadura divina del Rey del Tártaro (+10 Corazones e inmunidad total a radiación y fuego), la Guadaña Espectral de Caronte con daño verdadero y la legendaria Papa de Mar Espectral.",
             btnText: "Ver Kit Tártaro $29.99 ➔",
@@ -203,6 +209,12 @@ document.addEventListener("DOMContentLoaded", () => {
             badge: "Celebración Celestial · Mes del Creador (29 de Noviembre)",
             badgeStyle: "background: rgba(255, 215, 0, 0.2); border: 1px solid #ffd700; color: #fef08a;",
             dotColor: "#ffd700",
+            glowColor: "#ffd700",
+            containerBg: "linear-gradient(135deg, rgba(28, 18, 5, 0.96), rgba(38, 15, 45, 0.96))",
+            containerBorder: "2px solid #ffd700",
+            containerShadow: "0 0 35px rgba(255, 215, 0, 0.3)",
+            btnStyle: "background: linear-gradient(135deg, #ffd700, #b45309); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.45); border: 1px solid #fef08a;",
+            btnTextColor: "#000",
             title: "Cumpleaños del Creador JackStar & Star Sovereignty",
             desc: "Conmemoramos la mente maestra y arquitecto fundador de la red. Disfruta de un <strong>20% de descuento celestial</strong> en rangos, llaves y pases con el cupón <code>JACKSTAR</code>, además del regreso exclusivo de las Cajas Celestiales y el Kit Sagrado del Creador.",
             btnText: "Explorar Especial JackStar ➔",
@@ -213,6 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
             badge: "Solsticio Hiemal & Fiesta Navideña · Edición Anual",
             badgeStyle: "background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #bae6fd;",
             dotColor: "#38bdf8",
+            glowColor: "#38bdf8",
+            containerBg: "linear-gradient(135deg, rgba(8, 25, 45, 0.95), rgba(10, 38, 30, 0.95))",
+            containerBorder: "2px solid #38bdf8",
+            containerShadow: "0 0 35px rgba(56, 189, 248, 0.28)",
+            btnStyle: "background: linear-gradient(135deg, #0284c7, #0f766e); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4); border: 1px solid #7dd3fc;",
+            btnTextColor: "#fff",
             title: "La Ventisca Eterna de Bóreas ha descendido",
             desc: "El invierno primordial congela las cinco modalidades. Descubre el <strong>Kit Mítico: Corona de Bóreas</strong> con el Cristal Criogénico Absoluto, la Capa de Nieve Eterna que extingue el daño por frío y cajas navideñas de fin de año con recompensas exclusivas.",
             btnText: "Ver Colección Hiemal ➔",
@@ -223,6 +241,12 @@ document.addEventListener("DOMContentLoaded", () => {
             badge: "Temporada del Amor Divino · Edición San Valentín",
             badgeStyle: "background: rgba(244, 63, 94, 0.2); border: 1px solid #f43f5e; color: #fecdd3;",
             dotColor: "#f43f5e",
+            glowColor: "#f43f5e",
+            containerBg: "linear-gradient(135deg, rgba(45, 10, 25, 0.96), rgba(35, 8, 38, 0.96))",
+            containerBorder: "2px solid #f43f5e",
+            containerShadow: "0 0 35px rgba(244, 63, 94, 0.3)",
+            btnStyle: "background: linear-gradient(135deg, #e11d48, #9333ea); box-shadow: 0 4px 18px rgba(244, 63, 94, 0.45); border: 1px solid #fda4af;",
+            btnTextColor: "#fff",
             title: "La Gracia y Pasión de Afrodita en DrakesCraft",
             desc: "Los lazos de lealtad y alianzas florecen. Consigue cosméticos exclusivos de San Valentín, el <strong>Kit Devoción Eterna</strong>, Cajas de Afrodita con efectos de corazones divinos y multiplicadores dobles de amistad en modalidades.",
             btnText: "Ver Especial San Valentín ➔",
@@ -250,24 +274,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         container.style.display = "flex";
-        container.className = `seasonal-banner seasonal-banner--${currentTheme} store-halloween-banner`;
-        container.style.removeProperty("background");
-        container.style.removeProperty("border");
-        container.style.removeProperty("box-shadow");
+        container.style.background = bannerConfig.containerBg;
+        container.style.border = bannerConfig.containerBorder;
+        container.style.borderRadius = "14px";
+        container.style.padding = "22px 28px";
+        container.style.marginBottom = "25px";
+        container.style.boxShadow = bannerConfig.containerShadow;
+        container.style.alignItems = "center";
+        container.style.justifyContent = "space-between";
+        container.style.gap = "20px";
+        container.style.flexWrap = "wrap";
+        container.className = `store-halloween-banner seasonal-banner seasonal-banner--${currentTheme}`;
 
         container.innerHTML = `
-          <div class="seasonal-banner__content">
-            <span class="seasonal-banner__icon">${bannerConfig.icon}</span>
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <span style="font-size: 2.8rem; filter: drop-shadow(0 0 10px ${bannerConfig.glowColor}); line-height: 1;">${bannerConfig.icon}</span>
             <div>
-              <div class="seasonal-banner__badge" style="${bannerConfig.badgeStyle}">
-                <span class="seasonal-banner__badge-dot" style="background: ${bannerConfig.dotColor}; box-shadow: 0 0 8px ${bannerConfig.dotColor};"></span>
+              <div style="display: inline-flex; align-items: center; gap: 8px; ${bannerConfig.badgeStyle} padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: ${bannerConfig.dotColor}; box-shadow: 0 0 8px ${bannerConfig.dotColor};"></span>
                 ${bannerConfig.badge}
               </div>
-              <h3 class="seasonal-banner__title">${bannerConfig.title}</h3>
-              <p class="seasonal-banner__desc">${bannerConfig.desc}</p>
+              <h3 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Space Grotesk', sans-serif;">${bannerConfig.title}</h3>
+              <p style="margin: 4px 0 0; color: #d0c0d8; font-size: 0.92rem; max-width: 650px; line-height: 1.5;">${bannerConfig.desc}</p>
             </div>
           </div>
-          <a class="seasonal-banner__btn" href="#catalogo" onclick="window.storeSelectCategory && window.storeSelectCategory('${bannerConfig.category}')">
+          <a href="#catalogo" onclick="window.storeSelectCategory && window.storeSelectCategory('${bannerConfig.category}')" style="${bannerConfig.btnStyle} color: ${bannerConfig.btnTextColor || '#fff'}; font-weight: 700; padding: 12px 24px; border-radius: 10px; text-decoration: none; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s;">
             ${bannerConfig.btnText}
           </a>
         `;
