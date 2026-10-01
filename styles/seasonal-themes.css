@@ -239,3 +239,117 @@ body.theme-valentines .seasonal-banner__btn {
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
 }
+
+/* ── ESTILOS ESPECÍFICOS PARA LA PÁGINA PRINCIPAL (HOME PAGE) ────── */
+body.theme-halloween.home-page,
+body.theme-halloween .home-page {
+  --home-bg: #090410 !important;
+  --home-gold: #ff7700 !important;
+  --home-cream: #f5e6fb !important;
+  --home-line: rgba(255, 119, 0, 0.18) !important;
+}
+
+body.theme-halloween .home-hero__veil {
+  background:
+    linear-gradient(90deg, rgba(16, 5, 24, 0.97) 0%, rgba(32, 8, 42, 0.88) 48%, rgba(45, 12, 18, 0.55) 85%),
+    linear-gradient(0deg, #090410 0%, transparent 25%, rgba(0, 0, 0, 0.45) 100%) !important;
+}
+
+body.theme-halloween .home-tech-pill {
+  background: rgba(255, 119, 0, 0.16) !important;
+  border-color: rgba(255, 119, 0, 0.45) !important;
+  color: #ffaa33 !important;
+}
+
+body.theme-halloween .live-dot-mini {
+  background: #ff7700 !important;
+  box-shadow: 0 0 10px #ff7700 !important;
+}
+
+body.theme-halloween .title-glow {
+  color: #ff7700 !important;
+  text-shadow: 0 0 28px rgba(255, 119, 0, 0.65) !important;
+}
+
+body.theme-halloween .home-cta-store {
+  background: linear-gradient(135deg, rgba(255, 119, 0, 0.35) 0%, rgba(139, 92, 246, 0.35) 50%, rgba(35, 10, 45, 0.95) 100%) !important;
+  border-color: #ff7700 !important;
+  box-shadow: 0 0 28px rgba(255, 119, 0, 0.35), inset 0 0 16px rgba(255, 119, 0, 0.15) !important;
+}
+
+body.theme-halloween .home-cta-store:hover {
+  box-shadow: 0 0 35px rgba(255, 119, 0, 0.6), inset 0 0 20px rgba(255, 119, 0, 0.25) !important;
+  border-color: #ffaa33 !important;
+}
+
+body.theme-halloween .cta-store-tag {
+  color: #ffaa33 !important;
+}
+
+body.theme-halloween .nav-store-btn {
+  background: linear-gradient(135deg, #ff7700, #b30000) !important;
+  border-color: #ffaa33 !important;
+  box-shadow: 0 0 16px rgba(255, 119, 0, 0.45) !important;
+}
+
+body.theme-halloween .site-nav__links a.active {
+  color: #ff7700 !important;
+  border-bottom-color: #ff7700 !important;
+}
+
+/* Home overrides para Cumpleaños del Owner */
+body.theme-birthday.home-page,
+body.theme-birthday .home-page {
+  --home-bg: #070612 !important;
+  --home-gold: #ffd700 !important;
+  --home-cream: #fefce8 !important;
+}
+
+body.theme-birthday .title-glow {
+  color: #ffd700 !important;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.7) !important;
+}
+
+body.theme-birthday .home-cta-store {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.35) 0%, rgba(168, 85, 247, 0.35) 50%, rgba(28, 18, 5, 0.95) 100%) !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.35) !important;
+}
+
+/* Home overrides para Navidad / Solsticio Hiemal */
+body.theme-christmas.home-page,
+body.theme-christmas .home-page {
+  --home-bg: #040814 !important;
+  --home-gold: #38bdf8 !important;
+  --home-cream: #f0f9ff !important;
+}
+
+body.theme-christmas .title-glow {
+  color: #38bdf8 !important;
+  text-shadow: 0 0 30px rgba(56, 189, 248, 0.7) !important;
+}
+
+body.theme-christmas .home-cta-store {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.35) 0%, rgba(52, 211, 153, 0.3) 50%, rgba(8, 25, 45, 0.95) 100%) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.35) !important;
+}
+
+/* Home overrides para San Valentín */
+body.theme-valentines.home-page,
+body.theme-valentines .home-page {
+  --home-bg: #0d040c !important;
+  --home-gold: #f43f5e !important;
+  --home-cream: #fff1f2 !important;
+}
+
+body.theme-valentines .title-glow {
+  color: #f43f5e !important;
+  text-shadow: 0 0 30px rgba(244, 63, 94, 0.7) !important;
+}
+
+body.theme-valentines .home-cta-store {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.35) 0%, rgba(217, 70, 239, 0.3) 50%, rgba(45, 10, 25, 0.95) 100%) !important;
+  border-color: #f43f5e !important;
+  box-shadow: 0 0 30px rgba(244, 63, 94, 0.35) !important;
+}
