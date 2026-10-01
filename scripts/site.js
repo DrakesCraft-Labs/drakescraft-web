@@ -238,10 +238,64 @@
         }
     }
 
+    function detectSeasonalTheme() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryTheme = urlParams.get("theme");
+        if (queryTheme) {
+            const normalized = queryTheme.toLowerCase();
+            if (["halloween", "birthday", "christmas", "valentines", "default"].includes(normalized)) {
+                try { localStorage.setItem("drakes_seasonal_theme", normalized); } catch (e) {}
+                return normalized;
+            }
+        }
+        try {
+            const storedTheme = localStorage.getItem("drakes_seasonal_theme");
+            if (storedTheme && ["halloween", "birthday", "christmas", "valentines", "default"].includes(storedTheme)) {
+                return storedTheme;
+            }
+        } catch (e) {}
+
+        const now = new Date();
+        const month = now.getMonth(); // 0: Jan, 1: Feb, ..., 9: Oct, 10: Nov, 11: Dec
+        const day = now.getDate();
+
+        // Octubre (todo el mes): Halloween / Sombras del Tártaro
+        if (month === 9) return "halloween";
+
+        // Noviembre: Cumpleaños del Owner / JackStar (29 de Noviembre)
+        if (month === 10) return "birthday";
+
+        // Diciembre y hasta el 15 de Enero: Navidad & Solsticio Hiemal
+        if (month === 11 || (month === 0 && day <= 15)) return "christmas";
+
+        // Febrero: Día de los Enamorados / Afrodita
+        if (month === 1) return "valentines";
+
+        return "default";
+    }
+
+    function applySeasonalTheme(forcedTheme) {
+        const theme = forcedTheme || detectSeasonalTheme();
+        document.body.classList.remove("theme-halloween", "theme-birthday", "theme-christmas", "theme-valentines");
+        if (theme !== "default") {
+            document.body.classList.add("theme-" + theme);
+        }
+        window.drakesCurrentTheme = theme;
+        window.dispatchEvent(new CustomEvent("drakesThemeChanged", { detail: { theme } }));
+        return theme;
+    }
+
     window.showToast = showToast;
     window.setupTilt = setupTilt;
+    window.drakesDetectSeasonalTheme = detectSeasonalTheme;
+    window.drakesApplySeasonalTheme = applySeasonalTheme;
+    window.drakesSetSeasonalTheme = function(theme) {
+        try { localStorage.setItem("drakes_seasonal_theme", theme); } catch (e) {}
+        return applySeasonalTheme(theme);
+    };
 
     document.addEventListener("DOMContentLoaded", () => {
+        applySeasonalTheme();
         renderPrimaryNavigation();
         setupNavigation();
         setupProgress();

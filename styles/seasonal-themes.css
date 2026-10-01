@@ -1,0 +1,241 @@
+/* ==========================================================================
+   DRAKESCRAFT SEASONAL THEMES ENGINE
+   Temas estacionales dinámicos:
+   - Halloween (Octubre - Tártaro / Noche Perpetua)
+   - Cumpleaños del Owner JackStar (Noviembre - Dorado Celestial / Star Sovereignty)
+   - Navidad & Solsticio Hiemal (Diciembre - Enero - Corona de Bóreas / Frío Primordial)
+   - San Valentín / Enamorados (Febrero - Afrodita / Rosa Carmesí & Alianzas)
+   ========================================================================== */
+
+/* ── 1. TEMA HALLOWEEN (Octubre) ────────────────────────────────── */
+body.theme-halloween {
+  --page-accent: #ff7700;
+  --page-accent-soft: rgba(255, 119, 0, 0.22);
+  --page-glow: rgba(255, 119, 0, 0.28);
+  --store-accent-gold: #ff9900;
+  --store-accent-purple: #c084fc;
+  --store-card-border: rgba(255, 119, 0, 0.28);
+  --store-card-hover: rgba(255, 119, 0, 0.55);
+  background-color: #08040d !important;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 60%, rgba(255, 119, 0, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(180, 20, 20, 0.10) 0%, transparent 40%) !important;
+}
+
+body.theme-halloween .seasonal-banner {
+  background: linear-gradient(135deg, rgba(35, 10, 45, 0.95), rgba(75, 18, 20, 0.95));
+  border: 2px solid #ff7700;
+  box-shadow: 0 0 30px rgba(255, 119, 0, 0.25);
+}
+
+body.theme-halloween .seasonal-banner__btn {
+  background: linear-gradient(135deg, #ff7700, #b30000);
+  border: 1px solid #ffaa33;
+  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
+}
+
+/* ── 2. TEMA CUMPLEAÑOS DEL OWNER / JACKSTAR (Noviembre) ───────── */
+body.theme-birthday {
+  --page-accent: #ffd700;
+  --page-accent-soft: rgba(255, 215, 0, 0.24);
+  --page-glow: rgba(255, 215, 0, 0.32);
+  --gold: #ffd700;
+  --store-accent-gold: #fbbf24;
+  --store-accent-purple: #a855f7;
+  --store-accent-cyan: #67e8f9;
+  --store-card-border: rgba(255, 215, 0, 0.32);
+  --store-card-hover: rgba(255, 215, 0, 0.65);
+  background-color: #070612 !important;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.14) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.12) 0%, transparent 45%) !important;
+}
+
+body.theme-birthday .seasonal-banner {
+  background: linear-gradient(135deg, rgba(28, 18, 5, 0.96), rgba(38, 15, 45, 0.96));
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.3);
+}
+
+body.theme-birthday .seasonal-banner__btn {
+  background: linear-gradient(135deg, #ffd700, #b45309);
+  color: #000 !important;
+  font-weight: 800 !important;
+  border: 1px solid #fef08a;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.45);
+}
+
+/* ── 3. TEMA NAVIDAD & SOLSTICIO HIEMAL (Diciembre - Enero) ────── */
+body.theme-christmas {
+  --page-accent: #38bdf8;
+  --page-accent-soft: rgba(56, 189, 248, 0.22);
+  --page-glow: rgba(56, 189, 248, 0.35);
+  --cyan: #38bdf8;
+  --emerald: #34d399;
+  --store-accent-cyan: #38bdf8;
+  --store-accent-gold: #fef08a;
+  --store-accent-purple: #818cf8;
+  --store-card-border: rgba(56, 189, 248, 0.28);
+  --store-card-hover: rgba(56, 189, 248, 0.6);
+  background-color: #040814 !important;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(56, 189, 248, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(52, 211, 153, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(129, 140, 248, 0.10) 0%, transparent 40%) !important;
+}
+
+body.theme-christmas .seasonal-banner {
+  background: linear-gradient(135deg, rgba(8, 25, 45, 0.95), rgba(10, 38, 30, 0.95));
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.28);
+}
+
+body.theme-christmas .seasonal-banner__btn {
+  background: linear-gradient(135deg, #0284c7, #0f766e);
+  color: #fff !important;
+  border: 1px solid #7dd3fc;
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);
+}
+
+/* ── 4. TEMA SAN VALENTÍN / ENAMORADOS (Febrero) ───────────────── */
+body.theme-valentines {
+  --page-accent: #f43f5e;
+  --page-accent-soft: rgba(244, 63, 94, 0.22);
+  --page-glow: rgba(244, 63, 94, 0.3);
+  --rose: #fb7185;
+  --store-accent-purple: #f472b6;
+  --store-accent-gold: #fbcfe8;
+  --store-card-border: rgba(244, 63, 94, 0.28);
+  --store-card-hover: rgba(244, 63, 94, 0.6);
+  background-color: #0d040c !important;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(244, 63, 94, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 85% 60%, rgba(217, 70, 239, 0.13) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(251, 113, 133, 0.09) 0%, transparent 40%) !important;
+}
+
+body.theme-valentines .seasonal-banner {
+  background: linear-gradient(135deg, rgba(45, 10, 25, 0.96), rgba(35, 8, 38, 0.96));
+  border: 2px solid #f43f5e;
+  box-shadow: 0 0 35px rgba(244, 63, 94, 0.3);
+}
+
+body.theme-valentines .seasonal-banner__btn {
+  background: linear-gradient(135deg, #e11d48, #9333ea);
+  color: #fff !important;
+  border: 1px solid #fda4af;
+  box-shadow: 0 4px 18px rgba(244, 63, 94, 0.45);
+}
+
+/* ── ESTRUCTURA UNIVERSAL DEL BANNER ESTACIONAL ────────────────── */
+.seasonal-banner {
+  border-radius: 14px;
+  padding: 22px 28px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.seasonal-banner::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.seasonal-banner__content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 1;
+}
+
+.seasonal-banner__icon {
+  font-size: 2.8rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seasonal-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.seasonal-banner__badge-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.seasonal-banner__title {
+  margin: 0;
+  font-size: 1.45rem;
+  color: #fff;
+  font-family: 'Space Grotesk', var(--font-heading), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.seasonal-banner__desc {
+  margin: 4px 0 0;
+  color: #d0c0d8;
+  font-size: 0.92rem;
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+.seasonal-banner__btn {
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1;
+}
+
+.seasonal-banner__btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ── SELECTOR FLOTANTE / FOOTER DE TEMAS ESTACIONALES ─────────── */
+.seasonal-theme-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.seasonal-theme-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}

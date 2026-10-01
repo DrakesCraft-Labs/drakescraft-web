@@ -187,23 +187,108 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    const seasonalBanners = {
+        halloween: {
+            icon: "🎃",
+            badge: "Edición Especial Limitada · Octubre 2026",
+            badgeStyle: "background: rgba(255, 119, 0, 0.2); border: 1px solid #ff7700; color: #ffaa33;",
+            dotColor: "#ff7700",
+            title: "La Noche Perpetua del Tártaro ha comenzado",
+            desc: "En DrakesCraft la luz solar ha sido desterrada durante todo octubre. Descubre el <strong>Kit Legendario: Sombras del Tártaro</strong>, con la armadura divina del Rey del Tártaro (+10 Corazones e inmunidad total a radiación y fuego), la Guadaña Espectral de Caronte con daño verdadero y la legendaria Papa de Mar Espectral.",
+            btnText: "Ver Kit Tártaro $29.99 ➔",
+            category: "halloween"
+        },
+        birthday: {
+            icon: "👑",
+            badge: "Celebración Celestial · Mes del Creador (29 de Noviembre)",
+            badgeStyle: "background: rgba(255, 215, 0, 0.2); border: 1px solid #ffd700; color: #fef08a;",
+            dotColor: "#ffd700",
+            title: "Cumpleaños del Creador JackStar & Star Sovereignty",
+            desc: "Conmemoramos la mente maestra y arquitecto fundador de la red. Disfruta de un <strong>20% de descuento celestial</strong> en rangos, llaves y pases con el cupón <code>JACKSTAR</code>, además del regreso exclusivo de las Cajas Celestiales y el Kit Sagrado del Creador.",
+            btnText: "Explorar Especial JackStar ➔",
+            category: "ranks"
+        },
+        christmas: {
+            icon: "❄️",
+            badge: "Solsticio Hiemal & Fiesta Navideña · Edición Anual",
+            badgeStyle: "background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #bae6fd;",
+            dotColor: "#38bdf8",
+            title: "La Ventisca Eterna de Bóreas ha descendido",
+            desc: "El invierno primordial congela las cinco modalidades. Descubre el <strong>Kit Mítico: Corona de Bóreas</strong> con el Cristal Criogénico Absoluto, la Capa de Nieve Eterna que extingue el daño por frío y cajas navideñas de fin de año con recompensas exclusivas.",
+            btnText: "Ver Colección Hiemal ➔",
+            category: "ranks"
+        },
+        valentines: {
+            icon: "💖",
+            badge: "Temporada del Amor Divino · Edición San Valentín",
+            badgeStyle: "background: rgba(244, 63, 94, 0.2); border: 1px solid #f43f5e; color: #fecdd3;",
+            dotColor: "#f43f5e",
+            title: "La Gracia y Pasión de Afrodita en DrakesCraft",
+            desc: "Los lazos de lealtad y alianzas florecen. Consigue cosméticos exclusivos de San Valentín, el <strong>Kit Devoción Eterna</strong>, Cajas de Afrodita con efectos de corazones divinos y multiplicadores dobles de amistad en modalidades.",
+            btnText: "Ver Especial San Valentín ➔",
+            category: "ranks"
+        }
+    };
+
+    function renderSeasonalBanner() {
+        const container = document.getElementById("store-seasonal-banner-container") || document.querySelector(".store-halloween-banner");
+        if (!container) return;
+
+        const currentTheme = window.drakesCurrentTheme || (window.drakesDetectSeasonalTheme ? window.drakesDetectSeasonalTheme() : "halloween");
+        const bannerConfig = seasonalBanners[currentTheme];
+
+        if (!bannerConfig || currentTheme === "default") {
+            container.style.display = "none";
+            return;
+        }
+
+        const now = new Date();
+        const hasHalloween = state.catalog?.products?.some((p) => p.category === "halloween" && p.purchaseAvailable !== false);
+        if (currentTheme === "halloween" && (!hasHalloween || (now >= new Date("2026-11-01T04:00:00Z")))) {
+            container.style.display = "none";
+            return;
+        }
+
+        container.style.display = "flex";
+        container.className = `seasonal-banner seasonal-banner--${currentTheme} store-halloween-banner`;
+        container.style.removeProperty("background");
+        container.style.removeProperty("border");
+        container.style.removeProperty("box-shadow");
+
+        container.innerHTML = `
+          <div class="seasonal-banner__content">
+            <span class="seasonal-banner__icon">${bannerConfig.icon}</span>
+            <div>
+              <div class="seasonal-banner__badge" style="${bannerConfig.badgeStyle}">
+                <span class="seasonal-banner__badge-dot" style="background: ${bannerConfig.dotColor}; box-shadow: 0 0 8px ${bannerConfig.dotColor};"></span>
+                ${bannerConfig.badge}
+              </div>
+              <h3 class="seasonal-banner__title">${bannerConfig.title}</h3>
+              <p class="seasonal-banner__desc">${bannerConfig.desc}</p>
+            </div>
+          </div>
+          <a class="seasonal-banner__btn" href="#catalogo" onclick="window.storeSelectCategory && window.storeSelectCategory('${bannerConfig.category}')">
+            ${bannerConfig.btnText}
+          </a>
+        `;
+    }
+
     function renderAll() {
         const now = new Date();
-        const halloweenBanner = document.querySelector(".store-halloween-banner");
         const hasHalloween = state.catalog?.products?.some((p) => p.category === "halloween" && p.purchaseAvailable !== false);
-        if (halloweenBanner) {
-            if (!hasHalloween || (now >= new Date("2026-11-01T04:00:00Z"))) {
-                halloweenBanner.style.display = "none";
-            }
-        }
         if (state.category === "halloween" && (!hasHalloween || now >= new Date("2026-11-01T04:00:00Z"))) {
             state.category = "monthly";
         }
 
+        renderSeasonalBanner();
         renderTabs();
         renderProducts();
         renderSelection();
     }
+
+    window.addEventListener("drakesThemeChanged", () => {
+        renderSeasonalBanner();
+    });
 
     function closeDetail() {
         const modal = document.getElementById("store-modal");
