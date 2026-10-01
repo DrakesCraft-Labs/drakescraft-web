@@ -35,6 +35,7 @@ export const storeCatalog = {
       featured: true,
       accent: 'rose',
       purchaseAvailable: true,
+      availableUntil: '2026-11-01T04:00:00Z',
       summary: '¡El kit de combate y supervivencia más devastador del servidor! Armadura completa del Rey del Tártaro con +10 Corazones (+20 HP), Inmunidad a Radiación Slimefun y Fuego/Lava, Guadaña Espectral de Caronte con Daño Verdadero y Vórtice de Almas, los 5 Cores Daxi de TranscEndence, Papa de Mar Espectral con PDC genuino y 500.000 Dragmas.',
       includes: [
         '👑 Corona del Rey del Tártaro: Protección VI, Irrompible X, Soulbound, +5 Corazones (+10 HP), Inmunidad Slimefun',

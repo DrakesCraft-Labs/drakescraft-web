@@ -344,9 +344,21 @@ function isTebexEnabledProduct(product) {
 }
 
 function getStoreCatalogView() {
+  const now = new Date();
+  const activeProducts = storeCatalog.products.filter((product) => {
+    if (product.availableUntil && now > new Date(product.availableUntil)) {
+      return false;
+    }
+    return true;
+  });
+
+  const activeCategoryIds = new Set(activeProducts.map((p) => p.category));
+  const activeCategories = storeCatalog.categories.filter((cat) => activeCategoryIds.has(cat.id));
+
   return {
     ...storeCatalog,
-    products: storeCatalog.products.map((product) => ({
+    categories: activeCategories,
+    products: activeProducts.map((product) => ({
       ...product,
       tebexPackageId: tebexPackageIds[product.id] || null,
       tebexEnabled: isTebexEnabledProduct(product),
@@ -712,7 +724,12 @@ app.post('/api/webhooks/github-sponsors', async (request, reply) => {
 app.post('/api/store/tebex/checkout', async (request, reply) => {
   const body = request.body || {};
   const selectedIds = Array.isArray(body.items) ? body.items.slice(0, 12) : [];
-  const validIds = new Set(storeCatalog.products.map((product) => product.id));
+  const now = new Date();
+  const validIds = new Set(
+    storeCatalog.products
+      .filter((product) => !product.availableUntil || now <= new Date(product.availableUntil))
+      .map((product) => product.id)
+  );
   const items = storeCatalog.products.filter((product) => selectedIds.includes(product.id) && validIds.has(product.id));
   const nick = String(body.nick || '').trim().slice(0, 17);
   const contact = String(body.contact || '').trim().slice(0, 80);

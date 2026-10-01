@@ -188,6 +188,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderAll() {
+        const now = new Date();
+        const halloweenBanner = document.querySelector(".store-halloween-banner");
+        const hasHalloween = state.catalog?.products?.some((p) => p.category === "halloween" && p.purchaseAvailable !== false);
+        if (halloweenBanner) {
+            if (!hasHalloween || (now >= new Date("2026-11-01T04:00:00Z"))) {
+                halloweenBanner.style.display = "none";
+            }
+        }
+        if (state.category === "halloween" && (!hasHalloween || now >= new Date("2026-11-01T04:00:00Z"))) {
+            state.category = "monthly";
+        }
+
         renderTabs();
         renderProducts();
         renderSelection();
