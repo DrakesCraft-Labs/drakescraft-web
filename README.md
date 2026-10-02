@@ -16,6 +16,10 @@
 
 Portal web oficial, catálogo interactivo de la tienda Tebex y centro de guías completas para la comunidad de **DrakesCraft**. Mantenido por **DrakesCraft Labs**.
 
+## Rediseño en revisión local
+
+La rama `feat/full-rebuild-bootstrap-3d` contiene la presentación nueva de todas las páginas públicas, con Bootstrap local y un emblema WebGL en la portada. No supone un despliegue en Star. Alcance, pruebas y arranque aislado: [documentación del preview](docs/redesign-preview.md).
+
 ---
 
 ## 🎯 Objetivo
@@ -116,12 +120,10 @@ sequenceDiagram
 
 ---
 
-## ⚖️ Licencia y Créditos
+## 📄 License & Upstream Attribution
 
-- **Desarrollo y Mantenimiento**: DrakesCraft Labs & SAORI Autonomous Engineering Team.
-- **Compatibilidad**: Diseñado para el ecosistema DrakesCraft (Paper / Purpur 1.21.11, Slimefun, Geyser/Floodgate).
-- **Licencia**: MIT / GPL-3.0.
-- **Código Fuente**: [GitHub Repository](https://github.com/DrakesCraft-Labs/drakescraft-web)
-- **Soporte & Comunidad**: [GitHub Issues](https://github.com/DrakesCraft-Labs/drakescraft-web/issues) | [Discord Oficial](https://discord.gg/rv3vtXZTk7)
+This project is a sovereign fork maintained by [**JackStar6677-1**](https://github.com/JackStar6677-1) under [**DrakesCraft Labs**](https://github.com/DrakesCraft-Labs).
 
-*Mantenido con ingeniería continua y observabilidad activa en Star VPS.*
+- **Original Project:** Created by the upstream authors and the open-source community.
+- **DrakesCraft Optimizations:** Modernized for Paper/Purpur 1.21.11+, Java 21, high concurrency, asynchronous safety, and exploit/duplication prevention.
+- **License:** Distributed under the original **GNU General Public License v3.0 (GPLv3)** (or original upstream license). See the [LICENSE](LICENSE) file for complete terms.
