@@ -116,12 +116,10 @@ sequenceDiagram
 
 ---
 
-## ⚖️ Licencia y Créditos
+## 📄 License & Upstream Attribution
 
-- **Desarrollo y Mantenimiento**: DrakesCraft Labs & SAORI Autonomous Engineering Team.
-- **Compatibilidad**: Diseñado para el ecosistema DrakesCraft (Paper / Purpur 1.21.11, Slimefun, Geyser/Floodgate).
-- **Licencia**: MIT / GPL-3.0.
-- **Código Fuente**: [GitHub Repository](https://github.com/DrakesCraft-Labs/drakescraft-web)
-- **Soporte & Comunidad**: [GitHub Issues](https://github.com/DrakesCraft-Labs/drakescraft-web/issues) | [Discord Oficial](https://discord.gg/rv3vtXZTk7)
+This project is a sovereign fork maintained by [**JackStar6677-1**](https://github.com/JackStar6677-1) under [**DrakesCraft Labs**](https://github.com/DrakesCraft-Labs).
 
-*Mantenido con ingeniería continua y observabilidad activa en Star VPS.*
+- **Original Project:** Created by the upstream authors and the open-source community.
+- **DrakesCraft Optimizations:** Modernized for Paper/Purpur 1.21.11+, Java 21, high concurrency, asynchronous safety, and exploit/duplication prevention.
+- **License:** Distributed under the original **GNU General Public License v3.0 (GPLv3)** (or original upstream license). See the [LICENSE](LICENSE) file for complete terms.
